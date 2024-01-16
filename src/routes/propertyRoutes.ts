@@ -1,9 +1,8 @@
-import { swaggerUI } from '@hono/swagger-ui';
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 
-const app = new OpenAPIHono();
+const properties = new OpenAPIHono();
 
-app.openapi(
+properties.openapi(
   createRoute({
     method: 'get',
     path: '/',
@@ -22,24 +21,9 @@ app.openapi(
   }),
   (c) => {
     return c.json({
-      message: 'real estate api demo',
+      message: 'properties route',
     });
   },
 );
 
-app.get(
-  '/ui',
-  swaggerUI({
-    url: '/doc',
-  }),
-);
-
-app.doc('/doc', {
-  info: {
-    title: 'Real Estate API Demo',
-    version: 'v1',
-  },
-  openapi: '3.1.0',
-});
-
-export default app;
+export default properties;
