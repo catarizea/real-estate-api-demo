@@ -6,8 +6,6 @@ import { homeRoutes, propertyRoutes } from '@/routes';
 
 const app = new OpenAPIHono();
 
-app.basePath('/api/v1');
-
 app.use(
   '*',
   cors({
