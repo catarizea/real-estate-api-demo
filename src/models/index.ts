@@ -4,6 +4,7 @@ import { connect } from '@planetscale/database';
 import { drizzle } from 'drizzle-orm/planetscale-serverless';
 
 import * as schema from './schema';
+import * as zodSchemas from './zodSchemas';
 
 const connection = connect({
   host: process.env.DATABASE_HOST,
@@ -13,4 +14,4 @@ const connection = connect({
 
 const db = drizzle(connection, { schema });
 
-export { db, schema };
+export { db, zodSchemas };

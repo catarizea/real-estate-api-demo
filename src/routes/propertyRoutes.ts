@@ -1,13 +1,13 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 
 import { getAllProperties } from '@/controllers';
-import { schema } from '@/models';
+import { zodSchemas } from '@/models';
 
 const properties = new OpenAPIHono();
 
 const successSchema = z.object({
   success: z.string(),
-  data: z.array(schema.selectPropertySchema),
+  data: z.array(zodSchemas.selectPropertySchema),
 });
 
 properties.openapi(
