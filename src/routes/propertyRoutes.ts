@@ -1,6 +1,14 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 
+import { getAllProperties } from '@/controllers';
+import { schema } from '@/models';
+
 const properties = new OpenAPIHono();
+
+const successSchema = z.object({
+  success: z.string(),
+  data: z.array(schema.selectPropertySchema),
+});
 
 properties.openapi(
   createRoute({
@@ -11,19 +19,13 @@ properties.openapi(
         description: 'Responds with a message',
         content: {
           'application/json': {
-            schema: z.object({
-              message: z.string(),
-            }),
+            schema: successSchema,
           },
         },
       },
     },
   }),
-  (c) => {
-    return c.json({
-      message: 'properties route',
-    });
-  },
+  async (c) => getAllProperties(c),
 );
 
 export default properties;
