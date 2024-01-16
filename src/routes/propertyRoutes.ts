@@ -1,6 +1,6 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 
-import { getAllProperties } from '@/controllers';
+import { property } from '@/controllers';
 import { zodSchemas } from '@/models';
 
 const properties = new OpenAPIHono();
@@ -25,7 +25,7 @@ properties.openapi(
       },
     },
   }),
-  async (c) => getAllProperties(c),
+  async (c) => property.getAllProperties(c),
 );
 
 export default properties;

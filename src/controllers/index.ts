@@ -1,3 +1,3 @@
-import { getAllProperties } from './property';
+import * as property from './property';
 
-export { getAllProperties };
+export { property };
