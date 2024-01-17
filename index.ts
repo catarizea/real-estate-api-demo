@@ -1,21 +1,6 @@
 import { swaggerUI } from '@hono/swagger-ui';
-import { OpenAPIHono } from '@hono/zod-openapi';
-import { cors } from 'hono/cors';
 
-import { homeRoutes, propertyRoutes } from '@/routes';
-
-const app = new OpenAPIHono();
-
-app.use(
-  '*',
-  cors({
-    origin: '*',
-    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  }),
-);
-
-app.route('/', homeRoutes);
-app.route('/properties', propertyRoutes);
+import app from '@/server';
 
 app.get(
   '/ui',

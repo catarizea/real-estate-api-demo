@@ -2,6 +2,12 @@ import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 
 const home = new OpenAPIHono();
 
+const successSchema = z.object({
+  message: z.string(),
+});
+
+export type SuccessSchema = z.infer<typeof successSchema>;
+
 home.openapi(
   createRoute({
     method: 'get',
@@ -11,9 +17,7 @@ home.openapi(
         description: 'Responds with a message',
         content: {
           'application/json': {
-            schema: z.object({
-              message: z.string(),
-            }),
+            schema: successSchema,
           },
         },
       },

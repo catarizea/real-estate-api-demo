@@ -5,10 +5,12 @@ import { zodSchemas } from '@/models';
 
 const properties = new OpenAPIHono();
 
-const successSchema = z.object({
+export const successSchema = z.object({
   success: z.string(),
   data: z.array(zodSchemas.selectPropertySchema),
 });
+
+export type SuccessSchema = z.infer<typeof successSchema>;
 
 properties.openapi(
   createRoute({
