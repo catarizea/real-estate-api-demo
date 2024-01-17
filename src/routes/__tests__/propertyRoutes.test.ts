@@ -10,4 +10,6 @@ test('GET /properties', async () => {
   expect(response.status).toBe(200);
   expect(body).toHaveProperty('data');
   expect(body.data).toBeInstanceOf(Array);
+  expect(body.data.length).toBeGreaterThan(0);
+  expect(body.data[0]).toHaveProperty('id');
 });
