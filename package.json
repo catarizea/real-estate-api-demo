@@ -7,8 +7,8 @@
     "db:studio": "dotenv -e .env -- drizzle-kit studio --config=drizzle.config.ts --port=3001",
     "dev": "dotenv -e .env -- bun --hot index.ts",
     "debug": "dotenv -e .env -- bun --inspect index.ts",
-    "start": "dotenv -e .env -- bun index.ts",
-    "test": "dotenv -e .env -- bun test"
+    "start": "dotenv -e .env -v BUN_ENV=prod -- bun index.ts",
+    "test": "dotenv -e .env -v BUN_ENV=prod -- bun test"
   },
   "dependencies": {
     "@hono/swagger-ui": "^0.2.1",
