@@ -16,6 +16,12 @@ const qb = new QueryBuilder();
 
 export const getAllProperties = async (c: Context) => {
   let defaultLimit = 10;
+
+  const emptyResponse = c.json({
+    success: 'true',
+    data: [],
+  });
+
   const query = c.req.query();
 
   let queryOp = qb
@@ -26,7 +32,15 @@ export const getAllProperties = async (c: Context) => {
     .$dynamic();
 
   if (Object.keys(query).length > 0) {
+    if (!('limit' in query || 'cursor' in query)) {
+      return emptyResponse;
+    }
+
     const valid = querySchema.safeParse(query);
+
+    if (!valid.success && valid.error) {
+      return emptyResponse;
+    }
 
     if (valid.success) {
       const { limit, cursor } = valid.data;
