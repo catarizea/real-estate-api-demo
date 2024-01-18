@@ -1,15 +1,23 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 
 import { property } from '@/controllers';
+import { zodDefaultHook } from '@/middlewares';
 import { zodSchemas } from '@/models';
 
-const properties = new OpenAPIHono();
+const properties = new OpenAPIHono({
+  defaultHook: zodDefaultHook,
+});
 
 export const querySchema = z.object({
-  limit: z.coerce.number().positive().int().optional().openapi({ example: 10 }),
+  limit: z.coerce
+    .number({ invalid_type_error: 'query limit must be a number' })
+    .positive({ message: 'query limit must be geater then zero' })
+    .int({ message: 'query limit must be a integer' })
+    .optional()
+    .openapi({ example: 10 }),
   cursor: z
-    .string()
-    .datetime()
+    .string({ invalid_type_error: 'query cursor must be a string' })
+    .datetime({ message: 'query cursor must be a valid ISO 8601 date' })
     .optional()
     .openapi({ example: '2024-01-01T00:00:00.000Z' }),
 });
