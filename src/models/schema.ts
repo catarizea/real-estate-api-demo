@@ -10,3 +10,9 @@ export const property = mysqlTable('property', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
+
+// TODO: Add all the other tables here
+// Property Media
+// Cities
+// Communities
+// Property Types

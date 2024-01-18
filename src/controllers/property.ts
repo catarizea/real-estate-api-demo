@@ -10,3 +10,5 @@ export const getAllProperties = async (c: Context) => {
     data: result,
   });
 };
+
+// TODO: Add pagination
