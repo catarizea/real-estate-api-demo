@@ -7,3 +7,5 @@ export const selectPropertySchema = createSelectSchema(property, {
   createdAt: z.string(),
   updatedAt: z.string(),
 });
+
+export type SelectPropertySchema = z.infer<typeof selectPropertySchema>;
