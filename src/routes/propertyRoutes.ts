@@ -12,7 +12,7 @@ export const querySchema = z.object({
   limit: z.coerce
     .number({ invalid_type_error: 'query limit must be a number' })
     .positive({ message: 'query limit must be geater then zero' })
-    .int({ message: 'query limit must be a integer' })
+    .int({ message: 'query limit must be an integer' })
     .optional()
     .openapi({ example: 10 }),
   cursor: z

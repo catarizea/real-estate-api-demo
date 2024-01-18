@@ -16,13 +16,13 @@ const zodDefaultHook: Hook<any, Env, any, any> = (result, c) => {
             })),
           },
         },
-        404,
+        400,
       );
     }
 
     return c.json(
       { success: 'false', error: { reason: 'validation error' } },
-      404,
+      400,
     );
   }
 };

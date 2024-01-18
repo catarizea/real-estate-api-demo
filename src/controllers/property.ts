@@ -12,11 +12,6 @@ const qb = new QueryBuilder();
 export const getAllProperties = async (c: Context) => {
   let defaultLimit = 10;
 
-  const emptyResponse = c.json({
-    success: 'true',
-    data: [],
-  });
-
   const query = c.req.query();
 
   let queryOp = qb
@@ -28,14 +23,24 @@ export const getAllProperties = async (c: Context) => {
 
   if (Object.keys(query).length > 0) {
     if (!('limit' in query || 'cursor' in query)) {
-      return emptyResponse;
+      return c.json(
+        {
+          success: 'false',
+          error: {
+            reason: 'validation error',
+            issues: [
+              {
+                message: 'query must contain limit or cursor or both',
+                path: [],
+              },
+            ],
+          },
+        },
+        400,
+      );
     }
 
     const valid = querySchema.safeParse(query);
-
-    if (!valid.success && valid.error) {
-      return emptyResponse;
-    }
 
     if (valid.success) {
       const { limit, cursor } = valid.data;
