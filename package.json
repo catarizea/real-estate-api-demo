@@ -5,8 +5,9 @@
     "db:migrate": "dotenv -e .env -- bun ./src/utils/db/migrate.ts",
     "db:seed": "dotenv -e .env -- bun ./src/utils/db/seed.ts",
     "db:studio": "dotenv -e .env -- drizzle-kit studio --config=drizzle.config.ts --port=3001",
-    "dev": "dotenv -e .env -- bun run --hot index.ts",
-    "start": "dotenv -e .env -- bun run index.ts",
+    "dev": "dotenv -e .env -- bun --hot index.ts",
+    "debug": "dotenv -e .env -- bun --inspect index.ts",
+    "start": "dotenv -e .env -- bun index.ts",
     "test": "dotenv -e .env -- bun test"
   },
   "dependencies": {
@@ -15,7 +16,6 @@
     "@paralleldrive/cuid2": "^2.2.2",
     "@planetscale/database": "^1.13.0",
     "drizzle-orm": "^0.29.3",
-    "drizzle-pagination": "^1.0.10",
     "drizzle-zod": "^0.5.1",
     "hono": "^3.12.5",
     "mysql2": "^3.7.0"
