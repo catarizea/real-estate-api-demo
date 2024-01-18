@@ -37,3 +37,15 @@ test('GET /properties?cursor=2024-01-01T00:00:00.000Z', async () => {
   expect(body.data.length).toBeGreaterThan(0);
   expect(body.data[0]).toHaveProperty('id');
 });
+
+test('GET /properties?cursorrrrr=2024-01-01T00:00:00.000Z', async () => {
+  const response = await app.request(
+    '/properties?cursorrrrr=2024-01-01T00:00:00.000Z',
+  );
+  const body = (await response.json()) as SuccessSchema;
+
+  expect(response.status).toBe(200);
+  expect(body).toHaveProperty('data');
+  expect(body.data).toBeInstanceOf(Array);
+  expect(body.data.length).toBe(0);
+});

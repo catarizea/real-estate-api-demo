@@ -1,16 +1,11 @@
-import { z } from '@hono/zod-openapi';
 import { desc, sql } from 'drizzle-orm';
 import { QueryBuilder } from 'drizzle-orm/mysql-core';
 import { Context } from 'hono';
 
 import { db, zodSchemas } from '@/models';
 import { property } from '@/models/schema';
+import { querySchema } from '@/routes/propertyRoutes';
 import { dateIsoToDatetime } from '@/utils';
-
-const querySchema = z.object({
-  limit: z.coerce.number().positive().int().optional(),
-  cursor: z.string().datetime().optional(),
-});
 
 const qb = new QueryBuilder();
 

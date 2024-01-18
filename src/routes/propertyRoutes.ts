@@ -5,6 +5,15 @@ import { zodSchemas } from '@/models';
 
 const properties = new OpenAPIHono();
 
+export const querySchema = z.object({
+  limit: z.coerce.number().positive().int().optional().openapi({ example: 10 }),
+  cursor: z
+    .string()
+    .datetime()
+    .optional()
+    .openapi({ example: '2024-01-01T00:00:00.000Z' }),
+});
+
 export const successSchema = z.object({
   success: z.string(),
   data: z.array(zodSchemas.selectPropertySchema),
@@ -16,6 +25,9 @@ properties.openapi(
   createRoute({
     method: 'get',
     path: '/',
+    request: {
+      query: querySchema,
+    },
     responses: {
       200: {
         description: 'Responds with a message',
