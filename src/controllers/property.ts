@@ -8,7 +8,7 @@ import { property } from '@/models/schema';
 import { dateIsoToDatetime } from '@/utils';
 
 const querySchema = z.object({
-  limit: z.coerce.number().optional(),
+  limit: z.coerce.number().positive().int().optional(),
   cursor: z.string().datetime().optional(),
 });
 
