@@ -7,6 +7,7 @@ import { db, zodSchemas } from '@/models';
 import { property } from '@/models/schema';
 import { querySchema } from '@/routes/propertyRoutes';
 import { dateIsoToDatetime } from '@/utils';
+
 const qb = new QueryBuilder();
 
 export const getAllProperties = async (c: Context) => {
@@ -30,8 +31,8 @@ export const getAllProperties = async (c: Context) => {
             reason: 'validation error',
             issues: [
               {
-                message: 'query must contain limit or cursor or both',
-                path: [],
+                message: 'query must only contain limit or cursor or both',
+                path: ['cursor', 'limit'],
               },
             ],
           },

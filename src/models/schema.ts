@@ -11,6 +11,8 @@ export const property = mysqlTable('property', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
+// TODO: Add all the other fields for the property table here
+
 // TODO: Add all the other tables here
 // Property Media
 // Cities

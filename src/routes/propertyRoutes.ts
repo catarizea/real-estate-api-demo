@@ -49,7 +49,8 @@ properties.openapi(
     },
     responses: {
       200: {
-        description: 'Responds with an array of property objects',
+        description:
+          'Responds with an array of property objects. If no limit is provided provided in the query, the default limit is 10 records. This route is paginated by the createdAt field. The cursor is the createdAt field of the last property object in the array. To get the next page, provide the cursor in the query.',
         content: {
           'application/json': {
             schema: successSchema,

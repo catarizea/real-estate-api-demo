@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Hook } from '@hono/zod-openapi';
-import { z } from '@hono/zod-openapi';
+import { Hook, z } from '@hono/zod-openapi';
 import { Env } from 'hono';
 
 const zodDefaultHook: Hook<any, Env, any, any> = (result, c) => {

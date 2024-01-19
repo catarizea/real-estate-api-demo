@@ -1,3 +1,3 @@
-import * as property from './property';
+import { property } from './property';
 
 export { property };
