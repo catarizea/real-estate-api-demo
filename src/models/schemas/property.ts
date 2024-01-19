@@ -9,7 +9,7 @@ import { community } from './community';
 import { feature } from './feature';
 import { media } from './media';
 import { parking } from './parking';
-import { type } from './type';
+import { typeProp } from './typeProp';
 
 export const property = mysqlTable('property', {
   id: varchar('id', { length: 128 })
@@ -17,7 +17,7 @@ export const property = mysqlTable('property', {
     .primaryKey(),
   name: varchar('name', { length: 256 }).notNull(),
   address: varchar('address', { length: 256 }).notNull(),
-  typeId: varchar('type_id', { length: 128 }).notNull(),
+  typePropId: varchar('type_id', { length: 128 }).notNull(),
   bedroomId: varchar('bedroom_id', { length: 128 }),
   bathroomId: varchar('bathroom_id', { length: 128 }),
   communityId: varchar('community_id', { length: 128 }),
@@ -69,8 +69,8 @@ export const propertyParkingRelations = relations(property, ({ many }) => ({
 }));
 
 export const propertyTypeRelations = relations(property, ({ one }) => ({
-  type: one(type, {
-    fields: [property.typeId],
-    references: [type.id],
+  typeProp: one(typeProp, {
+    fields: [property.typePropId],
+    references: [typeProp.id],
   }),
 }));

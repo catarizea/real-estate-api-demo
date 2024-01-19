@@ -4,7 +4,7 @@ import { mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
 
 import { property } from './property';
 
-export const type = mysqlTable('type', {
+export const typeProp = mysqlTable('type', {
   id: varchar('id', { length: 128 })
     .$defaultFn(() => createId())
     .primaryKey(),
@@ -13,6 +13,6 @@ export const type = mysqlTable('type', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
-export const typePropertyRelations = relations(type, ({ many }) => ({
+export const typePropPropertyRelations = relations(typeProp, ({ many }) => ({
   properties: many(property),
 }));

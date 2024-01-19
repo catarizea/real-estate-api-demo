@@ -37,7 +37,7 @@ import {
   propertyTypeRelations,
 } from './schemas/property';
 import { region, regionCityRelations } from './schemas/region';
-import { type, typePropertyRelations } from './schemas/type';
+import { typeProp, typePropPropertyRelations } from './schemas/typeProp';
 
 export {
   bathroom,
@@ -73,6 +73,6 @@ export {
   propertyTypeRelations,
   region,
   regionCityRelations,
-  type,
-  typePropertyRelations,
+  typeProp,
+  typePropPropertyRelations,
 };
