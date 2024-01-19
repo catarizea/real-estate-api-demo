@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Hook } from '@hono/zod-openapi';
+import { z } from '@hono/zod-openapi';
 import { Env } from 'hono';
 
 const zodDefaultHook: Hook<any, Env, any, any> = (result, c) => {
@@ -7,7 +8,7 @@ const zodDefaultHook: Hook<any, Env, any, any> = (result, c) => {
     if (result.error.issues) {
       return c.json(
         {
-          success: 'false',
+          success: z.literal(false).value,
           error: {
             reason: 'validation error',
             issues: result.error.issues.map((issue) => ({
@@ -21,7 +22,10 @@ const zodDefaultHook: Hook<any, Env, any, any> = (result, c) => {
     }
 
     return c.json(
-      { success: 'false', error: { reason: 'validation error' } },
+      {
+        success: z.literal(false).value,
+        error: { reason: 'validation error' },
+      },
       400,
     );
   }

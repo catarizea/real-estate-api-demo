@@ -1,3 +1,4 @@
+import { z } from '@hono/zod-openapi';
 import { desc, sql } from 'drizzle-orm';
 import { QueryBuilder } from 'drizzle-orm/mysql-core';
 import { Context } from 'hono';
@@ -6,7 +7,6 @@ import { db, zodSchemas } from '@/models';
 import { property } from '@/models/schema';
 import { querySchema } from '@/routes/propertyRoutes';
 import { dateIsoToDatetime } from '@/utils';
-
 const qb = new QueryBuilder();
 
 export const getAllProperties = async (c: Context) => {
@@ -25,7 +25,7 @@ export const getAllProperties = async (c: Context) => {
     if (!('limit' in query || 'cursor' in query)) {
       return c.json(
         {
-          success: 'false',
+          success: z.literal(false).value,
           error: {
             reason: 'validation error',
             issues: [
@@ -71,7 +71,7 @@ export const getAllProperties = async (c: Context) => {
   const result = await db.execute(queryOp);
 
   return c.json({
-    success: 'true',
+    success: z.literal(true).value,
     data: result.rows as zodSchemas.SelectPropertySchema[],
   });
 };

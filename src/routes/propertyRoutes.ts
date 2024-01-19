@@ -23,8 +23,18 @@ export const querySchema = z.object({
 });
 
 export const successSchema = z.object({
-  success: z.string(),
+  success: z.literal(true),
   data: z.array(zodSchemas.selectPropertySchema),
+});
+
+export const errorSchema = z.object({
+  success: z.literal(false),
+  error: z.object({
+    reason: z.string(),
+    issues: z
+      .array(z.object({ message: z.string(), path: z.array(z.string()) }))
+      .optional(),
+  }),
 });
 
 export type SuccessSchema = z.infer<typeof successSchema>;
@@ -42,6 +52,14 @@ properties.openapi(
         content: {
           'application/json': {
             schema: successSchema,
+          },
+        },
+      },
+      400: {
+        description: 'Responds with a message',
+        content: {
+          'application/json': {
+            schema: errorSchema,
           },
         },
       },
