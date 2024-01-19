@@ -38,6 +38,7 @@ export const errorSchema = z.object({
 });
 
 export type SuccessSchema = z.infer<typeof successSchema>;
+export type ErrorSchema = z.infer<typeof errorSchema>;
 
 properties.openapi(
   createRoute({
@@ -48,7 +49,7 @@ properties.openapi(
     },
     responses: {
       200: {
-        description: 'Responds with a message',
+        description: 'Responds with an array of property objects',
         content: {
           'application/json': {
             schema: successSchema,
@@ -56,7 +57,7 @@ properties.openapi(
         },
       },
       400: {
-        description: 'Responds with a message',
+        description: 'Responds with an error object',
         content: {
           'application/json': {
             schema: errorSchema,

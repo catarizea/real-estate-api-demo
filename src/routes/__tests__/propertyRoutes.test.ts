@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test';
 
-import { SuccessSchema } from '@/routes/propertyRoutes';
+import { ErrorSchema, SuccessSchema } from '@/routes/propertyRoutes';
 import app from '@/server';
 
 test('GET /properties', async () => {
@@ -42,10 +42,32 @@ test('GET /properties?cursorrrrr=2024-01-01T00:00:00.000Z', async () => {
   const response = await app.request(
     '/properties?cursorrrrr=2024-01-01T00:00:00.000Z',
   );
-  const body = (await response.json()) as SuccessSchema;
+  const body = (await response.json()) as ErrorSchema;
 
-  expect(response.status).toBe(200);
-  expect(body).toHaveProperty('data');
-  expect(body.data).toBeInstanceOf(Array);
-  expect(body.data.length).toBe(0);
+  expect(response.status).toBe(400);
+  expect(body).toHaveProperty('success');
+  expect(body.success).toBe(false);
+  expect(body).toHaveProperty('error');
+  expect(body.error).toHaveProperty('reason');
+  expect(body.error.reason).toBe('validation error');
+  expect(body.error).toHaveProperty('issues');
+  expect(body.error.issues).toBeInstanceOf(Array);
+  expect(body.error.issues).toHaveLength(1);
+});
+
+test('GET /properties?cursor=2024-01-01T00:00:00.000', async () => {
+  const response = await app.request(
+    '/properties?cursor=2024-01-01T00:00:00.000',
+  );
+  const body = (await response.json()) as ErrorSchema;
+
+  expect(response.status).toBe(400);
+  expect(body).toHaveProperty('success');
+  expect(body.success).toBe(false);
+  expect(body).toHaveProperty('error');
+  expect(body.error).toHaveProperty('reason');
+  expect(body.error.reason).toBe('validation error');
+  expect(body.error).toHaveProperty('issues');
+  expect(body.error.issues).toBeInstanceOf(Array);
+  expect(body.error.issues).toHaveLength(1);
 });
