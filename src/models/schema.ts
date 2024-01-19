@@ -2,6 +2,7 @@ import bathroom from './schemas/bathroom';
 import bedroom from './schemas/bedroom';
 import city from './schemas/city';
 import community from './schemas/community';
+import feature from './schemas/feature';
 import { media, mediaType } from './schemas/media';
 import parking from './schemas/parking';
 import property from './schemas/property';
@@ -13,6 +14,7 @@ export {
   bedroom,
   city,
   community,
+  feature,
   media,
   mediaType,
   parking,

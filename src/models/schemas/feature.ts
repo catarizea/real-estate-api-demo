@@ -1,16 +1,7 @@
 import { createId } from '@paralleldrive/cuid2';
 import { mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
 
-export const media = mysqlTable('media', {
-  id: varchar('id', { length: 128 })
-    .$defaultFn(() => createId())
-    .primaryKey(),
-  url: varchar('url', { length: 256 }).notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
-});
-
-export const mediaType = mysqlTable('media_type', {
+const feature = mysqlTable('feature', {
   id: varchar('id', { length: 128 })
     .$defaultFn(() => createId())
     .primaryKey(),
@@ -18,3 +9,5 @@ export const mediaType = mysqlTable('media_type', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
+
+export default feature;
