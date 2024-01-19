@@ -1,7 +1,10 @@
 import { createId } from '@paralleldrive/cuid2';
+import { relations } from 'drizzle-orm';
 import { mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
 
-const region = mysqlTable('region', {
+import { city } from './city';
+
+export const region = mysqlTable('region', {
   id: varchar('id', { length: 128 })
     .$defaultFn(() => createId())
     .primaryKey(),
@@ -11,4 +14,6 @@ const region = mysqlTable('region', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
-export default region;
+export const regionCityRelations = relations(region, ({ many }) => ({
+  cities: many(city),
+}));

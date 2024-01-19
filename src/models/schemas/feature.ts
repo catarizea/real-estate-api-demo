@@ -1,7 +1,15 @@
 import { createId } from '@paralleldrive/cuid2';
-import { mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
+import { relations } from 'drizzle-orm';
+import {
+  mysqlTable,
+  primaryKey,
+  timestamp,
+  varchar,
+} from 'drizzle-orm/mysql-core';
 
-const feature = mysqlTable('feature', {
+import { property } from './property';
+
+export const feature = mysqlTable('feature', {
   id: varchar('id', { length: 128 })
     .$defaultFn(() => createId())
     .primaryKey(),
@@ -10,4 +18,38 @@ const feature = mysqlTable('feature', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
-export default feature;
+export const featurePropertyRelations = relations(feature, ({ many }) => ({
+  properties: many(property),
+}));
+
+export const featureToProperty = mysqlTable(
+  'feature_to_property',
+  {
+    featureId: varchar('feature_id', { length: 128 })
+      .notNull()
+      .references(() => feature.id),
+    propertyId: varchar('property_id', { length: 128 })
+      .notNull()
+      .references(() => property.id),
+  },
+  (t) => ({
+    pk: primaryKey({
+      name: 'feature_to_property_pk',
+      columns: [t.featureId, t.propertyId],
+    }),
+  }),
+);
+
+export const featureToPropertyRelations = relations(
+  featureToProperty,
+  ({ one }) => ({
+    feature: one(feature, {
+      fields: [featureToProperty.featureId],
+      references: [feature.id],
+    }),
+    property: one(property, {
+      fields: [featureToProperty.propertyId],
+      references: [property.id],
+    }),
+  }),
+);

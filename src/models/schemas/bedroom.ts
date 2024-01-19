@@ -1,7 +1,10 @@
 import { createId } from '@paralleldrive/cuid2';
+import { relations } from 'drizzle-orm';
 import { mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
 
-const bedroom = mysqlTable('bedroom', {
+import { property } from './property';
+
+export const bedroom = mysqlTable('bedroom', {
   id: varchar('id', { length: 128 })
     .$defaultFn(() => createId())
     .primaryKey(),
@@ -10,4 +13,6 @@ const bedroom = mysqlTable('bedroom', {
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
 
-export default bedroom;
+export const bedroomPropertyRelations = relations(bedroom, ({ many }) => ({
+  properties: many(property),
+}));
