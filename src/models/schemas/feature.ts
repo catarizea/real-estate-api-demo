@@ -25,12 +25,8 @@ export const featurePropertyRelations = relations(feature, ({ many }) => ({
 export const featureToProperty = mysqlTable(
   'feature_to_property',
   {
-    featureId: varchar('feature_id', { length: 128 })
-      .notNull()
-      .references(() => feature.id),
-    propertyId: varchar('property_id', { length: 128 })
-      .notNull()
-      .references(() => property.id),
+    featureId: varchar('feature_id', { length: 128 }).notNull(),
+    propertyId: varchar('property_id', { length: 128 }).notNull(),
   },
   (t) => ({
     pk: primaryKey({

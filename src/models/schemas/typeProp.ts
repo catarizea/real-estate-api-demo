@@ -4,7 +4,7 @@ import { mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
 
 import { property } from './property';
 
-export const typeProp = mysqlTable('type', {
+export const typeProp = mysqlTable('type_prop', {
   id: varchar('id', { length: 128 })
     .$defaultFn(() => createId())
     .primaryKey(),
