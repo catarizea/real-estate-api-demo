@@ -1,20 +1,22 @@
-import { createId } from '@paralleldrive/cuid2';
-import { mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
+import bathroom from './schemas/bathroom';
+import bedroom from './schemas/bedroom';
+import city from './schemas/city';
+import community from './schemas/community';
+import { media, mediaType } from './schemas/media';
+import parking from './schemas/parking';
+import property from './schemas/property';
+import region from './schemas/region';
+import type from './schemas/type';
 
-export const property = mysqlTable('property', {
-  id: varchar('id', { length: 128 })
-    .$defaultFn(() => createId())
-    .primaryKey(),
-  name: varchar('name', { length: 256 }).notNull(),
-  address: varchar('address', { length: 256 }).notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
-});
-
-// TODO: Add all the other fields for the property table here
-
-// TODO: Add all the other tables here
-// Property Media
-// Cities
-// Communities
-// Property Types
+export {
+  bathroom,
+  bedroom,
+  city,
+  community,
+  media,
+  mediaType,
+  parking,
+  property,
+  region,
+  type,
+};
