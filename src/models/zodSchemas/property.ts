@@ -1,7 +1,7 @@
 import { z } from '@hono/zod-openapi';
 import { createSelectSchema } from 'drizzle-zod';
 
-import { property } from './schema';
+import { property } from '@/models/schema';
 
 export const selectPropertySchema = createSelectSchema(property, {
   createdAt: z.string(),
