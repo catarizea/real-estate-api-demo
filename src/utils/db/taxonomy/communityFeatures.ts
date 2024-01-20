@@ -13,6 +13,11 @@ const communityFeatures = [
   'Schopping Center',
   'School',
   'Train Access',
+  'Airport Access',
+  'Highway Access',
+  'College/University',
+  'Community Center',
+  'Medical Facilities',
 ];
 
 export default communityFeatures;
