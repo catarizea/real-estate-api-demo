@@ -1,4 +1,8 @@
 {
+  "name": "real-estate-api-demo",
+  "version": "1.0.1",
+  "description": "Real estate api demo using Bun, Hono, Drizzle, Planetscale",
+  "main": "index.ts",
   "scripts": {
     "db:push": "dotenv -e .env -- drizzle-kit push:mysql --config=drizzle.config.ts",
     "db:generate:migration": "dotenv -e .env -- drizzle-kit generate:mysql --config=drizzle.config.ts",
