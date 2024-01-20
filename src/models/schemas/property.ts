@@ -3,6 +3,7 @@ import { relations } from 'drizzle-orm';
 import {
   boolean,
   decimal,
+  index,
   int,
   mysqlTable,
   text,
@@ -20,32 +21,39 @@ import { parking } from './parking';
 import { typeProp } from './typeProp';
 import { unit } from './unit';
 
-export const property = mysqlTable('property', {
-  id: varchar('id', { length: 128 })
-    .$defaultFn(() => createId())
-    .primaryKey(),
-  listingId: int('listing_id').notNull().autoincrement().unique(),
-  name: varchar('name', { length: 256 }).notNull(),
-  address: varchar('address', { length: 256 }).notNull(),
-  latitude: decimal('latitude', { precision: 10, scale: 8 }).notNull(),
-  longitude: decimal('longitude', { precision: 11, scale: 8 }).notNull(),
-  yearBuilt: int('year_built'),
-  descriptionTitle: varchar('description_title', { length: 256 }),
-  descriptionSubtitle: varchar('description_subtitle', { length: 256 }),
-  descriptionText: text('description_text'),
-  typePropId: varchar('type_id', { length: 128 }).notNull(),
-  communityId: varchar('community_id', { length: 128 }),
-  cityId: varchar('city_id', { length: 128 }).notNull(),
-  smoking: boolean('smoking').notNull().default(false),
-  cats: boolean('cats').notNull().default(false),
-  dogs: boolean('dogs').notNull().default(false),
-  petsNegotiable: boolean('pets_negotiable').notNull().default(false),
-  petsFee: int('pets_fee'),
-  petsFeeInterval: varchar('pets_fee_interval', { length: 128 }),
-  published: boolean('published').notNull().default(false),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
-});
+export const property = mysqlTable(
+  'property',
+  {
+    id: varchar('id', { length: 128 })
+      .$defaultFn(() => createId())
+      .primaryKey(),
+    listingId: int('listing_id').notNull().autoincrement().unique(),
+    name: varchar('name', { length: 256 }).notNull(),
+    address: varchar('address', { length: 256 }).notNull(),
+    latitude: decimal('latitude', { precision: 10, scale: 8 }).notNull(),
+    longitude: decimal('longitude', { precision: 11, scale: 8 }).notNull(),
+    yearBuilt: int('year_built'),
+    descriptionTitle: varchar('description_title', { length: 256 }),
+    descriptionSubtitle: varchar('description_subtitle', { length: 256 }),
+    descriptionText: text('description_text'),
+    typePropId: varchar('type_id', { length: 128 }).notNull(),
+    communityId: varchar('community_id', { length: 128 }),
+    cityId: varchar('city_id', { length: 128 }).notNull(),
+    smoking: boolean('smoking').notNull().default(false),
+    cats: boolean('cats').notNull().default(false),
+    dogs: boolean('dogs').notNull().default(false),
+    petsNegotiable: boolean('pets_negotiable').notNull().default(false),
+    petsFee: int('pets_fee'),
+    petsFeeInterval: varchar('pets_fee_interval', { length: 128 }),
+    published: boolean('published').notNull().default(false),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  },
+  (t) => ({
+    latIdx: index('lat_idx').on(t.latitude),
+    longIdx: index('long_idx').on(t.longitude),
+  }),
+);
 
 export const propertyBuildingFeatureRelations = relations(
   property,

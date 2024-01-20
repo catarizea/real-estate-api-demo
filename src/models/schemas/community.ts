@@ -2,6 +2,7 @@ import { createId } from '@paralleldrive/cuid2';
 import { relations } from 'drizzle-orm';
 import {
   decimal,
+  index,
   mysqlTable,
   timestamp,
   varchar,
@@ -11,17 +12,24 @@ import { city } from './city';
 import { communityFeature } from './communityFeature';
 import { property } from './property';
 
-export const community = mysqlTable('community', {
-  id: varchar('id', { length: 128 })
-    .$defaultFn(() => createId())
-    .primaryKey(),
-  name: varchar('name', { length: 256 }).notNull(),
-  latitude: decimal('latitude', { precision: 10, scale: 8 }).notNull(),
-  longitude: decimal('longitude', { precision: 11, scale: 8 }).notNull(),
-  cityId: varchar('city_id', { length: 128 }).notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull(),
-});
+export const community = mysqlTable(
+  'community',
+  {
+    id: varchar('id', { length: 128 })
+      .$defaultFn(() => createId())
+      .primaryKey(),
+    name: varchar('name', { length: 256 }).notNull(),
+    latitude: decimal('latitude', { precision: 10, scale: 8 }).notNull(),
+    longitude: decimal('longitude', { precision: 11, scale: 8 }).notNull(),
+    cityId: varchar('city_id', { length: 128 }).notNull(),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  },
+  (t) => ({
+    latIdx: index('lat_idx').on(t.latitude),
+    longIdx: index('long_idx').on(t.longitude),
+  }),
+);
 
 export const communityCommunityFeatureRelations = relations(
   community,
