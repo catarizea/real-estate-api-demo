@@ -2,6 +2,7 @@ import { createId } from '@paralleldrive/cuid2';
 import { relations } from 'drizzle-orm';
 import {
   boolean,
+  decimal,
   int,
   mysqlTable,
   text,
@@ -26,6 +27,8 @@ export const property = mysqlTable('property', {
   listingId: int('listing_id').notNull().autoincrement().unique(),
   name: varchar('name', { length: 256 }).notNull(),
   address: varchar('address', { length: 256 }).notNull(),
+  latitude: decimal('latitude', { precision: 10, scale: 8 }).notNull(),
+  longitude: decimal('longitude', { precision: 11, scale: 8 }).notNull(),
   yearBuilt: int('year_built'),
   descriptionTitle: varchar('description_title', { length: 256 }),
   descriptionSubtitle: varchar('description_subtitle', { length: 256 }),
