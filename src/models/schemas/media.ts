@@ -1,6 +1,6 @@
 import { createId } from '@paralleldrive/cuid2';
 import { relations } from 'drizzle-orm';
-import { mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
+import { int, mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
 
 import { property } from './property';
 
@@ -11,6 +11,7 @@ export const media = mysqlTable('media', {
   url: varchar('url', { length: 256 }).notNull(),
   mediaTypeId: varchar('media_type_id', { length: 128 }).notNull(),
   propertyId: varchar('property_id', { length: 128 }).notNull(),
+  order: int('order').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });

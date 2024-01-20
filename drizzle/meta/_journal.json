@@ -8,6 +8,13 @@
       "when": 1705706266473,
       "tag": "0000_big_switch",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1705759606975,
+      "tag": "0001_previous_red_ghost",
+      "breakpoints": true
     }
   ]
 }

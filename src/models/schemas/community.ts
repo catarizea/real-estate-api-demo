@@ -3,6 +3,7 @@ import { relations } from 'drizzle-orm';
 import { mysqlTable, timestamp, varchar } from 'drizzle-orm/mysql-core';
 
 import { city } from './city';
+import { communityFeature } from './communityFeature';
 import { property } from './property';
 
 export const community = mysqlTable('community', {
@@ -14,6 +15,13 @@ export const community = mysqlTable('community', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
+
+export const communityCommunityFeatureRelations = relations(
+  community,
+  ({ many }) => ({
+    communityFeatures: many(communityFeature),
+  }),
+);
 
 export const communityPropertyRelations = relations(community, ({ many }) => ({
   properties: many(property),

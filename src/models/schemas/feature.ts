@@ -1,6 +1,7 @@
 import { createId } from '@paralleldrive/cuid2';
 import { relations } from 'drizzle-orm';
 import {
+  int,
   mysqlTable,
   primaryKey,
   timestamp,
@@ -14,6 +15,7 @@ export const feature = mysqlTable('feature', {
     .$defaultFn(() => createId())
     .primaryKey(),
   name: varchar('name', { length: 256 }).notNull(),
+  order: int('order').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
