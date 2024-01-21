@@ -19,7 +19,10 @@ DATABASE_HOST=aws.connect.psdb.cloud
 DATABASE_USERNAME=<planetscale_username>
 DATABASE_PASSWORD=<planetscale_password>
 DATABASE_URI=mysql://<planetscale_username>:<planetscale_password>@aws.connect.psdb.cloud/<planetscale_database_name>?ssl={"rejectUnauthorized": "true"}
+
 GOOGLE_MAPS_API_KEY=<google_maps_api_key>
+
+WINSTON_LOG_DAYS=5
 ```
 
 3. Start the project in dev mode

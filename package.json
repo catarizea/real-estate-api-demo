@@ -12,7 +12,7 @@
     "dev": "dotenv -e .env -- bun --hot index.ts",
     "debug": "dotenv -e .env -- bun --inspect index.ts",
     "start": "dotenv -e .env -v BUN_ENV=prod -- bun index.ts",
-    "test": "dotenv -e .env -v BUN_ENV=prod -- bun test"
+    "test": "dotenv -e .env -v BUN_ENV=test -- bun test"
   },
   "dependencies": {
     "@hono/swagger-ui": "^0.2.1",
@@ -24,7 +24,9 @@
     "geolib": "^3.3.4",
     "hono": "^3.12.5",
     "mysql2": "^3.7.0",
-    "node-geocoder": "^4.2.0"
+    "node-geocoder": "^4.2.0",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",

@@ -1,3 +1,4 @@
+import httpLogger from './httpLogger';
 import zodDefaultHook from './zodDefaultHook';
 
-export { zodDefaultHook };
+export { httpLogger, zodDefaultHook };

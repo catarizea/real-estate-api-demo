@@ -1,7 +1,7 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
 import { cors } from 'hono/cors';
-import { logger } from 'hono/logger';
 
+import { httpLogger } from '@/middlewares';
 import { homeRoutes, propertyRoutes } from '@/routes';
 
 const app = new OpenAPIHono();
@@ -14,9 +14,7 @@ app.use(
   }),
 );
 
-if (process.env.BUN_ENV === 'dev') {
-  app.use('*', logger());
-}
+app.use('*', httpLogger);
 
 app.route('/', homeRoutes);
 app.route('/properties', propertyRoutes);

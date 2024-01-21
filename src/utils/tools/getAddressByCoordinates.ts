@@ -1,14 +1,13 @@
 import type { Entry } from 'node-geocoder';
 import NodeGeocoder from 'node-geocoder';
 
+import { logger } from '@/services';
 import { Point } from '@/types';
 
-const options = {
+const geocoder = NodeGeocoder({
   provider: 'google' as const,
   apiKey: `${process.env.GOOGLE_MAPS_API_KEY}`,
-};
-
-const geocoder = NodeGeocoder(options);
+});
 
 const getAddressByCoordinates = async ({
   latitude,
@@ -17,8 +16,10 @@ const getAddressByCoordinates = async ({
   try {
     const result = await geocoder.reverse({ lat: latitude, lon: longitude });
     return result;
-  } catch (_) {
-    throw new Error('Error getting address by coordinates');
+  } catch (error) {
+    logger.error('[GOOGLE MAPS] geocode reverse error', error);
+
+    throw new Error('Geocode reverse error');
   }
 };
 
