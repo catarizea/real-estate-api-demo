@@ -1,5 +1,7 @@
 # Real Estate API Demo
 
+REST API demo for renting a property using Bun, Hono, Drizzle, Planetscale
+
 ## Project setup
 
 1. Clone the repo and install dependencies

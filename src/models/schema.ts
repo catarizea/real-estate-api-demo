@@ -56,6 +56,7 @@ import {
   propertyUnitRelations,
 } from './schemas/property';
 import { region, regionCityRelations } from './schemas/region';
+import { seedAddress } from './schemas/seedAddress';
 import { typeProp, typePropPropertyRelations } from './schemas/typeProp';
 import {
   unit,
@@ -112,6 +113,7 @@ export {
   propertyUnitRelations,
   region,
   regionCityRelations,
+  seedAddress,
   typeProp,
   typePropPropertyRelations,
   unit,
