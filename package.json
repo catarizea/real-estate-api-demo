@@ -1,7 +1,7 @@
 {
   "name": "real-estate-api-demo",
   "version": "1.0.1",
-  "description": "Real estate api demo using Bun, Hono, Drizzle, Planetscale",
+  "description": "REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, Planetscale.",
   "main": "index.ts",
   "scripts": {
     "db:push": "dotenv -e .env -- drizzle-kit push:mysql --config=drizzle.config.ts",
