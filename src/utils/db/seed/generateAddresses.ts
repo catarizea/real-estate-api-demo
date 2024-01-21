@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 import { faker } from '@faker-js/faker';
+import { CronJob } from 'cron';
 import type { Entry } from 'node-geocoder';
 
 import { db } from '@/models';
@@ -10,7 +11,7 @@ import { delay, getAddressByCoordinates } from '@/utils';
 const origin: [latitude: number, longitude: number] = [51.0334, -114.05424];
 const city = 'Calgary';
 const delayTime = 2000;
-const batchSize = 10;
+const batchSize = 20;
 
 const generateAddresses = async () => {
   const addresses = [...Array(batchSize).keys()].map(
@@ -56,46 +57,52 @@ const generateAddresses = async () => {
   return Promise.all(addresses);
 };
 
-const addresses = await generateAddresses();
+const task = async () => {
+  const addresses = await generateAddresses();
 
-const values = [];
+  const values = [];
 
-for (const a of addresses) {
-  if (!a) {
-    continue;
-  } else {
-    if (
-      !a.formattedAddress ||
-      !a.streetNumber ||
-      !a.streetName ||
-      !a.zipcode ||
-      !a.city ||
-      !a.extra?.neighborhood ||
-      !a.administrativeLevels?.level1long ||
-      !a.administrativeLevels?.level1short ||
-      !a.country ||
-      !a.latitude ||
-      !a.longitude
-    ) {
+  for (const a of addresses) {
+    if (!a) {
       continue;
+    } else {
+      if (
+        !a.formattedAddress ||
+        !a.streetNumber ||
+        !a.streetName ||
+        !a.zipcode ||
+        !a.city ||
+        !a.extra?.neighborhood ||
+        !a.administrativeLevels?.level1long ||
+        !a.administrativeLevels?.level1short ||
+        !a.country ||
+        !a.latitude ||
+        !a.longitude
+      ) {
+        continue;
+      }
+
+      values.push({
+        address: a.formattedAddress,
+        streetNumber: a.streetNumber,
+        streetName: a.streetName,
+        neighborhood: a.extra?.neighborhood,
+        zipCode: a.zipcode,
+        city: a.city,
+        administrativeLong: a.administrativeLevels?.level1long,
+        administrativeShort: a.administrativeLevels?.level1short,
+        country: a.country,
+        latitude: `${a.latitude}`,
+        longitude: `${a.longitude}`,
+      });
     }
-
-    values.push({
-      address: a.formattedAddress,
-      streetNumber: a.streetNumber,
-      streetName: a.streetName,
-      neighborhood: a.extra?.neighborhood,
-      zipCode: a.zipcode,
-      city: a.city,
-      administrativeLong: a.administrativeLevels?.level1long,
-      administrativeShort: a.administrativeLevels?.level1short,
-      country: a.country,
-      latitude: `${a.latitude}`,
-      longitude: `${a.longitude}`,
-    });
   }
-}
 
-console.log(values);
+  console.log(values);
 
-await db.insert(seedAddress).values(values);
+  await db.insert(seedAddress).values(values);
+};
+
+const job = new CronJob('0 */2 * * * *', task, null, false, 'Europe/Bucharest');
+
+job.start();

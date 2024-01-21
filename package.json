@@ -35,6 +35,7 @@
     "@types/node-geocoder": "^4.2.6",
     "@typescript-eslint/eslint-plugin": "^6.19.0",
     "concurrently": "^8.2.2",
+    "cron": "^3.1.6",
     "dotenv-cli": "^7.3.0",
     "drizzle-kit": "^0.20.13",
     "eslint": "^8.56.0",
