@@ -11,7 +11,7 @@ export const seedAddress = mysqlTable('seed_address', {
     .$defaultFn(() => createId())
     .primaryKey(),
   address: varchar('name', { length: 256 }).notNull(),
-  streetNumber: varchar('street_number', { length: 10 }).notNull(),
+  streetNumber: varchar('street_number', { length: 128 }).notNull(),
   streetName: varchar('street_name', { length: 128 }).notNull(),
   neighborhood: varchar('neighborhood', { length: 100 }),
   zipCode: varchar('zip_code', { length: 30 }).notNull(),

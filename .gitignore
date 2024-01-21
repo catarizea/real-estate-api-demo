@@ -175,3 +175,7 @@ dist
 .DS_Store
 
 gists.txt
+
+*failed*
+
+sql-dumps
