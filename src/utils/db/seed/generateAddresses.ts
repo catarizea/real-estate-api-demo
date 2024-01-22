@@ -12,6 +12,7 @@ const origin: [latitude: number, longitude: number] = [51.0334, -114.05424];
 const city = 'Calgary';
 const delayTime = 2000;
 const batchSize = 20;
+const radius = 16;
 
 const generateAddresses = async () => {
   const addresses = [...Array(batchSize).keys()].map(
@@ -22,7 +23,7 @@ const generateAddresses = async () => {
 
       const c = faker.location.nearbyGPSCoordinate({
         origin,
-        radius: 16,
+        radius,
         isMetric: true,
       });
 
