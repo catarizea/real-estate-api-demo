@@ -1,11 +1,8 @@
-import axios from 'axios';
-import axiosRetry from 'axios-retry';
 import * as cheerio from 'cheerio';
 import path from 'path';
 
 import { logger } from '@/services';
-
-axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
+import { axios } from '@/utils';
 
 const url = 'https://en.wikipedia.org/wiki/List_of_neighbourhoods_in_Calgary';
 
@@ -22,12 +19,29 @@ export type ScrapedCommunity = {
   density: string;
 };
 
+const fail = (message: string) => {
+  logger.error(`[WIKI SCRAPER] ${message}`);
+  throw new Error('Wiki communities scraper error');
+};
+
 const scrapeCommunities = async () => {
   try {
     const communities: ScrapedCommunity[] = [];
     const response = await axios.get(url);
 
+    if (!response || !response.data) {
+      fail('axios response empty');
+    }
+
+    logger.info('[WIKI SCRAPER] axios response success');
+
     const $ = cheerio.load(response.data);
+
+    const trs = $('table.wikitable.sortable');
+
+    if (!trs || !trs.length) {
+      fail('trs not found');
+    }
 
     $('table.wikitable.sortable tbody tr').each((i, elem) => {
       const tds = $(elem).find('td');
@@ -116,16 +130,17 @@ const scrapeCommunities = async () => {
           'seed',
           'communities.json',
         ),
-        JSON.stringify(communities),
+        JSON.stringify(communities, null, 2),
       );
 
       logger.info('[WIKI SCRAPER] wiki communities scraper success');
+    } else {
+      fail('communities arrray empty');
     }
   } catch (error) {
     logger.error('[WIKI SCRAPER] wiki communities scraper error', error);
-
     throw new Error('Wiki communities scraper error');
   }
 };
 
-scrapeCommunities();
+await scrapeCommunities();
