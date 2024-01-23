@@ -23,7 +23,7 @@ export const communityFeature = mysqlTable('community_feature', {
 export const communityFeatureCommunityRelations = relations(
   communityFeature,
   ({ many }) => ({
-    communities: many(community),
+    communityFeatureToCommunity: many(communityFeatureToCommunity),
   }),
 );
 

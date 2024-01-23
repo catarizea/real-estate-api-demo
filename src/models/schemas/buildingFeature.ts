@@ -23,7 +23,7 @@ export const buildingFeature = mysqlTable('building_feature', {
 export const buildingFeaturePropertyRelations = relations(
   buildingFeature,
   ({ many }) => ({
-    properties: many(property),
+    buildingFeatureToProperty: many(buildingFeatureToProperty),
   }),
 );
 

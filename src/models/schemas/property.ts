@@ -11,10 +11,10 @@ import {
   varchar,
 } from 'drizzle-orm/mysql-core';
 
-import { buildingFeature } from './buildingFeature';
+import { buildingFeatureToProperty } from './buildingFeature';
 import { city } from './city';
 import { community } from './community';
-import { feature } from './feature';
+import { featureToProperty } from './feature';
 import { floorPlan } from './floorPlan';
 import { media } from './media';
 import { parking } from './parking';
@@ -58,7 +58,7 @@ export const property = mysqlTable(
 export const propertyBuildingFeatureRelations = relations(
   property,
   ({ many }) => ({
-    buildingFeatures: many(buildingFeature),
+    buildingFeatureToProperty: many(buildingFeatureToProperty),
   }),
 );
 
@@ -77,7 +77,7 @@ export const propertyCommunityRelations = relations(property, ({ one }) => ({
 }));
 
 export const propertyFeatureRelations = relations(property, ({ many }) => ({
-  features: many(feature),
+  featureToProperty: many(featureToProperty),
 }));
 
 export const propertyFloorPlanRelations = relations(property, ({ many }) => ({

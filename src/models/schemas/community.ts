@@ -11,7 +11,7 @@ import {
 } from 'drizzle-orm/mysql-core';
 
 import { city } from './city';
-import { communityFeature } from './communityFeature';
+import { communityFeatureToCommunity } from './communityFeature';
 import { property } from './property';
 
 export const community = mysqlTable(
@@ -52,7 +52,7 @@ export const community = mysqlTable(
 export const communityCommunityFeatureRelations = relations(
   community,
   ({ many }) => ({
-    communityFeatures: many(communityFeature),
+    communityFeatureToCommunity: many(communityFeatureToCommunity),
   }),
 );
 

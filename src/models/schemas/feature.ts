@@ -21,7 +21,7 @@ export const feature = mysqlTable('feature', {
 });
 
 export const featurePropertyRelations = relations(feature, ({ many }) => ({
-  properties: many(property),
+  featureToProperty: many(featureToProperty),
 }));
 
 export const featureToProperty = mysqlTable(
