@@ -13,6 +13,7 @@ const city = 'Calgary';
 const delayTime = 2000;
 const batchSize = 20;
 const radius = 16;
+const timezone = 'Europe/Bucharest';
 
 const generateAddresses = async () => {
   const addresses = [...Array(batchSize).keys()].map(
@@ -104,6 +105,6 @@ const task = async () => {
   await db.insert(seedAddress).values(values);
 };
 
-const job = new CronJob('0 */2 * * * *', task, null, false, 'Europe/Bucharest');
+const job = new CronJob('0 */2 * * * *', task, null, false, timezone);
 
 job.start();

@@ -9,7 +9,7 @@ axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 
 const url = 'https://en.wikipedia.org/wiki/List_of_neighbourhoods_in_Calgary';
 
-type ScrapedCommunity = {
+export type ScrapedCommunity = {
   name: string;
   url: string;
   quadrant: string;
@@ -18,11 +18,11 @@ type ScrapedCommunity = {
   type: string;
   population: number;
   dwellings: number;
-  area: number;
-  density: number;
+  area: string;
+  density: string;
 };
 
-const scrapeCommunity = async () => {
+const scrapeCommunities = async () => {
   try {
     const communities: ScrapedCommunity[] = [];
     const response = await axios.get(url);
@@ -45,13 +45,14 @@ const scrapeCommunity = async () => {
         type: '',
         population: 0,
         dwellings: 0,
-        area: 0,
-        density: 0,
+        area: '',
+        density: '',
       };
 
       tds.each((j, td) => {
         if (j === 0) {
           const a = $(td).find('a');
+
           if (a) {
             community.name = $(a).text();
             community.url = `https://en.wikipedia.org${$(a).attr('href')}`;
@@ -85,11 +86,11 @@ const scrapeCommunity = async () => {
         }
 
         if (j === 10) {
-          community.area = parseFloat($(td).text().replace(/,/g, ''));
+          community.area = `${parseFloat($(td).text().replace(/,/g, ''))}`;
         }
 
         if (j === 11) {
-          community.density = parseFloat($(td).text().replace(/,/g, ''));
+          community.density = `${parseFloat($(td).text().replace(/,/g, ''))}`;
         }
       });
 
@@ -121,10 +122,10 @@ const scrapeCommunity = async () => {
       logger.info('[WIKI SCRAPER] wiki communities scraper success');
     }
   } catch (error) {
-    logger.error('[WIKI SCRAPER] wiki scraper error', error);
+    logger.error('[WIKI SCRAPER] wiki communities scraper error', error);
 
-    throw new Error('Wiki scraper error');
+    throw new Error('Wiki communities scraper error');
   }
 };
 
-scrapeCommunity();
+scrapeCommunities();

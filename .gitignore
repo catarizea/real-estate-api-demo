@@ -180,4 +180,4 @@ gists.txt
 
 sql-dumps
 
-communities.json
+src/utils/db/seed/*.json

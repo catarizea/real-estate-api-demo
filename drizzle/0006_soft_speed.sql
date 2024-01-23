@@ -1,0 +1,1 @@
+ALTER TABLE `community` MODIFY COLUMN `density` decimal(10,2);

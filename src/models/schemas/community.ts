@@ -30,7 +30,7 @@ export const community = mysqlTable(
     dwellings: int('dwellings'),
     usedForRenting: decimal('used_for_renting', { precision: 4, scale: 2 }),
     area: decimal('area', { precision: 10, scale: 2 }),
-    density: decimal('density', { precision: 4, scale: 2 }),
+    density: decimal('density', { precision: 10, scale: 2 }),
     averageIncome: int('average_income'),
     lowIncome: decimal('low_income', { precision: 4, scale: 2 }),
     immigrants: decimal('immigrants', { precision: 4, scale: 2 }),
