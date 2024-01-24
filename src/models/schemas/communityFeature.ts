@@ -14,7 +14,7 @@ export const communityFeature = mysqlTable('community_feature', {
   id: varchar('id', { length: 128 })
     .$defaultFn(() => createId())
     .primaryKey(),
-  name: varchar('name', { length: 256 }).notNull(),
+  name: varchar('name', { length: 256 }).notNull().unique(),
   order: int('order').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),

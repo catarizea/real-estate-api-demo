@@ -1,5 +1,10 @@
 import { logger } from '@/services';
-import { bathroomsLoad, bedroomsLoad } from '@/utils/db/seed/load';
+import {
+  bathroomsLoad,
+  bedroomsLoad,
+  buildingFeaturesLoad,
+  communityFeaturesLoad,
+} from '@/utils/db/seed/load';
 
 const prefix = '[DB SEED]';
 
@@ -23,6 +28,26 @@ if (!bedroomIds || !bedroomIds.length) {
 }
 
 logger.info(`${prefix} bedrooms loaded: ${bedroomIds.length} items`);
+
+const buildingFeatureIds = await buildingFeaturesLoad();
+
+if (!buildingFeatureIds || !buildingFeatureIds.length) {
+  fail('loading building features error');
+}
+
+logger.info(
+  `${prefix} building features loaded: ${buildingFeatureIds.length} items`,
+);
+
+const communityFeatureIds = await communityFeaturesLoad();
+
+if (!communityFeatureIds || !communityFeatureIds.length) {
+  fail('loading community features error');
+}
+
+logger.info(
+  `${prefix} community features loaded: ${communityFeatureIds.length} items`,
+);
 
 logger.info(`${prefix} success db seed`);
 
