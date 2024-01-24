@@ -1,53 +1,41 @@
-import { logger } from '@/services';
 import {
-  bathroomsLoad,
-  bedroomsLoad,
-  buildingFeaturesLoad,
-  communityFeaturesLoad,
-} from '@/utils/db/seed/load';
+  bathroom,
+  bedroom,
+  buildingFeature,
+  communityFeature,
+  feature,
+  typeProp,
+} from '@/models/schema';
+import { logger } from '@/services';
+import load, { prefix } from '@/utils/db/seed/load';
+import {
+  bathrooms,
+  bedrooms,
+  buildingFeatures,
+  communityFeatures,
+  features,
+  typeProps,
+} from '@/utils/db/taxonomy';
 
-const prefix = '[DB SEED]';
+const bathroomIds = await load(bathroom, bathrooms, 'bathrooms types');
 
-const fail = (message: string): void => {
-  logger.error(`${prefix} ${message}`);
-  process.exit(1);
-};
+const bedroomIds = await load(bedroom, bedrooms, 'bedrooms types');
 
-const bathroomIds = await bathroomsLoad();
-
-if (!bathroomIds || !bathroomIds.length) {
-  fail('loading bathrooms error');
-}
-
-logger.info(`${prefix} bathrooms loaded: ${bathroomIds.length} items`);
-
-const bedroomIds = await bedroomsLoad();
-
-if (!bedroomIds || !bedroomIds.length) {
-  fail('loading bedrooms error');
-}
-
-logger.info(`${prefix} bedrooms loaded: ${bedroomIds.length} items`);
-
-const buildingFeatureIds = await buildingFeaturesLoad();
-
-if (!buildingFeatureIds || !buildingFeatureIds.length) {
-  fail('loading building features error');
-}
-
-logger.info(
-  `${prefix} building features loaded: ${buildingFeatureIds.length} items`,
+const buildingFeatureIds = await load(
+  buildingFeature,
+  buildingFeatures,
+  'building features',
 );
 
-const communityFeatureIds = await communityFeaturesLoad();
-
-if (!communityFeatureIds || !communityFeatureIds.length) {
-  fail('loading community features error');
-}
-
-logger.info(
-  `${prefix} community features loaded: ${communityFeatureIds.length} items`,
+const communityFeatureIds = await load(
+  communityFeature,
+  communityFeatures,
+  'community features',
 );
+
+const featureIds = await load(feature, features, 'property unit features');
+
+const typePropIds = await load(typeProp, typeProps, 'property types');
 
 logger.info(`${prefix} success db seed`);
 

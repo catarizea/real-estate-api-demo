@@ -18,7 +18,7 @@ const features = [
   'Hardwood Floors',
   'Laminate Floors',
   'Swinming Pool',
-  'Fitness Ares',
+  'Fitness Area',
   'Elevator',
   'Zero-Step Entrance',
   'Extra-Wide Doorways',

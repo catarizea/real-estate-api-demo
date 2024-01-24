@@ -10,7 +10,7 @@ const communityFeatures = [
   'Tennis Courts',
   'Golf Course',
   'Pool',
-  'Schopping Center',
+  'Shopping Center',
   'School',
   'Train Access',
   'Airport Access',
