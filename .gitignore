@@ -180,4 +180,6 @@ gists.txt
 
 sql-dumps
 
-src/utils/db/seed/*.json
+src/utils/db/seed/*/*.json
+
+*copy*

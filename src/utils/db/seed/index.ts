@@ -1,23 +1,28 @@
-import { faker } from '@faker-js/faker';
+import { logger } from '@/services';
+import { bathroomsLoad, bedroomsLoad } from '@/utils/db/seed/load';
 
-import { db } from '@/models';
-import { property } from '@/models/schema';
+const prefix = '[DB SEED]';
 
-faker.seed(12);
+const fail = (message: string): void => {
+  logger.error(`${prefix} ${message}`);
+  process.exit(1);
+};
 
-const properties = [...Array(50).keys()].map((index) => {
-  if (index === 0) {
-    return {
-      name: faker.company.name(),
-      address: faker.location.streetAddress(),
-      createdAt: new Date('2021-01-01'),
-    };
-  }
+const bathroomIds = await bathroomsLoad();
 
-  return {
-    name: faker.company.name(),
-    address: faker.location.streetAddress(),
-  };
-});
+if (!bathroomIds || !bathroomIds.length) {
+  fail('loading bathrooms error');
+}
 
-await db.insert(property).values(properties);
+logger.info(`${prefix} success bathrooms loaded: ${bathroomIds.length} items`);
+
+const bedroomIds = await bedroomsLoad();
+
+if (!bedroomIds || !bedroomIds.length) {
+  fail('loading bedrooms error');
+}
+
+logger.info(`${prefix} success bedrooms loaded: ${bedroomIds.length} items`);
+
+logger.info(`${prefix} success db seed`);
+process.exit(0);
