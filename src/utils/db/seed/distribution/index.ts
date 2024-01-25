@@ -386,3 +386,26 @@ export const getPropertyTypeIndex = (): number =>
   propertyTypeCumulative.findIndex(
     (c) => c >= faker.number.int({ min: 1, max: 10000 }),
   );
+
+export const propertyRentIntervals: number[][] = [
+  [3000, 5000], // Acreage
+  [1400, 3200], // Apartment
+  [750, 2300], // Basement
+  [1500, 3200], // Condo Unit
+  [1300, 3800], // Duplex
+  [1200, 4500], // House
+  [1700, 3500], // Loft
+  [800, 3000], // Main Floor
+  [500, 1500], // Mobile
+  [700, 3500], // Office Space
+  [150, 450], // Parking Spot
+  [600, 2000], // Room for Rent
+  [150, 700], // Storage
+  [1000, 4500], // Townhouse
+  [1000, 4500], // Vacation Home
+];
+
+export const getPropertyRent = (index: number): number => {
+  const [min, max] = propertyRentIntervals[index];
+  return Math.round(faker.number.int({ min, max }) / 100) * 100;
+};
