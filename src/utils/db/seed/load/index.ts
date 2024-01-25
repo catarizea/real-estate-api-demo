@@ -30,7 +30,7 @@ const loadModel = async (
     logger.info(`${prefix} ${name} loaded: ${ids.length} items`);
 
     return ids;
-  } catch (error) {
+  } catch (_) {
     logger.error(`${prefix} ${name} loading error`);
     process.exit(1);
   }
