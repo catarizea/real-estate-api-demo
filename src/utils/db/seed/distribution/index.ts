@@ -23,7 +23,8 @@ export const distribution = [35, 15, 10, 9, 7, 6, 6, 6, 4, 2];
 
 export const cumulative = [35, 50, 60, 69, 76, 82, 88, 94, 98, 100];
 
-export const getFloorPlan = (percent: number) => {
+export const getFloorPlan = () => {
+  const percent = faker.number.int({ min: 1, max: 100 });
   const index = cumulative.findIndex((c) => c >= percent);
   return floorPlans[index];
 };
@@ -287,26 +288,26 @@ export const getBooleanFeature = (
   return distribution[pos - 1];
 };
 
-export const propertySurfaceIntervals: { [key: string]: number[] } = {
-  Acreage: [1500, 3500],
-  Apartment: [600, 1000],
-  Basement: [500, 1000],
-  'Condo Unit': [600, 1000],
-  Duplex: [900, 1800],
-  House: [900, 2500],
-  Loft: [500, 1700],
-  'Main Floor': [900, 2300],
-  Mobile: [150, 300],
-  'Office Space': [1500, 3500],
-  'Parking Spot': [270, 1000],
-  'Room for Rent': [150, 800],
-  Storage: [270, 1000],
-  Townhouse: [900, 1600],
-  'Vacation Home': [900, 1600],
-};
+export const propertySurfaceIntervals: number[][] = [
+  [1500, 3500], // Acreage
+  [600, 1000], // Apartment
+  [500, 1000], // Basement
+  [600, 1000], // Condo Unit
+  [900, 1800], // Duplex
+  [900, 2500], // House
+  [500, 1700], // Loft
+  [900, 2300], // Main Floor
+  [150, 300], // Mobile
+  [1500, 3500], // Office Space
+  [270, 1000], // Parking Spot
+  [150, 800], // Room for Rent
+  [270, 1000], // Storage
+  [900, 1600], // Townhouse
+  [900, 1600], // Vacation Home
+];
 
-export const getPropertySurface = (type: string): number => {
-  const [min, max] = propertySurfaceIntervals[type];
+export const getPropertySurface = (index: number): number => {
+  const [min, max] = propertySurfaceIntervals[index];
   return faker.number.int({ min, max });
 };
 
@@ -344,3 +345,44 @@ export const getFee = (type: 'pets' | 'parking'): number | undefined => {
 
   return fee;
 };
+
+export const propertyTypeDistribution = [
+  19, // Acreage
+  2622, // Apartment
+  1443, // Basement
+  1682, // Condo Unit
+  387, // Duplex
+  1319, // House
+  19, // Loft
+  665, // Main Floor
+  2, // Mobile
+  28, // Office Space
+  26, // Parking Spot
+  701, // Room for Rent
+  36, // Storage
+  1047, // Townhouse
+  4, // Vacation Home
+];
+
+export const propertyTypeCumulative = [
+  19, // Acreage
+  2641, // Apartment
+  4084, // Basement
+  5766, // Condo Unit
+  6153, // Duplex
+  7472, // House
+  7491, // Loft
+  8156, // Main Floor
+  8158, // Mobile
+  8186, // Office Space
+  8212, // Parking Spot
+  8913, // Room for Rent
+  8949, // Storage
+  9996, // Townhouse
+  10000, // Vacation Home
+];
+
+export const getPropertyTypeIndex = (): number =>
+  propertyTypeCumulative.findIndex(
+    (c) => c >= faker.number.int({ min: 1, max: 10000 }),
+  );
