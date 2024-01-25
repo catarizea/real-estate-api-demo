@@ -46,6 +46,8 @@ export const property = mysqlTable(
     petsFee: int('pets_fee'),
     petsFeeInterval: varchar('pets_fee_interval', { length: 128 }),
     published: boolean('published').notNull().default(false),
+    customerRanking: int('customer_ranking').notNull().default(0),
+    paidSearchRanking: boolean('paid_search_ranking').notNull().default(false),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at').defaultNow().notNull(),
   },

@@ -71,6 +71,13 @@
       "when": 1706122053838,
       "tag": "0009_black_fallen_one",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1706188850507,
+      "tag": "0010_robust_golden_guardian",
+      "breakpoints": true
     }
   ]
 }
