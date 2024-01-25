@@ -318,4 +318,29 @@ export const getPropertyDescription = (): { [key: string]: string } => ({
   text: faker.lorem.paragraphs({ min: 1, max: 4 }),
 });
 
-export const getPetsFee = (): number => faker.number.int({ min: 50, max: 150 });
+export const feeIntervals: { [key: string]: number[] } = {
+  pets: [50, 150],
+  parking: [100, 300],
+};
+
+export const getFee = (type: 'pets' | 'parking'): number | undefined => {
+  let fee: number | undefined;
+
+  if (type === 'pets') {
+    fee = faker.number.int({
+      min: feeIntervals.pets[0],
+      max: feeIntervals.pets[1],
+    });
+  } else if (type === 'parking') {
+    fee = faker.number.int({
+      min: feeIntervals.parking[0],
+      max: feeIntervals.parking[1],
+    });
+  }
+
+  if (!fee) {
+    return undefined;
+  }
+
+  return fee;
+};
