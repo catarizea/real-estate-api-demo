@@ -57,9 +57,15 @@ export const getRandomFeatures = (
   // ids are random strings, so sorting is a good shuffle
   const randomOrderedTaxonomyIds = taxonomyIds.sort();
 
-  const indexes = [...Array(limit).keys()].map(() =>
-    faker.number.int({ min: 0, max: taxonomyIds.length - 1 }),
-  );
+  const indexes: number[] = [];
+
+  while (indexes.length < limit) {
+    const index = faker.number.int({ min: 0, max: taxonomyIds.length - 1 });
+
+    if (!indexes.includes(index)) {
+      indexes.push(index);
+    }
+  }
 
   return indexes.map((i) => randomOrderedTaxonomyIds[i]);
 };
@@ -328,15 +334,11 @@ export const getFee = (type: 'pets' | 'parking'): number | undefined => {
   let fee: number | undefined;
 
   if (type === 'pets') {
-    fee = faker.number.int({
-      min: feeIntervals.pets[0],
-      max: feeIntervals.pets[1],
-    });
+    const [min, max] = feeIntervals.pets;
+    fee = Math.round(faker.number.int({ min, max }) / 50) * 50;
   } else if (type === 'parking') {
-    fee = faker.number.int({
-      min: feeIntervals.parking[0],
-      max: feeIntervals.parking[1],
-    });
+    const [min, max] = feeIntervals.parking;
+    fee = Math.round(faker.number.int({ min, max }) / 50) * 50;
   }
 
   if (!fee) {
@@ -382,10 +384,10 @@ export const propertyTypeCumulative = [
   10000, // Vacation Home
 ];
 
-export const getPropertyTypeIndex = (): number =>
-  propertyTypeCumulative.findIndex(
-    (c) => c >= faker.number.int({ min: 1, max: 10000 }),
-  );
+export const getPropertyTypeIndex = (): number => {
+  const perDecaMille = faker.number.int({ min: 1, max: 10000 });
+  return propertyTypeCumulative.findIndex((c) => c >= perDecaMille);
+};
 
 export const propertyRentIntervals: number[][] = [
   [3000, 5000], // Acreage
@@ -407,5 +409,5 @@ export const propertyRentIntervals: number[][] = [
 
 export const getPropertyRent = (index: number): number => {
   const [min, max] = propertyRentIntervals[index];
-  return Math.round(faker.number.int({ min, max }) / 100) * 100;
+  return Math.round(faker.number.int({ min, max }) / 50) * 50;
 };
