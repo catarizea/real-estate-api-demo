@@ -15,3 +15,12 @@ export type Address = Entry & {
     establishment?: string | null;
   };
 };
+
+export type Cursor = {
+  cursor: string;
+  hasMore: boolean;
+};
+
+export type CursorArgs = Cursor & {
+  type: string;
+};

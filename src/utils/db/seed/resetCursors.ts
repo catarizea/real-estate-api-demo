@@ -9,8 +9,12 @@ const rootFolder = path.join(process.cwd(), 'src', 'utils', 'db', 'seed');
 const loadRoot = path.join(rootFolder, 'load');
 
 const loadCursor = {
-  cursor: 0,
+  cursor: '',
   hasMore: true,
+};
+
+const wikiCursor = {
+  cursor: 0,
 };
 
 const restLoaded = {
@@ -26,7 +30,7 @@ await Bun.write(
 
 await Bun.write(
   path.join(rootFolder, 'wiki', 'cursor.json'),
-  JSON.stringify(loadCursor, null, 2),
+  JSON.stringify(wikiCursor, null, 2),
 );
 
 logger.info(`${prefix} success reset wiki communities scraping cursors`);

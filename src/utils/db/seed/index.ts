@@ -11,8 +11,13 @@ import {
   typeProp,
 } from '@/models/schema';
 import { logger } from '@/services';
+import { CursorArgs } from '@/types';
 import {
   commIds,
+  cursorBuildingFeature,
+  cursorFeature,
+  cursorMedia,
+  cursorProperty,
   featuresToCommunity,
   load,
   loaded,
@@ -34,6 +39,32 @@ const rootFolder = path.join(
   'seed',
   'load',
 );
+
+const setCursor = async ({ cursor, hasMore, type }: CursorArgs) => {
+  switch (type) {
+    case 'buildingFeature':
+      cursorBuildingFeature.cursor = cursor;
+      cursorBuildingFeature.hasMore = hasMore;
+      break;
+    case 'feature':
+      cursorFeature.cursor = cursor;
+      cursorFeature.hasMore = hasMore;
+      break;
+    case 'media':
+      cursorMedia.cursor = cursor;
+      cursorMedia.hasMore = hasMore;
+      break;
+    case 'property':
+      cursorProperty.cursor = cursor;
+      cursorProperty.hasMore = hasMore;
+      break;
+    default:
+      break;
+  }
+
+  const file = path.join(rootFolder, type, 'cursor.json');
+  await Bun.write(file, JSON.stringify({ cursor, hasMore }, null, 2));
+};
 
 const communitiesIds = await commIds();
 

@@ -1,36 +1,26 @@
-import { db } from '@/models';
 import { communityFeatureToCommunity } from '@/models/schema';
 import { logger } from '@/services';
+import { BatchWriter } from '@/utils';
 import { getRandomFeatures } from '@/utils/db/seed/distribution';
-
-const batchSize = 20;
 
 const featuresToCommunity = async (
   communityFeatureIds: string[],
   communitiesIds: { [key: string]: string },
 ) => {
-  let batch: { communityId: string; communityFeatureId: string }[] = [];
+  const batchWriter = new BatchWriter<
+    typeof communityFeatureToCommunity,
+    { communityId: string; communityFeatureId: string }
+  >({ model: communityFeatureToCommunity, batchSize: 20 });
 
   for (const [, communityId] of Object.entries(communitiesIds)) {
     const features = getRandomFeatures(communityFeatureIds, 6);
 
-    const values = features.map((featureId) => ({
-      communityId,
-      communityFeatureId: featureId,
-    }));
-
-    if (batch.length < batchSize) {
-      batch = [...batch, ...values];
-    } else {
-      await db.insert(communityFeatureToCommunity).values(batch);
-      batch = [];
-      batch = [...batch, ...values];
-    }
+    features.forEach(async (featureId) => {
+      batchWriter.load({ communityId, communityFeatureId: featureId });
+    });
   }
 
-  if (batch.length) {
-    await db.insert(communityFeatureToCommunity).values(batch);
-  }
+  await batchWriter.execute();
 
   logger.info(
     `[DB SEED] success community features loaded for all communities`,
