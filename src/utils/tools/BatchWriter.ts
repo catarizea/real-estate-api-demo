@@ -28,11 +28,15 @@ class BatchWriter<
     new Promise<void>((resolve, reject) => {
       const func = async () => {
         if (this.data.length < this.batchSize) {
-          try {
-            await db.insert(this.model).values(this.data);
+          if (!this.data.length) {
             resolve();
-          } catch (error) {
-            reject(error);
+          } else {
+            try {
+              await db.insert(this.model).values(this.data);
+              resolve();
+            } catch (error) {
+              reject(error);
+            }
           }
         } else {
           const data = this.data.slice(0, this.batchSize);

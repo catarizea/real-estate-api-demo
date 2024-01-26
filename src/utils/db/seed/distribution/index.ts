@@ -1,5 +1,7 @@
 import { faker } from '@faker-js/faker';
 
+import { parking } from '@/utils/db/taxonomy';
+
 type FloorPlan = {
   units: number;
 }[];
@@ -254,7 +256,7 @@ export const getBooleanFeature = (
     | 'television'
     | 'paidSearchRanking'
     | 'petsNegotiable',
-): boolean | undefined => {
+): boolean => {
   const pos = faker.number.int({ min: 1, max: 10 });
 
   let distribution: boolean[] | undefined;
@@ -287,8 +289,8 @@ export const getBooleanFeature = (
     distribution = petsNegotiableDistribution;
   }
 
-  if (!distribution) {
-    return undefined;
+  if (typeof distribution === 'undefined') {
+    throw new Error(`Invalid boolean feature type: ${type}`);
   }
 
   return distribution[pos - 1];
@@ -330,7 +332,7 @@ export const feeIntervals: { [key: string]: number[] } = {
   parking: [100, 300],
 };
 
-export const getFee = (type: 'pets' | 'parking'): number | undefined => {
+export const getFee = (type: 'pets' | 'parking'): number => {
   let fee: number | undefined;
 
   if (type === 'pets') {
@@ -341,8 +343,8 @@ export const getFee = (type: 'pets' | 'parking'): number | undefined => {
     fee = Math.round(faker.number.int({ min, max }) / 50) * 50;
   }
 
-  if (!fee) {
-    return undefined;
+  if (typeof fee === 'undefined') {
+    throw new Error(`Invalid fee type: ${type}`);
   }
 
   return fee;
@@ -410,4 +412,20 @@ export const propertyRentIntervals: number[][] = [
 export const getPropertyRent = (index: number): number => {
   const [min, max] = propertyRentIntervals[index];
   return Math.round(faker.number.int({ min, max }) / 50) * 50;
+};
+
+export const getParkingOptions = (): string[] => {
+  const limit = faker.number.int({ min: 1, max: 3 });
+
+  const options: string[] = [];
+
+  while (options.length < limit) {
+    const index = faker.number.int({ min: 0, max: parking.length - 1 });
+
+    if (!options.includes(parking[index])) {
+      options.push(parking[index]);
+    }
+  }
+
+  return options;
 };

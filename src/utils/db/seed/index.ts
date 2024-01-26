@@ -21,6 +21,7 @@ import {
   featuresToCommunity,
   load,
   loaded,
+  loadProperty,
 } from '@/utils/db/seed/load';
 import {
   bathrooms,
@@ -106,6 +107,13 @@ const task = async () => {
   }
 
   logger.info(`${dbSeedPrefix} taxonomies already loaded`);
+
+  if (cursorProperty.hasMore) {
+    await loadProperty({ cursor: cursorProperty, setCursor, communitiesIds });
+    return;
+  } else {
+    logger.info(`${dbSeedPrefix} properties already loaded`);
+  }
 
   logger.info(`${dbSeedPrefix} success db seed finished`);
 
