@@ -1,3 +1,7 @@
+import { CronJob } from 'cron';
+import path from 'path';
+
+import { dbSeedPrefix, timezone } from '@/constants';
 import {
   bathroom,
   bedroom,
@@ -7,9 +11,12 @@ import {
   typeProp,
 } from '@/models/schema';
 import { logger } from '@/services';
-import load, { prefix } from '@/utils/db/seed/load';
-import commIds from '@/utils/db/seed/load/communitiesIds';
-import featuresToCommunity from '@/utils/db/seed/load/featuresToCommunities';
+import {
+  commIds,
+  featuresToCommunity,
+  load,
+  loaded,
+} from '@/utils/db/seed/load';
 import {
   bathrooms,
   bedrooms,
@@ -19,35 +26,61 @@ import {
   typeProps,
 } from '@/utils/db/taxonomy';
 
+const rootFolder = path.join(
+  process.cwd(),
+  'src',
+  'utils',
+  'db',
+  'seed',
+  'load',
+);
+
 const communitiesIds = await commIds();
 
-const bathroomIds = await load(bathroom, bathrooms, 'bathrooms types');
+const task = async () => {
+  if (!loaded.loaded) {
+    await load(bathroom, bathrooms, 'bathrooms types');
 
-const bedroomIds = await load(bedroom, bedrooms, 'bedrooms types');
+    await load(bedroom, bedrooms, 'bedrooms types');
 
-const buildingFeatureIds = await load(
-  buildingFeature,
-  buildingFeatures,
-  'building features',
-);
+    await load(buildingFeature, buildingFeatures, 'building features');
 
-const communityFeatureIds = await load(
-  communityFeature,
-  communityFeatures,
-  'community features',
-);
+    const communityFeatureIds = await load(
+      communityFeature,
+      communityFeatures,
+      'community features',
+    );
 
-if (!communityFeatureIds || !communityFeatureIds.length) {
-  logger.error(`${prefix} community features loading error`);
-  process.exit(1);
-}
+    if (!communityFeatureIds || !communityFeatureIds.length) {
+      logger.error(`${dbSeedPrefix} community features loading error`);
+      process.exit(1);
+    }
 
-await featuresToCommunity(communityFeatureIds, communitiesIds);
+    await featuresToCommunity(communityFeatureIds, communitiesIds);
 
-const featureIds = await load(feature, features, 'property unit features');
+    await load(feature, features, 'property unit features');
 
-const typePropIds = await load(typeProp, typeProps, 'property types');
+    await load(typeProp, typeProps, 'property types');
 
-logger.info(`${prefix} success db seed`);
+    loaded.loaded = true;
 
-process.exit(0);
+    await Bun.write(
+      path.join(rootFolder, 'rest', 'loaded.json'),
+      JSON.stringify(loaded, null, 2),
+    );
+
+    logger.info(`${dbSeedPrefix} success all taxonomies loaded`);
+
+    return;
+  }
+
+  logger.info(`${dbSeedPrefix} taxonomies already loaded`);
+
+  logger.info(`${dbSeedPrefix} success db seed finished`);
+
+  process.exit(0);
+};
+
+const job = new CronJob('0 * * * * *', task, null, false, timezone);
+
+job.start();

@@ -12,7 +12,7 @@ import { community } from '@/models/schema';
 import { logger } from '@/services';
 
 import communities from './communities.json';
-import cursor from './cursorScrapeCommunity.json';
+import cursor from './cursor.json';
 import type { ScrapedCommunity } from './scrapeCommunities';
 import scrapeGeohackCoords from './scrapeGeohackCoords';
 
@@ -236,7 +236,7 @@ await db.insert(community).values(completeCommunity);
 
 cursor.cursor += 1;
 
-Bun.write(
+await Bun.write(
   path.join(
     process.cwd(),
     'src',

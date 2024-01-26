@@ -3,6 +3,7 @@ import { faker } from '@faker-js/faker';
 import { CronJob } from 'cron';
 import type { Entry } from 'node-geocoder';
 
+import { timezone } from '@/constants';
 import { db } from '@/models';
 import { seedAddress } from '@/models/schema';
 import { Address, Point } from '@/types';
@@ -13,7 +14,6 @@ const city = 'Calgary';
 const delayTime = 2000;
 const batchSize = 20;
 const radius = 16;
-const timezone = 'Europe/Bucharest';
 
 const generateAddresses = async () => {
   const addresses = [...Array(batchSize).keys()].map(
