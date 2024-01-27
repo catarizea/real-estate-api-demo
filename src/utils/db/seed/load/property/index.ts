@@ -41,7 +41,7 @@ const batchSize = 50;
 
 type Args = {
   cursor: Cursor;
-  setCursor: ({ cursor, hasMore }: CursorArgs) => void;
+  setCursor: ({ cursor, hasMore, type }: CursorArgs) => void;
   communitiesIds: { [key: string]: string };
 };
 

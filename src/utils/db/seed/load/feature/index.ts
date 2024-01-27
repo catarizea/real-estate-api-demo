@@ -17,7 +17,7 @@ type NewFeatureToProperty = {
 
 type Args = {
   cursor: Cursor;
-  setCursor: ({ cursor, hasMore }: CursorArgs) => void;
+  setCursor: ({ cursor, hasMore, type }: CursorArgs) => void;
 };
 
 const loadFeature = async ({ cursor, setCursor }: Args): Promise<void> => {

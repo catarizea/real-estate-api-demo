@@ -19,6 +19,7 @@ export type Address = Entry & {
 export type Cursor = {
   cursor: string;
   hasMore: boolean;
+  iteration?: number;
 };
 
 export type CursorArgs = Cursor & {

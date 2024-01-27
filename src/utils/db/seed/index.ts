@@ -11,7 +11,7 @@ import {
   typeProp,
 } from '@/models/schema';
 import { logger } from '@/services';
-import { CursorArgs } from '@/types';
+import { Cursor, CursorArgs } from '@/types';
 import {
   commIds,
   cursorBuildingFeature,
@@ -23,6 +23,7 @@ import {
   loadBuildingFeature,
   loaded,
   loadFeature,
+  loadMedia,
   loadProperty,
 } from '@/utils/db/seed/load';
 import {
@@ -45,7 +46,7 @@ const rootFolder = path.join(
   'load',
 );
 
-const setCursor = async ({ cursor, hasMore, type }: CursorArgs) => {
+const setCursor = async ({ cursor, hasMore, type, iteration }: CursorArgs) => {
   switch (type) {
     case 'buildingFeature':
       cursorBuildingFeature.cursor = cursor;
@@ -56,8 +57,11 @@ const setCursor = async ({ cursor, hasMore, type }: CursorArgs) => {
       cursorFeature.hasMore = hasMore;
       break;
     case 'media':
-      cursorMedia.cursor = cursor;
-      cursorMedia.hasMore = hasMore;
+      if (typeof iteration !== 'undefined') {
+        cursorMedia.cursor = cursor;
+        cursorMedia.hasMore = hasMore;
+        cursorMedia.iteration = iteration;
+      }
       break;
     case 'property':
       cursorProperty.cursor = cursor;
@@ -66,7 +70,13 @@ const setCursor = async ({ cursor, hasMore, type }: CursorArgs) => {
   }
 
   const file = path.join(rootFolder, type, 'cursor.json');
-  await Bun.write(file, JSON.stringify({ cursor, hasMore }, null, 2));
+  const newCursor: Cursor = { cursor, hasMore };
+
+  if (typeof iteration !== 'undefined') {
+    newCursor.iteration = iteration;
+  }
+
+  await Bun.write(file, JSON.stringify(newCursor, null, 2));
 };
 
 const communitiesIds = await commIds();
@@ -129,6 +139,13 @@ const task = async () => {
     return;
   } else {
     logger.info(`${dbSeedPrefix} property features already loaded`);
+  }
+
+  if (cursorMedia.hasMore) {
+    await loadMedia({ cursor: cursorMedia, setCursor });
+    return;
+  } else {
+    logger.info(`${dbSeedPrefix} property media already loaded`);
   }
 
   logger.info(`${dbSeedPrefix} success db seed finished`);

@@ -2,6 +2,7 @@ import loadBuildingFeature from './buildingFeature';
 import cursorBuildingFeature from './buildingFeature/cursor.json';
 import loadFeature from './feature';
 import cursorFeature from './feature/cursor.json';
+import loadMedia from './media';
 import cursorMedia from './media/cursor.json';
 import loadProperty from './property';
 import cursorProperty from './property/cursor.json';
@@ -21,5 +22,6 @@ export {
   loadBuildingFeature,
   loaded,
   loadFeature,
+  loadMedia,
   loadProperty,
 };

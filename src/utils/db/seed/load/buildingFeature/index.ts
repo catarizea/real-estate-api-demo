@@ -21,7 +21,7 @@ type NewBuildingFeatureToProperty = {
 
 type Args = {
   cursor: Cursor;
-  setCursor: ({ cursor, hasMore }: CursorArgs) => void;
+  setCursor: ({ cursor, hasMore, type }: CursorArgs) => void;
 };
 
 const loadBuildingFeature = async ({
