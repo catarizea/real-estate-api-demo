@@ -22,7 +22,7 @@ export type Cursor = {
 };
 
 export type CursorArgs = Cursor & {
-  type: string;
+  type: 'buildingFeature' | 'feature' | 'media' | 'property';
 };
 
 export type NewProperty = {

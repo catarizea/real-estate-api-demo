@@ -1,7 +1,7 @@
 import { CronJob } from 'cron';
 import path from 'path';
 
-import { dbSeedPrefix, timezone } from '@/constants';
+import { dbSeedPrefix } from '@/constants';
 import {
   bathroom,
   bedroom,
@@ -20,7 +20,9 @@ import {
   cursorProperty,
   featuresToCommunity,
   load,
+  loadBuildingFeature,
   loaded,
+  loadFeature,
   loadProperty,
 } from '@/utils/db/seed/load';
 import {
@@ -31,6 +33,8 @@ import {
   features,
   typeProps,
 } from '@/utils/db/taxonomy';
+
+const timezone = process.env.SERVER_TIMEZONE;
 
 const rootFolder = path.join(
   process.cwd(),
@@ -58,8 +62,6 @@ const setCursor = async ({ cursor, hasMore, type }: CursorArgs) => {
     case 'property':
       cursorProperty.cursor = cursor;
       cursorProperty.hasMore = hasMore;
-      break;
-    default:
       break;
   }
 
@@ -113,6 +115,20 @@ const task = async () => {
     return;
   } else {
     logger.info(`${dbSeedPrefix} properties already loaded`);
+  }
+
+  if (cursorBuildingFeature.hasMore) {
+    await loadBuildingFeature({ cursor: cursorBuildingFeature, setCursor });
+    return;
+  } else {
+    logger.info(`${dbSeedPrefix} building features already loaded`);
+  }
+
+  if (cursorFeature.hasMore) {
+    await loadFeature({ cursor: cursorFeature, setCursor });
+    return;
+  } else {
+    logger.info(`${dbSeedPrefix} property features already loaded`);
   }
 
   logger.info(`${dbSeedPrefix} success db seed finished`);

@@ -1,4 +1,6 @@
+import loadBuildingFeature from './buildingFeature';
 import cursorBuildingFeature from './buildingFeature/cursor.json';
+import loadFeature from './feature';
 import cursorFeature from './feature/cursor.json';
 import cursorMedia from './media/cursor.json';
 import loadProperty from './property';
@@ -16,6 +18,8 @@ export {
   cursorProperty,
   featuresToCommunity,
   load,
+  loadBuildingFeature,
   loaded,
+  loadFeature,
   loadProperty,
 };

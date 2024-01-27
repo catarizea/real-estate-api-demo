@@ -102,7 +102,7 @@ const loadProperty = async ({
     community: seedAddress.neighborhood,
   };
 
-  const seedAddresses = cursor
+  const seedAddresses = cursor.cursor
     ? await db
         .select(fields)
         .from(seedAddress)
