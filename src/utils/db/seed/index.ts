@@ -36,6 +36,7 @@ import {
 } from '@/utils/db/taxonomy';
 
 const timezone = process.env.SERVER_TIMEZONE;
+const seedBlocked = process.env.DATABASE_SEED_BLOCKED === 'true';
 
 const rootFolder = path.join(
   process.cwd(),
@@ -82,6 +83,13 @@ const setCursor = async ({ cursor, hasMore, type, iteration }: CursorArgs) => {
 const communitiesIds = await commIds();
 
 const task = async () => {
+  if (seedBlocked) {
+    logger.error(
+      `${dbSeedPrefix} database seed is blocked from the environment variables`,
+    );
+    process.exit(1);
+  }
+
   if (!loaded.loaded) {
     await load(bathroom, bathrooms, 'bathrooms types');
 

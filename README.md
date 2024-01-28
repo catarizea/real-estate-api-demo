@@ -23,6 +23,7 @@ GOOGLE_MAPS_API_KEY=<google_maps_api_key>
 PEXELS_API_KEY=<pexels_api_key>
 WINSTON_LOG_DAYS=5
 SERVER_TIMEZONE=Europe/Berlin
+DATABASE_SEED_BLOCKED=false
 ```
 
 3. Start the project in dev mode

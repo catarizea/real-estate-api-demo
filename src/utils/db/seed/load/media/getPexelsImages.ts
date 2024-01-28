@@ -75,6 +75,7 @@ const getPexelsImages = async ({
       if (!matches || !matches.length) {
         throw new Error('Invalid image url');
       }
+
       return matches[0].replace(/\//gi, '');
     });
   } catch (err) {
