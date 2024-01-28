@@ -10,7 +10,7 @@ REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle
 bun install
 ```
 
-2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale, Google Maps Api, Pexels accounts
+2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels accounts.
 
 ```
 BUN_ENV=dev
@@ -26,7 +26,37 @@ SERVER_TIMEZONE=Europe/Berlin
 DATABASE_SEED_BLOCKED=false
 ```
 
-3. Start the project in dev mode
+3. Install PlanetScale CLI `pscale`
+
+```
+brew install planetscale/tap/pscale
+```
+
+4. Install `mysql-client`
+
+```
+brew install mysql-client
+```
+
+5. Push schema to PlanetScale
+
+```
+bun run db:push
+```
+
+6. Create database views (you need to be logged in to PlanetScale with `pscale`)
+
+```
+bun run db:create:views
+```
+
+7. Seed the database. Before running the command bellow, you need to seed `community` (wikipedia scraping) and `seedAddress` (Google Maps geocoder reverse) models first. See files here `src/utils/db/seed`.  
+
+```
+bun run db:seed
+```
+
+8. Start the project in dev mode
 
 ```
 bun run dev
