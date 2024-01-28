@@ -65,8 +65,10 @@ import {
   unitFloorPlanRelations,
   unitPropertyRelations,
 } from './schemas/unit';
+import { allView, propertyView, unitView } from './schemas/views';
 
 export {
+  allView,
   bathroom,
   bathroomUnitRelations,
   bedroom,
@@ -111,6 +113,7 @@ export {
   propertyParkingRelations,
   propertyTypeRelations,
   propertyUnitRelations,
+  propertyView,
   region,
   regionCityRelations,
   seedAddress,
@@ -121,4 +124,5 @@ export {
   unitBedroomRelations,
   unitFloorPlanRelations,
   unitPropertyRelations,
+  unitView,
 };
