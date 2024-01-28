@@ -25,5 +25,10 @@ const result = await db.execute(query);
 
 const duration = performance.now() - start;
 
-console.log(result);
+if (result) {
+  console.log(`Result rows no.: ${result.rows.length}`);
+} else {
+  console.log('No result');
+}
+
 console.log(`duration: ${Math.round(duration)} ms`);
