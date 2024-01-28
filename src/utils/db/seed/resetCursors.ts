@@ -58,7 +58,7 @@ logger.info(`${prefix} success reset property unit feature cursor`);
 
 await Bun.write(
   path.join(loadRoot, 'media', 'cursor.json'),
-  JSON.stringify(loadCursor, null, 2),
+  JSON.stringify({ ...loadCursor, iteration: 0 }, null, 2),
 );
 
 logger.info(`${prefix} success reset property media cursor`);

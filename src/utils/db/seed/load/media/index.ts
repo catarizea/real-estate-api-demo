@@ -4,7 +4,7 @@ import { dbSeedPrefix } from '@/constants';
 import { db } from '@/models';
 import { media, mediaType, property } from '@/models/schema';
 import { logger } from '@/services';
-import { Cursor, CursorArgs } from '@/types';
+import { Cursor, CursorArgs, NewPropertyMedia } from '@/types';
 import { BatchWriter } from '@/utils';
 
 import getPexelsImages from './getPexelsImages';
@@ -14,13 +14,6 @@ const batchSize = 80;
 type Args = {
   cursor: Cursor;
   setCursor: ({ cursor, hasMore, iteration, type }: CursorArgs) => void;
-};
-
-type NewPropertyMedia = {
-  propertyId: string;
-  mediaTypeId: string;
-  url: string;
-  order: number;
 };
 
 const loadMedia = async ({ cursor, setCursor }: Args): Promise<void> => {

@@ -87,3 +87,20 @@ export type NewParking = {
   feeInterval: string;
   order: number;
 };
+
+export type NewBuildingFeatureToProperty = {
+  buildingFeatureId: string;
+  propertyId: string;
+};
+
+export type NewFeatureToProperty = {
+  featureId: string;
+  propertyId: string;
+};
+
+export type NewPropertyMedia = {
+  propertyId: string;
+  mediaTypeId: string;
+  url: string;
+  order: number;
+};

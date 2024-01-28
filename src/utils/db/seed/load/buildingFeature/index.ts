@@ -8,16 +8,11 @@ import {
   property,
 } from '@/models/schema';
 import { logger } from '@/services';
-import { Cursor, CursorArgs } from '@/types';
+import { Cursor, CursorArgs, NewBuildingFeatureToProperty } from '@/types';
 import { BatchWriter } from '@/utils';
 import { getRandomFeatures } from '@/utils/db/seed/distribution';
 
 const batchSize = 100;
-
-type NewBuildingFeatureToProperty = {
-  buildingFeatureId: string;
-  propertyId: string;
-};
 
 type Args = {
   cursor: Cursor;

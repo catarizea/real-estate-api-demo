@@ -4,16 +4,11 @@ import { dbSeedPrefix } from '@/constants';
 import { db } from '@/models';
 import { feature, featureToProperty, property } from '@/models/schema';
 import { logger } from '@/services';
-import { Cursor, CursorArgs } from '@/types';
+import { Cursor, CursorArgs, NewFeatureToProperty } from '@/types';
 import { BatchWriter } from '@/utils';
 import { getRandomFeatures } from '@/utils/db/seed/distribution';
 
 const batchSize = 100;
-
-type NewFeatureToProperty = {
-  featureId: string;
-  propertyId: string;
-};
 
 type Args = {
   cursor: Cursor;
