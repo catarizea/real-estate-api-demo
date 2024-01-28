@@ -101,6 +101,6 @@ export type NewFeatureToProperty = {
 export type NewPropertyMedia = {
   propertyId: string;
   mediaTypeId: string;
-  url: string;
+  assetId: string;
   order: number;
 };

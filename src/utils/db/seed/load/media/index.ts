@@ -88,7 +88,7 @@ const loadMedia = async ({ cursor, setCursor }: Args): Promise<void> => {
     const newPropertyMedia = {
       propertyId: p.id,
       mediaTypeId,
-      url: pexelsImages[index],
+      assetId: pexelsImages[index],
       order: 0,
     };
 

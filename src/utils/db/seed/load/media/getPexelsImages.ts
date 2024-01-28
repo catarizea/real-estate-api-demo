@@ -1,3 +1,4 @@
+import { th } from '@faker-js/faker';
 import { z } from '@hono/zod-openapi';
 
 const key = process.env.PEXELS_API_KEY;
@@ -68,7 +69,14 @@ const getPexelsImages = async ({
       return null;
     }
 
-    return valid.data.map((p) => p.src.large2x);
+    return valid.data.map((p) => {
+      const matches = p.src.original.match(/\/[0-9]+\//gi);
+
+      if (!matches || !matches.length) {
+        throw new Error('Invalid image url');
+      }
+      return matches[0].replace(/\//gi, '');
+    });
   } catch (err) {
     // eslint-disable-next-line no-console
     console.log(err);

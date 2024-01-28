@@ -78,6 +78,13 @@
       "when": 1706188850507,
       "tag": "0010_robust_golden_guardian",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1706446757112,
+      "tag": "0011_glamorous_pyro",
+      "breakpoints": true
     }
   ]
 }

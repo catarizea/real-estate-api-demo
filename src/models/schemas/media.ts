@@ -8,7 +8,7 @@ export const media = mysqlTable('media', {
   id: varchar('id', { length: 128 })
     .$defaultFn(() => createId())
     .primaryKey(),
-  url: varchar('url', { length: 256 }).notNull(),
+  assetId: varchar('asset_id', { length: 256 }).notNull(),
   mediaTypeId: varchar('media_type_id', { length: 128 }).notNull(),
   propertyId: varchar('property_id', { length: 128 }).notNull(),
   order: int('order').notNull(),
