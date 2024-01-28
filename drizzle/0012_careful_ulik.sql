@@ -1,0 +1,1 @@
+CREATE INDEX `type_prop_id_idx` ON `property` (`type_id`);

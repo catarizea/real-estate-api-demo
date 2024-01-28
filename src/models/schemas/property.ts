@@ -54,6 +54,8 @@ export const property = mysqlTable(
   (t) => ({
     latIdx: index('lat_idx').on(t.latitude),
     longIdx: index('long_idx').on(t.longitude),
+    typePropIdIdx: index('type_prop_id_idx').on(t.typePropId),
+    communityIdIdx: index('community_id_idx').on(t.communityId),
   }),
 );
 

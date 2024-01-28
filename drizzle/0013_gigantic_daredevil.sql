@@ -1,0 +1,1 @@
+CREATE INDEX `community_id_idx` ON `property` (`community_id`);

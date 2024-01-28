@@ -1,0 +1,1 @@
+CREATE INDEX `rent_idx` ON `unit` (`rent`);
