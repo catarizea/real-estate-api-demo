@@ -65,7 +65,7 @@ import {
   unitFloorPlanRelations,
   unitPropertyRelations,
 } from './schemas/unit';
-import { allView, propertyView, unitView } from './schemas/views';
+import { allView, propertyView, searchView, unitView } from './schemas/views';
 
 export {
   allView,
@@ -116,6 +116,7 @@ export {
   propertyView,
   region,
   regionCityRelations,
+  searchView,
   seedAddress,
   typeProp,
   typePropPropertyRelations,

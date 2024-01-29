@@ -2,6 +2,8 @@ CREATE TABLE `all` AS SELECT * FROM `all_view`;
 
 ALTER TABLE `all` ADD PRIMARY KEY(`id`);
 
+CREATE FULLTEXT INDEX `search_idx` ON `all` (`parking`, `feature`);
+
 CREATE INDEX `property_id_idx` ON `all` (`property_id`);
 
 CREATE INDEX `rent_idx` ON `all` (`rent`);
@@ -41,3 +43,5 @@ CREATE INDEX `dogs_idx` ON `all` (`dogs`);
 CREATE INDEX `latitude_idx` ON `all` (`latitude`);
 
 CREATE INDEX `longitude_idx` ON `all` (`longitude`);
+
+CREATE VIEW `search_view` AS SELECT * FROM `all`;

@@ -38,7 +38,7 @@ export const unitView = mysqlView('unit_view', {
   bathroom: text('bathroom'),
 }).existing();
 
-export const allView = mysqlView('all_view', {
+const similarColumns = {
   id: text('id'),
   propertyId: text('property_id'),
   rent: int('rent'),
@@ -63,4 +63,10 @@ export const allView = mysqlView('all_view', {
   dogs: tinyint('dogs'),
   latitude: decimal('latitude'),
   longitude: decimal('longitude'),
-}).existing();
+  parking: text('parking'),
+  feature: text('feature'),
+};
+
+export const allView = mysqlView('all_view', similarColumns).existing();
+
+export const searchView = mysqlView('search_view', similarColumns).existing();
