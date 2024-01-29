@@ -13,7 +13,8 @@ import { BatchAlgoliaUpdater } from '@/utils';
 import cursorAglolia from './cursor.json';
 
 const timezone = process.env.SERVER_TIMEZONE;
-const batchSize = 500;
+const batchSize = 1000;
+const seedBlocked = process.env.DATABASE_SEED_BLOCKED === 'true';
 
 const file = path.join(
   process.cwd(),
@@ -32,6 +33,13 @@ const setCursor = async (cursor: Cursor): Promise<void> => {
 };
 
 const loadAlgolia = async (): Promise<void> => {
+  if (seedBlocked) {
+    logger.error(
+      `${algoliaSeedPrefix} database seed is blocked from the environment variables`,
+    );
+    process.exit(1);
+  }
+
   if (!cursorAglolia.hasMore) {
     logger.info(
       `${algoliaSeedPrefix} Algolia property unit objects already loaded`,

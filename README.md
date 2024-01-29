@@ -1,6 +1,6 @@
 # Real Estate API Demo
 
-REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, Planetscale
+REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, Planetscale, Algolia
 
 ## Project setup
 
