@@ -10,7 +10,7 @@ REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle
 bun install
 ```
 
-2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels accounts.
+2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia accounts.
 
 ```
 BUN_ENV=dev
@@ -21,6 +21,9 @@ DATABASE_PASSWORD=<planetscale_password>
 DATABASE_URI=mysql://<planetscale_username>:<planetscale_password>@aws.connect.psdb.cloud/<planetscale_database_name>?ssl={"rejectUnauthorized": "true"}
 GOOGLE_MAPS_API_KEY=<google_maps_api_key>
 PEXELS_API_KEY=<pexels_api_key>
+ALGOLIA_APP_ID=<algolia_app_id>
+ALGOLIA_ADMIN_API_KEY=<algolia_admin_api_key>
+ALGOLIA_SEARCH_API_KEY=<algolia_search_api_key>
 WINSTON_LOG_DAYS=5
 SERVER_TIMEZONE=Europe/Berlin
 DATABASE_SEED_BLOCKED=false
@@ -50,13 +53,19 @@ bun run db:push
 bun run db:create:views
 ```
 
-7. Seed the database. Before running the command bellow, you need to seed `community` (wikipedia scraping) and `seedAddress` (Google Maps geocoder reverse) models first. See files here `src/utils/db/seed`.  
+7. Seed the database. Before running the command bellow, you need to seed `community` (wikipedia scraping) and `seedAddress` (Google Maps geocoder reverse) models first. See files here `src/utils/db/seed/wiki` and here `src/utils/db/seed/gmaps`.  
 
 ```
 bun run db:seed
 ```
 
-8. Start the project in dev mode
+8. Block any accidental database seed from now on by setting this environment variable to `true`:
+
+```
+DATABASE_SEED_BLOCKED=true
+```
+
+9. Start the project in dev mode
 
 ```
 bun run dev
