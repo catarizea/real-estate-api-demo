@@ -4,6 +4,7 @@
   "description": "REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, Planetscale.",
   "main": "index.ts",
   "scripts": {
+    "algolia:seed": "dotenv -e .env -- bun ./src/utils/db/seed/algolia/index.ts",
     "db:push": "dotenv -e .env -- drizzle-kit push:mysql --config=drizzle.config.ts",
     "db:generate:migration": "dotenv -e .env -- drizzle-kit generate:mysql --config=drizzle.config.ts",
     "db:migrate": "dotenv -e .env -- bun ./src/utils/db/migrate.ts",

@@ -104,3 +104,33 @@ export type NewPropertyMedia = {
   assetId: string;
   order: number;
 };
+
+export type AlgoliaPropertyUnit = {
+  objectID: string;
+  propertyId: string;
+  rent: number;
+  immediate: number;
+  availableDate?: Date;
+  shortterm: number;
+  longterm: number;
+  furnished: number;
+  heat: number;
+  water: number;
+  electricity: number;
+  internet: number;
+  television: number;
+  bedroom: string;
+  bathroom: string;
+  listingId: number;
+  address: string;
+  community: string;
+  type: string;
+  smoking: number;
+  cats: number;
+  dogs: number;
+  latitude: number;
+  longitude: number;
+  parking?: string[];
+  feature?: string[];
+  imageId: string;
+};

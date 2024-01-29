@@ -65,6 +65,7 @@ const similarColumns = {
   longitude: decimal('longitude'),
   parking: text('parking'),
   feature: text('feature'),
+  imageId: text('image_id'),
 };
 
 export const allView = mysqlView('all_view', similarColumns).existing();
