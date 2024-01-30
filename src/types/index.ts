@@ -128,8 +128,10 @@ export type AlgoliaPropertyUnit = {
   smoking: number;
   cats: number;
   dogs: number;
-  latitude: number;
-  longitude: number;
+  _geoloc: {
+    lat: number;
+    lng: number;
+  };
   parking?: string[];
   feature?: string[];
   imageId: string;

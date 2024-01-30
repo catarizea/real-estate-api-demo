@@ -112,8 +112,10 @@ const loadAlgolia = async (): Promise<void> => {
       smoking: item.smoking as number,
       cats: item.cats as number,
       dogs: item.dogs as number,
-      latitude: parseFloat(item.latitude as string),
-      longitude: parseFloat(item.longitude as string),
+      _geoloc: {
+        lat: parseFloat(item.latitude as string),
+        lng: parseFloat(item.longitude as string),
+      },
       imageId: item.imageId as string,
     };
 
