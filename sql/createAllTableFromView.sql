@@ -6,6 +6,8 @@ CREATE FULLTEXT INDEX `parking_idx` ON `all` (`parking`);
 
 CREATE FULLTEXT INDEX `feature_idx` ON `all` (`feature`);
 
+CREATE FULLTEXT INDEX `address_idx` ON `all` (`address`);
+
 CREATE INDEX `property_id_idx` ON `all` (`property_id`);
 
 CREATE INDEX `rent_idx` ON `all` (`rent`);

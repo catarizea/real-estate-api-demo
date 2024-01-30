@@ -10,7 +10,7 @@ const searchOptions = {
   facets: ['*'],
   hitsPerPage: 100,
   maxValuesPerFacet: 100,
-  numericFilters: ['rent>=1000', 'rent<=1200'],
+  numericFilters: ['rent>=1000', 'rent<=1200', 'cats=1 OR dogs=1', 'smoking=1'],
   page: 0,
   responseFields: ['*'],
   snippetEllipsisText: '…',
@@ -26,5 +26,7 @@ index.search('', searchOptions).then(({ hits }) => {
   console.log(`===================`);
   console.log(`Result number of rows: ${hits.length}`);
 
+  console.log(`===================`);
+  console.log(hits);
   console.log(`Duration: ${Math.round(duration)} ms`);
 });

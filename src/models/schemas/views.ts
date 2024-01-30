@@ -18,6 +18,9 @@ export const propertyView = mysqlView('property_view', {
   dogs: tinyint('dogs'),
   latitude: decimal('latitude'),
   longitude: decimal('longitude'),
+  parking: text('parking'),
+  feature: text('feature'),
+  imageId: text('image_id'),
 }).existing();
 
 export const unitView = mysqlView('unit_view', {
