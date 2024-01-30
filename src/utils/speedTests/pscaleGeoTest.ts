@@ -21,10 +21,10 @@ const query = qb
       sql`MATCH (${searchView.address}) AGAINST ('Crescent' IN NATURAL LANGUAGE MODE)`,
       sql`${searchView.latitude} BETWEEN ${boundingBox[0].latitude} AND ${boundingBox[1].latitude}`,
       sql`${searchView.longitude} BETWEEN ${boundingBox[0].longitude} AND ${boundingBox[1].longitude}`,
-      sql`ST_distance_sphere(POINT(${testPoint.longitude}, ${testPoint.latitude}), POINT(${searchView.longitude}, ${searchView.latitude})) < 1000`,
+      sql`ST_Distance_Sphere(POINT(${testPoint.longitude}, ${testPoint.latitude}), POINT(${searchView.longitude}, ${searchView.latitude})) < 1000`,
     ),
   )
-  .limit(20);
+  .limit(50);
 
 const result = await db.execute(query);
 

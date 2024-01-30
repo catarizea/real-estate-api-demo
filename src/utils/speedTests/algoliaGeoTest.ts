@@ -4,7 +4,7 @@ import { testPoint } from '@/constants';
 
 const start = performance.now();
 
-const searchOptions = index.search('Crescent', {
+const searchOptions = {
   analytics: false,
   aroundLatLng: `${testPoint.latitude},${testPoint.longitude}`,
   aroundRadius: 1000,
@@ -14,14 +14,14 @@ const searchOptions = index.search('Crescent', {
   explain: ['*'],
   facets: ['*'],
   getRankingInfo: true,
-  hitsPerPage: 10,
+  hitsPerPage: 50,
   maxValuesPerFacet: 100,
   page: 0,
   responseFields: ['*'],
   snippetEllipsisText: '…',
-});
+};
 
-index.search('', searchOptions).then(({ hits }) => {
+index.search('Crescent', searchOptions).then(({ hits }) => {
   const duration = performance.now() - start;
 
   console.log(`====================================`);
