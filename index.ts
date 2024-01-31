@@ -1,6 +1,10 @@
 import { swaggerUI } from '@hono/swagger-ui';
 
+import { rabbitMqQueue } from '@/constants';
+import { rabbitMqConsumer } from '@/providers/rabbitmq';
 import app from '@/server';
+
+rabbitMqConsumer(rabbitMqQueue)();
 
 app.get(
   '/ui',

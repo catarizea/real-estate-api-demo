@@ -32,6 +32,10 @@ const rabbitMqConsumer = (queue: string) => {
 
           channel.assertQueue(queue, { durable: true });
 
+          logger.info(
+            `${rabbitMqPrefix} waiting for messages in queue ${queue}`,
+          );
+
           channel.consume(
             queue,
             (message: Message | null) => {

@@ -8,6 +8,8 @@ export const rabbitMqPrefix = '[RABBITMQ]';
 
 export const taskPrefix = '[TASK]';
 
+export const rabbitMqQueue = 'real-estate-api-demo-tasks';
+
 export const tasks = {
   property: {
     insert: 'property.insert',
