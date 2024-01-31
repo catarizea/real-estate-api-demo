@@ -2,7 +2,7 @@
 
 REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, Planetscale, Algolia
 
-## Project setup
+## Development environment setup
 
 1. Clone the repo and install dependencies
 
@@ -65,22 +65,44 @@ bun run db:seed
 DATABASE_SEED_BLOCKED=true
 ```
 
-9. Start the project in dev mode
+9. Create `all` table containing all data generated previously, to be used via `searchView` model for search testing purposes. The search will be provided by Algolia to the frontend directly.
+
+```
+bun run db:create:all
+```
+
+10. Seed Algolia `property-unit` index. This is going to be used by the frontend directly.
+
+```
+bun run algolia:seed
+```
+
+11. Start the project in dev mode
 
 ```
 bun run dev
 ```
 
-## Development environment
-
-You can access the API at:
+12. Access the API at:
 
 ```
 http://localhost:3000
 ```
 
-You can access the API Swagger documentation at:
+13. Access the API Swagger documentation at:
 
 ```
 http://localhost:3000/ui
+```
+
+14. Start Drizzle Studio
+
+```
+bun run db:studio
+```
+
+15. Access Drizzle Studio at:
+
+```
+https://local.drizzle.studio/?port=3001
 ```
