@@ -105,12 +105,11 @@ export type NewPropertyMedia = {
   order: number;
 };
 
-export type AlgoliaPropertyUnit = {
-  objectID: string;
+type CommonPropertyUnit = {
   propertyId: string;
   rent: number;
   immediate: number;
-  availableDate?: Date;
+  availableDate?: string;
   shortterm: number;
   longterm: number;
   furnished: number;
@@ -128,13 +127,25 @@ export type AlgoliaPropertyUnit = {
   smoking: number;
   cats: number;
   dogs: number;
+  imageId: string;
+};
+
+export type SearchPropertyUnit = CommonPropertyUnit & {
+  id: string;
+  latitude: string;
+  longitude: string;
+  parking?: string;
+  feature?: string;
+};
+
+export type AlgoliaPropertyUnit = CommonPropertyUnit & {
+  objectID: string;
   _geoloc: {
     lat: number;
     lng: number;
   };
   parking?: string[];
   feature?: string[];
-  imageId: string;
 };
 
 export type RabbitMqMessage = {

@@ -1,3 +1,3 @@
-import * as property from './property';
+import getPropertyHandler from './getPropertyHandler';
 
-export { property };
+export { getPropertyHandler };

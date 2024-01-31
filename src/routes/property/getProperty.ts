@@ -1,10 +1,11 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 
-import { property } from '@/controllers';
+import { getPropertyHandler } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
 import { zodSchemas } from '@/models';
+import { errorSchema } from '@/validators';
 
-const properties = new OpenAPIHono({
+const getProperty = new OpenAPIHono({
   defaultHook: zodDefaultHook,
 });
 
@@ -27,20 +28,10 @@ export const successSchema = z.object({
   data: z.array(zodSchemas.selectPropertySchema),
 });
 
-export const errorSchema = z.object({
-  success: z.literal(false),
-  error: z.object({
-    reason: z.string(),
-    issues: z
-      .array(z.object({ message: z.string(), path: z.array(z.string()) }))
-      .optional(),
-  }),
-});
-
 export type SuccessSchema = z.infer<typeof successSchema>;
 export type ErrorSchema = z.infer<typeof errorSchema>;
 
-properties.openapi(
+getProperty.openapi(
   createRoute({
     method: 'get',
     path: '/',
@@ -67,7 +58,7 @@ properties.openapi(
       },
     },
   }),
-  async (c) => property.getAllProperties(c),
+  async (c) => getPropertyHandler(c),
 );
 
-export default properties;
+export default getProperty;

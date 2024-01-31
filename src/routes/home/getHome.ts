@@ -1,6 +1,6 @@
 import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 
-const home = new OpenAPIHono();
+const getHome = new OpenAPIHono();
 
 const successSchema = z.object({
   message: z.string(),
@@ -8,7 +8,7 @@ const successSchema = z.object({
 
 export type SuccessSchema = z.infer<typeof successSchema>;
 
-home.openapi(
+getHome.openapi(
   createRoute({
     method: 'get',
     path: '/',
@@ -30,4 +30,4 @@ home.openapi(
   },
 );
 
-export default home;
+export default getHome;

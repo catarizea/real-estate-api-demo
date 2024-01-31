@@ -1,6 +1,6 @@
 # Real Estate API Demo
 
-REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, Planetscale, Algolia, RabbitMQ (CloudAMQP)
+REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, PlanetScale, Algolia, RabbitMQ (CloudAMQP)
 
 ## Development environment setup
 
@@ -66,13 +66,13 @@ bun run db:seed
 DATABASE_SEED_BLOCKED=true
 ```
 
-9. Create `all` table containing all data generated previously, to be used via `searchView` model for search testing purposes. The search will be provided by Algolia to the frontend directly.
+9. Create `all` table containing all data generated previously, to be used via `searchView` model for search testing purposes only. The search will be provided by Algolia to the frontend directly.
 
 ```
 bun run db:create:all
 ```
 
-10. Seed Algolia `property-unit` index. This is going to be used by the frontend directly.
+10. Seed Algolia `property-unit` index. This is going to be used directly by the frontend.
 
 ```
 bun run algolia:seed

@@ -1,4 +1,15 @@
-import homeRoutes from './homeRoutes';
-import propertyRoutes from './propertyRoutes';
+import { getHome } from '@/routes/home';
+import { postSearch } from '@/routes/search';
 
-export { homeRoutes, propertyRoutes };
+const routes = [
+  {
+    path: '/',
+    route: getHome,
+  },
+  {
+    path: '/search',
+    route: postSearch,
+  },
+];
+
+export default routes;

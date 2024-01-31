@@ -1,3 +1,4 @@
-import { property } from './property';
+import { getPropertyHandler } from './property';
+import { postSearchHandler } from './search';
 
-export { property };
+export { getPropertyHandler, postSearchHandler };

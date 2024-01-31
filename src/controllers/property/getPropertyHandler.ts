@@ -3,15 +3,16 @@ import { desc, sql } from 'drizzle-orm';
 import { QueryBuilder } from 'drizzle-orm/mysql-core';
 import { Context } from 'hono';
 
+import { defaultPerPage } from '@/constants';
 import { db, zodSchemas } from '@/models';
 import { property } from '@/models/schema';
-import { querySchema } from '@/routes/propertyRoutes';
+import { querySchema } from '@/routes/property/getProperty';
 import { dateIsoToDatetime } from '@/utils';
 
 const qb = new QueryBuilder();
 
-export const getAllProperties = async (c: Context) => {
-  let defaultLimit = 10;
+const getPropertyHandler = async (c: Context) => {
+  let defaultLimit = defaultPerPage;
 
   const query = c.req.query();
 
@@ -76,3 +77,5 @@ export const getAllProperties = async (c: Context) => {
     data: result.rows as zodSchemas.SelectPropertySchema[],
   });
 };
+
+export default getPropertyHandler;

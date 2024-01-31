@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test';
 
-import { ErrorSchema, SuccessSchema } from '@/routes/propertyRoutes';
+import { ErrorSchema, SuccessSchema } from '@/routes/property/getProperty';
 import app from '@/server';
 
 test('GET /properties', async () => {

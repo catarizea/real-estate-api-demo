@@ -2,7 +2,7 @@ import { OpenAPIHono } from '@hono/zod-openapi';
 import { cors } from 'hono/cors';
 
 import { httpLogger } from '@/middlewares';
-import { homeRoutes, propertyRoutes } from '@/routes';
+import routes from '@/routes';
 
 const app = new OpenAPIHono();
 
@@ -16,7 +16,8 @@ app.use(
 
 app.use('*', httpLogger);
 
-app.route('/', homeRoutes);
-app.route('/properties', propertyRoutes);
+routes.forEach(({ path, route }) => {
+  app.route(path, route);
+});
 
 export default app;
