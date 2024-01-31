@@ -70,15 +70,9 @@ const numericFields = [
   'listingId',
 ] as const;
 
-const textFields = ['bedroom', 'bathroom'] as const;
+const textFields = ['bedroom', 'bathroom', 'type'] as const;
 
-const textMatchFields = [
-  'address',
-  'community',
-  'type',
-  'parking',
-  'feature',
-] as const;
+const textMatchFields = ['address', 'community', 'parking', 'feature'] as const;
 
 const aroundLatLngSchema = z.tuple([
   z.enum(['aroundLatLng']),

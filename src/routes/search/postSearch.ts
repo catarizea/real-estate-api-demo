@@ -25,7 +25,7 @@ postSearch.openapi(
     request: {
       query: paginationSchema,
       body: {
-        description: 'Search object for property units',
+        description: `Search object for property units. "eq" operator cand be used with numerical tinyint fields ('immediate', 'shortterm', 'longterm', 'furnished', 'heat', 'water', 'electricity','internet', 'television', 'smoking', 'cats', 'dogs', 'listingId') and string fields ('bedroom', 'bathroom', 'type'). "between" operator can be used only with numerical field 'rent'. "like" operator can be used with string fields ('address', 'community', 'parking', 'feature'). "aroundLatLng" operator can be used with geo fields ('latitude', 'longitude') the third argument being the radius in meters. Set empty body as {} if you do not want to use any filters.`,
         content: {
           'application/json': {
             schema: andSchema,
