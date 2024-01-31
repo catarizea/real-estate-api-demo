@@ -1,3 +1,4 @@
 import logger from './logger';
+import worker from './taskWorkers';
 
-export { logger };
+export { logger, worker };

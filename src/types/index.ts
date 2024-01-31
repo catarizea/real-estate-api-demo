@@ -136,3 +136,10 @@ export type AlgoliaPropertyUnit = {
   feature?: string[];
   imageId: string;
 };
+
+export type RabbitMqMessage = {
+  type: string;
+  payload: {
+    id: string;
+  };
+};

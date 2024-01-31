@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { index } from '@/algolia';
+import { index } from '@/providers/algolia';
 
 const start = performance.now();
 

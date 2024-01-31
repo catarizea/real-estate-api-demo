@@ -2,10 +2,10 @@ import { CronJob } from 'cron';
 import { gt } from 'drizzle-orm';
 import path from 'path';
 
-import { index } from '@/algolia';
 import { algoliaSeedPrefix } from '@/constants';
 import { db } from '@/models';
 import { searchView } from '@/models/schema';
+import { index } from '@/providers/algolia';
 import { logger } from '@/services';
 import { AlgoliaPropertyUnit, Cursor } from '@/types';
 import { BatchAlgoliaUpdater } from '@/utils';
