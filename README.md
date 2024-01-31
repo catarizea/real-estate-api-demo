@@ -1,6 +1,6 @@
 # Real Estate API Demo
 
-REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, Planetscale, Algolia
+REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, Planetscale, Algolia, RabbitMQ (CloudAMQP)
 
 ## Development environment setup
 
@@ -10,7 +10,7 @@ REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle
 bun install
 ```
 
-2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia accounts.
+2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia, CloudAMQP accounts.
 
 ```
 BUN_ENV=dev
@@ -24,6 +24,7 @@ PEXELS_API_KEY=<pexels_api_key>
 ALGOLIA_APP_ID=<algolia_app_id>
 ALGOLIA_ADMIN_API_KEY=<algolia_admin_api_key>
 ALGOLIA_SEARCH_API_KEY=<algolia_search_api_key>
+CLOUDAMQP_URL=<cloudamqp_url>
 WINSTON_LOG_DAYS=5
 SERVER_TIMEZONE=Europe/Berlin
 DATABASE_SEED_BLOCKED=false
