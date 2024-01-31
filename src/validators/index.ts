@@ -129,7 +129,7 @@ const searchSchema = z.array(
 );
 
 export const andSchema = z.object({
-  and: searchSchema,
+  and: searchSchema.optional(),
 });
 
 export type SearchSchema = z.infer<typeof searchSchema>;
