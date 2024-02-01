@@ -43,7 +43,13 @@ postSearch.openapi(
                 ],
                 ['aroundLatLng', 50.9573828, -114.084153, 1000],
               ],
-              fields: ['propertyId', 'rent', 'immediate', 'imageId'],
+              fields: [
+                'listingId',
+                'propertyId',
+                'rent',
+                'immediate',
+                'imageId',
+              ],
             },
           },
         },
@@ -53,7 +59,7 @@ postSearch.openapi(
     responses: {
       200: {
         description:
-          'Responds with an array of property unit objects. If no filters are used, all property units are returned. If nothing is found according to filters, an empty array is returned.',
+          'Responds with an array of property unit objects. If no filters are used, all property units are returned. If nothing is found according to filters, an empty array is returned as "data".',
         content: {
           'application/json': {
             schema: successSchema,
