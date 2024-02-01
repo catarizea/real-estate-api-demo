@@ -1,12 +1,12 @@
 import { z } from '@hono/zod-openapi';
-import { and, asc, desc, gt, lt } from 'drizzle-orm';
+import { and, asc, desc, gt, lt, sql } from 'drizzle-orm';
 import { Context } from 'hono';
 
 import { defaultPerPage } from '@/constants';
 import { db } from '@/models';
 import { bathroom } from '@/models/schema';
 import { SelectBathroomSchema } from '@/models/zodSchemas';
-import { badRequestResponse, queryIsNotOk } from '@/utils';
+import { badRequestResponse, dateIsoToDatetime, queryIsNotOk } from '@/utils';
 import {
   getCursorValidatorByOrderBy,
   paginationOrderSchema,
@@ -105,10 +105,22 @@ const postListBathroomHandler = async (c: Context) => {
         );
       }
 
-      cursorArg =
-        orderDirection === 'asc'
-          ? gt(bathroom[dbField], cursor)
-          : lt(bathroom[dbField], cursor);
+      if (dbField === 'createdAt') {
+        cursorArg =
+          orderDirection === 'asc'
+            ? sql`${bathroom.createdAt} > ${dateIsoToDatetime(`${cursor}`)}`
+            : sql`${bathroom.createdAt} < ${dateIsoToDatetime(`${cursor}`)}`;
+      } else if (dbField === 'updatedAt') {
+        cursorArg =
+          orderDirection === 'asc'
+            ? sql`${bathroom.updatedAt} > ${dateIsoToDatetime(`${cursor}`)}`
+            : sql`${bathroom.updatedAt} < ${dateIsoToDatetime(`${cursor}`)}`;
+      } else {
+        cursorArg =
+          orderDirection === 'asc'
+            ? gt(bathroom[dbField], cursor)
+            : lt(bathroom[dbField], cursor);
+      }
     }
 
     queryOp =
