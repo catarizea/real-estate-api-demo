@@ -1,6 +1,5 @@
 import { z } from '@hono/zod-openapi';
 import { and, gt } from 'drizzle-orm';
-import { QueryBuilder } from 'drizzle-orm/mysql-core';
 import { Context } from 'hono';
 
 import { defaultPerPage } from '@/constants';
@@ -10,8 +9,6 @@ import { SearchPropertyUnit } from '@/types';
 import { paginationSchema } from '@/validators';
 
 import convertBodyToQBuilder from './convertBodyToQBuilder';
-
-const qb = new QueryBuilder();
 
 const postSearchHandler = async (c: Context) => {
   let defaultLimit = defaultPerPage;
@@ -23,14 +20,14 @@ const postSearchHandler = async (c: Context) => {
 
   let queryOp =
     qbArgs && qbArgs.length > 0
-      ? qb
+      ? db
           .select()
           .from(searchView)
           .where(and(...qbArgs))
           .orderBy(searchView.id)
           .limit(defaultLimit)
           .$dynamic()
-      : qb
+      : db
           .select()
           .from(searchView)
           .orderBy(searchView.id)
@@ -68,14 +65,14 @@ const postSearchHandler = async (c: Context) => {
       if (cursor) {
         queryOp =
           qbArgs && qbArgs.length > 0
-            ? qb
+            ? db
                 .select()
                 .from(searchView)
                 .where(and(gt(searchView.id, cursor), ...qbArgs))
                 .orderBy(searchView.id)
                 .limit(defaultLimit)
                 .$dynamic()
-            : qb
+            : db
                 .select()
                 .from(searchView)
                 .where(gt(searchView.id, cursor))
@@ -85,14 +82,14 @@ const postSearchHandler = async (c: Context) => {
       } else {
         queryOp =
           qbArgs && qbArgs.length > 0
-            ? qb
+            ? db
                 .select()
                 .from(searchView)
                 .where(and(...qbArgs))
                 .orderBy(searchView.id)
                 .limit(defaultLimit)
                 .$dynamic()
-            : qb
+            : db
                 .select()
                 .from(searchView)
                 .orderBy(searchView.id)
@@ -102,11 +99,11 @@ const postSearchHandler = async (c: Context) => {
     }
   }
 
-  const result = await db.execute(queryOp);
+  const result = await queryOp;
 
   return c.json({
     success: z.literal(true).value,
-    data: result.rows as SearchPropertyUnit[],
+    data: result as SearchPropertyUnit[],
   });
 };
 

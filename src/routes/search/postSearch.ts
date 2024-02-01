@@ -25,7 +25,7 @@ postSearch.openapi(
     request: {
       query: paginationSchema,
       body: {
-        description: `Search object for property units. "eq" operator cand be used with numerical tinyint fields ('immediate', 'shortterm', 'longterm', 'furnished', 'heat', 'water', 'electricity','internet', 'television', 'smoking', 'cats', 'dogs', 'listingId') and string fields ('bedroom', 'bathroom', 'type'). "between" operator can be used only with numerical field 'rent'. "like" operator can be used with string fields ('address', 'community', 'parking', 'feature'). "aroundLatLng" operator can be used with geo fields ('latitude', 'longitude') the third argument being the radius in meters. Set empty body as {} if you do not want to use any filters.`,
+        description: `Search object for property units. "eq" operator cand be used with numerical tinyint fields ('immediate', 'shortterm', 'longterm', 'furnished', 'heat', 'water', 'electricity','internet', 'television', 'smoking', 'cats', 'dogs', 'listingId') and string fields ('bedroom', 'bathroom', 'type'). Only these two "eq" use cases can be used inside of "or" operator array. "between" operator can be used only with numerical field 'rent'. "like" operator can be used with string fields ('address', 'community', 'parking', 'feature'). "aroundLatLng" operator can be used with geo fields ('latitude', 'longitude') the third argument being the radius in meters. Set empty body as {} if you do not want to use any filters.`,
         content: {
           'application/json': {
             schema: andSchema,
@@ -51,7 +51,8 @@ postSearch.openapi(
     },
     responses: {
       200: {
-        description: 'Responds with an array of property unit objects',
+        description:
+          'Responds with an array of property unit objects. If no filters are used, all property units are returned. If nothing is found according to filters, an empty array is returned.',
         content: {
           'application/json': {
             schema: successSchema,

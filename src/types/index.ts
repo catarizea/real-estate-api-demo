@@ -109,7 +109,7 @@ type CommonPropertyUnit = {
   propertyId: string;
   rent: number;
   immediate: number;
-  availableDate?: string;
+  availableDate?: Date;
   shortterm: number;
   longterm: number;
   furnished: number;

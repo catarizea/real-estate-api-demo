@@ -13,7 +13,7 @@ const boundingBox = getBoundingBox(testPoint, 1000);
 
 const qb = new QueryBuilder();
 
-const query = qb
+const query = db
   .select()
   .from(searchView)
   .where(
@@ -24,9 +24,10 @@ const query = qb
       sql`ST_Distance_Sphere(POINT(${testPoint.longitude}, ${testPoint.latitude}), POINT(${searchView.longitude}, ${searchView.latitude})) < 1000`,
     ),
   )
-  .limit(50);
+  .limit(50)
+  .$dynamic();
 
-const result = await db.execute(query);
+const result = await query;
 
 const duration = performance.now() - start;
 
@@ -34,7 +35,8 @@ if (result) {
   console.log(`========================================`);
   console.log('PLANETSCALE GEOSPATIAL QUERY TEST RESULT');
   console.log(`========================================`);
-  console.log(`Result number of rows: ${result.rows.length}`);
+  console.log(`Result number of rows: ${result.length}`);
+  console.log(`Result rows:`, result);
   console.log(`Duration: ${Math.round(duration)} ms`);
 } else {
   console.log('No result');
