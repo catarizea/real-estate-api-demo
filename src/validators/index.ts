@@ -70,9 +70,9 @@ const numericFields = [
   'listingId',
 ] as const;
 
-const textFields = ['bedroom', 'bathroom', 'type'] as const;
+const textFields = ['bedroom', 'bathroom', 'type', 'community'] as const;
 
-const textMatchFields = ['address', 'community', 'parking', 'feature'] as const;
+const textMatchFields = ['address', 'parking', 'feature'] as const;
 
 const aroundLatLngSchema = z.tuple([
   z.enum(['aroundLatLng']),
@@ -90,7 +90,7 @@ const eqNumericSchema = z.tuple([
 const eqStringSchema = z.tuple([
   z.enum(['eq']),
   z.enum(textFields),
-  z.number(),
+  z.string(),
 ]);
 
 const likeSchema = z.tuple([
