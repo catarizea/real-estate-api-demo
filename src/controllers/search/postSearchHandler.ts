@@ -9,6 +9,7 @@ import { SearchPropertyUnit } from '@/types';
 import { paginationSchema } from '@/validators';
 
 import convertBodyToQBuilder from './convertBodyToQBuilder';
+import { all, selectFields } from './searchFields';
 
 const postSearchHandler = async (c: Context) => {
   let defaultLimit = defaultPerPage;
@@ -17,18 +18,19 @@ const postSearchHandler = async (c: Context) => {
   const body = await c.req.json();
 
   const qbArgs = body && body.and ? convertBodyToQBuilder(body.and) : [];
+  const fields = body && body.fields ? selectFields(body.fields) : all;
 
   let queryOp =
     qbArgs && qbArgs.length > 0
       ? db
-          .select()
+          .select(fields)
           .from(searchView)
           .where(and(...qbArgs))
           .orderBy(searchView.id)
           .limit(defaultLimit)
           .$dynamic()
       : db
-          .select()
+          .select(fields)
           .from(searchView)
           .orderBy(searchView.id)
           .limit(defaultLimit)
@@ -66,14 +68,14 @@ const postSearchHandler = async (c: Context) => {
         queryOp =
           qbArgs && qbArgs.length > 0
             ? db
-                .select()
+                .select(fields)
                 .from(searchView)
                 .where(and(gt(searchView.id, cursor), ...qbArgs))
                 .orderBy(searchView.id)
                 .limit(defaultLimit)
                 .$dynamic()
             : db
-                .select()
+                .select(fields)
                 .from(searchView)
                 .where(gt(searchView.id, cursor))
                 .orderBy(searchView.id)
@@ -83,14 +85,14 @@ const postSearchHandler = async (c: Context) => {
         queryOp =
           qbArgs && qbArgs.length > 0
             ? db
-                .select()
+                .select(fields)
                 .from(searchView)
                 .where(and(...qbArgs))
                 .orderBy(searchView.id)
                 .limit(defaultLimit)
                 .$dynamic()
             : db
-                .select()
+                .select(fields)
                 .from(searchView)
                 .orderBy(searchView.id)
                 .limit(defaultLimit)

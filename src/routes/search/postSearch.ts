@@ -3,7 +3,7 @@ import { createRoute, OpenAPIHono, z } from '@hono/zod-openapi';
 import { postSearchHandler } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
 import {
-  andSchema,
+  bodySearchSchema,
   errorSchema,
   paginationSchema,
   searchPropertyUnitSchema,
@@ -25,10 +25,10 @@ postSearch.openapi(
     request: {
       query: paginationSchema,
       body: {
-        description: `Search object for property units. "eq" operator cand be used with numerical tinyint fields ('immediate', 'shortterm', 'longterm', 'furnished', 'heat', 'water', 'electricity','internet', 'television', 'smoking', 'cats', 'dogs', 'listingId') and string fields ('bedroom', 'bathroom', 'type', 'community'). Only these two "eq" use cases can be used inside of "or" operator array. "between" operator can be used only with numerical field 'rent'. "like" operator can be used with string fields ('address', 'parking', 'feature'). "aroundLatLng" operator can be used with geo fields ('latitude', 'longitude') the third argument being the radius in meters. Set empty body as {} if you do not want to use any filters.`,
+        description: `<p>Search body property "and" is for filtering property units. "eq" operator cand be used with numerical tinyint fields ('immediate', 'shortterm', 'longterm', 'furnished', 'heat', 'water', 'electricity','internet', 'television', 'smoking', 'cats', 'dogs', 'listingId') and string fields ('id', 'propertyId', 'bedroom', 'bathroom', 'type', 'community'). Only these two "eq" use cases can be used inside of "or" operator array. "between" operator can be used only with numerical field 'rent'. "like" operator can be used with string fields ('address', 'parking', 'feature'). "aroundLatLng" operator can be used with geo fields ('latitude', 'longitude') the third argument being the radius in meters. Set empty body as {} if you do not want to use any filters.</p><p>Search body property "fields" is for selecting the fields you want to be returned in the response. If you do not use this property, all fields will be returned. If you want to select only some fields, use the following format: "fields": ["propertyId", "rent", "immediate", "availableDate", "shortterm", "longterm", "furnished", "heat", "water", "electricity", "internet", "television", "bedroom", "bathroom", "listingId", "address", "community", "type", "smoking", "cats", "dogs", "parking", "feature", "imageId", "latitude", "longitude"]. 'id' field is always returned for pagination.</p>`,
         content: {
           'application/json': {
-            schema: andSchema,
+            schema: bodySearchSchema,
             example: {
               and: [
                 ['eq', 'smoking', 1],
@@ -43,6 +43,7 @@ postSearch.openapi(
                 ],
                 ['aroundLatLng', 50.9573828, -114.084153, 1000],
               ],
+              fields: ['propertyId', 'rent', 'immediate', 'imageId'],
             },
           },
         },

@@ -54,6 +54,37 @@ export const searchPropertyUnitSchema = z.object({
   longitude: z.string(),
 });
 
+const fieldsSchema = z.array(
+  z.enum([
+    'propertyId',
+    'rent',
+    'immediate',
+    'availableDate',
+    'shortterm',
+    'longterm',
+    'furnished',
+    'heat',
+    'water',
+    'electricity',
+    'internet',
+    'television',
+    'bedroom',
+    'bathroom',
+    'listingId',
+    'address',
+    'community',
+    'type',
+    'smoking',
+    'cats',
+    'dogs',
+    'parking',
+    'feature',
+    'imageId',
+    'latitude',
+    'longitude',
+  ]),
+);
+
 const numericFields = [
   'immediate',
   'shortterm',
@@ -70,7 +101,14 @@ const numericFields = [
   'listingId',
 ] as const;
 
-const textFields = ['bedroom', 'bathroom', 'type', 'community'] as const;
+const textFields = [
+  'id',
+  'propertyId',
+  'bedroom',
+  'bathroom',
+  'type',
+  'community',
+] as const;
 
 const textMatchFields = ['address', 'parking', 'feature'] as const;
 
@@ -122,8 +160,10 @@ const searchSchema = z.array(
   ]),
 );
 
-export const andSchema = z.object({
+export const bodySearchSchema = z.object({
   and: searchSchema.optional(),
+  fields: fieldsSchema.optional(),
 });
 
 export type SearchSchema = z.infer<typeof searchSchema>;
+export type FieldsSchema = z.infer<typeof fieldsSchema>;
