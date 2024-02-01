@@ -7,7 +7,7 @@ import { defaultPerPage } from '@/constants';
 import { db, zodSchemas } from '@/models';
 import { property } from '@/models/schema';
 import { querySchema } from '@/routes/property/getProperty';
-import { dateIsoToDatetime } from '@/utils';
+import { dateIsoToDatetime, queryIsNotOk } from '@/utils';
 
 const qb = new QueryBuilder();
 
@@ -24,22 +24,10 @@ const getPropertyHandler = async (c: Context) => {
     .$dynamic();
 
   if (Object.keys(query).length > 0) {
-    if (!('limit' in query || 'cursor' in query)) {
-      return c.json(
-        {
-          success: z.literal(false).value,
-          error: {
-            reason: 'validation error',
-            issues: [
-              {
-                message: 'query must only contain limit or cursor or both',
-                path: ['cursor', 'limit'],
-              },
-            ],
-          },
-        },
-        400,
-      );
+    const notOk = queryIsNotOk(query);
+
+    if (notOk) {
+      return c.json(notOk, 400);
     }
 
     const valid = querySchema.safeParse(query);
