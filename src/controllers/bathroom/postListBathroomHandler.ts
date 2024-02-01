@@ -1,5 +1,5 @@
 import { z } from '@hono/zod-openapi';
-import { and, gt } from 'drizzle-orm';
+import { and, asc, desc, gt, lt } from 'drizzle-orm';
 import { Context } from 'hono';
 
 import { defaultPerPage } from '@/constants';
@@ -7,7 +7,10 @@ import { db } from '@/models';
 import { bathroom } from '@/models/schema';
 import { SelectBathroomSchema } from '@/models/zodSchemas';
 import { badRequestResponse, queryIsNotOk } from '@/utils';
-import { paginationSchema } from '@/validators';
+import {
+  getCursorValidatorByOrderBy,
+  paginationOrderSchema,
+} from '@/validators';
 
 import convertBodyToQBuilder from './convertBodyToQBuilder';
 
@@ -44,46 +47,84 @@ const postListBathroomHandler = async (c: Context) => {
     });
   }
 
-  const notOk = queryIsNotOk(query);
+  const notOk = queryIsNotOk(query, true);
 
   if (notOk) {
     return c.json(notOk, 400);
   }
 
-  const valid = paginationSchema.safeParse(query);
+  const valid = paginationOrderSchema.safeParse(query);
 
   if (!valid.success) {
     return c.json(
       badRequestResponse({
         reason: 'validation error',
-        message: 'query must contain valid limit and cursor',
-        path: ['limit', 'cursor'],
+        message: 'query must contain valid limit, cursor and orderBy',
+        path: ['limit', 'cursor', 'orderBy'],
       }),
       400,
     );
   }
 
-  const { limit, cursor } = valid.data;
+  const { limit, orderBy, cursor } = valid.data;
 
   if (limit) {
     defaultLimit = limit;
   }
 
+  let orderByField = asc(bathroom.id);
+  let orderDirection = 'asc';
+  let dbField: keyof typeof bathroom.$inferSelect = 'id';
+
+  if (orderBy) {
+    const [field, order] = orderBy.split('-');
+    orderDirection = order;
+
+    dbField = field as keyof typeof bathroom.$inferSelect;
+
+    orderByField =
+      order === 'asc' ? asc(bathroom[dbField]) : desc(bathroom[dbField]);
+  }
+
   if (cursor) {
+    let cursorArg = gt(bathroom.id, `${cursor}`);
+
+    if (orderBy) {
+      const validator = getCursorValidatorByOrderBy(orderBy);
+
+      const validCursor = validator.safeParse(cursor);
+
+      if (!validCursor.success) {
+        return c.json(
+          badRequestResponse({
+            reason: 'validation error',
+            message: `query must contain a valid cursor for orderBy ${orderBy}`,
+            path: ['cursor'],
+          }),
+          400,
+        );
+      }
+
+      cursorArg =
+        orderDirection === 'asc'
+          ? gt(bathroom[dbField], cursor)
+          : lt(bathroom[dbField], cursor);
+    }
+
     queryOp =
       qbArgs && qbArgs.length > 0
         ? db
             .select()
             .from(bathroom)
-            .where(and(gt(bathroom.id, cursor), ...qbArgs))
-            .orderBy(bathroom.id)
+            .where(and(cursorArg, ...qbArgs))
+            .orderBy(orderByField)
             .limit(defaultLimit)
             .$dynamic()
         : db
             .select()
             .from(bathroom)
-            .where(gt(bathroom.id, cursor))
-            .orderBy(bathroom.id)
+            .where(cursorArg)
+            .orderBy(orderByField)
             .limit(defaultLimit)
             .$dynamic();
 
@@ -101,13 +142,13 @@ const postListBathroomHandler = async (c: Context) => {
           .select()
           .from(bathroom)
           .where(and(...qbArgs))
-          .orderBy(bathroom.id)
+          .orderBy(orderByField)
           .limit(defaultLimit)
           .$dynamic()
       : db
           .select()
           .from(bathroom)
-          .orderBy(bathroom.id)
+          .orderBy(orderByField)
           .limit(defaultLimit)
           .$dynamic();
 

@@ -6,7 +6,7 @@ import { selectBathroomSchema } from '@/models/zodSchemas';
 import {
   bodyBathroomListSchema,
   errorSchema,
-  paginationSchema,
+  paginationOrderSchema,
 } from '@/validators';
 
 const postListBathroom = new OpenAPIHono({
@@ -23,7 +23,7 @@ postListBathroom.openapi(
     method: 'post',
     path: '/',
     request: {
-      query: paginationSchema,
+      query: paginationOrderSchema,
       body: {
         description: `List bathrooms body property "and" is for filtering bathrooms. "eq" operator cand be used with integer fields ('order'). "eq" operator can also be used with string fields ('id', 'name'). Only these two "eq" use cases can be used inside of "or" operator array. Set empty body as {} if you do not want to use any filters.`,
         content: {

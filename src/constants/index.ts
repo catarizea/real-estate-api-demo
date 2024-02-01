@@ -2,6 +2,8 @@ import { Point } from '@/types';
 
 export const defaultPerPage = 10;
 
+export const maxPerPage = 100;
+
 export const dbSeedPrefix = '[DB SEED]';
 
 export const algoliaSeedPrefix = '[ALGOLIA SEED]';
