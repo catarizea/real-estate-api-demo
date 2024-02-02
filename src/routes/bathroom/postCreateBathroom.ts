@@ -28,7 +28,7 @@ const postCreateBathroom = createRoute({
     },
   },
   responses: {
-    200: {
+    201: {
       description: 'Responds with the id of the created bathroom.',
       content: {
         'application/json': {

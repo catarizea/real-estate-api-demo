@@ -1,4 +1,5 @@
 import {
+  deleteBathroomHandler,
   postCreateBathroomHandler,
   postListBathroomHandler,
   putUpdateBathroomHandler,
@@ -7,6 +8,7 @@ import { getPropertyHandler } from './property';
 import { postSearchHandler } from './search';
 
 export {
+  deleteBathroomHandler,
   getPropertyHandler,
   postCreateBathroomHandler,
   postListBathroomHandler,
