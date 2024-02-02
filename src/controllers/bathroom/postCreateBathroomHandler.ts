@@ -1,5 +1,28 @@
+import { z } from '@hono/zod-openapi';
+import { createId } from '@paralleldrive/cuid2';
 import { Context } from 'hono';
 
-const postCreateBathroomHandler = async (c: Context) => {};
+import { db } from '@/models';
+import { bathroom } from '@/models/schema';
+import { InsertBathroomSchema } from '@/models/zodSchemas';
+import { badRequestResponse } from '@/utils';
+
+const postCreateBathroomHandler = async (c: Context) => {
+  const body: InsertBathroomSchema = await c.req.json();
+
+  if (!body || !body.name || !body.order) {
+    badRequestResponse({
+      reason: 'validation error',
+      message: 'body must contain valid name and order',
+      path: ['name', 'order'],
+    });
+  }
+
+  const id = createId();
+
+  await db.insert(bathroom).values({ id, ...body });
+
+  return c.json({ success: z.literal(true).value, data: { id } });
+};
 
 export default postCreateBathroomHandler;

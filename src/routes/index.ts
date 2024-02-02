@@ -1,19 +1,19 @@
-import { postListBathroom } from '@/routes/bathroom';
-import { getHome } from '@/routes/home';
-import { postSearch } from '@/routes/search';
+import bathroom from './bathroom';
+import home from './home';
+import search from './search';
 
 const routes = [
   {
     path: '/',
-    route: getHome,
+    routes: home,
   },
   {
     path: '/search',
-    route: postSearch,
+    routes: search,
   },
   {
     path: '/bathroom',
-    route: postListBathroom,
+    routes: bathroom,
   },
 ];
 

@@ -1,5 +1,5 @@
 import { z } from '@hono/zod-openapi';
-import { createSelectSchema } from 'drizzle-zod';
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 import { bathroom } from '@/models/schema';
 
@@ -9,3 +9,7 @@ export const selectBathroomSchema = createSelectSchema(bathroom, {
 });
 
 export type SelectBathroomSchema = z.infer<typeof selectBathroomSchema>;
+
+export const insertBathroomSchema = createInsertSchema(bathroom);
+
+export type InsertBathroomSchema = z.infer<typeof insertBathroomSchema>;

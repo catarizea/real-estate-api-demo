@@ -16,8 +16,8 @@ app.use(
 
 app.use('*', httpLogger);
 
-routes.forEach(({ path, route }) => {
-  app.route(path, route);
+routes.forEach(({ path, routes }) => {
+  app.route(path, routes);
 });
 
 export default app;
