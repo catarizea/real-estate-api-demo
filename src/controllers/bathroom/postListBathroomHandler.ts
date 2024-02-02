@@ -86,56 +86,19 @@ const postListBathroomHandler = async (c: Context) => {
       order === 'asc' ? asc(bathroom[dbField]) : desc(bathroom[dbField]);
   }
 
-  if (cursor) {
-    let cursorArg = gt(bathroom.id, `${cursor}`);
-
-    if (orderBy) {
-      const validator = getCursorValidatorByOrderBy(orderBy);
-
-      const validCursor = validator.safeParse(cursor);
-
-      if (!validCursor.success) {
-        return c.json(
-          badRequestResponse({
-            reason: 'validation error',
-            message: `query must contain a valid cursor for orderBy ${orderBy}`,
-            path: ['cursor'],
-          }),
-          400,
-        );
-      }
-
-      if (dbField === 'createdAt') {
-        cursorArg =
-          orderDirection === 'asc'
-            ? sql`${bathroom.createdAt} > ${dateIsoToDatetime(`${cursor}`)}`
-            : sql`${bathroom.createdAt} < ${dateIsoToDatetime(`${cursor}`)}`;
-      } else if (dbField === 'updatedAt') {
-        cursorArg =
-          orderDirection === 'asc'
-            ? sql`${bathroom.updatedAt} > ${dateIsoToDatetime(`${cursor}`)}`
-            : sql`${bathroom.updatedAt} < ${dateIsoToDatetime(`${cursor}`)}`;
-      } else {
-        cursorArg =
-          orderDirection === 'asc'
-            ? gt(bathroom[dbField], cursor)
-            : lt(bathroom[dbField], cursor);
-      }
-    }
-
+  if (!cursor) {
     queryOp =
       qbArgs && qbArgs.length > 0
         ? db
             .select()
             .from(bathroom)
-            .where(and(cursorArg, ...qbArgs))
+            .where(and(...qbArgs))
             .orderBy(orderByField)
             .limit(defaultLimit)
             .$dynamic()
         : db
             .select()
             .from(bathroom)
-            .where(cursorArg)
             .orderBy(orderByField)
             .limit(defaultLimit)
             .$dynamic();
@@ -148,18 +111,55 @@ const postListBathroomHandler = async (c: Context) => {
     });
   }
 
+  let cursorArg = gt(bathroom.id, `${cursor}`);
+
+  if (orderBy) {
+    const validator = getCursorValidatorByOrderBy(orderBy);
+
+    const validCursor = validator.safeParse(cursor);
+
+    if (!validCursor.success) {
+      return c.json(
+        badRequestResponse({
+          reason: 'validation error',
+          message: `query must contain a valid cursor for orderBy ${orderBy}`,
+          path: ['cursor'],
+        }),
+        400,
+      );
+    }
+
+    if (dbField === 'createdAt') {
+      cursorArg =
+        orderDirection === 'asc'
+          ? sql`${bathroom.createdAt} > ${dateIsoToDatetime(`${cursor}`)}`
+          : sql`${bathroom.createdAt} < ${dateIsoToDatetime(`${cursor}`)}`;
+    } else if (dbField === 'updatedAt') {
+      cursorArg =
+        orderDirection === 'asc'
+          ? sql`${bathroom.updatedAt} > ${dateIsoToDatetime(`${cursor}`)}`
+          : sql`${bathroom.updatedAt} < ${dateIsoToDatetime(`${cursor}`)}`;
+    } else {
+      cursorArg =
+        orderDirection === 'asc'
+          ? gt(bathroom[dbField], cursor)
+          : lt(bathroom[dbField], cursor);
+    }
+  }
+
   queryOp =
     qbArgs && qbArgs.length > 0
       ? db
           .select()
           .from(bathroom)
-          .where(and(...qbArgs))
+          .where(and(cursorArg, ...qbArgs))
           .orderBy(orderByField)
           .limit(defaultLimit)
           .$dynamic()
       : db
           .select()
           .from(bathroom)
+          .where(cursorArg)
           .orderBy(orderByField)
           .limit(defaultLimit)
           .$dynamic();

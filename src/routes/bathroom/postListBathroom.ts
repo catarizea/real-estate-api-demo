@@ -25,7 +25,7 @@ postListBathroom.openapi(
     request: {
       query: paginationOrderSchema,
       body: {
-        description: `List bathrooms body property "and" is for filtering bathrooms. "eq" operator cand be used with integer fields ('order'). "eq" operator can also be used with string fields ('id', 'name'). Only these two "eq" use cases can be used inside of "or" operator array. Set empty body as {} if you do not want to use any filters.`,
+        description: `<p>List bathrooms body property "and" is for filtering bathrooms. "eq" operator cand be used with integer fields ('order'). "eq" operator can also be used with string fields ('id', 'name').</p><p>"lt", "gt", "between" operators are allowed for 'createdAt' and 'updatedAt' fields. The two "eq" use cases and those with date can also be used inside of "or" operator array. </p><p>Set empty body as {} if you do not want to use any filters.</p>`,
         content: {
           'application/json': {
             schema: bodyBathroomListSchema,
@@ -37,6 +37,15 @@ postListBathroom.openapi(
                     ['eq', 'name', '3+'],
                     ['eq', 'name', '2.5'],
                   ],
+                ],
+                ['eq', 'order', 1],
+                ['lt', 'createdAt', '2024-01-01T00:00:00.000Z'],
+                ['gt', 'updatedAt', '2024-01-01T00:00:00.000Z'],
+                [
+                  'between',
+                  'createdAt',
+                  '2024-01-01T00:00:00.000Z',
+                  '2024-01-02T00:00:00.000Z',
                 ],
               ],
             },
