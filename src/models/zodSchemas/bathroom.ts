@@ -12,18 +12,16 @@ export type SelectBathroomSchema = z.infer<typeof selectBathroomSchema>;
 
 export const insertBathroomSchema = createInsertSchema(bathroom);
 
-export const updateBathroomSchema = z.union([
-  z.object({
-    name: z.string(),
-    order: z.number().int(),
-  }),
-  z.object({
-    name: z.string(),
-  }),
-  z.object({
-    order: z.number().int(),
-  }),
-]);
+export const updateBathroomSchema = z
+  .object({
+    name: z.string().optional(),
+    order: z.number().int().optional(),
+  })
+  .refine(
+    ({ name, order }) =>
+      typeof name !== 'undefined' || typeof order !== 'undefined',
+    { message: 'name or order is required', path: ['name', 'order'] },
+  );
 
 export type UpdateBathroomSchema = z.infer<typeof updateBathroomSchema>;
 
