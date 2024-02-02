@@ -12,9 +12,7 @@ const deleteBathroom = createRoute({
   tags: ['bathroom'],
   request: {
     params: z.object({
-      id: z
-        .string()
-        .openapi({ param: { name: 'id', in: 'path', required: true } }),
+      id: z.string(),
     }),
   },
   responses: {

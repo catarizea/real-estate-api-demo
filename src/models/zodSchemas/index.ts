@@ -1,5 +1,13 @@
-import type { InsertBathroomSchema, SelectBathroomSchema } from './bathroom';
-import { insertBathroomSchema, selectBathroomSchema } from './bathroom';
+import type {
+  InsertBathroomSchema,
+  SelectBathroomSchema,
+  UpdateBathroomSchema,
+} from './bathroom';
+import {
+  insertBathroomSchema,
+  selectBathroomSchema,
+  updateBathroomSchema,
+} from './bathroom';
 import type { SelectPropertySchema } from './property';
 import { selectPropertySchema } from './property';
 import type { SelectSeedAddressSchema } from './seedAddress';
@@ -14,4 +22,6 @@ export {
   selectPropertySchema,
   SelectSeedAddressSchema,
   selectSeedAddressSchema,
+  UpdateBathroomSchema,
+  updateBathroomSchema,
 };
