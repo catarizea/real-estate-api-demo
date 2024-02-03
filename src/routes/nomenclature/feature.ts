@@ -36,7 +36,7 @@ app.openapi(
 
 app.openapi(
   deleteNomenclature(NomenclatureTag.Feature),
-  deleteNomenclatureHandler(feature, NomenclatureTag.Feature, [
+  deleteNomenclatureHandler(feature, NomenclatureTag.Feature, 'id', [
     {
       model: featureToProperty,
       tag: NomenclatureTag.FeatureToProperty,

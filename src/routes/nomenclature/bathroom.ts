@@ -36,7 +36,7 @@ app.openapi(
 
 app.openapi(
   deleteNomenclature(NomenclatureTag.Bathroom),
-  deleteNomenclatureHandler(bathroom, NomenclatureTag.Bathroom, [
+  deleteNomenclatureHandler(bathroom, NomenclatureTag.Bathroom, 'id', [
     {
       model: unit,
       tag: NomenclatureTag.Unit,

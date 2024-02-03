@@ -12,19 +12,23 @@ const deleteNomenclatureHandler =
   (
     model: NomenclatureModel,
     tag: NomenclatureTag,
+    idField: string,
     children?: NomenclatureChild[],
   ) =>
   async (c: Context) => {
     const id = c.req.param('id');
 
-    const extistingItem = await db.select().from(model).where(eq(model.id, id));
+    const extistingItem = await db
+      .select()
+      .from(model)
+      .where(eq(model[idField as keyof typeof model.$inferSelect], id));
 
     if (!extistingItem.length) {
       return c.json(
         badRequestResponse({
           reason: 'validation error',
-          message: 'id must be an existing string id',
-          path: ['id'],
+          message: `id must be an existing string ${idField} of ${tag}`,
+          path: [idField],
         }),
         400,
       );
@@ -38,7 +42,9 @@ const deleteNomenclatureHandler =
       }
     }
 
-    await db.delete(model).where(eq(model.id, id));
+    await db
+      .delete(model)
+      .where(eq(model[idField as keyof typeof model.$inferSelect], id));
 
     return c.json({ success: z.literal(true).value });
   };

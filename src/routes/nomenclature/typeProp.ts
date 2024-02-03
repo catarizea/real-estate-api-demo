@@ -36,7 +36,7 @@ app.openapi(
 
 app.openapi(
   deleteNomenclature(NomenclatureTag.TypeProp),
-  deleteNomenclatureHandler(typeProp, NomenclatureTag.TypeProp, [
+  deleteNomenclatureHandler(typeProp, NomenclatureTag.TypeProp, 'id', [
     {
       model: property,
       tag: NomenclatureTag.Property,

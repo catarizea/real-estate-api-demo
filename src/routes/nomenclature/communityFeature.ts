@@ -39,6 +39,7 @@ app.openapi(
   deleteNomenclatureHandler(
     communityFeature,
     NomenclatureTag.CommunityFeature,
+    'id',
     [
       {
         model: communityFeatureToCommunity,
