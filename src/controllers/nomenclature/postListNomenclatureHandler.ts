@@ -21,7 +21,8 @@ const postListNomenclatureHandler =
     const query = c.req.query();
     const body = await c.req.json();
 
-    const qbArgs = body && body.and ? convertBodyToQBuilder(body.and) : [];
+    const qbArgs =
+      body && body.and ? convertBodyToQBuilder(body.and, model) : [];
 
     let queryOp =
       qbArgs && qbArgs.length > 0

@@ -1,11 +1,12 @@
-import { eq, lt, or, SQL, sql } from 'drizzle-orm';
+import { eq, or, SQL, sql } from 'drizzle-orm';
 
-import { bathroom } from '@/models/schema';
+import { NomenclatureModel } from '@/types';
 import { dateIsoToDatetime } from '@/utils';
 import { BathroomListSchema } from '@/validators';
 
 const convertBodyToQBuilder = (
   and: BathroomListSchema,
+  model: NomenclatureModel,
 ): SQL<unknown>[] | null => {
   const args: (SQL<unknown> | undefined)[] = [];
 
@@ -13,20 +14,20 @@ const convertBodyToQBuilder = (
     if (item[0] === 'or') {
       const orArgs = item[1].map((orItem) => {
         if (orItem[0] === 'eq') {
-          return eq(bathroom[orItem[1]], orItem[2]);
+          return eq(model[orItem[1]], orItem[2]);
         }
 
         if (orItem[1] === 'createdAt' || orItem[1] === 'updatedAt') {
           if (orItem[0] === 'lt') {
-            return sql`${bathroom[orItem[1]]} < ${dateIsoToDatetime(orItem[2])}`;
+            return sql`${model[orItem[1]]} < ${dateIsoToDatetime(orItem[2])}`;
           }
 
           if (orItem[0] === 'gt') {
-            return sql`${bathroom[orItem[1]]} > ${dateIsoToDatetime(orItem[2])}`;
+            return sql`${model[orItem[1]]} > ${dateIsoToDatetime(orItem[2])}`;
           }
 
           if (orItem[0] === 'between') {
-            return sql`${bathroom[orItem[1]]} BETWEEN ${dateIsoToDatetime(orItem[2])} AND ${dateIsoToDatetime(orItem[3])}`;
+            return sql`${model[orItem[1]]} BETWEEN ${dateIsoToDatetime(orItem[2])} AND ${dateIsoToDatetime(orItem[3])}`;
           }
         }
       });
@@ -35,21 +36,21 @@ const convertBodyToQBuilder = (
     }
 
     if (item[0] === 'eq') {
-      args.push(eq(bathroom[item[1]], item[2]));
+      args.push(eq(model[item[1]], item[2]));
     }
 
     if (item[1] === 'createdAt' || item[1] === 'updatedAt') {
       if (item[0] === 'lt') {
-        args.push(sql`${bathroom[item[1]]} < ${dateIsoToDatetime(item[2])}`);
+        args.push(sql`${model[item[1]]} < ${dateIsoToDatetime(item[2])}`);
       }
 
       if (item[0] === 'gt') {
-        args.push(sql`${bathroom[item[1]]} > ${dateIsoToDatetime(item[2])}`);
+        args.push(sql`${model[item[1]]} > ${dateIsoToDatetime(item[2])}`);
       }
 
       if (item[0] === 'between') {
         args.push(
-          sql`${bathroom[item[1]]} BETWEEN ${dateIsoToDatetime(item[2])} AND ${dateIsoToDatetime(item[3])}`,
+          sql`${model[item[1]]} BETWEEN ${dateIsoToDatetime(item[2])} AND ${dateIsoToDatetime(item[3])}`,
         );
       }
     }
