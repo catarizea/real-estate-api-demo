@@ -1,5 +1,13 @@
 import type { Entry } from 'node-geocoder';
 
+import {
+  bathroom,
+  bedroom,
+  communityFeature,
+  feature,
+  typeProp,
+} from '@/models/schema';
+
 export type Point = {
   latitude: number;
   longitude: number;
@@ -154,3 +162,18 @@ export type RabbitMqMessage = {
     id: string;
   };
 };
+
+export type NomenclatureModel =
+  | typeof bathroom
+  | typeof bedroom
+  | typeof communityFeature
+  | typeof feature
+  | typeof typeProp;
+
+export enum NomenclatureTag {
+  Bathroom = 'bathroom',
+  Bedroom = 'bedroom',
+  CommunityFeature = 'communityFeature',
+  Feature = 'feature',
+  TypeProp = 'typeProp',
+}

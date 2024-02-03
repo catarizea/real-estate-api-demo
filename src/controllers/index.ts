@@ -1,17 +1,17 @@
 import {
-  deleteBathroomHandler,
-  postCreateBathroomHandler,
-  postListBathroomHandler,
-  putUpdateBathroomHandler,
-} from './bathroom';
+  deleteNomenclatureHandler,
+  postCreateNomenclatureHandler,
+  postListNomenclatureHandler,
+  putUpdateNomenclatureHandler,
+} from './nomenclature';
 import { getPropertyHandler } from './property';
 import { postSearchHandler } from './search';
 
 export {
-  deleteBathroomHandler,
+  deleteNomenclatureHandler,
   getPropertyHandler,
-  postCreateBathroomHandler,
-  postListBathroomHandler,
+  postCreateNomenclatureHandler,
+  postListNomenclatureHandler,
   postSearchHandler,
-  putUpdateBathroomHandler,
+  putUpdateNomenclatureHandler,
 };

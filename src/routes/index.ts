@@ -1,5 +1,11 @@
-import bathroom from './bathroom';
 import home from './home';
+import {
+  bathroom,
+  bedroom,
+  communityFeature,
+  feature,
+  typeProp,
+} from './nomenclature';
 import search from './search';
 
 const routes = [
@@ -14,6 +20,22 @@ const routes = [
   {
     path: '/bathroom',
     routes: bathroom,
+  },
+  {
+    path: '/bedroom',
+    routes: bedroom,
+  },
+  {
+    path: '/community-feature',
+    routes: communityFeature,
+  },
+  {
+    path: '/feature',
+    routes: feature,
+  },
+  {
+    path: '/type-prop',
+    routes: typeProp,
   },
 ];
 
