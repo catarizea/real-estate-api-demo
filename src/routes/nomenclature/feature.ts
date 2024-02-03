@@ -7,7 +7,7 @@ import {
   putUpdateNomenclatureHandler,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
-import { feature } from '@/models/schema';
+import { feature, featureToProperty } from '@/models/schema';
 import { NomenclatureTag } from '@/types';
 
 import deleteNomenclature from './deleteNomenclature';
@@ -36,7 +36,13 @@ app.openapi(
 
 app.openapi(
   deleteNomenclature(NomenclatureTag.Feature),
-  deleteNomenclatureHandler(feature),
+  deleteNomenclatureHandler(feature, NomenclatureTag.Feature, [
+    {
+      model: featureToProperty,
+      tag: NomenclatureTag.FeatureToProperty,
+      parentIdField: 'featureId',
+    },
+  ]),
 );
 
 export default app;

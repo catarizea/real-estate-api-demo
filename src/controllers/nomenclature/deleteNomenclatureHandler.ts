@@ -3,11 +3,18 @@ import { eq } from 'drizzle-orm';
 import { Context } from 'hono';
 
 import { db } from '@/models';
-import { NomenclatureModel } from '@/types';
+import { NomenclatureChild, NomenclatureModel, NomenclatureTag } from '@/types';
 import { badRequestResponse } from '@/utils';
 
+import checkChildren from './checkChildren';
+
 const deleteNomenclatureHandler =
-  (model: NomenclatureModel) => async (c: Context) => {
+  (
+    model: NomenclatureModel,
+    tag: NomenclatureTag,
+    children?: NomenclatureChild[],
+  ) =>
+  async (c: Context) => {
     const id = c.req.param('id');
 
     const extistingItem = await db.select().from(model).where(eq(model.id, id));
@@ -21,6 +28,14 @@ const deleteNomenclatureHandler =
         }),
         400,
       );
+    }
+
+    if (children) {
+      const hasChildrenResult = await checkChildren(tag, children, id);
+
+      if (hasChildrenResult) {
+        return c.json(hasChildrenResult, 409);
+      }
     }
 
     await db.delete(model).where(eq(model.id, id));

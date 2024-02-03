@@ -7,7 +7,7 @@ import {
   putUpdateNomenclatureHandler,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
-import { communityFeature } from '@/models/schema';
+import { communityFeature, communityFeatureToCommunity } from '@/models/schema';
 import { NomenclatureTag } from '@/types';
 
 import deleteNomenclature from './deleteNomenclature';
@@ -36,7 +36,17 @@ app.openapi(
 
 app.openapi(
   deleteNomenclature(NomenclatureTag.CommunityFeature),
-  deleteNomenclatureHandler(communityFeature),
+  deleteNomenclatureHandler(
+    communityFeature,
+    NomenclatureTag.CommunityFeature,
+    [
+      {
+        model: communityFeatureToCommunity,
+        tag: NomenclatureTag.CommunityFeatureToCommunity,
+        parentIdField: 'communityFeatureId',
+      },
+    ],
+  ),
 );
 
 export default app;

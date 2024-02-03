@@ -4,8 +4,12 @@ import {
   bathroom,
   bedroom,
   communityFeature,
+  communityFeatureToCommunity,
   feature,
+  featureToProperty,
+  property,
   typeProp,
+  unit,
 } from '@/models/schema';
 
 export type Point = {
@@ -168,7 +172,11 @@ export type NomenclatureModel =
   | typeof bedroom
   | typeof communityFeature
   | typeof feature
-  | typeof typeProp;
+  | typeof typeProp
+  | typeof unit
+  | typeof communityFeatureToCommunity
+  | typeof featureToProperty
+  | typeof property;
 
 export enum NomenclatureTag {
   Bathroom = 'bathroom',
@@ -176,4 +184,14 @@ export enum NomenclatureTag {
   CommunityFeature = 'communityFeature',
   Feature = 'feature',
   TypeProp = 'typeProp',
+  Unit = 'unit',
+  CommunityFeatureToCommunity = 'communityFeatureToCommunity',
+  FeatureToProperty = 'featureToProperty',
+  Property = 'property',
 }
+
+export type NomenclatureChild = {
+  model: NomenclatureModel;
+  tag: NomenclatureTag;
+  parentIdField: string;
+};

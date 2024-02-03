@@ -7,7 +7,7 @@ import {
   putUpdateNomenclatureHandler,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
-import { bathroom } from '@/models/schema';
+import { bathroom, unit } from '@/models/schema';
 import { NomenclatureTag } from '@/types';
 
 import deleteNomenclature from './deleteNomenclature';
@@ -36,7 +36,13 @@ app.openapi(
 
 app.openapi(
   deleteNomenclature(NomenclatureTag.Bathroom),
-  deleteNomenclatureHandler(bathroom),
+  deleteNomenclatureHandler(bathroom, NomenclatureTag.Bathroom, [
+    {
+      model: unit,
+      tag: NomenclatureTag.Unit,
+      parentIdField: 'bathroomId',
+    },
+  ]),
 );
 
 export default app;

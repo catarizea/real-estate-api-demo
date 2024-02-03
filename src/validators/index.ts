@@ -1,5 +1,6 @@
 import type { BathroomListSchema } from './bathroom';
 import { bodyBathroomListSchema } from './bathroom';
+import type { ErrorSchema } from './error';
 import { errorSchema } from './error';
 import {
   getCursorValidatorByOrderBy,
@@ -13,6 +14,7 @@ export {
   BathroomListSchema,
   bodyBathroomListSchema,
   bodySearchSchema,
+  ErrorSchema,
   errorSchema,
   FieldsSchema,
   getCursorValidatorByOrderBy,
