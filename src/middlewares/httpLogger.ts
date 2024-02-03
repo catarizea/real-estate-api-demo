@@ -12,9 +12,13 @@ if (process.env.BUN_ENV !== 'test') {
 
     await next();
 
-    logger.info(
-      `[API] ${c.req.method} ${c.req.path} ${c.res.status} ${Math.round(performance.now() - start)} ms`,
-    );
+    const message = `[API] ${c.req.method} ${c.req.path} ${c.res.status} ${Math.round(performance.now() - start)} ms`;
+
+    if (c.res.status >= 400) {
+      logger.error(message);
+    } else {
+      logger.info(message);
+    }
   };
 }
 
