@@ -39,7 +39,7 @@ const orSchema = z.tuple([
   ),
 ]);
 
-const bathroomListSchema = z.array(
+const nomenclatureListSchema = z.array(
   z.union([
     eqNumericSchema,
     eqTextSchema,
@@ -49,8 +49,8 @@ const bathroomListSchema = z.array(
   ]),
 );
 
-export const bodyBathroomListSchema = z.object({
-  and: bathroomListSchema.optional(),
+export const bodyNomenclatureListSchema = z.object({
+  and: nomenclatureListSchema.optional(),
 });
 
-export type BathroomListSchema = z.infer<typeof bathroomListSchema>;
+export type NomenclatureListSchema = z.infer<typeof nomenclatureListSchema>;

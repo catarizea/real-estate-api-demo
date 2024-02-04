@@ -172,7 +172,9 @@ export type NomenclatureModel =
   | typeof bedroom
   | typeof communityFeature
   | typeof feature
-  | typeof typeProp
+  | typeof typeProp;
+
+export type NomenclatureChildrenModel =
   | typeof unit
   | typeof communityFeatureToCommunity
   | typeof featureToProperty

@@ -52,6 +52,7 @@ export const unit = mysqlTable(
     bedroomIdIdx: index('bedroom_id_idx').on(t.bedroomId),
     bathroomIdIdx: index('bathroom_id_idx').on(t.bathroomId),
     rentIdx: index('rent_idx').on(t.rent),
+    publishedIdx: index('published_idx').on(t.published),
   }),
 );
 

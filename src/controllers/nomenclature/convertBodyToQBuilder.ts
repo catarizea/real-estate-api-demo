@@ -2,10 +2,10 @@ import { eq, or, SQL, sql } from 'drizzle-orm';
 
 import { NomenclatureModel } from '@/types';
 import { dateIsoToDatetime } from '@/utils';
-import { BathroomListSchema } from '@/validators';
+import { NomenclatureListSchema } from '@/validators';
 
 const convertBodyToQBuilder = (
-  and: BathroomListSchema,
+  and: NomenclatureListSchema,
   model: NomenclatureModel,
 ): SQL<unknown>[] | null => {
   const args: (SQL<unknown> | undefined)[] = [];
