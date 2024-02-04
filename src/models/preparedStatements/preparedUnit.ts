@@ -6,6 +6,8 @@ const preparedUnit = db.query.unit
   .findFirst({
     columns: {
       id: true,
+      propertyId: true,
+      floorPlanId: true,
       name: true,
       rent: true,
       deposit: true,
