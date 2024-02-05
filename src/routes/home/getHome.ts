@@ -1,5 +1,7 @@
 import { createRoute, z } from '@hono/zod-openapi';
 
+import { NomenclatureTag } from '@/types';
+
 const successSchema = z.object({
   message: z.string(),
 });
@@ -9,7 +11,7 @@ export type SuccessSchema = z.infer<typeof successSchema>;
 const getHome = createRoute({
   method: 'get',
   path: '/',
-  tags: ['home'],
+  tags: [NomenclatureTag.Home],
   responses: {
     200: {
       description: 'Responds with a message',

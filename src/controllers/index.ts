@@ -9,6 +9,7 @@ import {
   postListNomenclatureHandler,
   putUpdateNomenclatureHandler,
 } from './nomenclature';
+import { getParkingsByPropertyHandler } from './parking';
 import { getPropertyHandler } from './property';
 import { postSearchHandler } from './search';
 
@@ -16,6 +17,7 @@ export {
   deleteFeatureToItemHandler,
   deleteNomenclatureHandler,
   getFeaturesByItemHandler,
+  getParkingsByPropertyHandler,
   getPropertyHandler,
   postCreateFeatureToItemHandler,
   postCreateNomenclatureHandler,

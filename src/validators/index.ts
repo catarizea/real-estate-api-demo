@@ -19,6 +19,7 @@ import {
   paginationOrderSchema,
   paginationSchema,
 } from './pagination';
+import { parkingsByPropertySuccessSchema } from './parking';
 import type { FieldsSchema, SearchSchema } from './search';
 import { bodySearchSchema, searchPropertyUnitSchema } from './search';
 
@@ -40,6 +41,7 @@ export {
   NomenclatureListSchema,
   paginationOrderSchema,
   paginationSchema,
+  parkingsByPropertySuccessSchema,
   searchPropertyUnitSchema,
   SearchSchema,
 };

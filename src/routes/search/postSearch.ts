@@ -1,5 +1,6 @@
 import { createRoute, z } from '@hono/zod-openapi';
 
+import { NomenclatureTag } from '@/types';
 import {
   bodySearchSchema,
   errorSchema,
@@ -15,7 +16,7 @@ export const successSchema = z.object({
 const postSearch = createRoute({
   method: 'post',
   path: '/',
-  tags: ['search'],
+  tags: [NomenclatureTag.Search],
   request: {
     query: paginationSchema,
     body: {

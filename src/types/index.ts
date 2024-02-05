@@ -202,6 +202,9 @@ export enum NomenclatureTag {
   FeatureToProperty = 'featureToProperty',
   Property = 'property',
   BuildingFeatureToProperty = 'buildingFeatureToProperty',
+  Parking = 'parking',
+  Home = 'home',
+  Search = 'search',
 }
 
 export type NomenclatureChild = {

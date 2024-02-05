@@ -11,6 +11,7 @@ import {
   feature,
   typeProp,
 } from './nomenclature';
+import parking from './parking';
 import search from './search';
 
 const routes = [
@@ -43,16 +44,20 @@ const routes = [
     routes: typeProp,
   },
   {
-    path: 'feature-to-property',
+    path: '/feature-to-property',
     routes: featureToProperty,
   },
   {
-    path: 'community-feature-to-community',
+    path: '/community-feature-to-community',
     routes: communityFeatureToCommunity,
   },
   {
-    path: 'building-feature-to-property',
+    path: '/building-feature-to-property',
     routes: buildingFeatureToProperty,
+  },
+  {
+    path: '/parking',
+    routes: parking,
   },
 ];
 
