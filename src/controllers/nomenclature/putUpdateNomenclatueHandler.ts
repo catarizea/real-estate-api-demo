@@ -45,7 +45,7 @@ const putUpdateNomenclatureHandler =
 
     await db
       .update(model)
-      .set(pick(body, ['name', 'order']))
+      .set({ ...pick(body, ['name', 'order']), updatedAt: new Date() })
       .where(eq(model.id, id));
 
     return c.json({ success: z.literal(true).value, data: { id } }, 200);

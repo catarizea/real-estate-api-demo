@@ -61,7 +61,10 @@ const putUpdateParkingHandler = async (c: Context) => {
 
   await db
     .update(parking)
-    .set(pick(body, ['name', 'fee', 'feeInterval', 'order']))
+    .set({
+      ...pick(body, ['name', 'fee', 'feeInterval', 'order']),
+      updatedAt: new Date(),
+    })
     .where(eq(parking.id, id));
 
   return c.json({ success: z.literal(true).value, data: { id } }, 200);
