@@ -13,6 +13,7 @@ import {
   deleteParkingHandler,
   getParkingsByPropertyHandler,
   postCreateParkingHandler,
+  putUpdateParkingHandler,
 } from './parking';
 import { getPropertyHandler } from './property';
 import { postSearchHandler } from './search';
@@ -30,4 +31,5 @@ export {
   postListNomenclatureHandler,
   postSearchHandler,
   putUpdateNomenclatureHandler,
+  putUpdateParkingHandler,
 };

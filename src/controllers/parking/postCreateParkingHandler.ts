@@ -1,6 +1,7 @@
 import { z } from '@hono/zod-openapi';
 import { createId } from '@paralleldrive/cuid2';
 import { Context } from 'hono';
+import pick from 'lodash.pick';
 
 import { db } from '@/models';
 import { parking } from '@/models/schema';
@@ -66,7 +67,10 @@ const postCreateParkingHandler = async (c: Context) => {
 
   const id = createId();
 
-  await db.insert(parking).values({ id, ...body });
+  await db.insert(parking).values({
+    id,
+    ...pick(body, ['name', 'propertyId', 'fee', 'feeInterval', 'order']),
+  });
 
   return c.json({ success: z.literal(true).value, data: { id } }, 201);
 };

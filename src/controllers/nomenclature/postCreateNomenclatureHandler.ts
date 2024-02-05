@@ -1,6 +1,7 @@
 import { z } from '@hono/zod-openapi';
 import { createId } from '@paralleldrive/cuid2';
 import { Context } from 'hono';
+import pick from 'lodash.pick';
 
 import { db } from '@/models';
 import { InsertBathroomSchema } from '@/models/zodSchemas';
@@ -24,7 +25,7 @@ const postCreateNomenclatureHandler =
 
     const id = createId();
 
-    await db.insert(model).values({ id, ...body });
+    await db.insert(model).values({ id, ...pick(body, ['name', 'order']) });
 
     return c.json({ success: z.literal(true).value, data: { id } }, 201);
   };

@@ -30,9 +30,9 @@ const putUpdateNomenclatureHandler =
       );
     }
 
-    const extistingItem = await db.select().from(model).where(eq(model.id, id));
+    const existingItem = await db.select().from(model).where(eq(model.id, id));
 
-    if (!extistingItem.length) {
+    if (!existingItem.length) {
       return c.json(
         badRequestResponse({
           reason: 'validation error',
@@ -48,7 +48,7 @@ const putUpdateNomenclatureHandler =
       .set(pick(body, ['name', 'order']))
       .where(eq(model.id, id));
 
-    return c.json({ success: z.literal(true).value, data: { id } }, 201);
+    return c.json({ success: z.literal(true).value, data: { id } }, 200);
   };
 
 export default putUpdateNomenclatureHandler;
