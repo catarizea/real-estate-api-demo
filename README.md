@@ -96,13 +96,19 @@ http://localhost:3000
 http://localhost:3000/ui
 ```
 
-14. Start Drizzle Studio
+14. For client code generators access the JSON api specification at:
+
+```
+http://localhost:3000/doc
+```
+
+15. Start Drizzle Studio
 
 ```
 bun run db:studio
 ```
 
-15. Access Drizzle Studio at:
+16. Access Drizzle Studio at:
 
 ```
 https://local.drizzle.studio/?port=3001
