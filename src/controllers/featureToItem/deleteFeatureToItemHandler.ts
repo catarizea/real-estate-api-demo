@@ -53,18 +53,16 @@ const deleteFeatureToItemHandler =
         );
       }
 
-      try {
-        await db
-          .delete(communityFeatureToCommunity)
-          .where(
-            and(
-              eq(communityFeatureToCommunity.communityId, itemId),
-              eq(communityFeatureToCommunity.communityFeatureId, featureId),
-            ),
-          );
+      const result = await db
+        .delete(communityFeatureToCommunity)
+        .where(
+          and(
+            eq(communityFeatureToCommunity.communityId, itemId),
+            eq(communityFeatureToCommunity.communityFeatureId, featureId),
+          ),
+        );
 
-        return c.json({ success: z.literal(true).value });
-      } catch (error) {
+      if (result.rowsAffected === 0) {
         return c.json(
           badRequestResponse({
             reason: 'validation error',
@@ -74,6 +72,8 @@ const deleteFeatureToItemHandler =
           400,
         );
       }
+
+      return c.json({ success: z.literal(true).value });
     }
 
     if (tag === NomenclatureTag.BuildingFeatureToProperty) {
@@ -107,18 +107,16 @@ const deleteFeatureToItemHandler =
         );
       }
 
-      try {
-        await db
-          .delete(buildingFeatureToProperty)
-          .where(
-            and(
-              eq(buildingFeatureToProperty.propertyId, itemId),
-              eq(buildingFeatureToProperty.buildingFeatureId, featureId),
-            ),
-          );
+      const result = await db
+        .delete(buildingFeatureToProperty)
+        .where(
+          and(
+            eq(buildingFeatureToProperty.propertyId, itemId),
+            eq(buildingFeatureToProperty.buildingFeatureId, featureId),
+          ),
+        );
 
-        return c.json({ success: z.literal(true).value });
-      } catch (error) {
+      if (result.rowsAffected === 0) {
         return c.json(
           badRequestResponse({
             reason: 'validation error',
@@ -128,6 +126,8 @@ const deleteFeatureToItemHandler =
           400,
         );
       }
+
+      return c.json({ success: z.literal(true).value });
     }
 
     if (tag === NomenclatureTag.FeatureToProperty) {
@@ -161,18 +161,16 @@ const deleteFeatureToItemHandler =
         );
       }
 
-      try {
-        await db
-          .delete(featureToProperty)
-          .where(
-            and(
-              eq(featureToProperty.propertyId, itemId),
-              eq(featureToProperty.featureId, featureId),
-            ),
-          );
+      const result = await db
+        .delete(featureToProperty)
+        .where(
+          and(
+            eq(featureToProperty.propertyId, itemId),
+            eq(featureToProperty.featureId, featureId),
+          ),
+        );
 
-        return c.json({ success: z.literal(true).value });
-      } catch (error) {
+      if (result.rowsAffected === 0) {
         return c.json(
           badRequestResponse({
             reason: 'validation error',
@@ -182,6 +180,8 @@ const deleteFeatureToItemHandler =
           400,
         );
       }
+
+      return c.json({ success: z.literal(true).value });
     }
 
     return c.json(
