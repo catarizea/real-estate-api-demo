@@ -1,3 +1,8 @@
+import {
+  buildingFeatureToProperty,
+  communityFeatureToCommunity,
+  featureToProperty,
+} from '@/models/schema';
 import { Point } from '@/types';
 
 export const defaultPerPage = 10;
@@ -36,4 +41,22 @@ export const tasks = {
 export const testPoint: Point = {
   latitude: 50.9573828,
   longitude: -114.084153,
+};
+
+export const featureToPropertyMapping = {
+  featureId: 'featureId' as keyof typeof featureToProperty.$inferSelect,
+  itemId: 'propertyId' as keyof typeof featureToProperty.$inferSelect,
+};
+
+export const buildingFeatureToPropertyMapping = {
+  featureId:
+    'buildingFeatureId' as keyof typeof buildingFeatureToProperty.$inferSelect,
+  itemId: 'propertyId' as keyof typeof buildingFeatureToProperty.$inferSelect,
+};
+
+export const communityFeatureToCommunityMapping = {
+  featureId:
+    'communityFeatureId' as keyof typeof communityFeatureToCommunity.$inferSelect,
+  itemId:
+    'communityId' as keyof typeof communityFeatureToCommunity.$inferSelect,
 };

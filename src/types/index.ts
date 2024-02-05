@@ -1,8 +1,14 @@
 import type { Entry } from 'node-geocoder';
 
 import {
+  buildingFeatureToPropertyMapping,
+  communityFeatureToCommunityMapping,
+  featureToPropertyMapping,
+} from '@/constants';
+import {
   bathroom,
   bedroom,
+  buildingFeatureToProperty,
   communityFeature,
   communityFeatureToCommunity,
   feature,
@@ -11,6 +17,11 @@ import {
   typeProp,
   unit,
 } from '@/models/schema';
+import {
+  buildingFeatureToPropertySuccessSchema,
+  communityFeatureToPropertySuccessSchema,
+  featureToPropertySuccessSchema,
+} from '@/validators';
 
 export type Point = {
   latitude: number;
@@ -190,10 +201,26 @@ export enum NomenclatureTag {
   CommunityFeatureToCommunity = 'communityFeatureToCommunity',
   FeatureToProperty = 'featureToProperty',
   Property = 'property',
+  BuildingFeatureToProperty = 'buildingFeatureToProperty',
 }
 
 export type NomenclatureChild = {
-  model: NomenclatureModel;
+  model: NomenclatureChildrenModel;
   tag: NomenclatureTag;
   parentIdField: string;
 };
+
+export type FeatureToItem =
+  | typeof featureToProperty
+  | typeof communityFeatureToCommunity
+  | typeof buildingFeatureToProperty;
+
+export type FeatureToItemSuccessSchema =
+  | typeof featureToPropertySuccessSchema
+  | typeof buildingFeatureToPropertySuccessSchema
+  | typeof communityFeatureToPropertySuccessSchema;
+
+export type FeatureToItemFieldsMapping =
+  | typeof featureToPropertyMapping
+  | typeof buildingFeatureToPropertyMapping
+  | typeof communityFeatureToCommunityMapping;

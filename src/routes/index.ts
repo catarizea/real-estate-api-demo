@@ -1,3 +1,8 @@
+import {
+  buildingFeatureToProperty,
+  communityFeatureToCommunity,
+  featureToProperty,
+} from './featureToItem';
 import home from './home';
 import {
   bathroom,
@@ -36,6 +41,18 @@ const routes = [
   {
     path: '/type-prop',
     routes: typeProp,
+  },
+  {
+    path: 'feature-to-property',
+    routes: featureToProperty,
+  },
+  {
+    path: 'community-feature-to-community',
+    routes: communityFeatureToCommunity,
+  },
+  {
+    path: 'building-feature-to-property',
+    routes: buildingFeatureToProperty,
   },
 ];
 
