@@ -28,11 +28,18 @@ import {
 } from './parkingList';
 import type { FieldsSchema, SearchSchema } from './search';
 import { bodySearchSchema, searchPropertyUnitSchema } from './search';
+import type { UnitListSchema } from './unitList';
+import {
+  bodyUnitListSchema,
+  getUnitCursorValidatorByOrderBy,
+  paginationUnitOrderSchema,
+} from './unitList';
 
 export {
   bodyNomenclatureListSchema,
   bodyParkingListSchema,
   bodySearchSchema,
+  bodyUnitListSchema,
   BuildingFeatureToPropertySuccessSchema,
   buildingFeatureToPropertySuccessSchema,
   CommunityFeatureToPropertySuccessSchema,
@@ -46,12 +53,15 @@ export {
   FieldsSchema,
   getNomenclatureCursorValidatorByOrderBy,
   getParkingCursorValidatorByOrderBy,
+  getUnitCursorValidatorByOrderBy,
   NomenclatureListSchema,
   paginationNomenclatureOrderSchema,
   paginationParkingOrderSchema,
   paginationSchema,
+  paginationUnitOrderSchema,
   ParkingListSchema,
   parkingsByPropertySuccessSchema,
   searchPropertyUnitSchema,
   SearchSchema,
+  UnitListSchema,
 };

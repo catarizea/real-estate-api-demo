@@ -21,6 +21,8 @@ const fields = {
   numeric: ['order'],
   string: ['name'],
   datetime: ['createdAt', 'updatedAt'],
+  tinyInt: [],
+  dateOnly: [],
 };
 
 const rendered = ejs.render(template, { modelName, fields });

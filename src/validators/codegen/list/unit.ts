@@ -14,15 +14,27 @@ const file = Bun.file(
 
 const template = await file.text();
 
-const modelName = 'Parking';
+const modelName = 'Unit';
 
-const fields = {
-  id: ['id', 'propertyId'],
-  numeric: ['order', 'fee'],
-  string: ['name', 'feeInterval'],
+export const fields = {
+  id: ['id', 'propertyId', 'floorPlanId', 'bedroomId', 'bathroomId'],
+  numeric: ['rent', 'order', 'deposit', 'surface'],
+  string: ['name', 'unitNumber', 'unitName'],
+  dateOnly: ['availableDate'],
   datetime: ['createdAt', 'updatedAt'],
-  tinyInt: [],
-  dateOnly: [],
+  tinyInt: [
+    'available',
+    'immediate',
+    'shortterm',
+    'longterm',
+    'furnished',
+    'heat',
+    'water',
+    'electricity',
+    'internet',
+    'television',
+    'published',
+  ],
 };
 
 const rendered = ejs.render(template, { modelName, fields });

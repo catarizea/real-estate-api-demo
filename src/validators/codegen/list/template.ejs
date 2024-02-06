@@ -2,24 +2,35 @@ import { z } from '@hono/zod-openapi';
 
 import { limitSchema } from './pagination';
 
+<% if (fields.tinyInt.length) { %>
+const tinyIntValues = {
+  t: 1,
+  f: 0,
+} as const;
+<% } %>
+
 <% fields.id.forEach(function (fieldName) { %>
 const <%= fieldName %>Schema = z.string({ invalid_type_error: 'query cursor must be a string for orderBy <%= fieldName %>' }).openapi({ example: 'abqdj6xe8puto1j83soz3bml'});
-
 <% }); %>
 
 <% fields.numeric.forEach(function (fieldName) { %>
 const <%= fieldName %>Schema = z.coerce.number({ invalid_type_error: 'query cursor must be a number for orderBy <%= fieldName %>' }).int({ message: 'query cursor must be an integer for orderBy <%= fieldName %>' }).openapi({ example: 1 });
-
 <% }); %>
 
 <% fields.string.forEach(function (fieldName) { %>
 const <%= fieldName %>Schema = z.string({ invalid_type_error: 'query cursor must be a string for orderBy <%= fieldName %>' }).openapi({ example: 'some string' });
-
 <% }); %>
 
 <% fields.datetime.forEach(function (fieldName) { %>
 const <%= fieldName%>Schema = z.string({ invalid_type_error: 'query cursor must be a string for orderBy <%= fieldName %>' }).datetime({ message: 'query cursor must be a valid ISO 8601 date for orderBy <%= fieldName %>' }).openapi({ example: '2024-01-01T00:00:00Z' });
+<% }); %>
 
+<% fields.dateOnly.forEach(function (fieldName) { %>
+const <%= fieldName%>Schema = z.coerce.date({ invalid_type_error: 'query cursor must be a date string like "2024-01-01" for orderBy <%= fieldName %>' }).openapi({ example: '2024-01-01' });
+<% }); %>
+
+<% fields.tinyInt.forEach(function (fieldName) { %>
+const <%= fieldName %>Schema = z.nativeEnum(tinyIntValues, { invalid_type_error: 'query cursor must be 0 or 1 for orderBy <%= fieldName%>' }).openapi({ example: 1 });
 <% }); %>
 
 export const get<%= modelName %>CursorValidatorByOrderBy = (orderBy: string) => {
@@ -40,6 +51,16 @@ export const get<%= modelName %>CursorValidatorByOrderBy = (orderBy: string) => 
         return <%= fieldName %>Schema;
     <% }); %>
     <% fields.datetime.forEach(function (fieldName) { %>
+      case '<%= fieldName %>-asc':
+      case '<%= fieldName %>-desc':
+        return <%= fieldName %>Schema;
+    <% }); %>
+    <% fields.dateOnly.forEach(function (fieldName) { %>
+      case '<%= fieldName %>-asc':
+      case '<%= fieldName %>-desc':
+        return <%= fieldName %>Schema;
+    <% }); %>
+    <% fields.tinyInt.forEach(function (fieldName) { %>
       case '<%= fieldName %>-asc':
       case '<%= fieldName %>-desc':
         return <%= fieldName %>Schema;
@@ -69,6 +90,14 @@ export const pagination<%= modelName %>OrderSchema = z.object({
       '<%= fieldName %>-asc',
       '<%= fieldName %>-desc',
     <% }); %>
+    <% fields.dateOnly.forEach(function (fieldName) { %>
+      '<%= fieldName %>-asc',
+      '<%= fieldName %>-desc',
+    <% }); %>
+    <% fields.tinyInt.forEach(function (fieldName) { %>
+      '<%= fieldName %>-asc',
+      '<%= fieldName %>-desc',
+    <% }); %>
     ])
     .optional(),
   cursor: z
@@ -85,6 +114,12 @@ export const pagination<%= modelName %>OrderSchema = z.object({
       <% fields.datetime.forEach(function (fieldName) { %>
         <%= fieldName %>Schema,
       <% }); %>
+      <% fields.dateOnly.forEach(function (fieldName) { %>
+        <%= fieldName %>Schema,
+      <% }); %>
+      <% fields.tinyInt.forEach(function (fieldName) { %>
+        <%= fieldName %>Schema,
+      <% }); %>
     ])
     .optional()
 });
@@ -96,6 +131,33 @@ const numericFields = ['<%- fields.numeric.join("', '") %>'] as const;
 const dateFields = ['<%- fields.datetime.join("', '") %>'] as const;
 
 const eqTextSchema = z.tuple([z.enum(['eq']), z.enum(textFields), z.string()]);
+
+<% if (fields.tinyInt.length) { %>
+  const tinyIntFields = ['<%- fields.tinyInt.join("', '") %>'] as const;
+
+  const eqTinyIntSchema = z.tuple([
+    z.enum(['eq']),
+    z.enum(tinyIntFields),
+    z.nativeEnum(tinyIntValues),
+  ]);
+<% } %>
+
+<% if (fields.dateOnly.length) { %>
+  const dateOnlyFields = ['<%- fields.dateOnly.join("', '") %>'] as const;
+
+  const dateOnlySingleSchema = z.tuple([
+    z.enum(['lt', 'gt']),
+    z.enum(dateOnlyFields),
+    z.coerce.date(),
+  ]);
+
+  const dateOnlyBetweenSchema = z.tuple([
+    z.enum(['between']),
+    z.enum(dateOnlyFields),
+    z.coerce.date(),
+    z.coerce.date(),
+  ]);
+<% } %>
 
 const numericSchemaSingle = z.tuple([
   z.enum(['eq', 'lt', 'gt']),
@@ -132,6 +194,13 @@ const orSchema = z.tuple([
       dateSchemaBetween,
       numericSchemaSingle,
       numericSchemaBetween,
+      <% if (fields.tinyInt.length) { %>
+        eqTinyIntSchema,
+      <% } %>
+      <% if (fields.dateOnly.length) { %>
+        dateOnlySingleSchema,
+        dateOnlyBetweenSchema,
+      <% } %>
     ]),
   ),
 ]);
@@ -143,6 +212,13 @@ const <%= modelName.toLowerCase() %>ListSchema = z.array(
     dateSchemaBetween,
     numericSchemaSingle,
     numericSchemaBetween,
+    <% if (fields.tinyInt.length) { %>
+      eqTinyIntSchema,
+    <% } %>
+    <% if (fields.dateOnly.length) { %>
+      dateOnlySingleSchema,
+      dateOnlyBetweenSchema,
+    <% } %>
     orSchema,
   ]),
 );
