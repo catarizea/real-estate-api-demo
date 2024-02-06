@@ -32,7 +32,7 @@ import {
   getParkingCursorValidatorByOrderBy,
   paginationParkingOrderSchema,
 } from './parkingList';
-import { PropertyListSchema } from './propertyList';
+import type { PropertyListSchema } from './propertyList';
 import {
   bodyPropertyListSchema,
   getPropertyCursorValidatorByOrderBy,
