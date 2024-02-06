@@ -1,42 +1,26 @@
-import { eq, or, SQL, sql } from 'drizzle-orm';
+import { eq, gt, lt, or, SQL, sql } from 'drizzle-orm';
 
 import { NomenclatureModel } from '@/types';
 import { dateIsoToDatetime } from '@/utils';
 import { NomenclatureListSchema } from '@/validators';
 
-const convertBodyToQBuilder = (
-  and: NomenclatureListSchema,
+const mapOperations = (
+  ops: NomenclatureListSchema,
   model: NomenclatureModel,
-): SQL<unknown>[] | null => {
+) => {
   const args: (SQL<unknown> | undefined)[] = [];
 
-  and.forEach((item) => {
-    if (item[0] === 'or') {
-      const orArgs = item[1].map((orItem) => {
-        if (orItem[0] === 'eq') {
-          return eq(model[orItem[1]], orItem[2]);
-        }
-
-        if (orItem[1] === 'createdAt' || orItem[1] === 'updatedAt') {
-          if (orItem[0] === 'lt') {
-            return sql`${model[orItem[1]]} < ${dateIsoToDatetime(orItem[2])}`;
-          }
-
-          if (orItem[0] === 'gt') {
-            return sql`${model[orItem[1]]} > ${dateIsoToDatetime(orItem[2])}`;
-          }
-
-          if (orItem[0] === 'between') {
-            return sql`${model[orItem[1]]} BETWEEN ${dateIsoToDatetime(orItem[2])} AND ${dateIsoToDatetime(orItem[3])}`;
-          }
-        }
-      });
-
-      args.push(or(...orArgs));
-    }
-
+  ops.forEach((item) => {
     if (item[0] === 'eq') {
       args.push(eq(model[item[1]], item[2]));
+    }
+
+    if (item[0] === 'lt' && item[1] === 'order') {
+      args.push(lt(model[item[1]], item[2]));
+    }
+
+    if (item[0] === 'gt' && item[1] === 'order') {
+      args.push(gt(model[item[1]], item[2]));
     }
 
     if (item[1] === 'createdAt' || item[1] === 'updatedAt') {
@@ -55,6 +39,27 @@ const convertBodyToQBuilder = (
       }
     }
   });
+
+  return args;
+};
+
+const convertBodyToQBuilder = (
+  and: NomenclatureListSchema,
+  model: NomenclatureModel,
+): SQL<unknown>[] | null => {
+  const args: (SQL<unknown> | undefined)[] = [];
+
+  const orOps = and.filter((item) => item[0] === 'or');
+
+  if (orOps.length) {
+    const orArgs = mapOperations(orOps[0][1] as NomenclatureListSchema, model);
+
+    args.push(or(...orArgs));
+  }
+
+  const restArgs = mapOperations(and, model);
+
+  args.push(...restArgs);
 
   const filteredArgs = args.filter((item) => typeof item !== 'undefined');
 

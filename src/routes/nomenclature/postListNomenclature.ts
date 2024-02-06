@@ -21,7 +21,7 @@ const postListNomenclature = (tag: NomenclatureTag) =>
     request: {
       query: paginationNomenclatureOrderSchema,
       body: {
-        description: `<p>List ${tag} body property "and" is for filtering items. "eq" operator cand be used with integer fields ('order'). "eq" operator can also be used with string fields ('id', 'name').</p><p>"lt", "gt", "between" operators are allowed for 'createdAt' and 'updatedAt' fields. The two "eq" use cases and those with date can also be used inside of "or" operator array. </p><p>Set empty body as {} if you do not want to use any filters.</p>`,
+        description: `<p>List ${tag} body property "and" is for filtering items. "eq" operator cand be used with integer field 'order' and with string fields 'id' and 'name'.</p><p>"lt", "gt", "between" operators are allowed for integer 'order' field and for 'createdAt' and 'updatedAt' fields. These operations can also be used inside of "or" operator array. </p><p>Set empty body as {} if you do not want to use any filters.</p>`,
         content: {
           'application/json': {
             schema: bodyNomenclatureListSchema,
