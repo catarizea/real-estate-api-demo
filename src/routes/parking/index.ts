@@ -4,6 +4,7 @@ import {
   deleteParkingHandler,
   getParkingsByPropertyHandler,
   postCreateParkingHandler,
+  postListParkingHandler,
   putUpdateParkingHandler,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
@@ -11,6 +12,7 @@ import { zodDefaultHook } from '@/middlewares';
 import deleteParking from './deleteParking';
 import getParkingsByProperty from './getParkingsByProperty';
 import postCreateParking from './postCreateParking';
+import postListParking from './postListParking';
 import putUpdateParking from './putUpdateParking';
 
 const app = new OpenAPIHono({
@@ -18,6 +20,8 @@ const app = new OpenAPIHono({
 });
 
 app.openapi(getParkingsByProperty, getParkingsByPropertyHandler);
+
+app.openapi(postListParking, postListParkingHandler);
 
 app.openapi(postCreateParking, postCreateParkingHandler);
 
