@@ -12,13 +12,13 @@ import {
   featureToItemSchema,
   featureToPropertySuccessSchema,
 } from './featureToItem';
-import type { NomenclatureListSchema } from './nomenclature';
-import { bodyNomenclatureListSchema } from './nomenclature';
+import type { NomenclatureListSchema } from './nomenclatureList';
 import {
-  getCursorValidatorByOrderBy,
-  paginationOrderSchema,
-  paginationSchema,
-} from './pagination';
+  bodyNomenclatureListSchema,
+  getNomenclatureCursorValidatorByOrderBy,
+  paginationNomenclatureOrderSchema,
+} from './nomenclatureList';
+import { paginationSchema } from './pagination';
 import { parkingsByPropertySuccessSchema } from './parking';
 import type { ParkingListSchema } from './parkingList';
 import {
@@ -44,10 +44,10 @@ export {
   FeatureToPropertySuccessSchema,
   featureToPropertySuccessSchema,
   FieldsSchema,
-  getCursorValidatorByOrderBy,
+  getNomenclatureCursorValidatorByOrderBy,
   getParkingCursorValidatorByOrderBy,
   NomenclatureListSchema,
-  paginationOrderSchema,
+  paginationNomenclatureOrderSchema,
   paginationParkingOrderSchema,
   paginationSchema,
   ParkingListSchema,

@@ -8,8 +8,8 @@ import { SelectBathroomSchema } from '@/models/zodSchemas';
 import { NomenclatureModel } from '@/types';
 import { badRequestResponse, dateIsoToDatetime, queryIsNotOk } from '@/utils';
 import {
-  getCursorValidatorByOrderBy,
-  paginationOrderSchema,
+  getNomenclatureCursorValidatorByOrderBy,
+  paginationNomenclatureOrderSchema,
 } from '@/validators';
 
 import convertBodyToQBuilder from './convertBodyToQBuilder';
@@ -55,7 +55,7 @@ const postListNomenclatureHandler =
       return c.json(notOk, 400);
     }
 
-    const valid = paginationOrderSchema.safeParse(query);
+    const valid = paginationNomenclatureOrderSchema.safeParse(query);
 
     if (!valid.success) {
       return c.json(
@@ -116,7 +116,7 @@ const postListNomenclatureHandler =
     let cursorArg = gt(model.id, `${cursor}`);
 
     if (orderBy) {
-      const validator = getCursorValidatorByOrderBy(orderBy);
+      const validator = getNomenclatureCursorValidatorByOrderBy(orderBy);
 
       const validCursor = validator.safeParse(cursor);
 
