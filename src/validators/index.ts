@@ -1,3 +1,9 @@
+import type { CommunityListSchema } from './communityList';
+import {
+  bodyCommunityListSchema,
+  getCommunityCursorValidatorByOrderBy,
+  paginationCommunityOrderSchema,
+} from './communityList';
 import type { ErrorSchema } from './error';
 import { errorSchema } from './error';
 import type {
@@ -26,6 +32,12 @@ import {
   getParkingCursorValidatorByOrderBy,
   paginationParkingOrderSchema,
 } from './parkingList';
+import { PropertyListSchema } from './propertyList';
+import {
+  bodyPropertyListSchema,
+  getPropertyCursorValidatorByOrderBy,
+  paginationPropertyOrderSchema,
+} from './propertyList';
 import type { FieldsSchema, SearchSchema } from './search';
 import { bodySearchSchema, searchPropertyUnitSchema } from './search';
 import type { UnitListSchema } from './unitList';
@@ -36,14 +48,17 @@ import {
 } from './unitList';
 
 export {
+  bodyCommunityListSchema,
   bodyNomenclatureListSchema,
   bodyParkingListSchema,
+  bodyPropertyListSchema,
   bodySearchSchema,
   bodyUnitListSchema,
   BuildingFeatureToPropertySuccessSchema,
   buildingFeatureToPropertySuccessSchema,
   CommunityFeatureToPropertySuccessSchema,
   communityFeatureToPropertySuccessSchema,
+  CommunityListSchema,
   ErrorSchema,
   errorSchema,
   FeatureToItemSchema,
@@ -51,16 +66,21 @@ export {
   FeatureToPropertySuccessSchema,
   featureToPropertySuccessSchema,
   FieldsSchema,
+  getCommunityCursorValidatorByOrderBy,
   getNomenclatureCursorValidatorByOrderBy,
   getParkingCursorValidatorByOrderBy,
+  getPropertyCursorValidatorByOrderBy,
   getUnitCursorValidatorByOrderBy,
   NomenclatureListSchema,
+  paginationCommunityOrderSchema,
   paginationNomenclatureOrderSchema,
   paginationParkingOrderSchema,
+  paginationPropertyOrderSchema,
   paginationSchema,
   paginationUnitOrderSchema,
   ParkingListSchema,
   parkingsByPropertySuccessSchema,
+  PropertyListSchema,
   searchPropertyUnitSchema,
   SearchSchema,
   UnitListSchema,
