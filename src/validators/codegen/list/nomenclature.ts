@@ -23,6 +23,7 @@ const fields = {
   datetime: ['createdAt', 'updatedAt'],
   tinyInt: [],
   dateOnly: [],
+  decimal: [],
 };
 
 const rendered = ejs.render(template, { modelName, fields });

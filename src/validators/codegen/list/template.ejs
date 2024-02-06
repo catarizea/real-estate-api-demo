@@ -17,6 +17,10 @@ const <%= fieldName %>Schema = z.string({ invalid_type_error: 'query cursor must
 const <%= fieldName %>Schema = z.coerce.number({ invalid_type_error: 'query cursor must be a number for orderBy <%= fieldName %>' }).int({ message: 'query cursor must be an integer for orderBy <%= fieldName %>' }).openapi({ example: 1 });
 <% }); %>
 
+<% fields.decimal.forEach(function (fieldName) { %>
+const <%= fieldName %>Schema = z.coerce.number({ invalid_type_error: 'query cursor must be a decimal number for orderBy <%= fieldName %>' }).openapi({ example: 50.14522 });
+<% }); %>
+
 <% fields.string.forEach(function (fieldName) { %>
 const <%= fieldName %>Schema = z.string({ invalid_type_error: 'query cursor must be a string for orderBy <%= fieldName %>' }).openapi({ example: 'some string' });
 <% }); %>
@@ -41,6 +45,11 @@ export const get<%= modelName %>CursorValidatorByOrderBy = (orderBy: string) => 
         return <%= fieldName %>Schema;
     <% }); %>
     <% fields.numeric.forEach(function (fieldName) { %>
+      case '<%= fieldName %>-asc':
+      case '<%= fieldName %>-desc':
+        return <%= fieldName %>Schema;
+    <% }); %>
+    <% fields.decimal.forEach(function (fieldName) { %>
       case '<%= fieldName %>-asc':
       case '<%= fieldName %>-desc':
         return <%= fieldName %>Schema;
@@ -82,6 +91,10 @@ export const pagination<%= modelName %>OrderSchema = z.object({
       '<%= fieldName %>-asc',
       '<%= fieldName %>-desc',
     <% }); %>
+    <% fields.decimal.forEach(function (fieldName) { %>
+      '<%= fieldName %>-asc',
+      '<%= fieldName %>-desc',
+    <% }); %>
     <% fields.string.forEach(function (fieldName) { %>
       '<%= fieldName %>-asc',
       '<%= fieldName %>-desc',
@@ -106,6 +119,9 @@ export const pagination<%= modelName %>OrderSchema = z.object({
         <%= fieldName %>Schema,
       <% }); %>
       <% fields.numeric.forEach(function (fieldName) { %>
+        <%= fieldName %>Schema,
+      <% }); %>
+      <% fields.decimal.forEach(function (fieldName) { %>
         <%= fieldName %>Schema,
       <% }); %>
       <% fields.string.forEach(function (fieldName) { %>
@@ -159,6 +175,23 @@ const eqTextSchema = z.tuple([z.enum(['eq']), z.enum(textFields), z.string()]);
   ]);
 <% } %>
 
+<% if (fields.decimal.length) { %>
+const decimalFields = ['<%- fields.decimal.join("', '") %>'] as const;
+
+const decimalSchemaSingle = z.tuple([
+  z.enum(['eq', 'lt', 'gt']),
+  z.enum(decimalFields),
+  z.number(),
+]);
+
+const decimalSchemaBetween = z.tuple([
+  z.enum(['between']),
+  z.enum(decimalFields),
+  z.number(),
+  z.number(),
+]);
+<% } %>
+
 const numericSchemaSingle = z.tuple([
   z.enum(['eq', 'lt', 'gt']),
   z.enum(numericFields),
@@ -201,6 +234,10 @@ const orSchema = z.tuple([
         dateOnlySingleSchema,
         dateOnlyBetweenSchema,
       <% } %>
+      <% if (fields.decimal.length) { %>
+        decimalSchemaSingle,
+        decimalSchemaBetween,
+      <% } %>
     ]),
   ),
 ]);
@@ -218,6 +255,10 @@ const <%= modelName.toLowerCase() %>ListSchema = z.array(
     <% if (fields.dateOnly.length) { %>
       dateOnlySingleSchema,
       dateOnlyBetweenSchema,
+    <% } %>
+    <% if (fields.decimal.length) { %>
+      decimalSchemaSingle,
+      decimalSchemaBetween,
     <% } %>
     orSchema,
   ]),
