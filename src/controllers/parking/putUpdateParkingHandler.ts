@@ -1,6 +1,7 @@
 import { z } from '@hono/zod-openapi';
 import { eq } from 'drizzle-orm';
 import { Context } from 'hono';
+import intersection from 'lodash.intersection';
 import pick from 'lodash.pick';
 
 import { db } from '@/models';
@@ -9,6 +10,8 @@ import { UpdateParkingSchema } from '@/models/zodSchemas';
 import { badRequestResponse } from '@/utils';
 import * as taxonomy from '@/utils/db/taxonomy';
 
+const fields = ['name', 'fee', 'feeInterval', 'order'];
+
 const putUpdateParkingHandler = async (c: Context) => {
   const id = c.req.param('id');
   const body: UpdateParkingSchema = await c.req.json();
@@ -16,18 +19,15 @@ const putUpdateParkingHandler = async (c: Context) => {
   if (
     !body ||
     Object.keys(body).length === 0 ||
-    Object.keys(body).length > 4 ||
-    (!Object.keys(body).includes('name') &&
-      !Object.keys(body).includes('fee') &&
-      !Object.keys(body).includes('feeInterval') &&
-      !Object.keys(body).includes('order'))
+    Object.keys(body).length > fields.length ||
+    intersection(Object.keys(body), fields).length === 0
   ) {
     return c.json(
       badRequestResponse({
         reason: 'validation error',
         message:
           'body must contain valid name or fee or feeInterval or order or all',
-        path: ['name', 'fee', 'feeInterval', 'order'],
+        path: fields,
       }),
       400,
     );
@@ -62,7 +62,7 @@ const putUpdateParkingHandler = async (c: Context) => {
   await db
     .update(parking)
     .set({
-      ...pick(body, ['name', 'fee', 'feeInterval', 'order']),
+      ...pick(body, fields),
       updatedAt: new Date(),
     })
     .where(eq(parking.id, id));

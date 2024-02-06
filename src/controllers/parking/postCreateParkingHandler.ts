@@ -1,6 +1,7 @@
 import { z } from '@hono/zod-openapi';
 import { createId } from '@paralleldrive/cuid2';
 import { Context } from 'hono';
+import intersection from 'lodash.intersection';
 import pick from 'lodash.pick';
 
 import { db } from '@/models';
@@ -9,15 +10,22 @@ import { InsertParkingSchema } from '@/models/zodSchemas';
 import { badRequestResponse } from '@/utils';
 import * as taxonomy from '@/utils/db/taxonomy';
 
+const fields = ['propertyId', 'name', 'order'];
+
 const postCreateParkingHandler = async (c: Context) => {
   const body: InsertParkingSchema = await c.req.json();
 
-  if (!body || !body.propertyId || !body.name || !body.order) {
+  if (
+    !body ||
+    Object.keys(body).length === 0 ||
+    Object.keys(body).length > fields.length ||
+    intersection(Object.keys(body), fields).length === 0
+  ) {
     return c.json(
       badRequestResponse({
         reason: 'validation error',
         message: 'body must contain valid propertyId, name and order',
-        path: ['propertyId', 'name', 'order'],
+        path: fields,
       }),
       400,
     );
@@ -69,8 +77,8 @@ const postCreateParkingHandler = async (c: Context) => {
 
   await db.insert(parking).values({
     id,
-    ...pick(body, ['name', 'propertyId', 'fee', 'feeInterval', 'order']),
-  });
+    ...pick(body, [...fields, 'fee', 'feeInterval']),
+  } as InsertParkingSchema);
 
   return c.json({ success: z.literal(true).value, data: { id } }, 201);
 };

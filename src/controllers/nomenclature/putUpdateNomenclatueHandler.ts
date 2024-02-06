@@ -1,12 +1,15 @@
 import { z } from '@hono/zod-openapi';
 import { eq } from 'drizzle-orm';
 import { Context } from 'hono';
+import intersection from 'lodash.intersection';
 import pick from 'lodash.pick';
 
 import { db } from '@/models';
 import { UpdateBathroomSchema } from '@/models/zodSchemas';
 import { NomenclatureModel } from '@/types';
 import { badRequestResponse } from '@/utils';
+
+const fields = ['name', 'order'];
 
 const putUpdateNomenclatureHandler =
   (model: NomenclatureModel) => async (c: Context) => {
@@ -16,9 +19,8 @@ const putUpdateNomenclatureHandler =
     if (
       !body ||
       Object.keys(body).length === 0 ||
-      Object.keys(body).length > 2 ||
-      (!Object.keys(body).includes('name') &&
-        !Object.keys(body).includes('order'))
+      Object.keys(body).length > fields.length ||
+      intersection(Object.keys(body), fields).length === 0
     ) {
       return c.json(
         badRequestResponse({
@@ -45,7 +47,7 @@ const putUpdateNomenclatureHandler =
 
     await db
       .update(model)
-      .set({ ...pick(body, ['name', 'order']), updatedAt: new Date() })
+      .set({ ...pick(body, fields), updatedAt: new Date() })
       .where(eq(model.id, id));
 
     return c.json({ success: z.literal(true).value, data: { id } }, 200);

@@ -20,11 +20,18 @@ import {
   paginationSchema,
 } from './pagination';
 import { parkingsByPropertySuccessSchema } from './parking';
+import type { ParkingListSchema } from './parkingList';
+import {
+  bodyParkingListSchema,
+  getParkingCursorValidatorByOrderBy,
+  paginationParkingOrderSchema,
+} from './parkingList';
 import type { FieldsSchema, SearchSchema } from './search';
 import { bodySearchSchema, searchPropertyUnitSchema } from './search';
 
 export {
   bodyNomenclatureListSchema,
+  bodyParkingListSchema,
   bodySearchSchema,
   BuildingFeatureToPropertySuccessSchema,
   buildingFeatureToPropertySuccessSchema,
@@ -38,9 +45,12 @@ export {
   featureToPropertySuccessSchema,
   FieldsSchema,
   getCursorValidatorByOrderBy,
+  getParkingCursorValidatorByOrderBy,
   NomenclatureListSchema,
   paginationOrderSchema,
+  paginationParkingOrderSchema,
   paginationSchema,
+  ParkingListSchema,
   parkingsByPropertySuccessSchema,
   searchPropertyUnitSchema,
   SearchSchema,

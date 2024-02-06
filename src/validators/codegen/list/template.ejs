@@ -1,0 +1,162 @@
+import { z } from '@hono/zod-openapi';
+
+import { limitSchema } from './pagination';
+
+<% fields.id.forEach(function (fieldName) { %>
+const <%= fieldName %>Schema = z.string({ invalid_type_error: 'query cursor must be a string for orderBy <%= fieldName %>' }).openapi({ example: 'abqdj6xe8puto1j83soz3bml'});
+
+<% }); %>
+
+<% fields.numeric.forEach(function (fieldName) { %>
+const <%= fieldName %>Schema = z.coerce.number({ invalid_type_error: 'query cursor must be a number for orderBy <%= fieldName %>' }).int({ message: 'query cursor must be an integer for orderBy <%= fieldName %>' }).openapi({ example: 1 });
+
+<% }); %>
+
+<% fields.string.forEach(function (fieldName) { %>
+const <%= fieldName %>Schema = z.string({ invalid_type_error: 'query cursor must be a string for orderBy <%= fieldName %>' }).openapi({ example: 'some string' });
+
+<% }); %>
+
+<% fields.datetime.forEach(function (fieldName) { %>
+const <%= fieldName%>Schema = z.string({ invalid_type_error: 'query cursor must be a string for orderBy <%= fieldName %>' }).datetime({ message: 'query cursor must be a valid ISO 8601 date for orderBy <%= fieldName %>' }).openapi({ example: '2024-01-01T00:00:00Z' });
+
+<% }); %>
+
+export const get<%= modelName %>CursorValidatorByOrderBy = (orderBy: string) => {
+  switch (orderBy) {
+    <% fields.id.forEach(function (fieldName) { %>
+      case '<%= fieldName %>-asc':
+      case '<%= fieldName %>-desc':
+        return <%= fieldName %>Schema;
+    <% }); %>
+    <% fields.numeric.forEach(function (fieldName) { %>
+      case '<%= fieldName %>-asc':
+      case '<%= fieldName %>-desc':
+        return <%= fieldName %>Schema;
+    <% }); %>
+    <% fields.string.forEach(function (fieldName) { %>
+      case '<%= fieldName %>-asc':
+      case '<%= fieldName %>-desc':
+        return <%= fieldName %>Schema;
+    <% }); %>
+    <% fields.datetime.forEach(function (fieldName) { %>
+      case '<%= fieldName %>-asc':
+      case '<%= fieldName %>-desc':
+        return <%= fieldName %>Schema;
+    <% }); %>
+    default:
+      return z.never();
+  }
+}
+
+export const pagination<%= modelName %>OrderSchema = z.object({
+  limit: limitSchema,
+  orderBy: z
+    .enum([
+    <% fields.id.forEach(function (fieldName) { %>
+      '<%= fieldName %>-asc',
+      '<%= fieldName %>-desc',
+    <% }); %>
+    <% fields.numeric.forEach(function (fieldName) { %>
+      '<%= fieldName %>-asc',
+      '<%= fieldName %>-desc',
+    <% }); %>
+    <% fields.string.forEach(function (fieldName) { %>
+      '<%= fieldName %>-asc',
+      '<%= fieldName %>-desc',
+    <% }); %>
+    <% fields.datetime.forEach(function (fieldName) { %>
+      '<%= fieldName %>-asc',
+      '<%= fieldName %>-desc',
+    <% }); %>
+    ])
+    .optional(),
+  cursor: z
+    .union([
+      <% fields.id.forEach(function (fieldName) { %>
+        <%= fieldName %>Schema,
+      <% }); %>
+      <% fields.numeric.forEach(function (fieldName) { %>
+        <%= fieldName %>Schema,
+      <% }); %>
+      <% fields.string.forEach(function (fieldName) { %>
+        <%= fieldName %>Schema,
+      <% }); %>
+      <% fields.datetime.forEach(function (fieldName) { %>
+        <%= fieldName %>Schema,
+      <% }); %>
+    ])
+    .optional()
+});
+
+const textFields = ['<%- [...fields.id, ...fields.string].join("', '") %>'] as const;
+
+const numericFields = ['<%- fields.numeric.join("', '") %>'] as const;
+
+const dateFields = ['<%- fields.datetime.join("', '") %>'] as const;
+
+const eqTextSchema = z.tuple([z.enum(['eq']), z.enum(textFields), z.string()]);
+
+const eqNumericSchema = z.tuple([
+  z.enum(['eq']),
+  z.enum(numericFields),
+  z.number().int(),
+]);
+
+const numericSchemaSingle = z.tuple([
+  z.enum(['lt', 'gt']),
+  z.enum(numericFields),
+  z.number().int(),
+]);
+
+const numericSchemaBetween = z.tuple([
+  z.enum(['between']),
+  z.enum(numericFields),
+  z.number().int(),
+  z.number().int(),
+]);
+
+const dateSchemaSingle = z.tuple([
+  z.enum(['lt', 'gt']),
+  z.enum(dateFields),
+  z.string().datetime(),
+]);
+
+const dateSchemaBetween = z.tuple([
+  z.enum(['between']),
+  z.enum(dateFields),
+  z.string().datetime(),
+  z.string().datetime(),
+]);
+
+const orSchema = z.tuple([
+  z.enum(['or']),
+  z.array(
+    z.union([
+      eqNumericSchema,
+      eqTextSchema,
+      dateSchemaSingle,
+      dateSchemaBetween,
+      numericSchemaSingle,
+      numericSchemaBetween,
+    ]),
+  ),
+]);
+
+const <%= modelName.toLowerCase() %>ListSchema = z.array(
+  z.union([
+    eqNumericSchema,
+    eqTextSchema,
+    dateSchemaSingle,
+    dateSchemaBetween,
+    numericSchemaSingle,
+    numericSchemaBetween,
+    orSchema,
+  ]),
+);
+
+export const body<%= modelName %>ListSchema = z.object({
+  and: <%= modelName.toLowerCase() %>ListSchema.optional(),
+});
+
+export type <%= modelName %>ListSchema = z.infer<typeof <%= modelName.toLowerCase()%>ListSchema>;
