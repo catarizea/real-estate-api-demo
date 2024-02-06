@@ -141,14 +141,8 @@ const dateFields = ['createdAt', 'updatedAt'] as const;
 
 const eqTextSchema = z.tuple([z.enum(['eq']), z.enum(textFields), z.string()]);
 
-const eqNumericSchema = z.tuple([
-  z.enum(['eq']),
-  z.enum(numericFields),
-  z.number().int(),
-]);
-
 const numericSchemaSingle = z.tuple([
-  z.enum(['lt', 'gt']),
+  z.enum(['eq', 'lt', 'gt']),
   z.enum(numericFields),
   z.number().int(),
 ]);
@@ -177,7 +171,6 @@ const orSchema = z.tuple([
   z.enum(['or']),
   z.array(
     z.union([
-      eqNumericSchema,
       eqTextSchema,
       dateSchemaSingle,
       dateSchemaBetween,
@@ -189,7 +182,6 @@ const orSchema = z.tuple([
 
 const parkingListSchema = z.array(
   z.union([
-    eqNumericSchema,
     eqTextSchema,
     dateSchemaSingle,
     dateSchemaBetween,
