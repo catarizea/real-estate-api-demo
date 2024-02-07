@@ -1,3 +1,9 @@
+import type { CityListSchema } from './cityList';
+import {
+  bodyCityListSchema,
+  getCityCursorValidatorByOrderBy,
+  paginationCityOrderSchema,
+} from './cityList';
 import type { CommunityListSchema } from './communityList';
 import {
   bodyCommunityListSchema,
@@ -56,6 +62,12 @@ import {
   getPropertyCursorValidatorByOrderBy,
   paginationPropertyOrderSchema,
 } from './propertyList';
+import type { RegionListSchema } from './regionList';
+import {
+  bodyRegionListSchema,
+  getRegionCursorValidatorByOrderBy,
+  paginationRegionOrderSchema,
+} from './regionList';
 import type { FieldsSchema, SearchSchema } from './search';
 import { bodySearchSchema, searchPropertyUnitSchema } from './search';
 import type { UnitListSchema } from './unitList';
@@ -66,6 +78,7 @@ import {
 } from './unitList';
 
 export {
+  bodyCityListSchema,
   bodyCommunityListSchema,
   bodyFloorPlanListSchema,
   bodyMediaListSchema,
@@ -73,10 +86,12 @@ export {
   bodyNomenclatureListSchema,
   bodyParkingListSchema,
   bodyPropertyListSchema,
+  bodyRegionListSchema,
   bodySearchSchema,
   bodyUnitListSchema,
   BuildingFeatureToPropertySuccessSchema,
   buildingFeatureToPropertySuccessSchema,
+  CityListSchema,
   CommunityFeatureToPropertySuccessSchema,
   communityFeatureToPropertySuccessSchema,
   CommunityListSchema,
@@ -88,6 +103,7 @@ export {
   featureToPropertySuccessSchema,
   FieldsSchema,
   FloorPlanListSchema,
+  getCityCursorValidatorByOrderBy,
   getCommunityCursorValidatorByOrderBy,
   getFloorPlanCursorValidatorByOrderBy,
   getMediaCursorValidatorByOrderBy,
@@ -95,10 +111,12 @@ export {
   getNomenclatureCursorValidatorByOrderBy,
   getParkingCursorValidatorByOrderBy,
   getPropertyCursorValidatorByOrderBy,
+  getRegionCursorValidatorByOrderBy,
   getUnitCursorValidatorByOrderBy,
   MediaListSchema,
   MediaTypeListSchema,
   NomenclatureListSchema,
+  paginationCityOrderSchema,
   paginationCommunityOrderSchema,
   paginationFloorPlanOrderSchema,
   paginationMediaOrderSchema,
@@ -106,11 +124,13 @@ export {
   paginationNomenclatureOrderSchema,
   paginationParkingOrderSchema,
   paginationPropertyOrderSchema,
+  paginationRegionOrderSchema,
   paginationSchema,
   paginationUnitOrderSchema,
   ParkingListSchema,
   parkingsByPropertySuccessSchema,
   PropertyListSchema,
+  RegionListSchema,
   searchPropertyUnitSchema,
   SearchSchema,
   UnitListSchema,
