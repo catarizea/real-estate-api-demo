@@ -122,7 +122,7 @@ const postListParkingHandler = async (c: Context) => {
       return c.json(
         badRequestResponse({
           reason: 'validation error',
-          message: `query must contain a valid cursor for orderBy ${orderBy}`,
+          message: JSON.parse(validCursor.error.message)[0].message,
           path: ['cursor'],
         }),
         400,
