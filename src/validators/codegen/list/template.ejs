@@ -2,6 +2,8 @@ import { z } from '@hono/zod-openapi';
 
 import { limitSchema } from './pagination';
 
+<% const modelNameCamelCase = `${modelName.slice(0, 1).toLowerCase()}${modelName.slice(1, modelName.length)}` %>
+
 <% if (fields.tinyInt.length) { %>
 const tinyIntValues = {
   t: 1,
@@ -140,13 +142,45 @@ export const pagination<%= modelName %>OrderSchema = z.object({
     .optional()
 });
 
+<% if ([...fields.id, ...fields.string].length) { %>
 const textFields = ['<%- [...fields.id, ...fields.string].join("', '") %>'] as const;
 
+const eqTextSchema = z.tuple([z.enum(['eq']), z.enum(textFields), z.string()]);
+<% } %>
+
+<% if (fields.numeric.length) { %>
 const numericFields = ['<%- fields.numeric.join("', '") %>'] as const;
 
+const numericSchemaSingle = z.tuple([
+  z.enum(['eq', 'lt', 'gt']),
+  z.enum(numericFields),
+  z.number().int(),
+]);
+
+const numericSchemaBetween = z.tuple([
+  z.enum(['between']),
+  z.enum(numericFields),
+  z.number().int(),
+  z.number().int(),
+]);
+<% } %>
+
+<% if (fields.datetime.length) { %>
 const dateFields = ['<%- fields.datetime.join("', '") %>'] as const;
 
-const eqTextSchema = z.tuple([z.enum(['eq']), z.enum(textFields), z.string()]);
+const dateSchemaSingle = z.tuple([
+  z.enum(['lt', 'gt']),
+  z.enum(dateFields),
+  z.string().datetime(),
+]);
+
+const dateSchemaBetween = z.tuple([
+  z.enum(['between']),
+  z.enum(dateFields),
+  z.string().datetime(),
+  z.string().datetime(),
+]);
+<% } %>
 
 <% if (fields.tinyInt.length) { %>
   const tinyIntFields = ['<%- fields.tinyInt.join("', '") %>'] as const;
@@ -192,41 +226,24 @@ const decimalSchemaBetween = z.tuple([
 ]);
 <% } %>
 
-const numericSchemaSingle = z.tuple([
-  z.enum(['eq', 'lt', 'gt']),
-  z.enum(numericFields),
-  z.number().int(),
-]);
 
-const numericSchemaBetween = z.tuple([
-  z.enum(['between']),
-  z.enum(numericFields),
-  z.number().int(),
-  z.number().int(),
-]);
 
-const dateSchemaSingle = z.tuple([
-  z.enum(['lt', 'gt']),
-  z.enum(dateFields),
-  z.string().datetime(),
-]);
-
-const dateSchemaBetween = z.tuple([
-  z.enum(['between']),
-  z.enum(dateFields),
-  z.string().datetime(),
-  z.string().datetime(),
-]);
 
 const orSchema = z.tuple([
   z.enum(['or']),
   z.array(
     z.union([
+      <% if ([...fields.id, ...fields.string].length) { %>
       eqTextSchema,
+      <% } %>
+      <% if (fields.datetime.length) { %>
       dateSchemaSingle,
       dateSchemaBetween,
+      <% } %>
+      <% if (fields.numeric.length) { %>
       numericSchemaSingle,
       numericSchemaBetween,
+      <% } %>
       <% if (fields.tinyInt.length) { %>
         eqTinyIntSchema,
       <% } %>
@@ -242,13 +259,19 @@ const orSchema = z.tuple([
   ),
 ]);
 
-const <%= modelName.toLowerCase() %>ListSchema = z.array(
+const <%= modelNameCamelCase %>ListSchema = z.array(
   z.union([
+    <% if ([...fields.id, ...fields.string].length) { %>
     eqTextSchema,
+    <% } %>
+    <% if (fields.datetime.length) { %>
     dateSchemaSingle,
     dateSchemaBetween,
+    <% } %>
+    <% if (fields.numeric.length) { %>
     numericSchemaSingle,
     numericSchemaBetween,
+    <% } %>
     <% if (fields.tinyInt.length) { %>
       eqTinyIntSchema,
     <% } %>
@@ -265,7 +288,7 @@ const <%= modelName.toLowerCase() %>ListSchema = z.array(
 );
 
 export const body<%= modelName %>ListSchema = z.object({
-  and: <%= modelName.toLowerCase() %>ListSchema.optional(),
+  and: <%= modelNameCamelCase %>ListSchema.optional(),
 });
 
-export type <%= modelName %>ListSchema = z.infer<typeof <%= modelName.toLowerCase()%>ListSchema>;
+export type <%= modelName %>ListSchema = z.infer<typeof <%= modelNameCamelCase %>ListSchema>;

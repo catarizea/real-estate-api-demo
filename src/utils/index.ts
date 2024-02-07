@@ -7,6 +7,7 @@ import delay from './tools/delay';
 import getAddressByCoordinates from './tools/getAddressByCoordinates';
 import getBoundingBox from './tools/getBoundingBox';
 import queryIsNotOk from './tools/queryIsNotOk';
+import toCamelCase from './tools/toCamelCase';
 
 export {
   axios,
@@ -18,4 +19,5 @@ export {
   getAddressByCoordinates,
   getBoundingBox,
   queryIsNotOk,
+  toCamelCase,
 };
