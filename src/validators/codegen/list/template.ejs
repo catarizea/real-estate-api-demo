@@ -2,7 +2,7 @@ import { z } from '@hono/zod-openapi';
 
 import { limitSchema } from './pagination';
 
-<% const modelNameCamelCase = `${modelName.slice(0, 1).toLowerCase()}${modelName.slice(1, modelName.length)}` %>
+<% const modelNameCamelCase = `${modelName.slice(0, 1).toLowerCase()}${modelName.slice(1, modelName.length)}`; %>
 
 <% if (fields.tinyInt.length) { %>
 const tinyIntValues = {
@@ -225,9 +225,6 @@ const decimalSchemaBetween = z.tuple([
   z.number(),
 ]);
 <% } %>
-
-
-
 
 const orSchema = z.tuple([
   z.enum(['or']),
