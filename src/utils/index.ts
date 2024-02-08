@@ -8,6 +8,7 @@ import getAddressByCoordinates from './tools/getAddressByCoordinates';
 import getBoundingBox from './tools/getBoundingBox';
 import queryIsNotOk from './tools/queryIsNotOk';
 import toCamelCase from './tools/toCamelCase';
+import toPascalCase from './tools/toPascalCase';
 
 export {
   axios,
@@ -20,4 +21,5 @@ export {
   getBoundingBox,
   queryIsNotOk,
   toCamelCase,
+  toPascalCase,
 };

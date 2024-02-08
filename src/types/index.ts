@@ -227,3 +227,15 @@ export type FeatureToItemFieldsMapping =
   | typeof featureToPropertyMapping
   | typeof buildingFeatureToPropertyMapping
   | typeof communityFeatureToCommunityMapping;
+
+export type ModelFields = {
+  [key: string]: {
+    id: string[];
+    numeric: string[];
+    string: string[];
+    datetime: string[];
+    tinyInt: string[];
+    dateOnly: string[];
+    decimal: string[];
+  };
+};

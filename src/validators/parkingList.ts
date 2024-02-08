@@ -135,11 +135,9 @@ export const paginationParkingOrderSchema = z.object({
 
 const textFields = ['id', 'propertyId', 'name', 'feeInterval'] as const;
 
-const numericFields = ['order', 'fee'] as const;
-
-const dateFields = ['createdAt', 'updatedAt'] as const;
-
 const eqTextSchema = z.tuple([z.enum(['eq']), z.enum(textFields), z.string()]);
+
+const numericFields = ['order', 'fee'] as const;
 
 const numericSchemaSingle = z.tuple([
   z.enum(['eq', 'lt', 'gt']),
@@ -153,6 +151,8 @@ const numericSchemaBetween = z.tuple([
   z.number().int(),
   z.number().int(),
 ]);
+
+const dateFields = ['createdAt', 'updatedAt'] as const;
 
 const dateSchemaSingle = z.tuple([
   z.enum(['lt', 'gt']),
@@ -172,8 +172,10 @@ const orSchema = z.tuple([
   z.array(
     z.union([
       eqTextSchema,
+
       dateSchemaSingle,
       dateSchemaBetween,
+
       numericSchemaSingle,
       numericSchemaBetween,
     ]),
