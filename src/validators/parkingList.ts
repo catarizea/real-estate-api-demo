@@ -172,10 +172,8 @@ const orSchema = z.tuple([
   z.array(
     z.union([
       eqTextSchema,
-
       dateSchemaSingle,
       dateSchemaBetween,
-
       numericSchemaSingle,
       numericSchemaBetween,
     ]),

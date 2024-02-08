@@ -5,7 +5,6 @@ import { CommonModel } from '@/types';
 type Column = {
   name: string;
   notNull: boolean;
-  dataType: string;
   columnType: string;
 };
 
@@ -43,7 +42,6 @@ const getModelFields = (model: CommonModel): Fields => {
   Object.keys(columns).forEach((key) => {
     if (
       typeof columns[key].name === 'undefined' ||
-      typeof columns[key].dataType === 'undefined' ||
       typeof columns[key].columnType === 'undefined' ||
       typeof columns[key].notNull === 'undefined'
     ) {

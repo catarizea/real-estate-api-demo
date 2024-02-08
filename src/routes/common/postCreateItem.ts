@@ -14,7 +14,7 @@ export const successSchema = z.object({
   }),
 });
 
-const postCreateParking = ({
+const postCreateItem = ({
   tag,
   insertItemSchema,
   insertItemSchemaExample,
@@ -59,4 +59,4 @@ const postCreateParking = ({
     },
   });
 
-export default postCreateParking;
+export default postCreateItem;

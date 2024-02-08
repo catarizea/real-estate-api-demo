@@ -12,7 +12,7 @@ export const successSchema = z.object({
   data: z.object({ id: z.string() }),
 });
 
-const putUpdateParking = ({
+const putUpdateItem = ({
   tag,
   updateItemSchema,
   updateItemSchemaExample,
@@ -60,4 +60,4 @@ const putUpdateParking = ({
     },
   });
 
-export default putUpdateParking;
+export default putUpdateItem;

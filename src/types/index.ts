@@ -28,6 +28,7 @@ import {
 import {
   insertParkingSchema,
   insertParkingSchemaExample,
+  SelectParkingSchema,
   selectParkingSchema,
   updateParkingSchema,
   updateParkingSchemaExample,
@@ -39,6 +40,7 @@ import {
   featureToPropertySuccessSchema,
   paginationParkingOrderSchema,
   parkingBodySchemaExample,
+  ParkingListSchema,
 } from '@/validators';
 
 export type Point = {
@@ -268,14 +270,21 @@ export type CommonUpdateSchema = typeof updateParkingSchema;
 
 export type CommonUpdateSchemaExample = typeof updateParkingSchemaExample;
 
-export type CommonSelectItem = typeof selectParkingSchema;
+export type CommonSelectItemSchema = typeof selectParkingSchema;
+
+export type CommonSelectItemSchemaType = SelectParkingSchema;
 
 export type CommonPaginationOrderSchema = typeof paginationParkingOrderSchema;
+
+export type CommonItemListSchema = ParkingListSchema;
 
 export type CommonBodyItemListSchema = typeof bodyParkingListSchema;
 
 export type CommonBodyItemListSchemaExample = typeof parkingBodySchemaExample;
 
+export type CommonModel = typeof parking;
+
+/*
 export type CommonModel =
   | typeof bathroom
   | typeof bedroom
@@ -292,6 +301,7 @@ export type CommonModel =
   | typeof region
   | typeof typeProp
   | typeof unit;
+*/
 
 export type CommonChildrenModel =
   | typeof unit

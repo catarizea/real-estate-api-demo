@@ -4,12 +4,12 @@ import {
   CommonBodyItemListSchema,
   CommonBodyItemListSchemaExample,
   CommonPaginationOrderSchema,
-  CommonSelectItem,
+  CommonSelectItemSchema,
   NomenclatureTag,
 } from '@/types';
 import { errorSchema } from '@/validators';
 
-const postListParking = ({
+const postListItem = ({
   tag,
   selectItemSchema,
   paginationItemOrderSchema,
@@ -18,7 +18,7 @@ const postListParking = ({
   bodyDescription,
 }: {
   tag: NomenclatureTag;
-  selectItemSchema: CommonSelectItem;
+  selectItemSchema: CommonSelectItemSchema;
   paginationItemOrderSchema: CommonPaginationOrderSchema;
   bodyItemListSchema: CommonBodyItemListSchema;
   bodyItemListSchemaExample: CommonBodyItemListSchemaExample;
@@ -64,4 +64,4 @@ const postListParking = ({
     },
   });
 
-export default postListParking;
+export default postListItem;

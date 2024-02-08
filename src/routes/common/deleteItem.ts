@@ -7,7 +7,7 @@ export const successSchema = z.object({
   success: z.literal(true),
 });
 
-const deleteParking = ({ tag }: { tag: NomenclatureTag }) =>
+const deleteItem = ({ tag }: { tag: NomenclatureTag }) =>
   createRoute({
     method: 'delete',
     path: '/delete/{id}',
@@ -37,4 +37,4 @@ const deleteParking = ({ tag }: { tag: NomenclatureTag }) =>
     },
   });
 
-export default deleteParking;
+export default deleteItem;
