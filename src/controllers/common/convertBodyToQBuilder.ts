@@ -49,7 +49,7 @@ const mapOperations = (
         between(
           model[item[1]],
           parseFloat(`${item[2]}`),
-          parseInt(`${item[3]}`),
+          parseFloat(`${item[3]}`),
         ),
       );
     }
