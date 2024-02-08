@@ -4,9 +4,19 @@ import ejs from 'ejs';
 import logSymbols from 'log-symbols';
 import path from 'path';
 
-import { toCamelCase, toPascalCase } from '@/utils';
-
-import modelFields from './list/modelfields';
+import {
+  bathroom,
+  city,
+  community,
+  floorPlan,
+  media,
+  mediaType,
+  parking,
+  property,
+  region,
+  unit,
+} from '@/models/schema';
+import { getModelFields, toCamelCase, toPascalCase } from '@/utils';
 
 const program = new Command();
 
@@ -23,15 +33,39 @@ const file = Bun.file(
 
 const template = await file.text();
 
-const allowedModels = Object.keys(modelFields);
+const allowedModels: {
+  [key: string]:
+    | typeof city
+    | typeof community
+    | typeof floorPlan
+    | typeof media
+    | typeof mediaType
+    | typeof bathroom
+    | typeof parking
+    | typeof property
+    | typeof region
+    | typeof unit;
+} = {
+  city,
+  community,
+  floorPlan,
+  media,
+  mediaType,
+  nomenclator: bathroom,
+  parking,
+  property,
+  region,
+  unit,
+};
 
 const actionHandler = async (model: string) => {
-  if (!allowedModels.includes(model)) {
+  if (!Object.keys(allowedModels).includes(model)) {
     console.error(`${logSymbols.error} error: invalid model`);
     process.exit(1);
   }
 
-  const fields = modelFields[model];
+  const { fields } = getModelFields(allowedModels[model]);
+
   const modelName = toPascalCase(model);
 
   const rendered = ejs.render(template, { modelName, fields });

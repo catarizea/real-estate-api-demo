@@ -8,12 +8,20 @@ import {
 import {
   bathroom,
   bedroom,
+  buildingFeature,
   buildingFeatureToProperty,
+  city,
+  community,
   communityFeature,
   communityFeatureToCommunity,
   feature,
   featureToProperty,
+  floorPlan,
+  media,
+  mediaType,
+  parking,
   property,
+  region,
   typeProp,
   unit,
 } from '@/models/schema';
@@ -267,3 +275,32 @@ export type CommonPaginationOrderSchema = typeof paginationParkingOrderSchema;
 export type CommonBodyItemListSchema = typeof bodyParkingListSchema;
 
 export type CommonBodyItemListSchemaExample = typeof parkingBodySchemaExample;
+
+export type CommonModel =
+  | typeof bathroom
+  | typeof bedroom
+  | typeof buildingFeature
+  | typeof city
+  | typeof community
+  | typeof communityFeature
+  | typeof feature
+  | typeof floorPlan
+  | typeof media
+  | typeof mediaType
+  | typeof parking
+  | typeof property
+  | typeof region
+  | typeof typeProp
+  | typeof unit;
+
+export type CommonChildrenModel =
+  | typeof unit
+  | typeof communityFeatureToCommunity
+  | typeof featureToProperty
+  | typeof property;
+
+export type CommonChild = {
+  model: CommonChildrenModel;
+  tag: NomenclatureTag;
+  parentIdField: string;
+};

@@ -7,6 +7,7 @@ import dateIsoToDatetime from './tools/dateIsoToDatetime';
 import delay from './tools/delay';
 import getAddressByCoordinates from './tools/getAddressByCoordinates';
 import getBoundingBox from './tools/getBoundingBox';
+import getModelFields from './tools/getModelFields';
 import queryIsNotOk from './tools/queryIsNotOk';
 import toCamelCase from './tools/toCamelCase';
 import toPascalCase from './tools/toPascalCase';
@@ -21,6 +22,7 @@ export {
   delay,
   getAddressByCoordinates,
   getBoundingBox,
+  getModelFields,
   queryIsNotOk,
   toCamelCase,
   toPascalCase,
