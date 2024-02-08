@@ -15,8 +15,10 @@ import type {
 } from './parking';
 import {
   insertParkingSchema,
+  insertParkingSchemaExample,
   selectParkingSchema,
   updateParkingSchema,
+  updateParkingSchemaExample,
 } from './parking';
 import type { SelectPropertySchema } from './property';
 import { selectPropertySchema } from './property';
@@ -28,6 +30,7 @@ export {
   insertBathroomSchema,
   InsertParkingSchema,
   insertParkingSchema,
+  insertParkingSchemaExample,
   SelectBathroomSchema,
   selectBathroomSchema,
   SelectParkingSchema,
@@ -40,4 +43,5 @@ export {
   updateBathroomSchema,
   UpdateParkingSchema,
   updateParkingSchema,
+  updateParkingSchemaExample,
 };

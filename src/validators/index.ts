@@ -49,7 +49,10 @@ import {
   paginationNomenclatureOrderSchema,
 } from './nomenclatureList';
 import { paginationSchema } from './pagination';
-import { parkingsByPropertySuccessSchema } from './parking';
+import {
+  parkingBodySchemaExample,
+  parkingsByPropertySuccessSchema,
+} from './parking';
 import type { ParkingListSchema } from './parkingList';
 import {
   bodyParkingListSchema,
@@ -127,6 +130,7 @@ export {
   paginationRegionOrderSchema,
   paginationSchema,
   paginationUnitOrderSchema,
+  parkingBodySchemaExample,
   ParkingListSchema,
   parkingsByPropertySuccessSchema,
   PropertyListSchema,

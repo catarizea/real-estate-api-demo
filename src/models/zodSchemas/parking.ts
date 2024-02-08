@@ -12,6 +12,14 @@ export type SelectParkingSchema = z.infer<typeof selectParkingSchema>;
 
 export const insertParkingSchema = createInsertSchema(parking);
 
+export const insertParkingSchemaExample = {
+  name: 'Covered',
+  propertyId: 'a5ug1fdwkkc4byl1uw9d7cqo',
+  fee: 100,
+  feeInterval: 'monthly',
+  order: 1,
+};
+
 export type InsertParkingSchema = z.infer<typeof insertParkingSchema>;
 
 export const updateParkingSchema = z
@@ -32,5 +40,12 @@ export const updateParkingSchema = z
       path: ['name', 'fee', 'feeInterval', 'order'],
     },
   );
+
+export const updateParkingSchemaExample = {
+  name: 'Covered',
+  fee: 100,
+  feeInterval: 'monthly',
+  order: 1,
+};
 
 export type UpdateParkingSchema = z.infer<typeof updateParkingSchema>;

@@ -18,9 +18,19 @@ import {
   unit,
 } from '@/models/schema';
 import {
+  insertParkingSchema,
+  insertParkingSchemaExample,
+  selectParkingSchema,
+  updateParkingSchema,
+  updateParkingSchemaExample,
+} from '@/models/zodSchemas';
+import {
+  bodyParkingListSchema,
   buildingFeatureToPropertySuccessSchema,
   communityFeatureToPropertySuccessSchema,
   featureToPropertySuccessSchema,
+  paginationParkingOrderSchema,
+  parkingBodySchemaExample,
 } from '@/validators';
 
 export type Point = {
@@ -228,14 +238,32 @@ export type FeatureToItemFieldsMapping =
   | typeof buildingFeatureToPropertyMapping
   | typeof communityFeatureToCommunityMapping;
 
-export type ModelFields = {
-  [key: string]: {
-    id: string[];
-    numeric: string[];
-    string: string[];
-    datetime: string[];
-    tinyInt: string[];
-    dateOnly: string[];
-    decimal: string[];
-  };
+export type ModelField = {
+  id: string[];
+  numeric: string[];
+  string: string[];
+  datetime: string[];
+  tinyInt: string[];
+  dateOnly: string[];
+  decimal: string[];
 };
+
+export type ModelFields = {
+  [key: string]: ModelField;
+};
+
+export type CommonInsertSchema = typeof insertParkingSchema;
+
+export type CommonInsertSchemaExample = typeof insertParkingSchemaExample;
+
+export type CommonUpdateSchema = typeof updateParkingSchema;
+
+export type CommonUpdateSchemaExample = typeof updateParkingSchemaExample;
+
+export type CommonSelectItem = typeof selectParkingSchema;
+
+export type CommonPaginationOrderSchema = typeof paginationParkingOrderSchema;
+
+export type CommonBodyItemListSchema = typeof bodyParkingListSchema;
+
+export type CommonBodyItemListSchemaExample = typeof parkingBodySchemaExample;
