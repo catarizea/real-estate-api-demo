@@ -5,8 +5,10 @@ import type {
 } from './bathroom';
 import {
   insertBathroomSchema,
+  insertBathroomSchemaExample,
   selectBathroomSchema,
   updateBathroomSchema,
+  updateBathroomSchemaExample,
 } from './bathroom';
 import type {
   InsertParkingSchema,
@@ -28,6 +30,7 @@ import { selectSeedAddressSchema } from './seedAddress';
 export {
   InsertBathroomSchema,
   insertBathroomSchema,
+  insertBathroomSchemaExample,
   InsertParkingSchema,
   insertParkingSchema,
   insertParkingSchemaExample,
@@ -41,6 +44,7 @@ export {
   selectSeedAddressSchema,
   UpdateBathroomSchema,
   updateBathroomSchema,
+  updateBathroomSchemaExample,
   UpdateParkingSchema,
   updateParkingSchema,
   updateParkingSchemaExample,

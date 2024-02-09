@@ -42,6 +42,7 @@ import {
   getMediaTypeCursorValidatorByOrderBy,
   paginationMediaTypeOrderSchema,
 } from './mediaTypeList';
+import { bodyNomenclatureListSchemaExample } from './nomenclature';
 import type { NomenclatureListSchema } from './nomenclatureList';
 import {
   bodyNomenclatureListSchema,
@@ -87,6 +88,7 @@ export {
   bodyMediaListSchema,
   bodyMediaTypeListSchema,
   bodyNomenclatureListSchema,
+  bodyNomenclatureListSchemaExample,
   bodyParkingListSchema,
   bodyPropertyListSchema,
   bodyRegionListSchema,

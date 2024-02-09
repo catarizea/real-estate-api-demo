@@ -10,17 +10,17 @@ import { CommonModel } from '@/types';
 import { badRequestResponse, getModelFields } from '@/utils';
 
 const postCreateItemHandler =
-  ({
+  <InsertItemType>({
     model,
     customCheck,
     onSuccess,
   }: {
     model: CommonModel;
-    customCheck?: (body: typeof model.$inferInsert) => Promise<string | null>;
+    customCheck?: (body: InsertItemType) => Promise<string | null>;
     onSuccess?: (id: string) => Promise<void>;
   }) =>
   async (c: Context) => {
-    const body: typeof model.$inferInsert = await c.req.json();
+    const body: InsertItemType = await c.req.json();
     const { required, optional } = getModelFields(model);
     const mandatory = without(required, 'id');
 
@@ -52,7 +52,7 @@ const postCreateItemHandler =
     await db.insert(model).values({
       id,
       ...pick(body, [...mandatory, ...optional]),
-    } as typeof model.$inferInsert);
+    } as unknown as typeof model.$inferInsert);
 
     if (onSuccess) {
       await onSuccess(id);

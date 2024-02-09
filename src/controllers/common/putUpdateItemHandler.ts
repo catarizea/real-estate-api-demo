@@ -6,11 +6,11 @@ import pick from 'lodash.pick';
 import without from 'lodash.without';
 
 import { db } from '@/models';
-import { CommonModel, CommonUpdateItemSchema, NomenclatureTag } from '@/types';
+import { CommonModel, NomenclatureTag } from '@/types';
 import { badRequestResponse, getModelFields } from '@/utils';
 
 const putUpdateItemHandler =
-  ({
+  <UpdateItemSchema>({
     model,
     tag,
     customCheck,
@@ -18,12 +18,12 @@ const putUpdateItemHandler =
   }: {
     model: CommonModel;
     tag: NomenclatureTag;
-    customCheck?: (body: CommonUpdateItemSchema) => Promise<string | null>;
+    customCheck?: (body: UpdateItemSchema) => Promise<string | null>;
     onSuccess?: (id: string) => Promise<void>;
   }) =>
   async (c: Context) => {
     const id = c.req.param('id');
-    const body: CommonUpdateItemSchema = await c.req.json();
+    const body: UpdateItemSchema = await c.req.json();
 
     const { required, optional } = getModelFields(model);
     const mandatory = without(required, 'id');

@@ -13,9 +13,11 @@ import {
 import { zodDefaultHook } from '@/middlewares';
 import { parking } from '@/models/schema';
 import {
+  InsertParkingSchema,
   insertParkingSchema,
   insertParkingSchemaExample,
   selectParkingSchema,
+  UpdateParkingSchema,
   updateParkingSchema,
   updateParkingSchemaExample,
 } from '@/models/zodSchemas';
@@ -66,7 +68,7 @@ app.openapi(
     insertItemSchema: insertParkingSchema,
     insertItemSchemaExample: insertParkingSchemaExample,
   }),
-  postCreateItemHandler({
+  postCreateItemHandler<InsertParkingSchema>({
     model: parking,
     customCheck: customInsertParkingCheck,
     onSuccess: async (id: string) => {
@@ -81,7 +83,7 @@ app.openapi(
     updateItemSchema: updateParkingSchema,
     updateItemSchemaExample: updateParkingSchemaExample,
   }),
-  putUpdateItemHandler({
+  putUpdateItemHandler<UpdateParkingSchema>({
     model: parking,
     tag: NomenclatureTag.Parking,
     customCheck: customUpdateParkingCheck,

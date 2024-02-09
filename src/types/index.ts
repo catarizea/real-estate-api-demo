@@ -26,19 +26,26 @@ import {
   unit,
 } from '@/models/schema';
 import {
+  insertBathroomSchema,
+  insertBathroomSchemaExample,
   insertParkingSchema,
   insertParkingSchemaExample,
+  selectBathroomSchema,
   SelectParkingSchema,
   selectParkingSchema,
+  updateBathroomSchema,
+  updateBathroomSchemaExample,
   UpdateParkingSchema,
   updateParkingSchema,
   updateParkingSchemaExample,
 } from '@/models/zodSchemas';
 import {
+  bodyNomenclatureListSchema,
   bodyParkingListSchema,
   buildingFeatureToPropertySuccessSchema,
   communityFeatureToPropertySuccessSchema,
   featureToPropertySuccessSchema,
+  paginationNomenclatureOrderSchema,
   paginationParkingOrderSchema,
   parkingBodySchemaExample,
   ParkingListSchema,
@@ -263,29 +270,49 @@ export type ModelFields = {
   [key: string]: ModelField;
 };
 
-export type CommonInsertSchema = typeof insertParkingSchema;
+export type CommonInsertSchema =
+  | typeof insertParkingSchema
+  | typeof insertBathroomSchema;
 
-export type CommonInsertSchemaExample = typeof insertParkingSchemaExample;
+export type CommonInsertSchemaExample =
+  | typeof insertParkingSchemaExample
+  | typeof insertBathroomSchemaExample;
 
-export type CommonUpdateSchema = typeof updateParkingSchema;
+export type CommonUpdateSchema =
+  | typeof updateParkingSchema
+  | typeof updateBathroomSchema;
 
-export type CommonUpdateSchemaExample = typeof updateParkingSchemaExample;
+export type CommonUpdateSchemaExample =
+  | typeof updateParkingSchemaExample
+  | typeof updateBathroomSchemaExample;
 
-export type CommonSelectItemSchema = typeof selectParkingSchema;
+export type CommonSelectItemSchema =
+  | typeof selectParkingSchema
+  | typeof selectBathroomSchema;
 
 export type CommonSelectItemSchemaType = SelectParkingSchema;
 
 export type CommonUpdateItemSchema = UpdateParkingSchema;
 
-export type CommonPaginationOrderSchema = typeof paginationParkingOrderSchema;
+export type CommonPaginationOrderSchema =
+  | typeof paginationParkingOrderSchema
+  | typeof paginationNomenclatureOrderSchema;
 
 export type CommonItemListSchema = ParkingListSchema;
 
-export type CommonBodyItemListSchema = typeof bodyParkingListSchema;
+export type CommonBodyItemListSchema =
+  | typeof bodyParkingListSchema
+  | typeof bodyNomenclatureListSchema;
 
 export type CommonBodyItemListSchemaExample = typeof parkingBodySchemaExample;
 
-export type CommonModel = typeof parking;
+export type CommonModel =
+  | typeof parking
+  | typeof bathroom
+  | typeof bedroom
+  | typeof buildingFeature
+  | typeof feature
+  | typeof typeProp;
 
 /*
 export type CommonModel =
