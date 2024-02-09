@@ -32,7 +32,8 @@ const postListItemHandler =
           readonly t: 1;
           readonly f: 0;
         }>
-      | z.ZodDate;
+      | z.ZodDate
+      | z.ZodNever;
     paginationItemOrderSchema: CommonPaginationOrderSchema;
   }) =>
   async (c: Context) => {

@@ -2,8 +2,8 @@ import { z } from '@hono/zod-openapi';
 import { createId } from '@paralleldrive/cuid2';
 import { Context } from 'hono';
 import intersection from 'lodash.intersection';
-import omit from 'lodash.omit';
 import pick from 'lodash.pick';
+import without from 'lodash.without';
 
 import { db } from '@/models';
 import { CommonModel } from '@/types';
@@ -22,7 +22,7 @@ const postCreateItemHandler =
   async (c: Context) => {
     const body: typeof model.$inferInsert = await c.req.json();
     const { required, optional } = getModelFields(model);
-    const mandatory = omit(required, 'id');
+    const mandatory = without(required, 'id');
 
     if (
       !body ||

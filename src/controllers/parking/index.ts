@@ -1,13 +1,9 @@
-import deleteParkingHandler from './deleteParkingHandler';
+import customInsertParkingCheck from './customInsertParkingCheck';
+import customUpdateParkingCheck from './customUpdateParkingCheck';
 import getParkingsByPropertyHandler from './getParkingsByPropertyHandler';
-import postCreateParkingHandler from './postCreateParkingHandler';
-import postListParkingHandler from './postListParkingHandler';
-import putUpdateParkingHandler from './putUpdateParkingHandler';
 
 export {
-  deleteParkingHandler,
+  customInsertParkingCheck,
+  customUpdateParkingCheck,
   getParkingsByPropertyHandler,
-  postCreateParkingHandler,
-  postListParkingHandler,
-  putUpdateParkingHandler,
 };

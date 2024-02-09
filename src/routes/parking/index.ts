@@ -1,32 +1,108 @@
+/* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import {
-  deleteParkingHandler,
+  customInsertParkingCheck,
+  customUpdateParkingCheck,
+  deleteItemHandler,
   getParkingsByPropertyHandler,
-  postCreateParkingHandler,
-  postListParkingHandler,
-  putUpdateParkingHandler,
+  postCreateItemHandler,
+  postListItemHandler,
+  putUpdateItemHandler,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
+import { parking } from '@/models/schema';
+import {
+  insertParkingSchema,
+  insertParkingSchemaExample,
+  selectParkingSchema,
+  updateParkingSchema,
+  updateParkingSchemaExample,
+} from '@/models/zodSchemas';
+import { NomenclatureTag } from '@/types';
+import { createBodyDescription, getModelFields } from '@/utils';
+import {
+  bodyParkingListSchema,
+  getParkingCursorValidatorByOrderBy,
+  paginationParkingOrderSchema,
+  parkingBodySchemaExample,
+} from '@/validators';
 
-import deleteParking from './deleteParking';
+import {
+  deleteItem,
+  postCreateItem,
+  postListItem,
+  putUpdateItem,
+} from '../common';
 import getParkingsByProperty from './getParkingsByProperty';
-import postCreateParking from './postCreateParking';
-import postListParking from './postListParking';
-import putUpdateParking from './putUpdateParking';
 
 const app = new OpenAPIHono({
   defaultHook: zodDefaultHook,
 });
 
+const { fields } = getModelFields(parking);
+
 app.openapi(getParkingsByProperty, getParkingsByPropertyHandler);
 
-app.openapi(postListParking, postListParkingHandler);
+app.openapi(
+  postListItem({
+    tag: NomenclatureTag.Parking,
+    selectItemSchema: selectParkingSchema,
+    paginationItemOrderSchema: paginationParkingOrderSchema,
+    bodyItemListSchema: bodyParkingListSchema,
+    bodyItemListSchemaExample: parkingBodySchemaExample,
+    bodyDescription: createBodyDescription(fields),
+  }),
+  postListItemHandler({
+    model: parking,
+    getItemCursorValidatorByOrderBy: getParkingCursorValidatorByOrderBy,
+    paginationItemOrderSchema: paginationParkingOrderSchema,
+  }),
+);
 
-app.openapi(postCreateParking, postCreateParkingHandler);
+app.openapi(
+  postCreateItem({
+    tag: NomenclatureTag.Parking,
+    insertItemSchema: insertParkingSchema,
+    insertItemSchemaExample: insertParkingSchemaExample,
+  }),
+  postCreateItemHandler({
+    model: parking,
+    customCheck: customInsertParkingCheck,
+    onSuccess: async (id: string) => {
+      console.log(`publish message for created parking with id ${id}`);
+    },
+  }),
+);
 
-app.openapi(putUpdateParking, putUpdateParkingHandler);
+app.openapi(
+  putUpdateItem({
+    tag: NomenclatureTag.Parking,
+    updateItemSchema: updateParkingSchema,
+    updateItemSchemaExample: updateParkingSchemaExample,
+  }),
+  putUpdateItemHandler({
+    model: parking,
+    tag: NomenclatureTag.Parking,
+    customCheck: customUpdateParkingCheck,
+    onSuccess: async (id: string) => {
+      console.log(`publish message for updated parking with id ${id}`);
+    },
+  }),
+);
 
-app.openapi(deleteParking, deleteParkingHandler);
+app.openapi(
+  deleteItem({
+    tag: NomenclatureTag.Parking,
+  }),
+  deleteItemHandler({
+    model: parking,
+    tag: NomenclatureTag.Parking,
+    idField: 'id',
+    onSuccess: async (id: string) => {
+      console.log(`publish message for deleted parking with id ${id}`);
+    },
+  }),
+);
 
 export default app;

@@ -30,6 +30,7 @@ import {
   insertParkingSchemaExample,
   SelectParkingSchema,
   selectParkingSchema,
+  UpdateParkingSchema,
   updateParkingSchema,
   updateParkingSchemaExample,
 } from '@/models/zodSchemas';
@@ -273,6 +274,8 @@ export type CommonUpdateSchemaExample = typeof updateParkingSchemaExample;
 export type CommonSelectItemSchema = typeof selectParkingSchema;
 
 export type CommonSelectItemSchemaType = SelectParkingSchema;
+
+export type CommonUpdateItemSchema = UpdateParkingSchema;
 
 export type CommonPaginationOrderSchema = typeof paginationParkingOrderSchema;
 

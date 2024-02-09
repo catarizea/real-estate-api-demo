@@ -1,44 +1,16 @@
-import { z } from '@hono/zod-openapi';
-import { createId } from '@paralleldrive/cuid2';
-import { Context } from 'hono';
-import intersection from 'lodash.intersection';
-import pick from 'lodash.pick';
-
 import { db } from '@/models';
-import { parking } from '@/models/schema';
 import { InsertParkingSchema } from '@/models/zodSchemas';
 import { badRequestResponse } from '@/utils';
 import * as taxonomy from '@/utils/db/taxonomy';
 
-const fields = ['propertyId', 'name', 'order'];
-
-const postCreateParkingHandler = async (c: Context) => {
-  const body: InsertParkingSchema = await c.req.json();
-
-  if (
-    !body ||
-    Object.keys(body).length === 0 ||
-    Object.keys(body).length > fields.length ||
-    intersection(Object.keys(body), fields).length === 0
-  ) {
-    return c.json(
-      badRequestResponse({
-        reason: 'validation error',
-        message: 'body must contain valid propertyId, name and order',
-        path: fields,
-      }),
-      400,
-    );
-  }
-
+const customInsertParkingCheck = async (body: InsertParkingSchema) => {
   if (!taxonomy.parking.includes(body.name)) {
-    return c.json(
+    return JSON.stringify(
       badRequestResponse({
         reason: 'validation error',
         message: `name must be one of ${taxonomy.parking.join(', ')}`,
         path: ['name'],
       }),
-      400,
     );
   }
 
@@ -47,13 +19,12 @@ const postCreateParkingHandler = async (c: Context) => {
   });
 
   if (!propertyExists) {
-    return c.json(
+    return JSON.stringify(
       badRequestResponse({
         reason: 'validation error',
         message: `property with id ${body.propertyId} does not exist`,
         path: ['propertyId'],
       }),
-      400,
     );
   }
 
@@ -63,24 +34,16 @@ const postCreateParkingHandler = async (c: Context) => {
   });
 
   if (parkingExists) {
-    return c.json(
+    return JSON.stringify(
       badRequestResponse({
         reason: 'validation error',
         message: `parking with name ${body.name} already exists for property with id ${body.propertyId}`,
         path: ['name'],
       }),
-      400,
     );
   }
 
-  const id = createId();
-
-  await db.insert(parking).values({
-    id,
-    ...pick(body, [...fields, 'fee', 'feeInterval']),
-  } as InsertParkingSchema);
-
-  return c.json({ success: z.literal(true).value, data: { id } }, 201);
+  return null;
 };
 
-export default postCreateParkingHandler;
+export default customInsertParkingCheck;

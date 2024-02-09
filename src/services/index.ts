@@ -1,4 +1,5 @@
 import logger from './logger';
+import messagePublisher from './messagePublisher';
 import worker from './taskWorkers';
 
-export { logger, worker };
+export { logger, messagePublisher, worker };
