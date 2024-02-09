@@ -56,7 +56,7 @@ const postSearch = createRoute({
       },
     },
     400: {
-      description: 'Responds with an error object',
+      description: 'Responds with a bad request error object',
       content: {
         'application/json': {
           schema: errorSchema,

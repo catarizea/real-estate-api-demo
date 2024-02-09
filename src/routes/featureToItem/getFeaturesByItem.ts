@@ -29,7 +29,7 @@ const getFeaturesByItem = (
         },
       },
       400: {
-        description: 'Responds with an error message.',
+        description: 'Responds with a bad request error message.',
         content: {
           'application/json': {
             schema: errorSchema,
