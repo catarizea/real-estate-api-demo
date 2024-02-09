@@ -10,12 +10,6 @@ import {
   postCreateFeatureToItemHandler,
 } from './featureToItem';
 import {
-  deleteNomenclatureHandler,
-  postCreateNomenclatureHandler,
-  postListNomenclatureHandler,
-  putUpdateNomenclatureHandler,
-} from './nomenclature';
-import {
   customInsertParkingCheck,
   customUpdateParkingCheck,
   getParkingsByPropertyHandler,
@@ -28,16 +22,12 @@ export {
   customUpdateParkingCheck,
   deleteFeatureToItemHandler,
   deleteItemHandler,
-  deleteNomenclatureHandler,
   getFeaturesByItemHandler,
   getParkingsByPropertyHandler,
   getPropertyHandler,
   postCreateFeatureToItemHandler,
   postCreateItemHandler,
-  postCreateNomenclatureHandler,
   postListItemHandler,
-  postListNomenclatureHandler,
   postSearchHandler,
   putUpdateItemHandler,
-  putUpdateNomenclatureHandler,
 };

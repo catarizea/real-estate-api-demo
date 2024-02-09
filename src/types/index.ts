@@ -206,19 +206,6 @@ export type RabbitMqMessage = {
   };
 };
 
-export type NomenclatureModel =
-  | typeof bathroom
-  | typeof bedroom
-  | typeof communityFeature
-  | typeof feature
-  | typeof typeProp;
-
-export type NomenclatureChildrenModel =
-  | typeof unit
-  | typeof communityFeatureToCommunity
-  | typeof featureToProperty
-  | typeof property;
-
 export enum NomenclatureTag {
   Bathroom = 'bathroom',
   Bedroom = 'bedroom',
@@ -234,12 +221,6 @@ export enum NomenclatureTag {
   Home = 'home',
   Search = 'search',
 }
-
-export type NomenclatureChild = {
-  model: NomenclatureChildrenModel;
-  tag: NomenclatureTag;
-  parentIdField: string;
-};
 
 export type FeatureToItem =
   | typeof featureToProperty
