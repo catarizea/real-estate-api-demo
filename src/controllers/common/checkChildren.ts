@@ -16,7 +16,8 @@ const checkChildren = async (
     const existingChildren = await db
       .select()
       .from(model)
-      .where(eq(model[parentIdField as keyof typeof model.$inferSelect], id));
+      .where(eq(model[parentIdField as keyof typeof model.$inferSelect], id))
+      .limit(1);
 
     if (existingChildren.length) {
       return badRequestResponse({

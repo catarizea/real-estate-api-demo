@@ -312,6 +312,7 @@ export type CommonModel =
   | typeof bedroom
   | typeof buildingFeature
   | typeof feature
+  | typeof communityFeature
   | typeof typeProp;
 
 /*

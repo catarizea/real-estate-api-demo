@@ -13,7 +13,7 @@ const zodDefaultHook: Hook<any, Env, any, any> = (result, c) => {
 
       const issues = errors.unionErrors.map((error) =>
         error.issues.map((issue) => ({
-          message: issue.message,
+          message: issue.message.toLowerCase(),
           path: issue.path,
         })),
       );
@@ -36,7 +36,7 @@ const zodDefaultHook: Hook<any, Env, any, any> = (result, c) => {
         error: {
           reason: 'validation error',
           issues: result.error.issues.map((issue) => ({
-            message: issue.message,
+            message: issue.message.toLowerCase(),
             path: issue.path,
           })),
         },
