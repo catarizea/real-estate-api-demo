@@ -9,5 +9,3 @@ export const errorSchema = z.object({
       .optional(),
   }),
 });
-
-export type ErrorSchema = z.infer<typeof errorSchema>;

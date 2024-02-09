@@ -30,25 +30,35 @@ import {
   insertBathroomSchemaExample,
   insertParkingSchema,
   insertParkingSchemaExample,
+  insertPropertySchema,
+  insertPropertySchemaExample,
   selectBathroomSchema,
   SelectParkingSchema,
   selectParkingSchema,
+  SelectPropertySchema,
+  selectPropertySchema,
   updateBathroomSchema,
   updateBathroomSchemaExample,
   UpdateParkingSchema,
   updateParkingSchema,
   updateParkingSchemaExample,
+  UpdatePropertySchema,
+  updatePropertySchema,
+  updatePropertySchemaExample,
 } from '@/models/zodSchemas';
 import {
   bodyNomenclatureListSchema,
   bodyParkingListSchema,
+  bodyPropertyListSchema,
   buildingFeatureToPropertySuccessSchema,
   communityFeatureToPropertySuccessSchema,
   featureToPropertySuccessSchema,
   paginationNomenclatureOrderSchema,
   paginationParkingOrderSchema,
+  paginationPropertyOrderSchema,
   parkingBodySchemaExample,
   ParkingListSchema,
+  propertyBodySchemaExample,
 } from '@/validators';
 
 export type Point = {
@@ -220,6 +230,8 @@ export enum NomenclatureTag {
   Parking = 'parking',
   Home = 'home',
   Search = 'search',
+  FloorPlan = 'floorPlan',
+  Media = 'media',
 }
 
 export type FeatureToItem =
@@ -253,39 +265,50 @@ export type ModelFields = {
 
 export type CommonInsertSchema =
   | typeof insertParkingSchema
-  | typeof insertBathroomSchema;
+  | typeof insertBathroomSchema
+  | typeof insertPropertySchema;
 
 export type CommonInsertSchemaExample =
   | typeof insertParkingSchemaExample
-  | typeof insertBathroomSchemaExample;
+  | typeof insertBathroomSchemaExample
+  | typeof insertPropertySchemaExample;
 
 export type CommonUpdateSchema =
   | typeof updateParkingSchema
-  | typeof updateBathroomSchema;
+  | typeof updateBathroomSchema
+  | typeof updatePropertySchema;
 
 export type CommonUpdateSchemaExample =
   | typeof updateParkingSchemaExample
-  | typeof updateBathroomSchemaExample;
+  | typeof updateBathroomSchemaExample
+  | typeof updatePropertySchemaExample;
 
 export type CommonSelectItemSchema =
   | typeof selectParkingSchema
-  | typeof selectBathroomSchema;
+  | typeof selectBathroomSchema
+  | typeof selectPropertySchema;
 
-export type CommonSelectItemSchemaType = SelectParkingSchema;
+export type CommonSelectItemSchemaType =
+  | SelectParkingSchema
+  | SelectPropertySchema;
 
-export type CommonUpdateItemSchema = UpdateParkingSchema;
+export type CommonUpdateItemSchema = UpdateParkingSchema | UpdatePropertySchema;
 
 export type CommonPaginationOrderSchema =
   | typeof paginationParkingOrderSchema
-  | typeof paginationNomenclatureOrderSchema;
+  | typeof paginationNomenclatureOrderSchema
+  | typeof paginationPropertyOrderSchema;
 
 export type CommonItemListSchema = ParkingListSchema;
 
 export type CommonBodyItemListSchema =
   | typeof bodyParkingListSchema
-  | typeof bodyNomenclatureListSchema;
+  | typeof bodyNomenclatureListSchema
+  | typeof bodyPropertyListSchema;
 
-export type CommonBodyItemListSchemaExample = typeof parkingBodySchemaExample;
+export type CommonBodyItemListSchemaExample =
+  | typeof parkingBodySchemaExample
+  | typeof propertyBodySchemaExample;
 
 export type CommonModel =
   | typeof parking
@@ -294,7 +317,8 @@ export type CommonModel =
   | typeof buildingFeature
   | typeof feature
   | typeof communityFeature
-  | typeof typeProp;
+  | typeof typeProp
+  | typeof property;
 
 /*
 export type CommonModel =
@@ -319,7 +343,10 @@ export type CommonChildrenModel =
   | typeof unit
   | typeof communityFeatureToCommunity
   | typeof featureToProperty
-  | typeof property;
+  | typeof property
+  | typeof floorPlan
+  | typeof parking
+  | typeof media;
 
 export type CommonChild = {
   model: CommonChildrenModel;

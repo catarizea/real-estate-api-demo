@@ -12,6 +12,7 @@ import {
   typeProp,
 } from './nomenclature';
 import parking from './parking';
+import property from './property';
 import search from './search';
 
 const routes = [
@@ -58,6 +59,10 @@ const routes = [
   {
     path: '/parking',
     routes: parking,
+  },
+  {
+    path: '/property',
+    routes: property,
   },
 ];
 

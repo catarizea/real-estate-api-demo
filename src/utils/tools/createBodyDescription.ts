@@ -23,7 +23,7 @@ const createBodyDescription = (field: ModelField): string => {
   }
 
   if (field.tinyInt.length) {
-    description += `For tiny int type ${pluralize('field', field.tinyInt.length)} ['${field.tinyInt.join("', '")}'] you can use "eq" operator. `;
+    description += `For tiny int type (0 or 1) ${pluralize('field', field.tinyInt.length)} ['${field.tinyInt.join("', '")}'] you can use "eq" operator. `;
   }
 
   if (field.dateOnly.length) {

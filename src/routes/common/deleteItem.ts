@@ -27,7 +27,15 @@ const deleteItem = ({ tag }: { tag: NomenclatureTag }) =>
         },
       },
       400: {
-        description: 'Responds with an error message.',
+        description: 'Responds with a bad request error message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      409: {
+        description: 'Responds with a conflict error message.',
         content: {
           'application/json': {
             schema: errorSchema,

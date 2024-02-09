@@ -22,8 +22,18 @@ import {
   updateParkingSchema,
   updateParkingSchemaExample,
 } from './parking';
-import type { SelectPropertySchema } from './property';
-import { selectPropertySchema } from './property';
+import type {
+  InsertPropertySchema,
+  SelectPropertySchema,
+  UpdatePropertySchema,
+} from './property';
+import {
+  insertPropertySchema,
+  insertPropertySchemaExample,
+  selectPropertySchema,
+  updatePropertySchema,
+  updatePropertySchemaExample,
+} from './property';
 import type { SelectSeedAddressSchema } from './seedAddress';
 import { selectSeedAddressSchema } from './seedAddress';
 
@@ -34,6 +44,9 @@ export {
   InsertParkingSchema,
   insertParkingSchema,
   insertParkingSchemaExample,
+  InsertPropertySchema,
+  insertPropertySchema,
+  insertPropertySchemaExample,
   SelectBathroomSchema,
   selectBathroomSchema,
   SelectParkingSchema,
@@ -48,4 +61,7 @@ export {
   UpdateParkingSchema,
   updateParkingSchema,
   updateParkingSchemaExample,
+  UpdatePropertySchema,
+  updatePropertySchema,
+  updatePropertySchemaExample,
 };

@@ -1,5 +1,5 @@
 import { z } from '@hono/zod-openapi';
-import { createSelectSchema } from 'drizzle-zod';
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 import { property } from '@/models/schema';
 
@@ -9,3 +9,137 @@ export const selectPropertySchema = createSelectSchema(property, {
 });
 
 export type SelectPropertySchema = z.infer<typeof selectPropertySchema>;
+
+export const insertPropertySchema = createInsertSchema(property);
+
+export const insertPropertySchemaExample = {
+  name: 'Property name',
+  address: '123 Main St, Calgary, AB T2P 1J9',
+  latitude: '51.0447',
+  longitude: '-114.0719',
+  yearBuilt: 2020,
+  descriptionTitle: 'Property description title',
+  descriptionSubtitle: 'Property description subtitle',
+  descriptionText: 'Property description text',
+  typePropId: 'a5ug1fdwkkc4byl1uw9d7cqo',
+  communityId: 'a5ug1fdwkkc4byl1uw9d7cqo',
+  cityId: 'a5ug1fdwkkc4byl1uw9d7cqo',
+  smoking: false,
+  cats: true,
+  dogs: false,
+  petsNegotiable: true,
+};
+
+export type InsertPropertySchema = z.infer<typeof insertPropertySchema>;
+
+export const updatePropertySchema = z
+  .object({
+    name: z.string().optional(),
+    address: z.string().optional(),
+    latitude: z.string().optional(),
+    longitude: z.string().optional(),
+    yearBuilt: z.number().int().optional(),
+    descriptionTitle: z.string().optional(),
+    descriptionSubtitle: z.string().optional(),
+    descriptionText: z.string().optional(),
+    typePropId: z.string().optional(),
+    communityId: z.string().optional(),
+    cityId: z.string().optional(),
+    smoking: z.boolean().optional(),
+    cats: z.boolean().optional(),
+    dogs: z.boolean().optional(),
+    petsNegotiable: z.boolean().optional(),
+    petsFee: z.number().optional(),
+    petsFeeInterval: z.string().optional(),
+    published: z.boolean().optional(),
+    customerRanking: z.number().optional(),
+    paidSearchRanking: z.boolean().optional(),
+  })
+  .refine(
+    ({
+      name,
+      address,
+      latitude,
+      longitude,
+      yearBuilt,
+      descriptionTitle,
+      descriptionSubtitle,
+      descriptionText,
+      typePropId,
+      communityId,
+      cityId,
+      smoking,
+      cats,
+      dogs,
+      petsNegotiable,
+      petsFee,
+      petsFeeInterval,
+      published,
+      customerRanking,
+      paidSearchRanking,
+    }) =>
+      typeof name !== 'undefined' ||
+      typeof address !== 'undefined' ||
+      typeof latitude !== 'undefined' ||
+      typeof longitude !== 'undefined' ||
+      typeof yearBuilt !== 'undefined' ||
+      typeof descriptionTitle !== 'undefined' ||
+      typeof descriptionSubtitle !== 'undefined' ||
+      typeof descriptionText !== 'undefined' ||
+      typeof typePropId !== 'undefined' ||
+      typeof communityId !== 'undefined' ||
+      typeof cityId !== 'undefined' ||
+      typeof smoking !== 'undefined' ||
+      typeof cats !== 'undefined' ||
+      typeof dogs !== 'undefined' ||
+      typeof petsNegotiable !== 'undefined' ||
+      typeof petsFee !== 'undefined' ||
+      typeof petsFeeInterval !== 'undefined' ||
+      typeof published !== 'undefined' ||
+      typeof customerRanking !== 'undefined' ||
+      typeof paidSearchRanking !== 'undefined',
+    {
+      message:
+        'name or address or latitude or longitude or yearBuilt or descriptionTitle or descriptionSubtitle or descriptionText or typePropId or communityId or cityId or smoking or cats or dogs or petsNegotiable or petsFee or petsFeeInterval or published or customerRanking or paidSearchRanking is required',
+      path: [
+        'name',
+        'address',
+        'latitude',
+        'longitude',
+        'yearBuilt',
+        'descriptionTitle',
+        'descriptionSubtitle',
+        'descriptionText',
+        'typePropId',
+        'communityId',
+        'cityId',
+        'smoking',
+        'cats',
+        'dogs',
+        'petsNegotiable',
+        'petsFee',
+        'petsFeeInterval',
+        'published',
+        'customerRanking',
+        'paidSearchRanking',
+      ],
+    },
+  );
+
+export const updatePropertySchemaExample = {
+  name: 'Property name',
+  address: '123 Main St, Calgary, AB T2P 1J9',
+  latitude: '51.0447',
+  longitude: '-114.0719',
+  yearBuilt: 2020,
+  descriptionTitle: 'Property description title',
+  descriptionSubtitle: 'Property description subtitle',
+  descriptionText: 'Property description text',
+  smoking: true,
+  cats: true,
+  dogs: false,
+  petsNegotiable: true,
+  petsFee: 100,
+};
+
+export type UpdatePropertySchema = z.infer<typeof updatePropertySchema>;
