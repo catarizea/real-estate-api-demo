@@ -14,7 +14,7 @@ import {
   customUpdateParkingCheck,
   getParkingsByPropertyHandler,
 } from './parking';
-import { customInsertPropertyCheck } from './property';
+import { customInsertPropertyCheck, getPropertyHandler } from './property';
 import { postSearchHandler } from './search';
 
 export {
@@ -25,6 +25,7 @@ export {
   deleteItemHandler,
   getFeaturesByItemHandler,
   getParkingsByPropertyHandler,
+  getPropertyHandler,
   postCreateFeatureToItemHandler,
   postCreateItemHandler,
   postListItemHandler,

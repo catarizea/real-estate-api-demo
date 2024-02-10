@@ -4,6 +4,7 @@ import { OpenAPIHono } from '@hono/zod-openapi';
 import {
   customInsertPropertyCheck,
   deleteItemHandler,
+  getPropertyHandler,
   postCreateItemHandler,
   postListItemHandler,
   putUpdateItemHandler,
@@ -34,12 +35,15 @@ import {
   postListItem,
   putUpdateItem,
 } from '../common';
+import getProperty from './getProperty';
 
 const app = new OpenAPIHono({
   defaultHook: zodDefaultHook,
 });
 
 const { fields } = getModelFields(property);
+
+app.openapi(getProperty, getPropertyHandler);
 
 app.openapi(
   postListItem({

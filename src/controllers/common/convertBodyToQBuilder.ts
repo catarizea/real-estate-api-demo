@@ -4,7 +4,8 @@ import { CommonItemListSchema, CommonModel, ModelField } from '@/types';
 import { dateIsoToDatetime } from '@/utils';
 
 const mapOperations = (
-  model: CommonModel,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  model: any,
   ops: CommonItemListSchema,
   fields: ModelField,
 ) => {
@@ -94,13 +95,15 @@ const convertBodyToQBuilder = (
   const orOps = and.filter((item) => item[0] === 'or');
 
   if (orOps.length) {
-    const orArgs = mapOperations(
-      model,
-      orOps[0][1] as CommonItemListSchema,
-      fields,
-    );
+    orOps.forEach((item) => {
+      const orArgs = mapOperations(
+        model,
+        item[1] as CommonItemListSchema,
+        fields,
+      );
 
-    args.push(or(...orArgs));
+      args.push(or(...orArgs));
+    });
   }
 
   const restArgs = mapOperations(model, and, fields);

@@ -1,3 +1,4 @@
 import customInsertPropertyCheck from './customInsertPropertyCheck';
+import getPropertyHandler from './getPropertyHandler';
 
-export { customInsertPropertyCheck };
+export { customInsertPropertyCheck, getPropertyHandler };

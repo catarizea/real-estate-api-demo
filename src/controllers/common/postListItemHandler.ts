@@ -167,8 +167,8 @@ const postListItemHandler =
       } else {
         cursorArg =
           orderDirection === 'asc'
-            ? gt(model[dbField], cursor)
-            : lt(model[dbField], cursor);
+            ? gt(model[dbField], `${cursor}`)
+            : lt(model[dbField], `${cursor}`);
       }
     }
 

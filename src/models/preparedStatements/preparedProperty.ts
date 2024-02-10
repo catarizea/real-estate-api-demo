@@ -116,6 +116,7 @@ const preparedProperty = db.query.property
       },
       floorPlans: {
         columns: {
+          id: true,
           name: true,
           order: true,
         },

@@ -60,7 +60,8 @@ import {
   getParkingCursorValidatorByOrderBy,
   paginationParkingOrderSchema,
 } from './parkingList';
-import { propertyBodySchemaExample } from './property';
+import type { PreparedPropertySchema } from './property';
+import { preparedPropertySchema, propertyBodySchemaExample } from './property';
 import type { PropertyListSchema } from './propertyList';
 import {
   bodyPropertyListSchema,
@@ -136,6 +137,8 @@ export {
   parkingBodySchemaExample,
   ParkingListSchema,
   parkingsByPropertySuccessSchema,
+  PreparedPropertySchema,
+  preparedPropertySchema,
   propertyBodySchemaExample,
   PropertyListSchema,
   RegionListSchema,
