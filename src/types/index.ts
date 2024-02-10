@@ -28,12 +28,15 @@ import {
 import {
   insertBathroomSchema,
   insertBathroomSchemaExample,
+  insertCommunitySchemaExample,
   insertParkingSchema,
   insertParkingSchemaExample,
   insertPropertySchema,
   insertPropertySchemaExample,
   SelectBathroomSchema,
   selectBathroomSchema,
+  SelectCommunitySchema,
+  selectCommunitySchema,
   SelectParkingSchema,
   selectParkingSchema,
   SelectPropertySchema,
@@ -41,6 +44,8 @@ import {
   UpdateBathroomSchema,
   updateBathroomSchema,
   updateBathroomSchemaExample,
+  updateCommunitySchema,
+  updateCommunitySchemaExample,
   UpdateParkingSchema,
   updateParkingSchema,
   updateParkingSchemaExample,
@@ -49,14 +54,22 @@ import {
   updatePropertySchemaExample,
 } from '@/models/zodSchemas';
 import {
+  insertCommunitySchema,
+  UpdateCommunitySchema,
+} from '@/models/zodSchemas/community';
+import {
+  bodyCommunityListSchema,
+  bodyCommunityListSchemaExample,
   bodyNomenclatureListSchema,
   bodyNomenclatureListSchemaExample,
   bodyParkingListSchema,
   bodyPropertyListSchema,
   buildingFeatureToPropertySuccessSchema,
   communityFeatureToPropertySuccessSchema,
+  CommunityListSchema,
   featureToPropertySuccessSchema,
   NomenclatureListSchema,
+  paginationCommunityOrderSchema,
   paginationNomenclatureOrderSchema,
   paginationParkingOrderSchema,
   paginationPropertyOrderSchema,
@@ -237,6 +250,7 @@ export enum NomenclatureTag {
   Search = 'search',
   FloorPlan = 'floorPlan',
   Media = 'media',
+  Community = 'community',
 }
 
 export type FeatureToItem =
@@ -271,57 +285,68 @@ export type ModelFields = {
 export type CommonInsertSchema =
   | typeof insertParkingSchema
   | typeof insertBathroomSchema
-  | typeof insertPropertySchema;
+  | typeof insertPropertySchema
+  | typeof insertCommunitySchema;
 
 export type CommonInsertSchemaExample =
   | typeof insertParkingSchemaExample
   | typeof insertBathroomSchemaExample
-  | typeof insertPropertySchemaExample;
+  | typeof insertPropertySchemaExample
+  | typeof insertCommunitySchemaExample;
 
 export type CommonUpdateSchema =
   | typeof updateParkingSchema
   | typeof updateBathroomSchema
-  | typeof updatePropertySchema;
+  | typeof updatePropertySchema
+  | typeof updateCommunitySchema;
 
 export type CommonUpdateSchemaExample =
   | typeof updateParkingSchemaExample
   | typeof updateBathroomSchemaExample
-  | typeof updatePropertySchemaExample;
+  | typeof updatePropertySchemaExample
+  | typeof updateCommunitySchemaExample;
 
 export type CommonSelectItemSchema =
   | typeof selectParkingSchema
   | typeof selectBathroomSchema
-  | typeof selectPropertySchema;
+  | typeof selectPropertySchema
+  | typeof selectCommunitySchema;
 
 export type CommonSelectItemSchemaType =
   | SelectParkingSchema
   | SelectPropertySchema
-  | SelectBathroomSchema;
+  | SelectBathroomSchema
+  | SelectCommunitySchema;
 
 export type CommonUpdateItemSchema =
   | UpdateParkingSchema
   | UpdatePropertySchema
-  | UpdateBathroomSchema;
+  | UpdateBathroomSchema
+  | UpdateCommunitySchema;
 
 export type CommonPaginationOrderSchema =
   | typeof paginationParkingOrderSchema
   | typeof paginationNomenclatureOrderSchema
-  | typeof paginationPropertyOrderSchema;
+  | typeof paginationPropertyOrderSchema
+  | typeof paginationCommunityOrderSchema;
 
 export type CommonItemListSchema =
   | ParkingListSchema
   | PropertyListSchema
-  | NomenclatureListSchema;
+  | NomenclatureListSchema
+  | CommunityListSchema;
 
 export type CommonBodyItemListSchema =
   | typeof bodyParkingListSchema
   | typeof bodyNomenclatureListSchema
-  | typeof bodyPropertyListSchema;
+  | typeof bodyPropertyListSchema
+  | typeof bodyCommunityListSchema;
 
 export type CommonBodyItemListSchemaExample =
   | typeof parkingBodySchemaExample
   | typeof propertyBodySchemaExample
-  | typeof bodyNomenclatureListSchemaExample;
+  | typeof bodyNomenclatureListSchemaExample
+  | typeof bodyCommunityListSchemaExample;
 
 export type CommonModel =
   | typeof parking
@@ -331,7 +356,8 @@ export type CommonModel =
   | typeof feature
   | typeof communityFeature
   | typeof typeProp
-  | typeof property;
+  | typeof property
+  | typeof community;
 
 /*
 export type CommonModel =
@@ -359,7 +385,8 @@ export type CommonChildrenModel =
   | typeof property
   | typeof floorPlan
   | typeof parking
-  | typeof media;
+  | typeof media
+  | typeof buildingFeatureToProperty;
 
 export type CommonChild = {
   model: CommonChildrenModel;

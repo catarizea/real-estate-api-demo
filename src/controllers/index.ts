@@ -4,6 +4,7 @@ import {
   postListItemHandler,
   putUpdateItemHandler,
 } from './common';
+import { customInsertCommunityCheck, getCommunityHandler } from './community';
 import {
   deleteFeatureToItemHandler,
   getFeaturesByItemHandler,
@@ -18,11 +19,13 @@ import { customInsertPropertyCheck, getPropertyHandler } from './property';
 import { postSearchHandler } from './search';
 
 export {
+  customInsertCommunityCheck,
   customInsertParkingCheck,
   customInsertPropertyCheck,
   customUpdateParkingCheck,
   deleteFeatureToItemHandler,
   deleteItemHandler,
+  getCommunityHandler,
   getFeaturesByItemHandler,
   getParkingsByPropertyHandler,
   getPropertyHandler,

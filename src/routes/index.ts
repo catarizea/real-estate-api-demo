@@ -1,3 +1,4 @@
+import community from './community';
 import {
   buildingFeatureToProperty,
   communityFeatureToCommunity,
@@ -31,6 +32,10 @@ const routes = [
   {
     path: '/bedroom',
     routes: bedroom,
+  },
+  {
+    path: '/community',
+    routes: community,
   },
   {
     path: '/community-feature',

@@ -10,7 +10,15 @@ import {
   putUpdateItemHandler,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
-import { floorPlan, media, parking, property, unit } from '@/models/schema';
+import {
+  buildingFeatureToProperty,
+  featureToProperty,
+  floorPlan,
+  media,
+  parking,
+  property,
+  unit,
+} from '@/models/schema';
 import {
   InsertPropertySchema,
   insertPropertySchema,
@@ -119,6 +127,16 @@ app.openapi(
       {
         model: media,
         tag: NomenclatureTag.Media,
+        parentIdField: 'propertyId',
+      },
+      {
+        model: featureToProperty,
+        tag: NomenclatureTag.FeatureToProperty,
+        parentIdField: 'propertyId',
+      },
+      {
+        model: buildingFeatureToProperty,
+        tag: NomenclatureTag.BuildingFeatureToProperty,
         parentIdField: 'propertyId',
       },
     ],

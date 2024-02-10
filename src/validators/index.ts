@@ -4,6 +4,11 @@ import {
   getCityCursorValidatorByOrderBy,
   paginationCityOrderSchema,
 } from './cityList';
+import type { PreparedCommunitySchema } from './community';
+import {
+  bodyCommunityListSchemaExample,
+  preparedCommunitySchema,
+} from './community';
 import type { CommunityListSchema } from './communityList';
 import {
   bodyCommunityListSchema,
@@ -86,6 +91,7 @@ import {
 export {
   bodyCityListSchema,
   bodyCommunityListSchema,
+  bodyCommunityListSchemaExample,
   bodyFloorPlanListSchema,
   bodyMediaListSchema,
   bodyMediaTypeListSchema,
@@ -137,6 +143,8 @@ export {
   parkingBodySchemaExample,
   ParkingListSchema,
   parkingsByPropertySuccessSchema,
+  PreparedCommunitySchema,
+  preparedCommunitySchema,
   PreparedPropertySchema,
   preparedPropertySchema,
   propertyBodySchemaExample,
