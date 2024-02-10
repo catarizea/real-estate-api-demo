@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 import { and, sql } from 'drizzle-orm';
-import { QueryBuilder } from 'drizzle-orm/mysql-core';
 
 import { testPoint } from '@/constants';
 import { db } from '@/models';
@@ -10,8 +9,6 @@ import { getBoundingBox } from '@/utils';
 const start = performance.now();
 
 const boundingBox = getBoundingBox(testPoint, 1000);
-
-const qb = new QueryBuilder();
 
 const query = db
   .select()

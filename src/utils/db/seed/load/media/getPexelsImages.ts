@@ -1,4 +1,3 @@
-import { th } from '@faker-js/faker';
 import { z } from '@hono/zod-openapi';
 
 const key = process.env.PEXELS_API_KEY;

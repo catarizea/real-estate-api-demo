@@ -32,11 +32,13 @@ import {
   insertParkingSchemaExample,
   insertPropertySchema,
   insertPropertySchemaExample,
+  SelectBathroomSchema,
   selectBathroomSchema,
   SelectParkingSchema,
   selectParkingSchema,
   SelectPropertySchema,
   selectPropertySchema,
+  UpdateBathroomSchema,
   updateBathroomSchema,
   updateBathroomSchemaExample,
   UpdateParkingSchema,
@@ -48,17 +50,20 @@ import {
 } from '@/models/zodSchemas';
 import {
   bodyNomenclatureListSchema,
+  bodyNomenclatureListSchemaExample,
   bodyParkingListSchema,
   bodyPropertyListSchema,
   buildingFeatureToPropertySuccessSchema,
   communityFeatureToPropertySuccessSchema,
   featureToPropertySuccessSchema,
+  NomenclatureListSchema,
   paginationNomenclatureOrderSchema,
   paginationParkingOrderSchema,
   paginationPropertyOrderSchema,
   parkingBodySchemaExample,
   ParkingListSchema,
   propertyBodySchemaExample,
+  PropertyListSchema,
 } from '@/validators';
 
 export type Point = {
@@ -290,16 +295,23 @@ export type CommonSelectItemSchema =
 
 export type CommonSelectItemSchemaType =
   | SelectParkingSchema
-  | SelectPropertySchema;
+  | SelectPropertySchema
+  | SelectBathroomSchema;
 
-export type CommonUpdateItemSchema = UpdateParkingSchema | UpdatePropertySchema;
+export type CommonUpdateItemSchema =
+  | UpdateParkingSchema
+  | UpdatePropertySchema
+  | UpdateBathroomSchema;
 
 export type CommonPaginationOrderSchema =
   | typeof paginationParkingOrderSchema
   | typeof paginationNomenclatureOrderSchema
   | typeof paginationPropertyOrderSchema;
 
-export type CommonItemListSchema = ParkingListSchema;
+export type CommonItemListSchema =
+  | ParkingListSchema
+  | PropertyListSchema
+  | NomenclatureListSchema;
 
 export type CommonBodyItemListSchema =
   | typeof bodyParkingListSchema
@@ -308,7 +320,8 @@ export type CommonBodyItemListSchema =
 
 export type CommonBodyItemListSchemaExample =
   | typeof parkingBodySchemaExample
-  | typeof propertyBodySchemaExample;
+  | typeof propertyBodySchemaExample
+  | typeof bodyNomenclatureListSchemaExample;
 
 export type CommonModel =
   | typeof parking
