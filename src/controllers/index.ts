@@ -17,11 +17,13 @@ import {
 } from './parking';
 import { customInsertPropertyCheck, getPropertyHandler } from './property';
 import { postSearchHandler } from './search';
+import { customInsertUnitCheck, getUnitHandler } from './unit';
 
 export {
   customInsertCommunityCheck,
   customInsertParkingCheck,
   customInsertPropertyCheck,
+  customInsertUnitCheck,
   customUpdateParkingCheck,
   deleteFeatureToItemHandler,
   deleteItemHandler,
@@ -29,6 +31,7 @@ export {
   getFeaturesByItemHandler,
   getParkingsByPropertyHandler,
   getPropertyHandler,
+  getUnitHandler,
   postCreateFeatureToItemHandler,
   postCreateItemHandler,
   postListItemHandler,

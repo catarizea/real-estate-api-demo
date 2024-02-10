@@ -15,6 +15,7 @@ import {
 import parking from './parking';
 import property from './property';
 import search from './search';
+import unit from './unit';
 
 const routes = [
   {
@@ -68,6 +69,10 @@ const routes = [
   {
     path: '/property',
     routes: property,
+  },
+  {
+    path: '/unit',
+    routes: unit,
   },
 ];
 

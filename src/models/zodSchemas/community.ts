@@ -88,7 +88,7 @@ export const updateCommunitySchema = z
       typeof established !== 'undefined' ||
       typeof description !== 'undefined',
     {
-      message: 'At least one field must be provided',
+      message: 'at least one field must be provided for update',
       path: [
         'name',
         'latitude',

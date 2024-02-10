@@ -81,6 +81,8 @@ import {
 } from './regionList';
 import type { FieldsSchema, SearchSchema } from './search';
 import { bodySearchSchema, searchPropertyUnitSchema } from './search';
+import type { PreparedUnitSchema } from './unit';
+import { preparedUnitSchema, unitBodySchemaExample } from './unit';
 import type { UnitListSchema } from './unitList';
 import {
   bodyUnitListSchema,
@@ -147,10 +149,13 @@ export {
   preparedCommunitySchema,
   PreparedPropertySchema,
   preparedPropertySchema,
+  PreparedUnitSchema,
+  preparedUnitSchema,
   propertyBodySchemaExample,
   PropertyListSchema,
   RegionListSchema,
   searchPropertyUnitSchema,
   SearchSchema,
+  unitBodySchemaExample,
   UnitListSchema,
 };

@@ -18,7 +18,10 @@ const putUpdateItemHandler =
   }: {
     model: CommonModel;
     tag: NomenclatureTag;
-    customCheck?: (body: UpdateItemSchema) => Promise<string | null>;
+    customCheck?: (
+      body: UpdateItemSchema,
+      id?: string,
+    ) => Promise<string | null>;
     onSuccess?: (id: string) => Promise<void>;
   }) =>
   async (c: Context) => {
@@ -46,7 +49,7 @@ const putUpdateItemHandler =
     }
 
     if (customCheck) {
-      const customCheckError = await customCheck(body);
+      const customCheckError = await customCheck(body, id);
       if (customCheckError) {
         return c.json(JSON.parse(customCheckError), 400);
       }
