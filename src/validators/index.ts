@@ -1,3 +1,4 @@
+import { cityBodySchemaExample } from './city';
 import type { CityListSchema } from './cityList';
 import {
   bodyCityListSchema,
@@ -108,6 +109,7 @@ export {
   bodyUnitListSchema,
   BuildingFeatureToPropertySuccessSchema,
   buildingFeatureToPropertySuccessSchema,
+  cityBodySchemaExample,
   CityListSchema,
   CommunityFeatureToPropertySuccessSchema,
   communityFeatureToPropertySuccessSchema,

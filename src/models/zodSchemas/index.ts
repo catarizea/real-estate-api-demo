@@ -11,6 +11,18 @@ import {
   updateBathroomSchemaExample,
 } from './bathroom';
 import type {
+  InsertCitySchema,
+  SelectCitySchema,
+  UpdateCitySchema,
+} from './city';
+import {
+  insertCitySchema,
+  insertCitySchemaExample,
+  selectCitySchema,
+  updateCitySchema,
+  updateCitySchemaExample,
+} from './city';
+import type {
   InsertCommunitySchema,
   SelectCommunitySchema,
   UpdateCommunitySchema,
@@ -77,6 +89,9 @@ export {
   InsertBathroomSchema,
   insertBathroomSchema,
   insertBathroomSchemaExample,
+  InsertCitySchema,
+  insertCitySchema,
+  insertCitySchemaExample,
   InsertCommunitySchema,
   insertCommunitySchema,
   insertCommunitySchemaExample,
@@ -94,6 +109,8 @@ export {
   insertUnitSchemaExample,
   SelectBathroomSchema,
   selectBathroomSchema,
+  SelectCitySchema,
+  selectCitySchema,
   SelectCommunitySchema,
   selectCommunitySchema,
   SelectParkingSchema,
@@ -109,6 +126,9 @@ export {
   UpdateBathroomSchema,
   updateBathroomSchema,
   updateBathroomSchemaExample,
+  UpdateCitySchema,
+  updateCitySchema,
+  updateCitySchemaExample,
   UpdateCommunitySchema,
   updateCommunitySchema,
   updateCommunitySchemaExample,

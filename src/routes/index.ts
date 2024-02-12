@@ -1,3 +1,4 @@
+import city from './city';
 import community from './community';
 import {
   buildingFeatureToProperty,
@@ -38,6 +39,10 @@ const routes = [
   {
     path: '/building-feature-to-property',
     routes: buildingFeatureToProperty,
+  },
+  {
+    path: '/city',
+    routes: city,
   },
   {
     path: '/community',

@@ -1,3 +1,4 @@
+import { customInsertCityCheck } from './city';
 import {
   deleteItemHandler,
   postCreateItemHandler,
@@ -21,6 +22,7 @@ import { postSearchHandler } from './search';
 import { customInsertUnitCheck, getUnitHandler } from './unit';
 
 export {
+  customInsertCityCheck,
   customInsertCommunityCheck,
   customInsertParkingCheck,
   customInsertPropertyCheck,
