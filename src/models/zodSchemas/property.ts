@@ -99,8 +99,7 @@ export const updatePropertySchema = z
       typeof customerRanking !== 'undefined' ||
       typeof paidSearchRanking !== 'undefined',
     {
-      message:
-        'name or address or latitude or longitude or yearBuilt or descriptionTitle or descriptionSubtitle or descriptionText or typePropId or communityId or cityId or smoking or cats or dogs or petsNegotiable or petsFee or petsFeeInterval or published or customerRanking or paidSearchRanking is required',
+      message: 'at least one field must be provided for update',
       path: [
         'name',
         'address',

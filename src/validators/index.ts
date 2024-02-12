@@ -36,6 +36,7 @@ import {
   getFloorPlanCursorValidatorByOrderBy,
   paginationFloorPlanOrderSchema,
 } from './floorPlanList';
+import { mediaBodySchemaExample } from './media';
 import type { MediaListSchema } from './mediaList';
 import {
   bodyMediaListSchema,
@@ -133,6 +134,7 @@ export {
   getPropertyCursorValidatorByOrderBy,
   getRegionCursorValidatorByOrderBy,
   getUnitCursorValidatorByOrderBy,
+  mediaBodySchemaExample,
   MediaListSchema,
   mediaTypeBodySchemaExample,
   MediaTypeListSchema,

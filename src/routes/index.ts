@@ -6,6 +6,7 @@ import {
   featureToProperty,
 } from './featureToItem';
 import home from './home';
+import media from './media';
 import mediaType from './mediaType';
 import {
   bathroom,
@@ -64,6 +65,10 @@ const routes = [
   {
     path: '/feature-to-property',
     routes: featureToProperty,
+  },
+  {
+    path: '/media',
+    routes: media,
   },
   {
     path: '/media-type',

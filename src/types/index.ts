@@ -26,6 +26,8 @@ import {
   insertCitySchema,
   insertCitySchemaExample,
   insertCommunitySchemaExample,
+  insertMediaSchema,
+  insertMediaSchemaExample,
   insertMediaTypeSchema,
   insertMediaTypeSchemaExample,
   insertParkingSchema,
@@ -42,6 +44,8 @@ import {
   selectCitySchema,
   SelectCommunitySchema,
   selectCommunitySchema,
+  SelectMediaSchema,
+  selectMediaSchema,
   SelectMediaTypeSchema,
   selectMediaTypeSchema,
   SelectParkingSchema,
@@ -58,6 +62,9 @@ import {
   updateCitySchemaExample,
   updateCommunitySchema,
   updateCommunitySchemaExample,
+  UpdateMediaSchema,
+  updateMediaSchema,
+  updateMediaSchemaExample,
   UpdateMediaTypeSchema,
   updateMediaTypeSchema,
   updateMediaTypeSchemaExample,
@@ -86,6 +93,7 @@ import {
   bodyCityListSchema,
   bodyCommunityListSchema,
   bodyCommunityListSchemaExample,
+  bodyMediaListSchema,
   bodyMediaTypeListSchema,
   bodyNomenclatureListSchema,
   bodyNomenclatureListSchemaExample,
@@ -99,10 +107,13 @@ import {
   communityFeatureToPropertySuccessSchema,
   CommunityListSchema,
   featureToPropertySuccessSchema,
+  mediaBodySchemaExample,
   MediaListSchema,
+  MediaTypeListSchema,
   NomenclatureListSchema,
   paginationCityOrderSchema,
   paginationCommunityOrderSchema,
+  paginationMediaOrderSchema,
   paginationMediaTypeOrderSchema,
   paginationNomenclatureOrderSchema,
   paginationParkingOrderSchema,
@@ -328,7 +339,8 @@ export type CommonInsertSchema =
   | typeof insertUnitSchema
   | typeof insertRegionSchema
   | typeof insertCitySchema
-  | typeof insertMediaTypeSchema;
+  | typeof insertMediaTypeSchema
+  | typeof insertMediaSchema;
 
 export type CommonInsertSchemaExample =
   | typeof insertParkingSchemaExample
@@ -338,7 +350,8 @@ export type CommonInsertSchemaExample =
   | typeof insertUnitSchemaExample
   | typeof insertRegionSchemaExample
   | typeof insertCitySchemaExample
-  | typeof insertMediaTypeSchemaExample;
+  | typeof insertMediaTypeSchemaExample
+  | typeof insertMediaSchemaExample;
 
 export type CommonUpdateSchema =
   | typeof updateParkingSchema
@@ -348,7 +361,8 @@ export type CommonUpdateSchema =
   | typeof updateUnitSchema
   | typeof updateRegionSchema
   | typeof updateCitySchema
-  | typeof updateMediaTypeSchema;
+  | typeof updateMediaTypeSchema
+  | typeof updateMediaSchema;
 
 export type CommonUpdateSchemaExample =
   | typeof updateParkingSchemaExample
@@ -358,7 +372,8 @@ export type CommonUpdateSchemaExample =
   | typeof updateUnitSchemaExample
   | typeof updateRegionSchemaExample
   | typeof updateCitySchemaExample
-  | typeof updateMediaTypeSchemaExample;
+  | typeof updateMediaTypeSchemaExample
+  | typeof updateMediaSchemaExample;
 
 export type CommonSelectItemSchema =
   | typeof selectParkingSchema
@@ -368,7 +383,8 @@ export type CommonSelectItemSchema =
   | typeof selectUnitSchema
   | typeof selectRegionSchema
   | typeof selectCitySchema
-  | typeof selectMediaTypeSchema;
+  | typeof selectMediaTypeSchema
+  | typeof selectMediaSchema;
 
 export type CommonSelectItemSchemaType =
   | SelectParkingSchema
@@ -378,7 +394,8 @@ export type CommonSelectItemSchemaType =
   | SelectUnitSchema
   | SelectRegionSchema
   | SelectCitySchema
-  | SelectMediaTypeSchema;
+  | SelectMediaTypeSchema
+  | SelectMediaSchema;
 
 export type CommonUpdateItemSchema =
   | UpdateParkingSchema
@@ -388,7 +405,8 @@ export type CommonUpdateItemSchema =
   | UpdateUnitSchema
   | UpdateRegionSchema
   | UpdateCitySchema
-  | UpdateMediaTypeSchema;
+  | UpdateMediaTypeSchema
+  | UpdateMediaSchema;
 
 export type CommonPaginationOrderSchema =
   | typeof paginationParkingOrderSchema
@@ -398,7 +416,8 @@ export type CommonPaginationOrderSchema =
   | typeof paginationUnitOrderSchema
   | typeof paginationRegionOrderSchema
   | typeof paginationCityOrderSchema
-  | typeof paginationMediaTypeOrderSchema;
+  | typeof paginationMediaTypeOrderSchema
+  | typeof paginationMediaOrderSchema;
 
 export type CommonItemListSchema =
   | ParkingListSchema
@@ -408,7 +427,8 @@ export type CommonItemListSchema =
   | UnitListSchema
   | RegionListSchema
   | CityListSchema
-  | MediaListSchema;
+  | MediaListSchema
+  | MediaTypeListSchema;
 
 export type CommonBodyItemListSchema =
   | typeof bodyParkingListSchema
@@ -418,7 +438,8 @@ export type CommonBodyItemListSchema =
   | typeof bodyUnitListSchema
   | typeof bodyRegionListSchema
   | typeof bodyCityListSchema
-  | typeof bodyMediaTypeListSchema;
+  | typeof bodyMediaTypeListSchema
+  | typeof bodyMediaListSchema;
 
 export type CommonBodyItemListSchemaExample =
   | typeof parkingBodySchemaExample
@@ -428,7 +449,8 @@ export type CommonBodyItemListSchemaExample =
   | typeof unitBodySchemaExample
   | typeof regionBodySchemaExample
   | typeof cityBodySchemaExample
-  | typeof bodyMediaTypeListSchema;
+  | typeof bodyMediaTypeListSchema
+  | typeof mediaBodySchemaExample;
 
 export type CommonModel =
   | typeof parking
@@ -443,7 +465,8 @@ export type CommonModel =
   | typeof unit
   | typeof region
   | typeof city
-  | typeof mediaType;
+  | typeof mediaType
+  | typeof media;
 
 export type CommonChildrenModel =
   | typeof unit

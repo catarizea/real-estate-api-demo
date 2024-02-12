@@ -35,6 +35,18 @@ import {
   updateCommunitySchemaExample,
 } from './community';
 import type {
+  InsertMediaSchema,
+  SelectMediaSchema,
+  UpdateMediaSchema,
+} from './media';
+import {
+  insertMediaSchema,
+  insertMediaSchemaExample,
+  selectMediaSchema,
+  updateMediaSchema,
+  updateMediaSchemaExample,
+} from './media';
+import type {
   InsertMediaTypeSchema,
   SelectMediaTypeSchema,
   UpdateMediaTypeSchema,
@@ -107,6 +119,9 @@ export {
   InsertCommunitySchema,
   insertCommunitySchema,
   insertCommunitySchemaExample,
+  InsertMediaSchema,
+  insertMediaSchema,
+  insertMediaSchemaExample,
   InsertMediaTypeSchema,
   insertMediaTypeSchema,
   insertMediaTypeSchemaExample,
@@ -128,6 +143,8 @@ export {
   selectCitySchema,
   SelectCommunitySchema,
   selectCommunitySchema,
+  SelectMediaSchema,
+  selectMediaSchema,
   SelectMediaTypeSchema,
   selectMediaTypeSchema,
   SelectParkingSchema,
@@ -149,6 +166,9 @@ export {
   UpdateCommunitySchema,
   updateCommunitySchema,
   updateCommunitySchemaExample,
+  UpdateMediaSchema,
+  updateMediaSchema,
+  updateMediaSchemaExample,
   UpdateMediaTypeSchema,
   updateMediaTypeSchema,
   updateMediaTypeSchemaExample,
