@@ -16,6 +16,7 @@ import {
   getParkingsByPropertyHandler,
 } from './parking';
 import { customInsertPropertyCheck, getPropertyHandler } from './property';
+import { getRegionHandler } from './region';
 import { postSearchHandler } from './search';
 import { customInsertUnitCheck, getUnitHandler } from './unit';
 
@@ -31,6 +32,7 @@ export {
   getFeaturesByItemHandler,
   getParkingsByPropertyHandler,
   getPropertyHandler,
+  getRegionHandler,
   getUnitHandler,
   postCreateFeatureToItemHandler,
   postCreateItemHandler,

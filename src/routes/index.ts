@@ -14,6 +14,7 @@ import {
 } from './nomenclature';
 import parking from './parking';
 import property from './property';
+import region from './region';
 import search from './search';
 import unit from './unit';
 
@@ -69,6 +70,10 @@ const routes = [
   {
     path: '/property',
     routes: property,
+  },
+  {
+    path: '/region',
+    routes: region,
   },
   {
     path: '/unit',

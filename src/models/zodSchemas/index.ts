@@ -46,6 +46,18 @@ import {
   updatePropertySchema,
   updatePropertySchemaExample,
 } from './property';
+import type {
+  InsertRegionSchema,
+  SelectRegionSchema,
+  UpdateRegionSchema,
+} from './region';
+import {
+  insertRegionSchema,
+  insertRegionSchemaExample,
+  selectRegionSchema,
+  updateRegionSchema,
+  updateRegionSchemaExample,
+} from './region';
 import type { SelectSeedAddressSchema } from './seedAddress';
 import { selectSeedAddressSchema } from './seedAddress';
 import type {
@@ -74,6 +86,9 @@ export {
   InsertPropertySchema,
   insertPropertySchema,
   insertPropertySchemaExample,
+  InsertRegionSchema,
+  insertRegionSchema,
+  insertRegionSchemaExample,
   InsertUnitSchema,
   insertUnitSchema,
   insertUnitSchemaExample,
@@ -85,6 +100,8 @@ export {
   selectParkingSchema,
   SelectPropertySchema,
   selectPropertySchema,
+  SelectRegionSchema,
+  selectRegionSchema,
   SelectSeedAddressSchema,
   selectSeedAddressSchema,
   SelectUnitSchema,
@@ -101,6 +118,9 @@ export {
   UpdatePropertySchema,
   updatePropertySchema,
   updatePropertySchemaExample,
+  UpdateRegionSchema,
+  updateRegionSchema,
+  updateRegionSchemaExample,
   UpdateUnitSchema,
   updateUnitSchema,
   updateUnitSchemaExample,

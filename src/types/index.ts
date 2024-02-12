@@ -1,11 +1,6 @@
 import type { Entry } from 'node-geocoder';
 
 import {
-  buildingFeatureToPropertyMapping,
-  communityFeatureToCommunityMapping,
-  featureToPropertyMapping,
-} from '@/constants';
-import {
   bathroom,
   bedroom,
   buildingFeature,
@@ -33,6 +28,8 @@ import {
   insertParkingSchemaExample,
   insertPropertySchema,
   insertPropertySchemaExample,
+  insertRegionSchema,
+  insertRegionSchemaExample,
   insertUnitSchema,
   insertUnitSchemaExample,
   SelectBathroomSchema,
@@ -56,6 +53,7 @@ import {
   UpdatePropertySchema,
   updatePropertySchema,
   updatePropertySchemaExample,
+  updateRegionSchema,
   UpdateUnitSchema,
   updateUnitSchema,
   updateUnitSchemaExample,
@@ -65,12 +63,19 @@ import {
   UpdateCommunitySchema,
 } from '@/models/zodSchemas/community';
 import {
+  SelectRegionSchema,
+  selectRegionSchema,
+  UpdateRegionSchema,
+  updateRegionSchemaExample,
+} from '@/models/zodSchemas/region';
+import {
   bodyCommunityListSchema,
   bodyCommunityListSchemaExample,
   bodyNomenclatureListSchema,
   bodyNomenclatureListSchemaExample,
   bodyParkingListSchema,
   bodyPropertyListSchema,
+  bodyRegionListSchema,
   bodyUnitListSchema,
   buildingFeatureToPropertySuccessSchema,
   communityFeatureToPropertySuccessSchema,
@@ -81,11 +86,14 @@ import {
   paginationNomenclatureOrderSchema,
   paginationParkingOrderSchema,
   paginationPropertyOrderSchema,
+  paginationRegionOrderSchema,
   paginationUnitOrderSchema,
   parkingBodySchemaExample,
   ParkingListSchema,
   propertyBodySchemaExample,
   PropertyListSchema,
+  regionBodySchemaExample,
+  RegionListSchema,
   unitBodySchemaExample,
   UnitListSchema,
 } from '@/validators';
@@ -262,6 +270,8 @@ export enum NomenclatureTag {
   FloorPlan = 'floorPlan',
   Media = 'media',
   Community = 'community',
+  Region = 'region',
+  City = 'city',
 }
 
 export type FeatureToItem =
@@ -273,11 +283,6 @@ export type FeatureToItemSuccessSchema =
   | typeof featureToPropertySuccessSchema
   | typeof buildingFeatureToPropertySuccessSchema
   | typeof communityFeatureToPropertySuccessSchema;
-
-export type FeatureToItemFieldsMapping =
-  | typeof featureToPropertyMapping
-  | typeof buildingFeatureToPropertyMapping
-  | typeof communityFeatureToCommunityMapping;
 
 export type ModelField = {
   id: string[];
@@ -298,77 +303,88 @@ export type CommonInsertSchema =
   | typeof insertBathroomSchema
   | typeof insertPropertySchema
   | typeof insertCommunitySchema
-  | typeof insertUnitSchema;
+  | typeof insertUnitSchema
+  | typeof insertRegionSchema;
 
 export type CommonInsertSchemaExample =
   | typeof insertParkingSchemaExample
   | typeof insertBathroomSchemaExample
   | typeof insertPropertySchemaExample
   | typeof insertCommunitySchemaExample
-  | typeof insertUnitSchemaExample;
+  | typeof insertUnitSchemaExample
+  | typeof insertRegionSchemaExample;
 
 export type CommonUpdateSchema =
   | typeof updateParkingSchema
   | typeof updateBathroomSchema
   | typeof updatePropertySchema
   | typeof updateCommunitySchema
-  | typeof updateUnitSchema;
+  | typeof updateUnitSchema
+  | typeof updateRegionSchema;
 
 export type CommonUpdateSchemaExample =
   | typeof updateParkingSchemaExample
   | typeof updateBathroomSchemaExample
   | typeof updatePropertySchemaExample
   | typeof updateCommunitySchemaExample
-  | typeof updateUnitSchemaExample;
+  | typeof updateUnitSchemaExample
+  | typeof updateRegionSchemaExample;
 
 export type CommonSelectItemSchema =
   | typeof selectParkingSchema
   | typeof selectBathroomSchema
   | typeof selectPropertySchema
   | typeof selectCommunitySchema
-  | typeof selectUnitSchema;
+  | typeof selectUnitSchema
+  | typeof selectRegionSchema;
 
 export type CommonSelectItemSchemaType =
   | SelectParkingSchema
   | SelectPropertySchema
   | SelectBathroomSchema
   | SelectCommunitySchema
-  | SelectUnitSchema;
+  | SelectUnitSchema
+  | SelectRegionSchema;
 
 export type CommonUpdateItemSchema =
   | UpdateParkingSchema
   | UpdatePropertySchema
   | UpdateBathroomSchema
   | UpdateCommunitySchema
-  | UpdateUnitSchema;
+  | UpdateUnitSchema
+  | UpdateRegionSchema;
 
 export type CommonPaginationOrderSchema =
   | typeof paginationParkingOrderSchema
   | typeof paginationNomenclatureOrderSchema
   | typeof paginationPropertyOrderSchema
   | typeof paginationCommunityOrderSchema
-  | typeof paginationUnitOrderSchema;
+  | typeof paginationUnitOrderSchema
+  | typeof paginationRegionOrderSchema;
 
 export type CommonItemListSchema =
   | ParkingListSchema
   | PropertyListSchema
   | NomenclatureListSchema
   | CommunityListSchema
-  | UnitListSchema;
+  | UnitListSchema
+  | RegionListSchema;
 
 export type CommonBodyItemListSchema =
   | typeof bodyParkingListSchema
   | typeof bodyNomenclatureListSchema
   | typeof bodyPropertyListSchema
   | typeof bodyCommunityListSchema
-  | typeof bodyUnitListSchema;
+  | typeof bodyUnitListSchema
+  | typeof bodyRegionListSchema;
 
 export type CommonBodyItemListSchemaExample =
   | typeof parkingBodySchemaExample
   | typeof propertyBodySchemaExample
   | typeof bodyNomenclatureListSchemaExample
   | typeof bodyCommunityListSchemaExample
-  | typeof unitBodySchemaExample;
+  | typeof unitBodySchemaExample
+  | typeof regionBodySchemaExample;
 
 export type CommonModel =
   | typeof parking
@@ -380,7 +396,8 @@ export type CommonModel =
   | typeof typeProp
   | typeof property
   | typeof community
-  | typeof unit;
+  | typeof unit
+  | typeof region;
 
 export type CommonChildrenModel =
   | typeof unit
@@ -390,7 +407,8 @@ export type CommonChildrenModel =
   | typeof floorPlan
   | typeof parking
   | typeof media
-  | typeof buildingFeatureToProperty;
+  | typeof buildingFeatureToProperty
+  | typeof city;
 
 export type CommonChild = {
   model: CommonChildrenModel;

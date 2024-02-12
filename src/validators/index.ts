@@ -73,6 +73,8 @@ import {
   getPropertyCursorValidatorByOrderBy,
   paginationPropertyOrderSchema,
 } from './propertyList';
+import type { PreparedRegionSchema } from './region';
+import { preparedRegionSchema, regionBodySchemaExample } from './region';
 import type { RegionListSchema } from './regionList';
 import {
   bodyRegionListSchema,
@@ -149,10 +151,13 @@ export {
   preparedCommunitySchema,
   PreparedPropertySchema,
   preparedPropertySchema,
+  PreparedRegionSchema,
+  preparedRegionSchema,
   PreparedUnitSchema,
   preparedUnitSchema,
   propertyBodySchemaExample,
   PropertyListSchema,
+  regionBodySchemaExample,
   RegionListSchema,
   searchPropertyUnitSchema,
   SearchSchema,
