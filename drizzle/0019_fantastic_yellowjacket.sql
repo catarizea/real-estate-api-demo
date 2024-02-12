@@ -1,0 +1,1 @@
+ALTER TABLE `media_type` ADD CONSTRAINT `media_type_name_unique` UNIQUE(`name`);

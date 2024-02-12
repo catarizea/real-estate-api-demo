@@ -35,6 +35,18 @@ import {
   updateCommunitySchemaExample,
 } from './community';
 import type {
+  InsertMediaTypeSchema,
+  SelectMediaTypeSchema,
+  UpdateMediaTypeSchema,
+} from './mediaType';
+import {
+  insertMediaTypeSchema,
+  insertMediaTypeSchemaExample,
+  selectMediaTypeSchema,
+  updateMediaTypeSchema,
+  updateMediaTypeSchemaExample,
+} from './mediaType';
+import type {
   InsertParkingSchema,
   SelectParkingSchema,
   UpdateParkingSchema,
@@ -95,6 +107,9 @@ export {
   InsertCommunitySchema,
   insertCommunitySchema,
   insertCommunitySchemaExample,
+  InsertMediaTypeSchema,
+  insertMediaTypeSchema,
+  insertMediaTypeSchemaExample,
   InsertParkingSchema,
   insertParkingSchema,
   insertParkingSchemaExample,
@@ -113,6 +128,8 @@ export {
   selectCitySchema,
   SelectCommunitySchema,
   selectCommunitySchema,
+  SelectMediaTypeSchema,
+  selectMediaTypeSchema,
   SelectParkingSchema,
   selectParkingSchema,
   SelectPropertySchema,
@@ -132,6 +149,9 @@ export {
   UpdateCommunitySchema,
   updateCommunitySchema,
   updateCommunitySchemaExample,
+  UpdateMediaTypeSchema,
+  updateMediaTypeSchema,
+  updateMediaTypeSchemaExample,
   UpdateParkingSchema,
   updateParkingSchema,
   updateParkingSchemaExample,

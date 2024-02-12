@@ -11,6 +11,7 @@ import {
   getFeaturesByItemHandler,
   postCreateFeatureToItemHandler,
 } from './featureToItem';
+import { customInsertMediaTypeCheck } from './mediaType';
 import {
   customInsertParkingCheck,
   customUpdateParkingCheck,
@@ -24,6 +25,7 @@ import { customInsertUnitCheck, getUnitHandler } from './unit';
 export {
   customInsertCityCheck,
   customInsertCommunityCheck,
+  customInsertMediaTypeCheck,
   customInsertParkingCheck,
   customInsertPropertyCheck,
   customInsertUnitCheck,

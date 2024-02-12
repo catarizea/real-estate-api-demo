@@ -134,6 +134,13 @@
       "when": 1707148460325,
       "tag": "0018_dry_maginty",
       "breakpoints": true
+    },
+    {
+      "idx": 19,
+      "version": "5",
+      "when": 1707760426840,
+      "tag": "0019_fantastic_yellowjacket",
+      "breakpoints": true
     }
   ]
 }

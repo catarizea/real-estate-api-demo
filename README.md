@@ -114,4 +114,4 @@ bun run db:studio
 https://local.drizzle.studio/?port=3001
 ```
 
-17. See entity relationship diagram inside this folder `erd/entity-relationship-diagram.drawio`
+17. See entity relationship Draw.io diagram inside this folder `erd/entity-relationship-diagram.drawio`

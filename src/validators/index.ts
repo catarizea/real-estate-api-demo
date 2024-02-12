@@ -42,6 +42,7 @@ import {
   getMediaCursorValidatorByOrderBy,
   paginationMediaOrderSchema,
 } from './mediaList';
+import { mediaTypeBodySchemaExample } from './mediaType';
 import type { MediaTypeListSchema } from './mediaTypeList';
 import {
   bodyMediaTypeListSchema,
@@ -133,6 +134,7 @@ export {
   getRegionCursorValidatorByOrderBy,
   getUnitCursorValidatorByOrderBy,
   MediaListSchema,
+  mediaTypeBodySchemaExample,
   MediaTypeListSchema,
   NomenclatureListSchema,
   paginationCityOrderSchema,
