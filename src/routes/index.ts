@@ -36,6 +36,10 @@ const routes = [
     routes: bedroom,
   },
   {
+    path: '/building-feature-to-property',
+    routes: buildingFeatureToProperty,
+  },
+  {
     path: '/community',
     routes: community,
   },
@@ -44,24 +48,17 @@ const routes = [
     routes: communityFeature,
   },
   {
-    path: '/feature',
-    routes: feature,
-  },
-  {
-    path: '/type-prop',
-    routes: typeProp,
-  },
-  {
-    path: '/feature-to-property',
-    routes: featureToProperty,
-  },
-  {
     path: '/community-feature-to-community',
     routes: communityFeatureToCommunity,
   },
   {
-    path: '/building-feature-to-property',
-    routes: buildingFeatureToProperty,
+    path: '/feature',
+    routes: feature,
+  },
+
+  {
+    path: '/feature-to-property',
+    routes: featureToProperty,
   },
   {
     path: '/parking',
@@ -74,6 +71,10 @@ const routes = [
   {
     path: '/region',
     routes: region,
+  },
+  {
+    path: '/type-prop',
+    routes: typeProp,
   },
   {
     path: '/unit',
