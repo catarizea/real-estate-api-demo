@@ -30,6 +30,7 @@ import {
   featureToItemSchema,
   featureToPropertySuccessSchema,
 } from './featureToItem';
+import { floorPlanBodySchemaExample } from './floorPlan';
 import type { FloorPlanListSchema } from './floorPlanList';
 import {
   bodyFloorPlanListSchema,
@@ -123,6 +124,7 @@ export {
   FeatureToPropertySuccessSchema,
   featureToPropertySuccessSchema,
   FieldsSchema,
+  floorPlanBodySchemaExample,
   FloorPlanListSchema,
   getCityCursorValidatorByOrderBy,
   getCommunityCursorValidatorByOrderBy,

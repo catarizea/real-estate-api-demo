@@ -14,6 +14,7 @@ import {
   getFeaturesByItemHandler,
   postCreateFeatureToItemHandler,
 } from './featureToItem';
+import { customInsertFloorPlanCheck } from './floorPlan';
 import { customInsertMediaCheck } from './media';
 import { customInsertMediaTypeCheck } from './mediaType';
 import {
@@ -31,6 +32,7 @@ export {
   customBathroomBedroomCheck,
   customInsertCityCheck,
   customInsertCommunityCheck,
+  customInsertFloorPlanCheck,
   customInsertMediaCheck,
   customInsertMediaTypeCheck,
   customInsertParkingCheck,

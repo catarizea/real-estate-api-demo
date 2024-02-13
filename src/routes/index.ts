@@ -5,6 +5,7 @@ import {
   communityFeatureToCommunity,
   featureToProperty,
 } from './featureToItem';
+import floorPlan from './floorPlan';
 import home from './home';
 import media from './media';
 import mediaType from './mediaType';
@@ -65,6 +66,10 @@ const routes = [
   {
     path: '/feature-to-property',
     routes: featureToProperty,
+  },
+  {
+    path: '/floor-plan',
+    routes: floorPlan,
   },
   {
     path: '/media',

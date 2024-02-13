@@ -35,6 +35,18 @@ import {
   updateCommunitySchemaExample,
 } from './community';
 import type {
+  InsertFloorPlanSchema,
+  SelectFloorPlanSchema,
+  UpdateFloorPlanSchema,
+} from './floorPlan';
+import {
+  insertFloorPlanSchema,
+  insertFloorPlanSchemaExample,
+  selectFloorPlanSchema,
+  updateFloorPlanSchema,
+  updateFloorPlanSchemaExample,
+} from './floorPlan';
+import type {
   InsertMediaSchema,
   SelectMediaSchema,
   UpdateMediaSchema,
@@ -119,6 +131,9 @@ export {
   InsertCommunitySchema,
   insertCommunitySchema,
   insertCommunitySchemaExample,
+  InsertFloorPlanSchema,
+  insertFloorPlanSchema,
+  insertFloorPlanSchemaExample,
   InsertMediaSchema,
   insertMediaSchema,
   insertMediaSchemaExample,
@@ -143,6 +158,8 @@ export {
   selectCitySchema,
   SelectCommunitySchema,
   selectCommunitySchema,
+  SelectFloorPlanSchema,
+  selectFloorPlanSchema,
   SelectMediaSchema,
   selectMediaSchema,
   SelectMediaTypeSchema,
@@ -166,6 +183,9 @@ export {
   UpdateCommunitySchema,
   updateCommunitySchema,
   updateCommunitySchemaExample,
+  UpdateFloorPlanSchema,
+  updateFloorPlanSchema,
+  updateFloorPlanSchemaExample,
   UpdateMediaSchema,
   updateMediaSchema,
   updateMediaSchemaExample,
