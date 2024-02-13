@@ -12,7 +12,11 @@ const customInsertUnitCheck = async (
   let unitExists: (typeof unit.$inferSelect)[] | null = null;
 
   if (id) {
-    unitExists = await db.select().from(unit).where(eq(unit.id, id)).limit(1);
+    const exists = await db.select().from(unit).where(eq(unit.id, id));
+
+    if (exists.length > 0) {
+      unitExists = exists;
+    }
   }
 
   if (body.propertyId) {

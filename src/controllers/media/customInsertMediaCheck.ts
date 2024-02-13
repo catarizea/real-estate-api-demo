@@ -12,11 +12,11 @@ const customInsertMediaCheck = async (
   let mediaExists: (typeof media.$inferSelect)[] | null = null;
 
   if (id) {
-    mediaExists = await db
-      .select()
-      .from(media)
-      .where(eq(media.id, id))
-      .limit(1);
+    const exists = await db.select().from(media).where(eq(media.id, id));
+
+    if (exists.length > 0) {
+      mediaExists = exists;
+    }
   }
 
   if (body.mediaTypeId) {
