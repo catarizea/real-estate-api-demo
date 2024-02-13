@@ -2,6 +2,7 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import {
+  customUpdateRegionCheck,
   deleteItemHandler,
   getRegionHandler,
   postCreateItemHandler,
@@ -83,6 +84,7 @@ app.openapi(
   putUpdateItemHandler<UpdateRegionSchema>({
     model: region,
     tag: NomenclatureTag.Region,
+    customCheck: customUpdateRegionCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated region with id ${id}`);
     },

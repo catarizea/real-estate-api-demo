@@ -22,7 +22,7 @@ import {
   getParkingsByPropertyHandler,
 } from './parking';
 import { customInsertPropertyCheck, getPropertyHandler } from './property';
-import { getRegionHandler } from './region';
+import { customUpdateRegionCheck, getRegionHandler } from './region';
 import { postSearchHandler } from './search';
 import { customUpdateTypePropCheck } from './typeProp';
 import { customInsertUnitCheck, getUnitHandler } from './unit';
@@ -39,6 +39,7 @@ export {
   customUpdateCommunityFeatureCheck,
   customUpdateFeatureCheck,
   customUpdateParkingCheck,
+  customUpdateRegionCheck,
   customUpdateTypePropCheck,
   deleteFeatureToItemHandler,
   deleteItemHandler,
