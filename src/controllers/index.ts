@@ -1,3 +1,4 @@
+import { customBathroomBedroomCheck } from './bathroom';
 import { customInsertCityCheck } from './city';
 import {
   deleteItemHandler,
@@ -6,6 +7,8 @@ import {
   putUpdateItemHandler,
 } from './common';
 import { customInsertCommunityCheck, getCommunityHandler } from './community';
+import { customUpdateCommunityFeatureCheck } from './communityFeature';
+import { customUpdateFeatureCheck } from './feature';
 import {
   deleteFeatureToItemHandler,
   getFeaturesByItemHandler,
@@ -21,9 +24,11 @@ import {
 import { customInsertPropertyCheck, getPropertyHandler } from './property';
 import { getRegionHandler } from './region';
 import { postSearchHandler } from './search';
+import { customUpdateTypePropCheck } from './typeProp';
 import { customInsertUnitCheck, getUnitHandler } from './unit';
 
 export {
+  customBathroomBedroomCheck,
   customInsertCityCheck,
   customInsertCommunityCheck,
   customInsertMediaCheck,
@@ -31,7 +36,10 @@ export {
   customInsertParkingCheck,
   customInsertPropertyCheck,
   customInsertUnitCheck,
+  customUpdateCommunityFeatureCheck,
+  customUpdateFeatureCheck,
   customUpdateParkingCheck,
+  customUpdateTypePropCheck,
   deleteFeatureToItemHandler,
   deleteItemHandler,
   getCommunityHandler,

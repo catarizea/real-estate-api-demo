@@ -2,6 +2,7 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import {
+  customUpdateFeatureCheck,
   deleteItemHandler,
   postCreateItemHandler,
   postListItemHandler,
@@ -79,6 +80,7 @@ app.openapi(
   putUpdateItemHandler<UpdateBathroomSchema>({
     model: feature,
     tag: NomenclatureTag.Feature,
+    customCheck: customUpdateFeatureCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated feature with id ${id}`);
     },

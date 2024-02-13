@@ -21,6 +21,7 @@ const putUpdateItemHandler =
     customCheck?: (
       body: UpdateItemSchema,
       id?: string,
+      tag?: NomenclatureTag,
     ) => Promise<string | null>;
     onSuccess?: (id: string) => Promise<void>;
   }) =>
@@ -49,7 +50,7 @@ const putUpdateItemHandler =
     }
 
     if (customCheck) {
-      const customCheckError = await customCheck(body, id);
+      const customCheckError = await customCheck(body, id, tag);
       if (customCheckError) {
         return c.json(JSON.parse(customCheckError), 400);
       }

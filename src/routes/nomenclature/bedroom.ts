@@ -2,6 +2,7 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import {
+  customBathroomBedroomCheck,
   deleteItemHandler,
   postCreateItemHandler,
   postListItemHandler,
@@ -79,6 +80,7 @@ app.openapi(
   putUpdateItemHandler<UpdateBathroomSchema>({
     model: bedroom,
     tag: NomenclatureTag.Bedroom,
+    customCheck: customBathroomBedroomCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated bedroom with id ${id}`);
     },

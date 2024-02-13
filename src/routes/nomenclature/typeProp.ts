@@ -2,6 +2,7 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import {
+  customUpdateTypePropCheck,
   deleteItemHandler,
   postCreateItemHandler,
   postListItemHandler,
@@ -79,6 +80,7 @@ app.openapi(
   putUpdateItemHandler<UpdateBathroomSchema>({
     model: typeProp,
     tag: NomenclatureTag.TypeProp,
+    customCheck: customUpdateTypePropCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated typeProp with id ${id}`);
     },
