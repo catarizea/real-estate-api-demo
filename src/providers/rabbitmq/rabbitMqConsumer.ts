@@ -30,7 +30,7 @@ const rabbitMqConsumer = async (queue: string) => {
       const rabbitMqMessage: RabbitMqMessage = JSON.parse(messageString);
 
       logger.info(
-        `${rabbitMqPrefix} message of type ${rabbitMqMessage.type} consumed from queue ${queue}`,
+        `${rabbitMqPrefix} consuming message of type ${rabbitMqMessage.type} from queue ${queue}`,
       );
 
       worker(rabbitMqMessage, channel, message);

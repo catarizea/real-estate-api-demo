@@ -1,8 +1,10 @@
-import { Channel, Message } from 'amqplib/callback_api';
+import { Channel, Message } from 'amqplib';
 
 import { taskPrefix, tasks } from '@/constants';
 import { logger } from '@/services';
 import { RabbitMqMessage } from '@/types';
+
+import { mediaInsertWorker } from './media';
 
 const worker = (
   rabbitMqMessage: RabbitMqMessage,
@@ -19,8 +21,7 @@ const worker = (
       channel.ack(message);
       break;
     case tasks.media.insert:
-      logger.info(`${taskPrefix} processing task ${tasks.media.insert}`);
-      channel.ack(message);
+      mediaInsertWorker(rabbitMqMessage, channel, message);
       break;
     default:
       logger.error(`${taskPrefix} unknown task type ${rabbitMqMessage.type}`);

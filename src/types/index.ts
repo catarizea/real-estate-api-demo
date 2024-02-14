@@ -299,16 +299,18 @@ export type AlgoliaPropertyUnit = CommonPropertyUnit & {
   feature?: string[];
 };
 
+export type MediaPayload = {
+  imageId: string;
+  unitIds: string[];
+};
+
 export type RabbitMqMessage = {
   type: string;
   payload:
     | {
         id: string;
       }
-    | {
-        imageId: string;
-        unitIds: string[];
-      };
+    | MediaPayload;
 };
 
 export enum NomenclatureTag {

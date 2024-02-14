@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { and, eq } from 'drizzle-orm';
 
 import { tasks } from '@/constants';
@@ -12,10 +11,7 @@ const publishInsertMedia = async (
   newId: string,
   newValues: CommonInsertItemSchema,
 ) => {
-  console.log(`publish message for created media with id ${newId}`);
-  console.log(JSON.stringify(newValues, null, 2));
-
-  const { id, propertyId, assetId } = newValues as typeof media.$inferInsert;
+  const { propertyId, assetId } = newValues as typeof media.$inferInsert;
 
   const medias = await preparedImagesByPropertyId.execute({ propertyId });
 
@@ -23,7 +19,7 @@ const publishInsertMedia = async (
     return;
   }
 
-  if (medias[0].id !== id) {
+  if (medias[0].id !== newId) {
     return;
   }
 
@@ -45,19 +41,13 @@ const publishInsertMedia = async (
     return;
   }
 
-  console.log('publish task to update index for property cover');
-
-  const unitsToUpdateIndexFor = publishedUnit.map((u) => u.id);
-
-  const message = {
+  messagePublisher({
     type: tasks.media.insert,
     payload: {
       imageId: assetId,
-      unitIds: unitsToUpdateIndexFor,
+      unitIds: publishedUnit.map((u) => u.id),
     },
-  };
-
-  messagePublisher(message);
+  });
 };
 
 export default publishInsertMedia;
