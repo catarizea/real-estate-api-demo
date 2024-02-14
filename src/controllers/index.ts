@@ -31,9 +31,10 @@ import { customInsertPropertyCheck, getPropertyHandler } from './property';
 import { customUpdateRegionCheck, getRegionHandler } from './region';
 import { postSearchHandler } from './search';
 import { customUpdateTypePropCheck } from './typeProp';
-import { customInsertUnitCheck, getUnitHandler } from './unit';
+import { checkPublished, customInsertUnitCheck, getUnitHandler } from './unit';
 
 export {
+  checkPublished,
   customBathroomBedroomCheck,
   customInsertCityCheck,
   customInsertCommunityCheck,

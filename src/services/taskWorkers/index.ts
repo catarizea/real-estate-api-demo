@@ -20,8 +20,11 @@ const worker = (
       logger.info(`${taskPrefix} processing task ${tasks.property.update}`);
       channel.ack(message);
       break;
+    case tasks.media.update:
+      mediaInsertWorker(rabbitMqMessage, channel, message, tasks.media.update);
+      break;
     case tasks.media.insert:
-      mediaInsertWorker(rabbitMqMessage, channel, message);
+      mediaInsertWorker(rabbitMqMessage, channel, message, tasks.media.insert);
       break;
     default:
       logger.error(`${taskPrefix} unknown task type ${rabbitMqMessage.type}`);

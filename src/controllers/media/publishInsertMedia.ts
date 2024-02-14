@@ -1,43 +1,25 @@
-import { and, eq } from 'drizzle-orm';
-
 import { tasks } from '@/constants';
-import { db } from '@/models';
+import { checkPublished } from '@/controllers';
 import { preparedImagesByPropertyId } from '@/models/preparedStatements';
-import { media, property, unit } from '@/models/schema';
+import { media } from '@/models/schema';
 import { messagePublisher } from '@/services';
 import { CommonInsertItemSchema } from '@/types';
 
-const publishInsertMedia = async (
+const publishInsertMedia: (
   newId: string,
   newValues: CommonInsertItemSchema,
-) => {
+) => Promise<void> = async (newId, newValues) => {
   const { propertyId, assetId } = newValues as typeof media.$inferInsert;
 
   const medias = await preparedImagesByPropertyId.execute({ propertyId });
 
-  if (medias.length === 0) {
+  if (medias.length === 0 || medias[0].id !== newId) {
     return;
   }
 
-  if (medias[0].id !== newId) {
-    return;
-  }
+  const publishedUnit = await checkPublished(propertyId);
 
-  const publishedProperty = await db
-    .select({ id: property.id })
-    .from(property)
-    .where(and(eq(property.id, propertyId), eq(property.published, true)));
-
-  if (publishedProperty.length === 0) {
-    return;
-  }
-
-  const publishedUnit = await db
-    .select({ id: unit.id })
-    .from(unit)
-    .where(and(eq(unit.propertyId, propertyId), eq(unit.published, true)));
-
-  if (publishedUnit.length === 0) {
+  if (!publishedUnit || publishedUnit.length === 0) {
     return;
   }
 
