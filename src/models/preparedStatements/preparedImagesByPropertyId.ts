@@ -4,7 +4,7 @@ import { db } from '@/models';
 import { media, mediaType } from '@/models/schema';
 
 const preparedImagesByPropertyId = db
-  .select({ id: media.id })
+  .select({ id: media.id, assetId: media.assetId })
   .from(media)
   .innerJoin(mediaType, eq(media.mediaTypeId, mediaType.id))
   .where(

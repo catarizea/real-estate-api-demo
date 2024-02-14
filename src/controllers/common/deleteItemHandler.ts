@@ -19,12 +19,16 @@ const deleteItemHandler =
     tag,
     idField,
     children,
+    customCheck,
     onSuccess,
   }: {
     model: CommonModel;
     tag: NomenclatureTag;
     idField: string;
     children?: CommonChild[];
+    customCheck?: (
+      existingItem: CommonSelectItemSchemaType,
+    ) => Promise<string | null>;
     onSuccess?: (
       id: string,
       oldValues: CommonSelectItemSchemaType,
@@ -54,6 +58,15 @@ const deleteItemHandler =
 
       if (hasChildrenResult) {
         return c.json(hasChildrenResult, 409);
+      }
+    }
+
+    if (customCheck) {
+      const customCheckError = await customCheck(
+        itemExists[0] as unknown as CommonSelectItemSchemaType,
+      );
+      if (customCheckError) {
+        return c.json(JSON.parse(customCheckError), 400);
       }
     }
 

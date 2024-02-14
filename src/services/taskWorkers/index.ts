@@ -4,7 +4,7 @@ import { taskPrefix, tasks } from '@/constants';
 import { logger } from '@/services';
 import { RabbitMqMessage } from '@/types';
 
-import { mediaInsertWorker } from './media';
+import { mediaWorker } from './media';
 
 const worker = (
   rabbitMqMessage: RabbitMqMessage,
@@ -20,11 +20,14 @@ const worker = (
       logger.info(`${taskPrefix} processing task ${tasks.property.update}`);
       channel.ack(message);
       break;
-    case tasks.media.update:
-      mediaInsertWorker(rabbitMqMessage, channel, message, tasks.media.update);
+    case tasks.media.create:
+      mediaWorker(rabbitMqMessage, channel, message, tasks.media.create);
       break;
-    case tasks.media.insert:
-      mediaInsertWorker(rabbitMqMessage, channel, message, tasks.media.insert);
+    case tasks.media.update:
+      mediaWorker(rabbitMqMessage, channel, message, tasks.media.update);
+      break;
+    case tasks.media.delete:
+      mediaWorker(rabbitMqMessage, channel, message, tasks.media.delete);
       break;
     default:
       logger.error(`${taskPrefix} unknown task type ${rabbitMqMessage.type}`);

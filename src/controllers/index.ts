@@ -16,6 +16,7 @@ import {
 } from './featureToItem';
 import { customInsertFloorPlanCheck } from './floorPlan';
 import {
+  customDeleteMediaCheck,
   customInsertMediaCheck,
   publishDeleteMedia,
   publishInsertMedia,
@@ -36,6 +37,7 @@ import { checkPublished, customInsertUnitCheck, getUnitHandler } from './unit';
 export {
   checkPublished,
   customBathroomBedroomCheck,
+  customDeleteMediaCheck,
   customInsertCityCheck,
   customInsertCommunityCheck,
   customInsertFloorPlanCheck,

@@ -28,7 +28,7 @@ export const tasks = {
     update: 'feature.update',
   },
   media: {
-    insert: 'media.insert',
+    create: 'media.create',
     update: 'media.update',
     delete: 'media.delete',
   },

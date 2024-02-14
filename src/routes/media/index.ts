@@ -2,6 +2,7 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import {
+  customDeleteMediaCheck,
   customInsertMediaCheck,
   deleteItemHandler,
   postCreateItemHandler,
@@ -95,6 +96,7 @@ app.openapi(
     model: media,
     tag: NomenclatureTag.Media,
     idField: 'id',
+    customCheck: customDeleteMediaCheck,
     onSuccess: publishDeleteMedia,
   }),
 );

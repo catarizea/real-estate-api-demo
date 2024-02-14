@@ -1,3 +1,3 @@
-import mediaInsertWorker from './mediaInsertWorker';
+import mediaWorker from './mediaWorker';
 
-export { mediaInsertWorker };
+export { mediaWorker };

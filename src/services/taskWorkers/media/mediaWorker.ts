@@ -5,7 +5,7 @@ import { index } from '@/providers/algolia';
 import { logger } from '@/services';
 import { MediaPayload, RabbitMqMessage } from '@/types';
 
-const mediaInsertWorker = async (
+const mediaWorker = async (
   rabbitMqMessage: RabbitMqMessage,
   channel: Channel,
   message: Message,
@@ -35,4 +35,4 @@ const mediaInsertWorker = async (
   }
 };
 
-export default mediaInsertWorker;
+export default mediaWorker;
