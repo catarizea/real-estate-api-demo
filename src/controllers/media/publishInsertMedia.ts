@@ -24,7 +24,7 @@ const publishInsertMedia: (
   }
 
   messagePublisher({
-    type: tasks.media.insert,
+    type: tasks.media.create,
     payload: {
       imageId: assetId,
       unitIds: publishedUnit.map((u) => u.id),

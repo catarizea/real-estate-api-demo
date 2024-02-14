@@ -8,7 +8,7 @@ import { CommonSelectItemSchemaType } from '@/types';
 const publishDeleteMedia: (
   id: string,
   oldValues: CommonSelectItemSchemaType,
-) => Promise<void> = async (id, oldValues) => {
+) => Promise<void> = async (_, oldValues) => {
   const { propertyId, order } = oldValues as SelectMediaSchema;
 
   const medias = (await preparedImagesByPropertyId.execute({
