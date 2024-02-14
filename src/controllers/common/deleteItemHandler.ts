@@ -3,7 +3,12 @@ import { eq } from 'drizzle-orm';
 import { Context } from 'hono';
 
 import { db } from '@/models';
-import { CommonChild, CommonModel, NomenclatureTag } from '@/types';
+import {
+  CommonChild,
+  CommonModel,
+  CommonSelectItemSchemaType,
+  NomenclatureTag,
+} from '@/types';
 import { badRequestResponse } from '@/utils';
 
 import checkChildren from './checkChildren';
@@ -20,7 +25,10 @@ const deleteItemHandler =
     tag: NomenclatureTag;
     idField: string;
     children?: CommonChild[];
-    onSuccess?: (id: string) => Promise<void>;
+    onSuccess?: (
+      id: string,
+      oldValues: CommonSelectItemSchemaType,
+    ) => Promise<void>;
   }) =>
   async (c: Context) => {
     const id = c.req.param('id');
@@ -54,7 +62,10 @@ const deleteItemHandler =
       .where(eq(model[idField as keyof typeof model.$inferSelect], id));
 
     if (onSuccess) {
-      await onSuccess(id);
+      await onSuccess(
+        id,
+        itemExists[0] as unknown as CommonSelectItemSchemaType,
+      );
     }
 
     return c.json({ success: z.literal(true).value });

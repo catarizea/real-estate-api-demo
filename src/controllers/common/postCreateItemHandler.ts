@@ -6,7 +6,7 @@ import pick from 'lodash.pick';
 import without from 'lodash.without';
 
 import { db } from '@/models';
-import { CommonModel } from '@/types';
+import { CommonInsertItemSchema, CommonModel } from '@/types';
 import { badRequestResponse, getModelFields } from '@/utils';
 
 const postCreateItemHandler =
@@ -17,7 +17,10 @@ const postCreateItemHandler =
   }: {
     model: CommonModel;
     customCheck?: (body: InsertItemType) => Promise<string | null>;
-    onSuccess?: (id: string) => Promise<void>;
+    onSuccess?: (
+      id: string,
+      newValues: CommonInsertItemSchema,
+    ) => Promise<void>;
   }) =>
   async (c: Context) => {
     const body: InsertItemType = await c.req.json();
@@ -48,14 +51,15 @@ const postCreateItemHandler =
     }
 
     const id = createId();
-
-    await db.insert(model).values({
+    const newValues = {
       id,
       ...pick(body, [...mandatory, ...optional]),
-    } as unknown as typeof model.$inferInsert);
+    } as unknown as typeof model.$inferInsert;
+
+    await db.insert(model).values(newValues);
 
     if (onSuccess) {
-      await onSuccess(id);
+      await onSuccess(id, newValues);
     }
 
     return c.json({ success: z.literal(true).value, data: { id } }, 201);

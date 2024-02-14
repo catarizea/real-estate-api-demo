@@ -4,7 +4,7 @@ import { rabbitMqQueue } from '@/constants';
 import { rabbitMqConsumer } from '@/providers/rabbitmq';
 import app from '@/server';
 
-rabbitMqConsumer(rabbitMqQueue)();
+rabbitMqConsumer(rabbitMqQueue);
 
 app.get(
   '/ui',

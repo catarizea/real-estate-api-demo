@@ -1,4 +1,4 @@
-import amqp, { Channel, Connection } from 'amqplib/callback_api';
+import amqp from 'amqplib';
 
 import { rabbitMqPrefix } from '@/constants';
 import { logger } from '@/services';
@@ -10,45 +10,14 @@ if (!cloudAmqpUrl) {
   throw new Error('Missing CLOUDAMQP_URL environment variable');
 }
 
-const rabbitMqPublisher = (queue: string) => {
-  let channel: Channel;
-
-  amqp.connect(
-    cloudAmqpUrl,
-    (connectionError: Error, connection: Connection) => {
-      if (connectionError) {
-        logger.error(
-          `${rabbitMqPrefix} connection error ${connectionError.message}`,
-        );
-        return;
-      }
-
-      connection.createChannel((channelError: Error, newChannel: Channel) => {
-        if (channelError) {
-          logger.error(
-            `${rabbitMqPrefix} channel error ${channelError.message}`,
-          );
-          return;
-        }
-
-        channel = newChannel;
-      });
-    },
-  );
+const rabbitMqPublisher = async (queue: string) => {
+  const connection = await amqp.connect(cloudAmqpUrl);
+  const channel = await connection.createChannel();
 
   return (message: RabbitMqMessage) => {
-    if (!channel) {
-      logger.error(`${rabbitMqPrefix} channel not initialized`);
-      return;
-    }
-
     const messageString = JSON.stringify(message);
-
+    logger.info(`${rabbitMqPrefix} publishing message to queue ${queue}`);
     channel.sendToQueue(queue, Buffer.from(messageString));
-
-    logger.info(
-      `${rabbitMqPrefix} success message of type ${message.type} published to queue ${queue}`,
-    );
   };
 };
 

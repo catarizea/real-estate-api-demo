@@ -6,6 +6,9 @@ import {
   deleteItemHandler,
   postCreateItemHandler,
   postListItemHandler,
+  publishDeleteMedia,
+  publishInsertMedia,
+  publishUpdateMedia,
   putUpdateItemHandler,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
@@ -66,9 +69,7 @@ app.openapi(
   postCreateItemHandler<InsertMediaSchema>({
     model: media,
     customCheck: customInsertMediaCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created media with id ${id}`);
-    },
+    onSuccess: publishInsertMedia,
   }),
 );
 
@@ -82,9 +83,7 @@ app.openapi(
     model: media,
     tag: NomenclatureTag.Media,
     customCheck: customInsertMediaCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated media with id ${id}`);
-    },
+    onSuccess: publishUpdateMedia,
   }),
 );
 
@@ -96,9 +95,7 @@ app.openapi(
     model: media,
     tag: NomenclatureTag.Media,
     idField: 'id',
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted media with id ${id}`);
-    },
+    onSuccess: publishDeleteMedia,
   }),
 );
 

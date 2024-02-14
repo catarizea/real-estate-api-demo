@@ -30,6 +30,7 @@ export const tasks = {
   media: {
     insert: 'media.insert',
     update: 'media.update',
+    delete: 'media.delete',
   },
 };
 

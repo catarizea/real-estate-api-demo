@@ -15,7 +15,12 @@ import {
   postCreateFeatureToItemHandler,
 } from './featureToItem';
 import { customInsertFloorPlanCheck } from './floorPlan';
-import { customInsertMediaCheck } from './media';
+import {
+  customInsertMediaCheck,
+  publishDeleteMedia,
+  publishInsertMedia,
+  publishUpdateMedia,
+} from './media';
 import { customInsertMediaTypeCheck } from './mediaType';
 import {
   customInsertParkingCheck,
@@ -55,5 +60,8 @@ export {
   postCreateItemHandler,
   postListItemHandler,
   postSearchHandler,
+  publishDeleteMedia,
+  publishInsertMedia,
+  publishUpdateMedia,
   putUpdateItemHandler,
 };

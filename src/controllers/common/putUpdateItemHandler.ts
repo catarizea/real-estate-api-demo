@@ -6,7 +6,12 @@ import pick from 'lodash.pick';
 import without from 'lodash.without';
 
 import { db } from '@/models';
-import { CommonModel, NomenclatureTag } from '@/types';
+import {
+  CommonModel,
+  CommonSelectItemSchemaType,
+  CommonUpdateItemSchema,
+  NomenclatureTag,
+} from '@/types';
 import { badRequestResponse, getModelFields } from '@/utils';
 
 const putUpdateItemHandler =
@@ -23,7 +28,11 @@ const putUpdateItemHandler =
       id?: string,
       tag?: NomenclatureTag,
     ) => Promise<string | null>;
-    onSuccess?: (id: string) => Promise<void>;
+    onSuccess?: (
+      id: string,
+      newValues: CommonUpdateItemSchema & { updatedAt: Date },
+      oldValues: CommonSelectItemSchemaType,
+    ) => Promise<void>;
   }) =>
   async (c: Context) => {
     const id = c.req.param('id');
@@ -69,16 +78,19 @@ const putUpdateItemHandler =
       );
     }
 
-    await db
-      .update(model)
-      .set({
-        ...pick(body, fields),
-        updatedAt: new Date(),
-      })
-      .where(eq(model.id, id));
+    const newValues = {
+      ...pick(body, fields),
+      updatedAt: new Date(),
+    };
+
+    await db.update(model).set(newValues).where(eq(model.id, id));
 
     if (onSuccess) {
-      await onSuccess(id);
+      await onSuccess(
+        id,
+        newValues,
+        existingItem[0] as unknown as CommonSelectItemSchemaType,
+      );
     }
 
     return c.json({ success: z.literal(true).value, data: { id } }, 200);

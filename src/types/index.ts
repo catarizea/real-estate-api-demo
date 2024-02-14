@@ -21,23 +21,33 @@ import {
   unit,
 } from '@/models/schema';
 import {
+  InsertBathroomSchema,
   insertBathroomSchema,
   insertBathroomSchemaExample,
+  InsertCitySchema,
   insertCitySchema,
   insertCitySchemaExample,
+  InsertCommunitySchema,
   insertCommunitySchemaExample,
+  InsertFloorPlanSchema,
   insertFloorPlanSchema,
   insertFloorPlanSchemaExample,
+  InsertMediaSchema,
   insertMediaSchema,
   insertMediaSchemaExample,
+  InsertMediaTypeSchema,
   insertMediaTypeSchema,
   insertMediaTypeSchemaExample,
+  InsertParkingSchema,
   insertParkingSchema,
   insertParkingSchemaExample,
+  InsertPropertySchema,
   insertPropertySchema,
   insertPropertySchemaExample,
+  InsertRegionSchema,
   insertRegionSchema,
   insertRegionSchemaExample,
+  InsertUnitSchema,
   insertUnitSchema,
   insertUnitSchemaExample,
   SelectBathroomSchema,
@@ -291,9 +301,14 @@ export type AlgoliaPropertyUnit = CommonPropertyUnit & {
 
 export type RabbitMqMessage = {
   type: string;
-  payload: {
-    id: string;
-  };
+  payload:
+    | {
+        id: string;
+      }
+    | {
+        imageId: string;
+        unitIds: string[];
+      };
 };
 
 export enum NomenclatureTag {
@@ -341,6 +356,18 @@ export type ModelField = {
 export type ModelFields = {
   [key: string]: ModelField;
 };
+
+export type CommonInsertItemSchema =
+  | InsertParkingSchema
+  | InsertBathroomSchema
+  | InsertPropertySchema
+  | InsertCommunitySchema
+  | InsertUnitSchema
+  | InsertRegionSchema
+  | InsertCitySchema
+  | InsertMediaTypeSchema
+  | InsertMediaSchema
+  | InsertFloorPlanSchema;
 
 export type CommonInsertSchema =
   | typeof insertParkingSchema
