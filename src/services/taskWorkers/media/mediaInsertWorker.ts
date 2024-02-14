@@ -6,7 +6,7 @@ import { index } from '@/providers/algolia';
 import { logger } from '@/services';
 import { MediaPayload, RabbitMqMessage } from '@/types';
 
-const mediaInsertWorker = (
+const mediaInsertWorker = async (
   rabbitMqMessage: RabbitMqMessage,
   channel: Channel,
   message: Message,
@@ -20,13 +20,19 @@ const mediaInsertWorker = (
     imageId,
   }));
 
-  index.partialUpdateObjects(objects).then(({ objectIDs }) => {
+  try {
+    const result = await index.partialUpdateObjects(objects);
+
     logger.info(
-      `${taskPrefix} success finished task ${tasks.media.insert} updated ${objectIDs.length} index objects`,
+      `${taskPrefix} success finished task ${tasks.media.insert} updated ${result.objectIDs.length} index objects`,
     );
 
     channel.ack(message);
-  });
+  } catch (error) {
+    logger.error(
+      `${taskPrefix} error processing task ${tasks.media.insert} cannot update index ${error}`,
+    );
+  }
 };
 
 export default mediaInsertWorker;

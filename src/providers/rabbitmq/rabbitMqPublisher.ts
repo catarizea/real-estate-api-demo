@@ -16,7 +16,9 @@ const rabbitMqPublisher = async (queue: string) => {
 
   return (message: RabbitMqMessage) => {
     const messageString = JSON.stringify(message);
-    logger.info(`${rabbitMqPrefix} publishing message to queue ${queue}`);
+    logger.info(
+      `${rabbitMqPrefix} publishing message of type ${message.type} to queue ${queue}`,
+    );
     channel.sendToQueue(queue, Buffer.from(messageString));
   };
 };
