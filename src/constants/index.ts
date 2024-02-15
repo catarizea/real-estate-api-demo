@@ -32,6 +32,11 @@ export const tasks = {
     update: 'media.update',
     delete: 'media.delete',
   },
+  parking: {
+    create: 'parking.create',
+    update: 'parking.update',
+    delete: 'parking.delete',
+  },
 };
 
 export const testPoint: Point = {

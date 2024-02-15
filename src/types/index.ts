@@ -304,13 +304,19 @@ export type MediaPayload = {
   unitIds: string[];
 };
 
+export type ParkingPayload = {
+  parking: string[];
+  unitIds: string[];
+};
+
 export type RabbitMqMessage = {
   type: string;
   payload:
     | {
         id: string;
       }
-    | MediaPayload;
+    | MediaPayload
+    | ParkingPayload;
 };
 
 export enum NomenclatureTag {

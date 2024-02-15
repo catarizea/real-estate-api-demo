@@ -8,6 +8,9 @@ import {
   getParkingsByPropertyHandler,
   postCreateItemHandler,
   postListItemHandler,
+  publishDeleteParking,
+  publishInsertParking,
+  publishUpdateParking,
   putUpdateItemHandler,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
@@ -71,9 +74,7 @@ app.openapi(
   postCreateItemHandler<InsertParkingSchema>({
     model: parking,
     customCheck: customInsertParkingCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created parking with id ${id}`);
-    },
+    onSuccess: publishInsertParking,
   }),
 );
 
@@ -87,9 +88,7 @@ app.openapi(
     model: parking,
     tag: NomenclatureTag.Parking,
     customCheck: customUpdateParkingCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated parking with id ${id}`);
-    },
+    onSuccess: publishUpdateParking,
   }),
 );
 
@@ -101,9 +100,7 @@ app.openapi(
     model: parking,
     tag: NomenclatureTag.Parking,
     idField: 'id',
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted parking with id ${id}`);
-    },
+    onSuccess: publishDeleteParking,
   }),
 );
 

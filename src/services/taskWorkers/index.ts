@@ -5,6 +5,7 @@ import { logger } from '@/services';
 import { RabbitMqMessage } from '@/types';
 
 import { mediaWorker } from './media';
+import { parkingWorker } from './parking';
 
 const worker = (
   rabbitMqMessage: RabbitMqMessage,
@@ -28,6 +29,15 @@ const worker = (
       break;
     case tasks.media.delete:
       mediaWorker(rabbitMqMessage, channel, message, tasks.media.delete);
+      break;
+    case tasks.parking.create:
+      parkingWorker(rabbitMqMessage, channel, message, tasks.parking.create);
+      break;
+    case tasks.parking.update:
+      parkingWorker(rabbitMqMessage, channel, message, tasks.parking.update);
+      break;
+    case tasks.parking.delete:
+      parkingWorker(rabbitMqMessage, channel, message, tasks.parking.delete);
       break;
     default:
       logger.error(`${taskPrefix} unknown task type ${rabbitMqMessage.type}`);

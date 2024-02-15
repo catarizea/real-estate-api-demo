@@ -27,6 +27,9 @@ import {
   customInsertParkingCheck,
   customUpdateParkingCheck,
   getParkingsByPropertyHandler,
+  publishDeleteParking,
+  publishInsertParking,
+  publishUpdateParking,
 } from './parking';
 import { customInsertPropertyCheck, getPropertyHandler } from './property';
 import { customUpdateRegionCheck, getRegionHandler } from './region';
@@ -64,7 +67,10 @@ export {
   postListItemHandler,
   postSearchHandler,
   publishDeleteMedia,
+  publishDeleteParking,
   publishInsertMedia,
+  publishInsertParking,
   publishUpdateMedia,
+  publishUpdateParking,
   putUpdateItemHandler,
 };
