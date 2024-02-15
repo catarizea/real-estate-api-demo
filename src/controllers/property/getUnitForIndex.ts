@@ -15,7 +15,7 @@ const getUnitForIndex = async (
 
   const unitsForIndex = us.map((u) => {
     const unitForIndex: UnitIndexFragment = {
-      id: u.id,
+      objectID: u.id,
       propertyId: id,
       rent: u.rent,
       immediate: u.immediate ? 1 : 0,

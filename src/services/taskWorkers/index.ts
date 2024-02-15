@@ -6,6 +6,11 @@ import { RabbitMqMessage } from '@/types';
 
 import { mediaWorker } from './media';
 import { parkingWorker } from './parking';
+import {
+  propertyCreateWorker,
+  propertyDeleteWorker,
+  propertyUpdateWorker,
+} from './property';
 
 const worker = (
   rabbitMqMessage: RabbitMqMessage,
@@ -24,16 +29,28 @@ const worker = (
 
   switch (rabbitMqMessage.type) {
     case tasks.property.create:
-      logger.info(`${taskPrefix} processing task ${tasks.property.create}`);
-      channel.ack(message);
+      propertyCreateWorker(
+        rabbitMqMessage,
+        channel,
+        message,
+        tasks.property.create,
+      );
       break;
     case tasks.property.update:
-      logger.info(`${taskPrefix} processing task ${tasks.property.update}`);
-      channel.ack(message);
+      propertyUpdateWorker(
+        rabbitMqMessage,
+        channel,
+        message,
+        tasks.property.update,
+      );
       break;
     case tasks.property.delete:
-      logger.info(`${taskPrefix} processing task ${tasks.property.delete}`);
-      channel.ack(message);
+      propertyDeleteWorker(
+        rabbitMqMessage,
+        channel,
+        message,
+        tasks.property.delete,
+      );
       break;
     case tasks.media.create:
       mediaWorker(rabbitMqMessage, channel, message, tasks.media.create);

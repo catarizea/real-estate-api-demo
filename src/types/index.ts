@@ -317,7 +317,7 @@ export type PropertyIndexFragment = {
 };
 
 export type UnitIndexFragment = {
-  id: string;
+  objectID: string;
   propertyId: string;
   rent: number;
   immediate: number;
@@ -345,7 +345,12 @@ export type ParkingPayload = {
 };
 
 export type UnitsPayload = {
-  units: PropertyIndexFragment & UnitIndexFragment[];
+  units: (PropertyIndexFragment & UnitIndexFragment)[];
+};
+
+export type PropertyPartialPayload = {
+  property: PartialUpdatePropertySchema;
+  unitIds: string[];
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -370,7 +375,7 @@ export type RabbitMqMessage = {
     | { unitIds: string[] }
     | MediaPayload
     | ParkingPayload
-    | PartialUpdatePropertySchema
+    | PropertyPartialPayload
     | UnitsPayload;
 };
 
