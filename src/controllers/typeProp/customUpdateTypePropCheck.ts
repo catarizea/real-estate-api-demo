@@ -20,7 +20,7 @@ const customUpdateTypePropCheck = async (
   }
 
   const existingItem = await db
-    .select()
+    .select({ name: typeProp.name })
     .from(typeProp)
     .where(eq(typeProp.id, id));
 

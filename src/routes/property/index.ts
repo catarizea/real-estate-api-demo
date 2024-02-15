@@ -7,6 +7,7 @@ import {
   getPropertyHandler,
   postCreateItemHandler,
   postListItemHandler,
+  // publishUpdateProperty,
   putUpdateItemHandler,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
@@ -24,6 +25,7 @@ import {
   insertPropertySchema,
   insertPropertySchemaExample,
   selectPropertySchema,
+  updatablePropertyFields,
   UpdatePropertySchema,
   updatePropertySchema,
   updatePropertySchemaExample,
@@ -78,9 +80,6 @@ app.openapi(
   postCreateItemHandler<InsertPropertySchema>({
     model: property,
     customCheck: customInsertPropertyCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created property with id ${id}`);
-    },
   }),
 );
 
@@ -93,9 +92,11 @@ app.openapi(
   putUpdateItemHandler<UpdatePropertySchema>({
     model: property,
     tag: NomenclatureTag.Property,
+    updatableFields: updatablePropertyFields,
     customCheck: customInsertPropertyCheck,
+    // onSuccess: publishUpdateProperty,
     onSuccess: async (id: string) => {
-      console.log(`publish message for updated property with id ${id}`);
+      console.log(`publish message for updated region with id ${id}`);
     },
   }),
 );
@@ -140,9 +141,6 @@ app.openapi(
         parentIdField: 'propertyId',
       },
     ],
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted property with id ${id}`);
-    },
   }),
 );
 

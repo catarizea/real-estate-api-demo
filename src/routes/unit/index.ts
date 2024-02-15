@@ -16,6 +16,7 @@ import {
   insertUnitSchema,
   insertUnitSchemaExample,
   selectUnitSchema,
+  updatableUnitFields,
   UpdateUnitSchema,
   updateUnitSchema,
   updateUnitSchemaExample,
@@ -85,6 +86,7 @@ app.openapi(
   putUpdateItemHandler<UpdateUnitSchema>({
     model: unit,
     tag: NomenclatureTag.Unit,
+    updatableFields: updatableUnitFields,
     customCheck: customInsertUnitCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated unit with id ${id}`);

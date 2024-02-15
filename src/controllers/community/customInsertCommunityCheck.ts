@@ -12,11 +12,11 @@ const customInsertCommunityCheck = async (
   body: InsertCommunitySchema | UpdateCommunitySchema,
   id?: string,
 ) => {
-  let existingItem: (typeof community.$inferSelect)[] | null = null;
+  let existingItem: { id: string; name: string }[] | null = null;
 
   if (id) {
     const existing = await db
-      .select()
+      .select({ id: community.id, name: community.name })
       .from(community)
       .where(eq(community.id, id));
 
@@ -45,7 +45,7 @@ const customInsertCommunityCheck = async (
 
   if (body.name && existingItem && body.name !== existingItem[0].name) {
     const propertyExists = await db
-      .select()
+      .select({ id: property.id })
       .from(property)
       .where(eq(property.communityId, existingItem[0].id))
       .limit(1);

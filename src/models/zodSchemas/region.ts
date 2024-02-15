@@ -19,19 +19,21 @@ export const insertRegionSchemaExample = {
 
 export type InsertRegionSchema = z.infer<typeof insertRegionSchema>;
 
-export const updateRegionSchema = z
-  .object({
-    name: z.string().optional(),
-    administrativeName: z.string().optional(),
-  })
-  .refine(
-    ({ name, administrativeName }) =>
-      typeof name !== 'undefined' || typeof administrativeName !== 'undefined',
-    {
-      message: 'at least one field must be provided for update',
-      path: ['name', 'administrativeName'],
-    },
-  );
+const updateSchema = z.object({
+  name: z.string().optional(),
+  administrativeName: z.string().optional(),
+});
+
+export const updatableRegionFields: string[] = updateSchema.keyof().options;
+
+export const updateRegionSchema = updateSchema.refine(
+  ({ name, administrativeName }) =>
+    typeof name !== 'undefined' || typeof administrativeName !== 'undefined',
+  {
+    message: 'at least one field must be provided for update',
+    path: updatableRegionFields,
+  },
+);
 
 export type UpdateRegionSchema = z.infer<typeof updateRegionSchema>;
 

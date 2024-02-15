@@ -21,24 +21,26 @@ export const insertMediaSchemaExample = {
 
 export type InsertMediaSchema = z.infer<typeof insertMediaSchema>;
 
-export const updateMediaSchema = z
-  .object({
-    assetId: z.string().optional(),
-    mediaTypeId: z.string().optional(),
-    propertyId: z.string().optional(),
-    order: z.number().optional(),
-  })
-  .refine(
-    ({ assetId, mediaTypeId, propertyId, order }) =>
-      typeof assetId !== 'undefined' ||
-      typeof mediaTypeId !== 'undefined' ||
-      typeof propertyId !== 'undefined' ||
-      typeof order !== 'undefined',
-    {
-      message: 'at least one field must be provided for update',
-      path: ['assetId', 'mediaTypeId', 'propertyId', 'order'],
-    },
-  );
+const updateSchema = z.object({
+  assetId: z.string().optional(),
+  mediaTypeId: z.string().optional(),
+  propertyId: z.string().optional(),
+  order: z.number().optional(),
+});
+
+export const updatableMediaFields: string[] = updateSchema.keyof().options;
+
+export const updateMediaSchema = updateSchema.refine(
+  ({ assetId, mediaTypeId, propertyId, order }) =>
+    typeof assetId !== 'undefined' ||
+    typeof mediaTypeId !== 'undefined' ||
+    typeof propertyId !== 'undefined' ||
+    typeof order !== 'undefined',
+  {
+    message: 'at least one field must be provided for update',
+    path: updatableMediaFields,
+  },
+);
 
 export type UpdateMediaSchema = z.infer<typeof updateMediaSchema>;
 

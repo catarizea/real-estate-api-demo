@@ -15,6 +15,7 @@ import {
   insertBathroomSchema,
   insertBathroomSchemaExample,
   selectBathroomSchema,
+  updatableBathroomFields,
   UpdateBathroomSchema,
   updateBathroomSchema,
   updateBathroomSchemaExample,
@@ -80,6 +81,7 @@ app.openapi(
   putUpdateItemHandler<UpdateBathroomSchema>({
     model: communityFeature,
     tag: NomenclatureTag.CommunityFeature,
+    updatableFields: updatableBathroomFields,
     customCheck: customUpdateCommunityFeatureCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated communityFeature with id ${id}`);

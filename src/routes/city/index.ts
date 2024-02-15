@@ -15,6 +15,7 @@ import {
   insertCitySchema,
   insertCitySchemaExample,
   selectCitySchema,
+  updatableCityFields,
   UpdateCitySchema,
   updateCitySchema,
   updateCitySchemaExample,
@@ -81,6 +82,7 @@ app.openapi(
   putUpdateItemHandler<UpdateCitySchema>({
     model: city,
     tag: NomenclatureTag.City,
+    updatableFields: updatableCityFields,
     customCheck: customInsertCityCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated city with id ${id}`);

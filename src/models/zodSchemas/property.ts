@@ -32,98 +32,79 @@ export const insertPropertySchemaExample = {
 
 export type InsertPropertySchema = z.infer<typeof insertPropertySchema>;
 
-export const updatePropertySchema = z
-  .object({
-    name: z.string().optional(),
-    address: z.string().optional(),
-    latitude: z.string().optional(),
-    longitude: z.string().optional(),
-    yearBuilt: z.number().int().optional(),
-    descriptionTitle: z.string().optional(),
-    descriptionSubtitle: z.string().optional(),
-    descriptionText: z.string().optional(),
-    typePropId: z.string().optional(),
-    communityId: z.string().optional(),
-    cityId: z.string().optional(),
-    smoking: z.boolean().optional(),
-    cats: z.boolean().optional(),
-    dogs: z.boolean().optional(),
-    petsNegotiable: z.boolean().optional(),
-    petsFee: z.number().optional(),
-    petsFeeInterval: z.string().optional(),
-    published: z.boolean().optional(),
-    customerRanking: z.number().optional(),
-    paidSearchRanking: z.boolean().optional(),
-  })
-  .refine(
-    ({
-      name,
-      address,
-      latitude,
-      longitude,
-      yearBuilt,
-      descriptionTitle,
-      descriptionSubtitle,
-      descriptionText,
-      typePropId,
-      communityId,
-      cityId,
-      smoking,
-      cats,
-      dogs,
-      petsNegotiable,
-      petsFee,
-      petsFeeInterval,
-      published,
-      customerRanking,
-      paidSearchRanking,
-    }) =>
-      typeof name !== 'undefined' ||
-      typeof address !== 'undefined' ||
-      typeof latitude !== 'undefined' ||
-      typeof longitude !== 'undefined' ||
-      typeof yearBuilt !== 'undefined' ||
-      typeof descriptionTitle !== 'undefined' ||
-      typeof descriptionSubtitle !== 'undefined' ||
-      typeof descriptionText !== 'undefined' ||
-      typeof typePropId !== 'undefined' ||
-      typeof communityId !== 'undefined' ||
-      typeof cityId !== 'undefined' ||
-      typeof smoking !== 'undefined' ||
-      typeof cats !== 'undefined' ||
-      typeof dogs !== 'undefined' ||
-      typeof petsNegotiable !== 'undefined' ||
-      typeof petsFee !== 'undefined' ||
-      typeof petsFeeInterval !== 'undefined' ||
-      typeof published !== 'undefined' ||
-      typeof customerRanking !== 'undefined' ||
-      typeof paidSearchRanking !== 'undefined',
-    {
-      message: 'at least one field must be provided for update',
-      path: [
-        'name',
-        'address',
-        'latitude',
-        'longitude',
-        'yearBuilt',
-        'descriptionTitle',
-        'descriptionSubtitle',
-        'descriptionText',
-        'typePropId',
-        'communityId',
-        'cityId',
-        'smoking',
-        'cats',
-        'dogs',
-        'petsNegotiable',
-        'petsFee',
-        'petsFeeInterval',
-        'published',
-        'customerRanking',
-        'paidSearchRanking',
-      ],
-    },
-  );
+const updateSchema = z.object({
+  name: z.string().optional(),
+  address: z.string().optional(),
+  latitude: z.string().optional(),
+  longitude: z.string().optional(),
+  yearBuilt: z.number().int().optional(),
+  descriptionTitle: z.string().optional(),
+  descriptionSubtitle: z.string().optional(),
+  descriptionText: z.string().optional(),
+  typePropId: z.string().optional(),
+  communityId: z.string().optional(),
+  cityId: z.string().optional(),
+  smoking: z.boolean().optional(),
+  cats: z.boolean().optional(),
+  dogs: z.boolean().optional(),
+  petsNegotiable: z.boolean().optional(),
+  petsFee: z.number().optional(),
+  petsFeeInterval: z.string().optional(),
+  published: z.boolean().optional(),
+  customerRanking: z.number().optional(),
+  paidSearchRanking: z.boolean().optional(),
+});
+
+export const updatablePropertyFields: string[] = updateSchema.keyof().options;
+
+export const updatePropertySchema = updateSchema.refine(
+  ({
+    name,
+    address,
+    latitude,
+    longitude,
+    yearBuilt,
+    descriptionTitle,
+    descriptionSubtitle,
+    descriptionText,
+    typePropId,
+    communityId,
+    cityId,
+    smoking,
+    cats,
+    dogs,
+    petsNegotiable,
+    petsFee,
+    petsFeeInterval,
+    published,
+    customerRanking,
+    paidSearchRanking,
+  }) =>
+    typeof name !== 'undefined' ||
+    typeof address !== 'undefined' ||
+    typeof latitude !== 'undefined' ||
+    typeof longitude !== 'undefined' ||
+    typeof yearBuilt !== 'undefined' ||
+    typeof descriptionTitle !== 'undefined' ||
+    typeof descriptionSubtitle !== 'undefined' ||
+    typeof descriptionText !== 'undefined' ||
+    typeof typePropId !== 'undefined' ||
+    typeof communityId !== 'undefined' ||
+    typeof cityId !== 'undefined' ||
+    typeof smoking !== 'undefined' ||
+    typeof cats !== 'undefined' ||
+    typeof dogs !== 'undefined' ||
+    typeof petsNegotiable !== 'undefined' ||
+    typeof petsFee !== 'undefined' ||
+    typeof petsFeeInterval !== 'undefined' ||
+    typeof published !== 'undefined' ||
+    typeof customerRanking !== 'undefined' ||
+    typeof paidSearchRanking !== 'undefined',
+  {
+    message: 'at least one field must be provided for update',
+    path: updatablePropertyFields,
+  },
+);
 
 export const updatePropertySchemaExample = {
   name: 'Property name',

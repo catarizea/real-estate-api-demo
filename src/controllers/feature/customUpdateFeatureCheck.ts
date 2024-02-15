@@ -20,7 +20,7 @@ const customUpdateFeatureCheck = async (
   }
 
   const existingItem = await db
-    .select()
+    .select({ name: feature.name })
     .from(feature)
     .where(eq(feature.id, id));
 

@@ -19,6 +19,7 @@ import {
   insertMediaSchema,
   insertMediaSchemaExample,
   selectMediaSchema,
+  updatableMediaFields,
   UpdateMediaSchema,
   updateMediaSchema,
   updateMediaSchemaExample,
@@ -83,6 +84,7 @@ app.openapi(
   putUpdateItemHandler<UpdateMediaSchema>({
     model: media,
     tag: NomenclatureTag.Media,
+    updatableFields: updatableMediaFields,
     customCheck: customInsertMediaCheck,
     onSuccess: publishUpdateMedia,
   }),

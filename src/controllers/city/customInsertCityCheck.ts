@@ -21,7 +21,7 @@ const customInsertCityCheck = async (
 
   if (body.regionId) {
     const regionExists = await db
-      .select()
+      .select({ id: region.id })
       .from(region)
       .where(eq(region.id, body.regionId))
       .limit(1);
@@ -39,13 +39,13 @@ const customInsertCityCheck = async (
 
   if (body.name && existingItem && body.name !== existingItem[0].name) {
     const communityExists = await db
-      .select()
+      .select({ id: community.id })
       .from(community)
       .where(eq(community.cityId, existingItem[0].id))
       .limit(1);
 
     const propertyExists = await db
-      .select()
+      .select({ id: property.id })
       .from(property)
       .where(eq(property.cityId, existingItem[0].id))
       .limit(1);

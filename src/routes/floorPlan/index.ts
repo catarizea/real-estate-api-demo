@@ -15,6 +15,7 @@ import {
   insertFloorPlanSchema,
   insertFloorPlanSchemaExample,
   selectFloorPlanSchema,
+  updatableFloorPlanFields,
   UpdateFloorPlanSchema,
   updateFloorPlanSchema,
   updateFloorPlanSchemaExample,
@@ -81,6 +82,7 @@ app.openapi(
   putUpdateItemHandler<UpdateFloorPlanSchema>({
     model: floorPlan,
     tag: NomenclatureTag.FloorPlan,
+    updatableFields: updatableFloorPlanFields,
     customCheck: customInsertFloorPlanCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated floorPlan with id ${id}`);

@@ -20,6 +20,7 @@ import {
   insertParkingSchema,
   insertParkingSchemaExample,
   selectParkingSchema,
+  updatableParkingFields,
   UpdateParkingSchema,
   updateParkingSchema,
   updateParkingSchemaExample,
@@ -87,6 +88,7 @@ app.openapi(
   putUpdateItemHandler<UpdateParkingSchema>({
     model: parking,
     tag: NomenclatureTag.Parking,
+    updatableFields: updatableParkingFields,
     customCheck: customUpdateParkingCheck,
     onSuccess: publishUpdateParking,
   }),

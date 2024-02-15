@@ -20,6 +20,7 @@ import {
   insertCommunitySchema,
   insertCommunitySchemaExample,
   selectCommunitySchema,
+  updatableCommunityFields,
   UpdateCommunitySchema,
   updateCommunitySchema,
   updateCommunitySchemaExample,
@@ -89,6 +90,7 @@ app.openapi(
   putUpdateItemHandler<UpdateCommunitySchema>({
     model: community,
     tag: NomenclatureTag.Community,
+    updatableFields: updatableCommunityFields,
     customCheck: customInsertCommunityCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated community with id ${id}`);

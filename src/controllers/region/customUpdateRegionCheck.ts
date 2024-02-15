@@ -19,7 +19,10 @@ const customUpdateRegionCheck = async (
     );
   }
 
-  const existingItem = await db.select().from(region).where(eq(region.id, id));
+  const existingItem = await db
+    .select({ name: region.name })
+    .from(region)
+    .where(eq(region.id, id));
 
   if (existingItem.length === 0) {
     return JSON.stringify(
@@ -33,7 +36,7 @@ const customUpdateRegionCheck = async (
 
   if (body.name && body.name !== existingItem[0].name) {
     const childExists = await db
-      .select()
+      .select({ id: city.id })
       .from(city)
       .where(eq(city.regionId, id))
       .limit(1);

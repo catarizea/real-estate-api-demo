@@ -21,24 +21,26 @@ export const insertCitySchemaExample = {
 
 export type InsertCitySchema = z.infer<typeof insertCitySchema>;
 
-export const updateCitySchema = z
-  .object({
-    name: z.string().optional(),
-    regionId: z.string().optional(),
-    latitude: z.string().optional(),
-    longitude: z.string().optional(),
-  })
-  .refine(
-    ({ name, regionId, latitude, longitude }) =>
-      typeof name !== 'undefined' ||
-      typeof regionId !== 'undefined' ||
-      typeof latitude !== 'undefined' ||
-      typeof longitude !== 'undefined',
-    {
-      message: 'at least one field must be provided for update',
-      path: ['name', 'regionId', 'latitude', 'longitude'],
-    },
-  );
+const updateSchema = z.object({
+  name: z.string().optional(),
+  regionId: z.string().optional(),
+  latitude: z.string().optional(),
+  longitude: z.string().optional(),
+});
+
+export const updatableCityFields: string[] = updateSchema.keyof().options;
+
+export const updateCitySchema = updateSchema.refine(
+  ({ name, regionId, latitude, longitude }) =>
+    typeof name !== 'undefined' ||
+    typeof regionId !== 'undefined' ||
+    typeof latitude !== 'undefined' ||
+    typeof longitude !== 'undefined',
+  {
+    message: 'at least one field must be provided for update',
+    path: updatableCityFields,
+  },
+);
 
 export type UpdateCitySchema = z.infer<typeof updateCitySchema>;
 

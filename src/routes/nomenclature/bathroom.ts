@@ -15,6 +15,7 @@ import {
   insertBathroomSchema,
   insertBathroomSchemaExample,
   selectBathroomSchema,
+  updatableBathroomFields,
   UpdateBathroomSchema,
   updateBathroomSchema,
   updateBathroomSchemaExample,
@@ -80,6 +81,7 @@ app.openapi(
   putUpdateItemHandler<UpdateBathroomSchema>({
     model: bathroom,
     tag: NomenclatureTag.Bathroom,
+    updatableFields: updatableBathroomFields,
     customCheck: customBathroomBedroomCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated bathroom with id ${id}`);

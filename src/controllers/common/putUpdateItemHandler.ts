@@ -18,11 +18,13 @@ const putUpdateItemHandler =
   <UpdateItemSchema>({
     model,
     tag,
+    updatableFields,
     customCheck,
     onSuccess,
   }: {
     model: CommonModel;
     tag: NomenclatureTag;
+    updatableFields: string[];
     customCheck?: (
       body: UpdateItemSchema,
       id?: string,
@@ -45,14 +47,14 @@ const putUpdateItemHandler =
     if (
       !body ||
       Object.keys(body).length === 0 ||
-      Object.keys(body).length > fields.length ||
-      intersection(Object.keys(body), fields).length === 0
+      Object.keys(body).length > updatableFields.length ||
+      intersection(Object.keys(body), updatableFields).length === 0
     ) {
       return c.json(
         badRequestResponse({
           reason: 'validation error',
-          message: `body must contain valid ${fields.join(' or ')} or all`,
-          path: fields,
+          message: `body must contain valid ${updatableFields.join(' or ')} or all`,
+          path: updatableFields,
         }),
         400,
       );
@@ -79,7 +81,7 @@ const putUpdateItemHandler =
     }
 
     const newValues = {
-      ...pick(body, fields),
+      ...pick(pick(body, fields), updatableFields),
       updatedAt: new Date(),
     };
 

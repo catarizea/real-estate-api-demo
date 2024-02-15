@@ -5,6 +5,7 @@ import preparedFeaturesByProperty from './preparedFeaturesByProperty';
 import preparedImagesByPropertyId from './preparedImagesByPropertyId';
 import preparedParkingByProperty from './preparedParkingByProperty';
 import preparedProperty from './preparedProperty';
+import preparedPropertyForIndex from './preparedPropertyForIndex';
 import preparedPublishedProperty from './preparedPublishedProperty';
 import preparedPublishedUnit from './preparedPublishedUnit';
 import preparedRegion from './preparedRegion';
@@ -19,6 +20,7 @@ export {
   preparedImagesByPropertyId,
   preparedParkingByProperty,
   preparedProperty,
+  preparedPropertyForIndex,
   preparedPublishedProperty,
   preparedPublishedUnit,
   preparedRegion,

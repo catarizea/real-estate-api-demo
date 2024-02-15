@@ -7,6 +7,7 @@ import {
   insertBathroomSchema,
   insertBathroomSchemaExample,
   selectBathroomSchema,
+  updatableBathroomFields,
   updateBathroomSchema,
   updateBathroomSchemaExample,
 } from './bathroom';
@@ -19,6 +20,7 @@ import {
   insertCitySchema,
   insertCitySchemaExample,
   selectCitySchema,
+  updatableCityFields,
   updateCitySchema,
   updateCitySchemaExample,
 } from './city';
@@ -31,6 +33,7 @@ import {
   insertCommunitySchema,
   insertCommunitySchemaExample,
   selectCommunitySchema,
+  updatableCommunityFields,
   updateCommunitySchema,
   updateCommunitySchemaExample,
 } from './community';
@@ -43,6 +46,7 @@ import {
   insertFloorPlanSchema,
   insertFloorPlanSchemaExample,
   selectFloorPlanSchema,
+  updatableFloorPlanFields,
   updateFloorPlanSchema,
   updateFloorPlanSchemaExample,
 } from './floorPlan';
@@ -55,6 +59,7 @@ import {
   insertMediaSchema,
   insertMediaSchemaExample,
   selectMediaSchema,
+  updatableMediaFields,
   updateMediaSchema,
   updateMediaSchemaExample,
 } from './media';
@@ -67,6 +72,7 @@ import {
   insertMediaTypeSchema,
   insertMediaTypeSchemaExample,
   selectMediaTypeSchema,
+  updatableMediaTypeFields,
   updateMediaTypeSchema,
   updateMediaTypeSchemaExample,
 } from './mediaType';
@@ -79,6 +85,7 @@ import {
   insertParkingSchema,
   insertParkingSchemaExample,
   selectParkingSchema,
+  updatableParkingFields,
   updateParkingSchema,
   updateParkingSchemaExample,
 } from './parking';
@@ -91,6 +98,7 @@ import {
   insertPropertySchema,
   insertPropertySchemaExample,
   selectPropertySchema,
+  updatablePropertyFields,
   updatePropertySchema,
   updatePropertySchemaExample,
 } from './property';
@@ -103,6 +111,7 @@ import {
   insertRegionSchema,
   insertRegionSchemaExample,
   selectRegionSchema,
+  updatableRegionFields,
   updateRegionSchema,
   updateRegionSchemaExample,
 } from './region';
@@ -117,6 +126,7 @@ import {
   insertUnitSchema,
   insertUnitSchemaExample,
   selectUnitSchema,
+  updatableUnitFields,
   updateUnitSchema,
   updateUnitSchemaExample,
 } from './unit';
@@ -174,6 +184,16 @@ export {
   selectSeedAddressSchema,
   SelectUnitSchema,
   selectUnitSchema,
+  updatableBathroomFields,
+  updatableCityFields,
+  updatableCommunityFields,
+  updatableFloorPlanFields,
+  updatableMediaFields,
+  updatableMediaTypeFields,
+  updatableParkingFields,
+  updatablePropertyFields,
+  updatableRegionFields,
+  updatableUnitFields,
   UpdateBathroomSchema,
   updateBathroomSchema,
   updateBathroomSchemaExample,

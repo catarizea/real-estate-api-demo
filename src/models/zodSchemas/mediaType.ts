@@ -18,14 +18,19 @@ export const insertMediaTypeSchemaExample = {
 
 export type InsertMediaTypeSchema = z.infer<typeof insertMediaTypeSchema>;
 
-export const updateMediaTypeSchema = z
-  .object({
-    name: z.string().optional(),
-  })
-  .refine(({ name }) => typeof name !== 'undefined', {
+const updateSchema = z.object({
+  name: z.string().optional(),
+});
+
+export const updatableMediaTypeFields: string[] = updateSchema.keyof().options;
+
+export const updateMediaTypeSchema = updateSchema.refine(
+  ({ name }) => typeof name !== 'undefined',
+  {
     message: 'name must be provided for update',
-    path: ['name'],
-  });
+    path: updatableMediaTypeFields,
+  },
+);
 
 export type UpdateMediaTypeSchema = z.infer<typeof updateMediaTypeSchema>;
 

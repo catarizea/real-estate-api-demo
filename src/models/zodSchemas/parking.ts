@@ -22,24 +22,26 @@ export const insertParkingSchemaExample = {
 
 export type InsertParkingSchema = z.infer<typeof insertParkingSchema>;
 
-export const updateParkingSchema = z
-  .object({
-    name: z.string().optional(),
-    fee: z.number().int().optional(),
-    feeInterval: z.string().optional(),
-    order: z.number().int().optional(),
-  })
-  .refine(
-    ({ name, fee, feeInterval, order }) =>
-      typeof name !== 'undefined' ||
-      typeof fee !== 'undefined' ||
-      typeof feeInterval !== 'undefined' ||
-      typeof order !== 'undefined',
-    {
-      message: 'name or fee or feeInterval or order is required',
-      path: ['name', 'fee', 'feeInterval', 'order'],
-    },
-  );
+const updateSchema = z.object({
+  name: z.string().optional(),
+  fee: z.number().int().optional(),
+  feeInterval: z.string().optional(),
+  order: z.number().int().optional(),
+});
+
+export const updatableParkingFields: string[] = updateSchema.keyof().options;
+
+export const updateParkingSchema = updateSchema.refine(
+  ({ name, fee, feeInterval, order }) =>
+    typeof name !== 'undefined' ||
+    typeof fee !== 'undefined' ||
+    typeof feeInterval !== 'undefined' ||
+    typeof order !== 'undefined',
+  {
+    message: 'name or fee or feeInterval or order is required',
+    path: updatableParkingFields,
+  },
+);
 
 export const updateParkingSchemaExample = {
   name: 'Covered',

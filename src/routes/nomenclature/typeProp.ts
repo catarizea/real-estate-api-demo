@@ -15,6 +15,7 @@ import {
   insertBathroomSchema,
   insertBathroomSchemaExample,
   selectBathroomSchema,
+  updatableBathroomFields,
   UpdateBathroomSchema,
   updateBathroomSchema,
   updateBathroomSchemaExample,
@@ -80,6 +81,7 @@ app.openapi(
   putUpdateItemHandler<UpdateBathroomSchema>({
     model: typeProp,
     tag: NomenclatureTag.TypeProp,
+    updatableFields: updatableBathroomFields,
     customCheck: customUpdateTypePropCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated typeProp with id ${id}`);

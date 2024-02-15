@@ -16,6 +16,7 @@ import {
   insertRegionSchema,
   insertRegionSchemaExample,
   selectRegionSchema,
+  updatableRegionFields,
   UpdateRegionSchema,
   updateRegionSchema,
   updateRegionSchemaExample,
@@ -84,6 +85,7 @@ app.openapi(
   putUpdateItemHandler<UpdateRegionSchema>({
     model: region,
     tag: NomenclatureTag.Region,
+    updatableFields: updatableRegionFields,
     customCheck: customUpdateRegionCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated region with id ${id}`);

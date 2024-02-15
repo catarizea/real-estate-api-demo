@@ -20,7 +20,7 @@ const customUpdateCommunityFeatureCheck = async (
   }
 
   const existingItem = await db
-    .select()
+    .select({ name: communityFeature.name })
     .from(communityFeature)
     .where(eq(communityFeature.id, id));
 

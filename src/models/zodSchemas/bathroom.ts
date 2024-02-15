@@ -17,16 +17,21 @@ export const insertBathroomSchemaExample = {
   order: 1,
 };
 
-export const updateBathroomSchema = z
-  .object({
-    name: z.string().optional(),
-    order: z.number().int().optional(),
-  })
-  .refine(
-    ({ name, order }) =>
-      typeof name !== 'undefined' || typeof order !== 'undefined',
-    { message: 'name or order is required', path: ['name', 'order'] },
-  );
+const updateSchema = z.object({
+  name: z.string().optional(),
+  order: z.number().int().optional(),
+});
+
+export const updatableBathroomFields: string[] = updateSchema.keyof().options;
+
+export const updateBathroomSchema = updateSchema.refine(
+  ({ name, order }) =>
+    typeof name !== 'undefined' || typeof order !== 'undefined',
+  {
+    message: 'at least one field must be provided for update',
+    path: updatableBathroomFields,
+  },
+);
 
 export const updateBathroomSchemaExample = {
   name: '1.5',

@@ -39,7 +39,7 @@ const customBathroomBedroomCheck = async (
 
   if (body.name && body.name !== existingItem[0].name) {
     const childExists = await db
-      .select()
+      .select({ id: unit.id })
       .from(unit)
       .where(eq(checkField, id))
       .limit(1);

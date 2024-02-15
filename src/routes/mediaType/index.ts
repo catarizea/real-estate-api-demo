@@ -15,6 +15,7 @@ import {
   insertMediaTypeSchema,
   insertMediaTypeSchemaExample,
   selectMediaTypeSchema,
+  updatableMediaTypeFields,
   UpdateMediaTypeSchema,
   updateMediaTypeSchema,
   updateMediaTypeSchemaExample,
@@ -81,6 +82,7 @@ app.openapi(
   putUpdateItemHandler<UpdateMediaTypeSchema>({
     model: mediaType,
     tag: NomenclatureTag.MediaType,
+    updatableFields: updatableMediaTypeFields,
     customCheck: customInsertMediaTypeCheck,
     onSuccess: async (id: string) => {
       console.log(`publish message for updated mediaType with id ${id}`);

@@ -12,11 +12,11 @@ const customInsertFloorPlanCheck = async (
   body: InsertFloorPlanSchema | UpdateFloorPlanSchema,
   id?: string,
 ) => {
-  let existingItem: (typeof floorPlan.$inferSelect)[] | null = null;
+  let existingItem: { propertyId: string }[] | null = null;
 
   if (id) {
     const existing = await db
-      .select()
+      .select({ propertyId: floorPlan.propertyId })
       .from(floorPlan)
       .where(eq(floorPlan.id, id));
 

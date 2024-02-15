@@ -13,7 +13,7 @@ const customInsertMediaTypeCheck = async (
 ) => {
   if (body.name) {
     const mediaTypeExists = await db
-      .select()
+      .select({ id: mediaType.id })
       .from(mediaType)
       .where(eq(mediaType.name, body.name.trim()))
       .limit(1);

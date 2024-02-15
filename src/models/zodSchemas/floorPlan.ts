@@ -20,22 +20,24 @@ export const insertFloorPlanSchemaExample = {
 
 export type InsertFloorPlanSchema = z.infer<typeof insertFloorPlanSchema>;
 
-export const updateFloorPlanSchema = z
-  .object({
-    name: z.string().optional(),
-    propertyId: z.string().optional(),
-    order: z.number().optional(),
-  })
-  .refine(
-    ({ name, propertyId, order }) =>
-      typeof name !== 'undefined' ||
-      typeof propertyId !== 'undefined' ||
-      typeof order !== 'undefined',
-    {
-      message: 'at least one field must be provided for update',
-      path: ['name', 'propertyId', 'order'],
-    },
-  );
+const updateSchema = z.object({
+  name: z.string().optional(),
+  propertyId: z.string().optional(),
+  order: z.number().optional(),
+});
+
+export const updatableFloorPlanFields: string[] = updateSchema.keyof().options;
+
+export const updateFloorPlanSchema = updateSchema.refine(
+  ({ name, propertyId, order }) =>
+    typeof name !== 'undefined' ||
+    typeof propertyId !== 'undefined' ||
+    typeof order !== 'undefined',
+  {
+    message: 'at least one field must be provided for update',
+    path: updatableFloorPlanFields,
+  },
+);
 
 export type UpdateFloorPlanSchema = z.infer<typeof updateFloorPlanSchema>;
 

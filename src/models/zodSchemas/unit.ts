@@ -36,110 +36,82 @@ export const insertUnitSchemaExample = {
 
 export type InsertUnitSchema = z.infer<typeof insertUnitSchema>;
 
-export const updateUnitSchema = z
-  .object({
-    propertyId: z.string().optional(),
-    floorPlanId: z.string().optional(),
-    name: z.string().optional(),
-    rent: z.number().int().optional(),
-    deposit: z.number().int().optional(),
-    available: z.boolean().optional(),
-    immediate: z.boolean().optional(),
-    availableDate: z.string().optional(),
-    shortterm: z.boolean().optional(),
-    longterm: z.boolean().optional(),
-    unitNumber: z.string().optional(),
-    unitName: z.string().optional(),
-    surface: z.number().int().optional(),
-    furnished: z.boolean().optional(),
-    bedroomId: z.string().optional(),
-    bathroomId: z.string().optional(),
-    heat: z.boolean().optional(),
-    water: z.boolean().optional(),
-    electricity: z.boolean().optional(),
-    internet: z.boolean().optional(),
-    television: z.boolean().optional(),
-    order: z.number().int().optional(),
-    published: z.boolean().optional(),
-  })
-  .refine(
-    ({
-      propertyId,
-      floorPlanId,
-      name,
-      rent,
-      deposit,
-      available,
-      immediate,
-      availableDate,
-      shortterm,
-      longterm,
-      unitNumber,
-      unitName,
-      surface,
-      furnished,
-      bedroomId,
-      bathroomId,
-      heat,
-      water,
-      electricity,
-      internet,
-      television,
-      order,
-      published,
-    }) =>
-      typeof propertyId !== 'undefined' ||
-      typeof floorPlanId !== 'undefined' ||
-      typeof name !== 'undefined' ||
-      typeof rent !== 'undefined' ||
-      typeof deposit !== 'undefined' ||
-      typeof available !== 'undefined' ||
-      typeof immediate !== 'undefined' ||
-      typeof availableDate !== 'undefined' ||
-      typeof shortterm !== 'undefined' ||
-      typeof longterm !== 'undefined' ||
-      typeof unitNumber !== 'undefined' ||
-      typeof unitName !== 'undefined' ||
-      typeof surface !== 'undefined' ||
-      typeof furnished !== 'undefined' ||
-      typeof bedroomId !== 'undefined' ||
-      typeof bathroomId !== 'undefined' ||
-      typeof heat !== 'undefined' ||
-      typeof water !== 'undefined' ||
-      typeof electricity !== 'undefined' ||
-      typeof internet !== 'undefined' ||
-      typeof television !== 'undefined' ||
-      typeof order !== 'undefined' ||
-      typeof published !== 'undefined',
-    {
-      message: 'at least one field must be provided for update',
-      path: [
-        'propertyId',
-        'floorPlanId',
-        'name',
-        'rent',
-        'deposit',
-        'available',
-        'immediate',
-        'availableDate',
-        'shortterm',
-        'longterm',
-        'unitNumber',
-        'unitName',
-        'surface',
-        'furnished',
-        'bedroomId',
-        'bathroomId',
-        'heat',
-        'water',
-        'electricity',
-        'internet',
-        'television',
-        'order',
-        'published',
-      ],
-    },
-  );
+const updateSchema = z.object({
+  name: z.string().optional(),
+  rent: z.number().int().optional(),
+  deposit: z.number().int().optional(),
+  available: z.boolean().optional(),
+  immediate: z.boolean().optional(),
+  availableDate: z.string().optional(),
+  shortterm: z.boolean().optional(),
+  longterm: z.boolean().optional(),
+  unitNumber: z.string().optional(),
+  unitName: z.string().optional(),
+  surface: z.number().int().optional(),
+  furnished: z.boolean().optional(),
+  bedroomId: z.string().optional(),
+  bathroomId: z.string().optional(),
+  heat: z.boolean().optional(),
+  water: z.boolean().optional(),
+  electricity: z.boolean().optional(),
+  internet: z.boolean().optional(),
+  television: z.boolean().optional(),
+  order: z.number().int().optional(),
+  published: z.boolean().optional(),
+});
+
+export const updatableUnitFields: string[] = updateSchema.keyof().options;
+
+export const updateUnitSchema = updateSchema.refine(
+  ({
+    name,
+    rent,
+    deposit,
+    available,
+    immediate,
+    availableDate,
+    shortterm,
+    longterm,
+    unitNumber,
+    unitName,
+    surface,
+    furnished,
+    bedroomId,
+    bathroomId,
+    heat,
+    water,
+    electricity,
+    internet,
+    television,
+    order,
+    published,
+  }) =>
+    typeof name !== 'undefined' ||
+    typeof rent !== 'undefined' ||
+    typeof deposit !== 'undefined' ||
+    typeof available !== 'undefined' ||
+    typeof immediate !== 'undefined' ||
+    typeof availableDate !== 'undefined' ||
+    typeof shortterm !== 'undefined' ||
+    typeof longterm !== 'undefined' ||
+    typeof unitNumber !== 'undefined' ||
+    typeof unitName !== 'undefined' ||
+    typeof surface !== 'undefined' ||
+    typeof furnished !== 'undefined' ||
+    typeof bedroomId !== 'undefined' ||
+    typeof bathroomId !== 'undefined' ||
+    typeof heat !== 'undefined' ||
+    typeof water !== 'undefined' ||
+    typeof electricity !== 'undefined' ||
+    typeof internet !== 'undefined' ||
+    typeof television !== 'undefined' ||
+    typeof order !== 'undefined' ||
+    typeof published !== 'undefined',
+  {
+    message: 'at least one field must be provided for update',
+    path: updatableUnitFields,
+  },
+);
 
 export const updateUnitSchemaExample = {
   rent: 1500,
