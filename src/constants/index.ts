@@ -16,16 +16,14 @@ export const rabbitMqQueue = 'real-estate-api-demo-tasks';
 
 export const tasks = {
   property: {
-    insert: 'property.insert',
+    create: 'property.create',
     update: 'property.update',
+    delete: 'property.delete',
   },
-  buildingFeature: {
-    insert: 'buildingFeature.insert',
-    update: 'buildingFeature.update',
-  },
-  feature: {
-    insert: 'feature.insert',
-    update: 'feature.update',
+  unit: {
+    create: 'unit.create',
+    update: 'unit.update',
+    delete: 'unit.delete',
   },
   media: {
     create: 'media.create',

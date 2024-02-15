@@ -7,14 +7,12 @@ const preparedPropertyForIndex = db.query.property
     columns: {
       id: true,
       listingId: true,
-      name: true,
       address: true,
       latitude: true,
       longitude: true,
       smoking: true,
       cats: true,
       dogs: true,
-      published: true,
     },
     where: (property, { eq }) => eq(property.id, sql.placeholder('id')),
     with: {

@@ -12,13 +12,27 @@ const worker = (
   channel: Channel,
   message: Message,
 ) => {
+  if (!rabbitMqMessage) {
+    logger.error(`${taskPrefix} undefined message cannot process task`);
+    return;
+  }
+
+  if (!rabbitMqMessage.type || !rabbitMqMessage.payload) {
+    logger.error(`${taskPrefix} invalid message cannot process task`);
+    return;
+  }
+
   switch (rabbitMqMessage.type) {
-    case tasks.property.insert:
-      logger.info(`${taskPrefix} processing task ${tasks.property.insert}`);
+    case tasks.property.create:
+      logger.info(`${taskPrefix} processing task ${tasks.property.create}`);
       channel.ack(message);
       break;
     case tasks.property.update:
       logger.info(`${taskPrefix} processing task ${tasks.property.update}`);
+      channel.ack(message);
+      break;
+    case tasks.property.delete:
+      logger.info(`${taskPrefix} processing task ${tasks.property.delete}`);
       channel.ack(message);
       break;
     case tasks.media.create:

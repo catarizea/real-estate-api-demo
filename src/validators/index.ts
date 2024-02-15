@@ -69,8 +69,15 @@ import {
   getParkingCursorValidatorByOrderBy,
   paginationParkingOrderSchema,
 } from './parkingList';
-import type { PreparedPropertySchema } from './property';
-import { preparedPropertySchema, propertyBodySchemaExample } from './property';
+import type {
+  PreparedPropertyForIndexSchema,
+  PreparedPropertySchema,
+} from './property';
+import {
+  preparedPropertyForIndexSchema,
+  preparedPropertySchema,
+  propertyBodySchemaExample,
+} from './property';
 import type { PropertyListSchema } from './propertyList';
 import {
   bodyPropertyListSchema,
@@ -87,8 +94,12 @@ import {
 } from './regionList';
 import type { FieldsSchema, SearchSchema } from './search';
 import { bodySearchSchema, searchPropertyUnitSchema } from './search';
-import type { PreparedUnitSchema } from './unit';
-import { preparedUnitSchema, unitBodySchemaExample } from './unit';
+import type { PreparedUnitForIndexSchema, PreparedUnitSchema } from './unit';
+import {
+  preparedUnitForIndexSchema,
+  preparedUnitSchema,
+  unitBodySchemaExample,
+} from './unit';
 import type { UnitListSchema } from './unitList';
 import {
   bodyUnitListSchema,
@@ -157,10 +168,14 @@ export {
   parkingsByPropertySuccessSchema,
   PreparedCommunitySchema,
   preparedCommunitySchema,
+  PreparedPropertyForIndexSchema,
+  preparedPropertyForIndexSchema,
   PreparedPropertySchema,
   preparedPropertySchema,
   PreparedRegionSchema,
   preparedRegionSchema,
+  PreparedUnitForIndexSchema,
+  preparedUnitForIndexSchema,
   PreparedUnitSchema,
   preparedUnitSchema,
   propertyBodySchemaExample,

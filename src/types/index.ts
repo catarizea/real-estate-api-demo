@@ -273,12 +273,12 @@ type CommonPropertyUnit = {
   bathroom: string;
   listingId: number;
   address: string;
-  community: string;
+  community?: string;
   type: string;
   smoking: number;
   cats: number;
   dogs: number;
-  imageId: string;
+  imageId?: string;
 };
 
 export type SearchPropertyUnit = CommonPropertyUnit & {
@@ -299,6 +299,41 @@ export type AlgoliaPropertyUnit = CommonPropertyUnit & {
   feature?: string[];
 };
 
+export type PropertyIndexFragment = {
+  listingId: number;
+  address: string;
+  type: string;
+  _geoloc: {
+    lat: number;
+    lng: number;
+  };
+  smoking: number;
+  cats: number;
+  dogs: number;
+  feature?: string[];
+  parking?: string[];
+  imageId?: string;
+  community?: string;
+};
+
+export type UnitIndexFragment = {
+  id: string;
+  propertyId: string;
+  rent: number;
+  immediate: number;
+  availableDate?: Date;
+  shortterm: number;
+  longterm: number;
+  furnished: number;
+  heat: number;
+  water: number;
+  electricity: number;
+  internet: number;
+  television: number;
+  bedroom?: string;
+  bathroom?: string;
+};
+
 export type MediaPayload = {
   imageId: string;
   unitIds: string[];
@@ -309,14 +344,34 @@ export type ParkingPayload = {
   unitIds: string[];
 };
 
+export type UnitsPayload = {
+  units: PropertyIndexFragment & UnitIndexFragment[];
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type KeyedObject = { [key: string]: any };
+
+export type PartialUpdatePropertySchema = Omit<
+  UpdatePropertySchema,
+  'updatedAt' | 'published'
+> &
+  KeyedObject;
+
+export type PartialSelectPropertySchema = Omit<
+  SelectPropertySchema,
+  'createdAt' | 'updatedAt' | 'published'
+> &
+  KeyedObject;
+
 export type RabbitMqMessage = {
   type: string;
   payload:
-    | {
-        id: string;
-      }
+    | { id: string }
+    | { unitIds: string[] }
     | MediaPayload
-    | ParkingPayload;
+    | ParkingPayload
+    | PartialUpdatePropertySchema
+    | UnitsPayload;
 };
 
 export enum NomenclatureTag {

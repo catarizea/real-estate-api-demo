@@ -117,3 +117,29 @@ export const preparedPropertySchema = z.object({
 });
 
 export type PreparedPropertySchema = z.infer<typeof preparedPropertySchema>;
+
+export const preparedPropertyForIndexSchema = z.object({
+  id: z.string(),
+  listingId: z.number(),
+  address: z.string(),
+  latitude: z.string(),
+  longitude: z.string(),
+  smoking: z.boolean(),
+  cats: z.boolean(),
+  dogs: z.boolean(),
+  featureToProperty: z.array(
+    z.object({ feature: z.object({ name: z.string() }) }).optional(),
+  ),
+  community: z.object({ name: z.string() }).optional(),
+  medias: z
+    .array(z.object({ assetId: z.string(), order: z.number() }))
+    .optional(),
+  parkings: z.array(
+    z.object({ name: z.string(), order: z.number() }).optional(),
+  ),
+  typeProp: z.object({ name: z.string() }),
+});
+
+export type PreparedPropertyForIndexSchema = z.infer<
+  typeof preparedPropertyForIndexSchema
+>;

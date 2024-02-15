@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import {
@@ -7,7 +6,7 @@ import {
   getPropertyHandler,
   postCreateItemHandler,
   postListItemHandler,
-  // publishUpdateProperty,
+  publishUpdateProperty,
   putUpdateItemHandler,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
@@ -94,10 +93,7 @@ app.openapi(
     tag: NomenclatureTag.Property,
     updatableFields: updatablePropertyFields,
     customCheck: customInsertPropertyCheck,
-    // onSuccess: publishUpdateProperty,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated region with id ${id}`);
-    },
+    onSuccess: publishUpdateProperty,
   }),
 );
 

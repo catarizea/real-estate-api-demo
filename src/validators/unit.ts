@@ -42,8 +42,29 @@ export const preparedUnitSchema = z.object({
   television: z.boolean(),
   order: z.number().int(),
   published: z.boolean(),
-  bedroom: z.object({ name: z.string() }),
-  bathroom: z.object({ name: z.string() }),
+  bedroom: z.object({ name: z.string() }).nullable(),
+  bathroom: z.object({ name: z.string() }).nullable(),
 });
 
 export type PreparedUnitSchema = z.infer<typeof preparedUnitSchema>;
+
+export const preparedUnitForIndexSchema = z.object({
+  id: z.string(),
+  rent: z.number(),
+  immediate: z.boolean(),
+  availableDate: z.date().nullable(),
+  shortterm: z.boolean(),
+  longterm: z.boolean(),
+  furnished: z.boolean(),
+  heat: z.boolean(),
+  water: z.boolean(),
+  electricity: z.boolean(),
+  internet: z.boolean(),
+  television: z.boolean(),
+  bedroom: z.object({ name: z.string() }).nullable(),
+  bathroom: z.object({ name: z.string() }).nullable(),
+});
+
+export type PreparedUnitForIndexSchema = z.infer<
+  typeof preparedUnitForIndexSchema
+>;
