@@ -22,10 +22,10 @@
     "dev": "bun --hot index.ts",
     "debug": "bun --inspect index.ts",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
-    "openapi:generate": "run-s openapi:getspec openapi:validate openapi:postman",
+    "openapi:generate": "run-s openapi:getspec openapi:validate openapi:portman",
     "openapi:getspec": "bun ./src/validators/openApiParser/saveCurrentSpec.ts",
     "openapi:validate": "bun ./src/validators/openApiParser",
-    "openapi:postman": "openapi2postmanv2 -s ./spec/spec.json -o ./spec/collection.json -p -O folderStrategy=Tags,includeAuthInfoInExample=false,parametersResolution=Example",
+    "openapi:portman": "portman -u ./spec/spec.json  -o ./spec/crm.postman.json",
     "start": "dotenv -e .env -v BUN_ENV=prod -- bun index.ts",
     "test": "dotenv -e .env -v BUN_ENV=test -- bun test"
   },
@@ -50,6 +50,7 @@
     "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
+    "@apideck/portman": "^1.26.3",
     "@faker-js/faker": "^8.3.1",
     "@readme/openapi-parser": "^2.5.0",
     "@types/amqplib": "^0.10.4",
