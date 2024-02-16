@@ -15,15 +15,10 @@ export const taskPrefix = '[TASK]';
 export const rabbitMqQueue = 'real-estate-api-demo-tasks';
 
 export const tasks = {
-  property: {
-    create: 'property.create',
-    update: 'property.update',
-    delete: 'property.delete',
-  },
-  unit: {
-    create: 'unit.create',
-    update: 'unit.update',
-    delete: 'unit.delete',
+  feature: {
+    create: 'feature.create',
+    update: 'feature.update',
+    delete: 'feature.delete',
   },
   media: {
     create: 'media.create',
@@ -34,6 +29,16 @@ export const tasks = {
     create: 'parking.create',
     update: 'parking.update',
     delete: 'parking.delete',
+  },
+  property: {
+    create: 'property.create',
+    update: 'property.update',
+    delete: 'property.delete',
+  },
+  unit: {
+    create: 'unit.create',
+    update: 'unit.update',
+    delete: 'unit.delete',
   },
 };
 

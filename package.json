@@ -22,6 +22,10 @@
     "dev": "bun --hot index.ts",
     "debug": "bun --inspect index.ts",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "openapi:generate": "run-s openapi:getspec openapi:validate openapi:postman",
+    "openapi:getspec": "bun ./src/validators/openApiParser/saveCurrentSpec.ts",
+    "openapi:validate": "bun ./src/validators/openApiParser",
+    "openapi:postman": "openapi2postmanv2 -s ./spec/spec.json -o ./spec/collection.json -p -O folderStrategy=Tags,includeAuthInfoInExample=false,parametersResolution=Example",
     "start": "dotenv -e .env -v BUN_ENV=prod -- bun index.ts",
     "test": "dotenv -e .env -v BUN_ENV=test -- bun test"
   },
@@ -47,6 +51,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.3.1",
+    "@readme/openapi-parser": "^2.5.0",
     "@types/amqplib": "^0.10.4",
     "@types/bun": "^1.0.5",
     "@types/ejs": "^3.1.5",
@@ -61,7 +66,6 @@
     "axios-retry": "^4.0.0",
     "cheerio": "^1.0.0-rc.12",
     "commander": "^12.0.0",
-    "concurrently": "^8.2.2",
     "cron": "^3.1.6",
     "dotenv-cli": "^7.3.0",
     "drizzle-kit": "^0.20.14",
@@ -72,6 +76,8 @@
     "eslint-plugin-simple-import-sort": "^12.0.0",
     "log-symbols": "^6.0.0",
     "node-geocoder": "^4.3.0",
+    "npm-run-all": "^4.1.5",
+    "openapi-to-postmanv2": "^4.20.0",
     "path": "^0.12.7",
     "prettier": "^3.2.5"
   }
