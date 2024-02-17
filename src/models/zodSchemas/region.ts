@@ -38,6 +38,5 @@ export const updateRegionSchema = updateSchema.refine(
 export type UpdateRegionSchema = z.infer<typeof updateRegionSchema>;
 
 export const updateRegionSchemaExample = {
-  name: 'British Columbia',
-  administrativeName: 'Province',
+  administrativeName: 'State',
 };

@@ -14,7 +14,7 @@ export type SelectBathroomSchema = z.infer<typeof selectBathroomSchema>;
 export const insertBathroomSchema = createInsertSchema(bathroom);
 
 export const insertBathroomSchemaExample = {
-  name: '1.5',
+  name: '1.55',
   order: 1,
 };
 
@@ -34,7 +34,6 @@ export const updateBathroomSchema = updateSchema.refine(
 );
 
 export const updateBathroomSchemaExample = {
-  name: '1.5',
   order: 1,
 };
 

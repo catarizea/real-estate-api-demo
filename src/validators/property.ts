@@ -103,7 +103,7 @@ export const preparedPropertySchema = z.object({
               shortterm: z.boolean(),
               longterm: z.boolean(),
               unitNumber: z.string().nullable(),
-              unitName: z.null().nullable(),
+              unitName: z.string().nullable(),
               surface: z.number().int(),
               furnished: z.boolean(),
               heat: z.boolean(),

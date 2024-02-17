@@ -1,3 +1,5 @@
+import { postmanIds } from '@/constants';
+
 export const mediaBodySchemaExample = {
   and: [
     [
@@ -7,7 +9,7 @@ export const mediaBodySchemaExample = {
         ['eq', 'assetId', 'a344xpp2'],
       ],
     ],
-    ['eq', 'mediaTypeId', 'a27vslbjwoyszaqrxw6082aa'],
+    ['eq', 'mediaTypeId', postmanIds.mediaType],
     [
       'between',
       'createdAt',

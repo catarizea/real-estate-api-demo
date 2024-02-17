@@ -13,7 +13,7 @@ export type SelectMediaTypeSchema = z.infer<typeof selectMediaTypeSchema>;
 export const insertMediaTypeSchema = createInsertSchema(mediaType);
 
 export const insertMediaTypeSchemaExample = {
-  name: 'image',
+  name: 'postman test media type',
 };
 
 export type InsertMediaTypeSchema = z.infer<typeof insertMediaTypeSchema>;
@@ -35,5 +35,5 @@ export const updateMediaTypeSchema = updateSchema.refine(
 export type UpdateMediaTypeSchema = z.infer<typeof updateMediaTypeSchema>;
 
 export const updateMediaTypeSchemaExample = {
-  name: 'video',
+  name: 'postman test media type update',
 };

@@ -1,6 +1,7 @@
 import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
+import { postmanIds } from '@/constants';
 import { media } from '@/models/schema';
 import { atLeastOneFieldDefined } from '@/utils';
 
@@ -15,8 +16,8 @@ export const insertMediaSchema = createInsertSchema(media);
 
 export const insertMediaSchemaExample = {
   assetId: 'a344xpp1',
-  mediaTypeId: 'a27vslbjwoyszaqrxw6082aa',
-  propertyId: 'a1i6zw4lep7o2qrc5hdxytmv',
+  mediaTypeId: postmanIds.mediaType,
+  propertyId: postmanIds.property,
   order: 0,
 };
 

@@ -26,6 +26,7 @@
     "openapi:getspec": "bun ./src/validators/openApiParser/saveCurrentSpec.ts",
     "openapi:validate": "bun ./src/validators/openApiParser",
     "openapi:portman": "portman -u ./spec/spec.json  -o ./spec/crm.postman.json",
+    "postman:test:cleanup": "bun ./src/utils/tools/cleanUpAfterTest.ts",
     "start": "dotenv -e .env -v BUN_ENV=prod -- bun index.ts",
     "start:postman:test": "dotenv -e .env -v BUN_ENV=postman -- bun index.ts",
     "test": "dotenv -e .env -v BUN_ENV=test -- bun test"

@@ -1,6 +1,7 @@
 import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
+import { postmanIds } from '@/constants';
 import { floorPlan } from '@/models/schema';
 import { atLeastOneFieldDefined } from '@/utils';
 
@@ -15,7 +16,7 @@ export const insertFloorPlanSchema = createInsertSchema(floorPlan);
 
 export const insertFloorPlanSchemaExample = {
   name: 'Floor Plan 1',
-  propertyId: 'atgl5rbiijouz9695d01vpne',
+  propertyId: postmanIds.property,
   order: 0,
 };
 

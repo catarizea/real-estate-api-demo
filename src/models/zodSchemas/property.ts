@@ -1,6 +1,7 @@
 import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
+import { postmanIds } from '@/constants';
 import { property } from '@/models/schema';
 import { atLeastOneFieldDefined } from '@/utils';
 
@@ -22,9 +23,9 @@ export const insertPropertySchemaExample = {
   descriptionTitle: 'Property description title',
   descriptionSubtitle: 'Property description subtitle',
   descriptionText: 'Property description text',
-  typePropId: 'a5ug1fdwkkc4byl1uw9d7cqo',
-  communityId: 'a5ug1fdwkkc4byl1uw9d7cqo',
-  cityId: 'a5ug1fdwkkc4byl1uw9d7cqo',
+  typePropId: postmanIds.typeProp,
+  communityId: postmanIds.community,
+  cityId: postmanIds.city,
   smoking: false,
   cats: true,
   dogs: false,

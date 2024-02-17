@@ -1,6 +1,7 @@
 import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
+import { postmanIds } from '@/constants';
 import { city } from '@/models/schema';
 import { atLeastOneFieldDefined } from '@/utils';
 
@@ -15,7 +16,7 @@ export const insertCitySchema = createInsertSchema(city);
 
 export const insertCitySchemaExample = {
   name: 'Toronto',
-  regionId: 'atgl5rbiijouz9695d01vpne',
+  regionId: postmanIds.region,
   latitude: '43.741667',
   longitude: '-79.373333',
 };
@@ -42,8 +43,6 @@ export const updateCitySchema = updateSchema.refine(
 export type UpdateCitySchema = z.infer<typeof updateCitySchema>;
 
 export const updateCitySchemaExample = {
-  name: 'Vancouver',
-  regionId: 'atgl5rbiijouz9695d01vpne',
   latitude: '49.2827',
   longitude: '-123.1207',
 };

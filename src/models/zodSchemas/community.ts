@@ -1,6 +1,7 @@
 import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
+import { postmanIds } from '@/constants';
 import { community } from '@/models/schema';
 import { atLeastOneFieldDefined } from '@/utils';
 
@@ -15,7 +16,7 @@ export const insertCommunitySchema = createInsertSchema(community);
 
 export const insertCommunitySchemaExample = {
   name: 'Community name',
-  cityId: 'a5ug1fdwkkc4byl1uw9d7cqo',
+  cityId: postmanIds.city,
   latitude: '51.0447',
   longitude: '-114.0719',
 };
@@ -56,8 +57,6 @@ export const updateCommunitySchema = updateSchema.refine(
 );
 
 export const updateCommunitySchemaExample = {
-  name: 'Community name',
-  cityId: 'a5ug1fdwkkc4byl1uw9d7cqo',
   latitude: '51.0447',
   longitude: '-114.0719',
   imageUrl: 'https://example.com/image.jpg',

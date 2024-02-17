@@ -8,6 +8,18 @@ const idSchema = z
   })
   .openapi({ example: 'abqdj6xe8puto1j83soz3bml' });
 
+const assetIdSchema = z
+  .string({
+    invalid_type_error: 'query cursor must be a string for orderBy assetId',
+  })
+  .openapi({ example: 'abqdj6xe8puto1j83soz3bml' });
+
+const mediaTypeIdSchema = z
+  .string({
+    invalid_type_error: 'query cursor must be a string for orderBy mediaTypeId',
+  })
+  .openapi({ example: 'abqdj6xe8puto1j83soz3bml' });
+
 const propertyIdSchema = z
   .string({
     invalid_type_error: 'query cursor must be a string for orderBy propertyId',
@@ -20,12 +32,6 @@ const orderSchema = z.coerce
   })
   .int({ message: 'query cursor must be an integer for orderBy order' })
   .openapi({ example: 1 });
-
-const assetIdSchema = z
-  .string({
-    invalid_type_error: 'query cursor must be a string for orderBy assetId',
-  })
-  .openapi({ example: 'some string' });
 
 const createdAtSchema = z
   .string({
@@ -51,6 +57,14 @@ export const getMediaCursorValidatorByOrderBy = (orderBy: string) => {
     case 'id-desc':
       return idSchema;
 
+    case 'assetId-asc':
+    case 'assetId-desc':
+      return assetIdSchema;
+
+    case 'mediaTypeId-asc':
+    case 'mediaTypeId-desc':
+      return mediaTypeIdSchema;
+
     case 'propertyId-asc':
     case 'propertyId-desc':
       return propertyIdSchema;
@@ -58,10 +72,6 @@ export const getMediaCursorValidatorByOrderBy = (orderBy: string) => {
     case 'order-asc':
     case 'order-desc':
       return orderSchema;
-
-    case 'assetId-asc':
-    case 'assetId-desc':
-      return assetIdSchema;
 
     case 'createdAt-asc':
     case 'createdAt-desc':
@@ -82,12 +92,14 @@ export const paginationMediaOrderSchema = z.object({
     .enum([
       'id-asc',
       'id-desc',
+      'assetId-asc',
+      'assetId-desc',
+      'mediaTypeId-asc',
+      'mediaTypeId-desc',
       'propertyId-asc',
       'propertyId-desc',
       'order-asc',
       'order-desc',
-      'assetId-asc',
-      'assetId-desc',
       'createdAt-asc',
       'createdAt-desc',
       'updatedAt-asc',
@@ -97,16 +109,17 @@ export const paginationMediaOrderSchema = z.object({
   cursor: z
     .union([
       idSchema,
+      assetIdSchema,
+      mediaTypeIdSchema,
       propertyIdSchema,
       orderSchema,
-      assetIdSchema,
       createdAtSchema,
       updatedAtSchema,
     ])
     .optional(),
 });
 
-const textFields = ['id', 'propertyId', 'assetId'] as const;
+const textFields = ['id', 'assetId', 'mediaTypeId', 'propertyId'] as const;
 
 const eqTextSchema = z.tuple([z.enum(['eq']), z.enum(textFields), z.string()]);
 
