@@ -10,7 +10,7 @@ REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle
 bun install
 ```
 
-2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia, CloudAMQP accounts.
+2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia, CloudAMQP, Postman accounts.
 
 ```
 BUN_ENV=dev
@@ -28,6 +28,7 @@ CLOUDAMQP_URL=<cloudamqp_url>
 WINSTON_LOG_DAYS=5
 SERVER_TIMEZONE=Europe/Berlin
 DATABASE_SEED_BLOCKED=false
+POSTMAN_API_KEY=<postman_api_key>
 ```
 
 3. Install PlanetScale CLI `pscale`
@@ -115,3 +116,23 @@ https://local.drizzle.studio/?port=3001
 ```
 
 17. See entity relationship Draw.io diagram inside this folder `erd/entity-relationship-diagram.drawio`
+
+18 Install **Postman** and import `spec/real-estate-api-demo.postman_collection.json`. In Postman set `baseUrl` variable as `http://localhost:3000`
+
+19. Install Postman CLI with Homebrew
+
+```
+brew install --cask postman-cli
+```
+
+20. Start api for Postman
+
+```
+bun run start:postman:test
+```
+
+21. You can run tests from Postman app or from CLI
+
+```
+bun run postman
+```
