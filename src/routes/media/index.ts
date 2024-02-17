@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   customDeleteMediaCheck,
   customInsertMediaCheck,
@@ -71,6 +72,7 @@ app.openapi(
   postCreateItemHandler<InsertMediaSchema>({
     model: media,
     customCheck: customInsertMediaCheck,
+    postmanId: postmanIds.media,
     onSuccess: publishInsertMedia,
   }),
 );
@@ -80,6 +82,7 @@ app.openapi(
     tag: NomenclatureTag.Media,
     updateItemSchema: updateMediaSchema,
     updateItemSchemaExample: updateMediaSchemaExample,
+    postmanId: postmanIds.media,
   }),
   putUpdateItemHandler<UpdateMediaSchema>({
     model: media,
@@ -93,6 +96,7 @@ app.openapi(
 app.openapi(
   deleteItem({
     tag: NomenclatureTag.Media,
+    postmanId: postmanIds.media,
   }),
   deleteItemHandler({
     model: media,

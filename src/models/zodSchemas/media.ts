@@ -2,6 +2,7 @@ import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 import { media } from '@/models/schema';
+import { atLeastOneFieldDefined } from '@/utils';
 
 export const selectMediaSchema = createSelectSchema(media, {
   createdAt: z.string(),
@@ -31,11 +32,7 @@ const updateSchema = z.object({
 export const updatableMediaFields: string[] = updateSchema.keyof().options;
 
 export const updateMediaSchema = updateSchema.refine(
-  ({ assetId, mediaTypeId, propertyId, order }) =>
-    typeof assetId !== 'undefined' ||
-    typeof mediaTypeId !== 'undefined' ||
-    typeof propertyId !== 'undefined' ||
-    typeof order !== 'undefined',
+  (fields) => atLeastOneFieldDefined(fields, updatableMediaFields),
   {
     message: 'at least one field must be provided for update',
     path: updatableMediaFields,

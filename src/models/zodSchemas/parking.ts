@@ -1,7 +1,9 @@
 import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
+import { postmanIds } from '@/constants';
 import { parking } from '@/models/schema';
+import { atLeastOneFieldDefined } from '@/utils';
 
 export const selectParkingSchema = createSelectSchema(parking, {
   createdAt: z.string(),
@@ -14,7 +16,7 @@ export const insertParkingSchema = createInsertSchema(parking);
 
 export const insertParkingSchemaExample = {
   name: 'Covered',
-  propertyId: 'a5ug1fdwkkc4byl1uw9d7cqo',
+  propertyId: postmanIds.property,
   fee: 100,
   feeInterval: 'monthly',
   order: 1,
@@ -32,11 +34,7 @@ const updateSchema = z.object({
 export const updatableParkingFields: string[] = updateSchema.keyof().options;
 
 export const updateParkingSchema = updateSchema.refine(
-  ({ name, fee, feeInterval, order }) =>
-    typeof name !== 'undefined' ||
-    typeof fee !== 'undefined' ||
-    typeof feeInterval !== 'undefined' ||
-    typeof order !== 'undefined',
+  (fields) => atLeastOneFieldDefined(fields, updatableParkingFields),
   {
     message: 'name or fee or feeInterval or order is required',
     path: updatableParkingFields,

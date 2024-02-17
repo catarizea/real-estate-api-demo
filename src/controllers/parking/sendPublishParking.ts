@@ -6,6 +6,13 @@ const sendPublishParking = async (
   propertyId: string,
   task: string,
 ): Promise<void> => {
+  if (
+    process.env.BUN_ENV &&
+    ['test', 'postman'].includes(process.env.BUN_ENV)
+  ) {
+    return;
+  }
+
   const parkings = await preparedParkingByProperty.execute({ propertyId });
 
   const publishedUnit = await checkPublished(propertyId);

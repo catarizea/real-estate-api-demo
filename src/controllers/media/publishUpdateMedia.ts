@@ -10,6 +10,13 @@ const publishUpdateMedia: (
   newValues: CommonUpdateItemSchema & { updatedAt: Date },
   oldValues: CommonSelectItemSchemaType,
 ) => Promise<void> = async (id, newValues, oldValues) => {
+  if (
+    process.env.BUN_ENV &&
+    ['test', 'postman'].includes(process.env.BUN_ENV)
+  ) {
+    return;
+  }
+
   const { order: newOrder, assetId: newAssetId } =
     newValues as UpdateMediaSchema;
   const {

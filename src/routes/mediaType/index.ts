@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   customInsertMediaTypeCheck,
   deleteItemHandler,
@@ -67,6 +68,7 @@ app.openapi(
   postCreateItemHandler<InsertMediaTypeSchema>({
     model: mediaType,
     customCheck: customInsertMediaTypeCheck,
+    postmanId: postmanIds.mediaType,
     onSuccess: async (id: string) => {
       console.log(`publish message for created mediaType with id ${id}`);
     },
@@ -78,6 +80,7 @@ app.openapi(
     tag: NomenclatureTag.MediaType,
     updateItemSchema: updateMediaTypeSchema,
     updateItemSchemaExample: updateMediaTypeSchemaExample,
+    postmanId: postmanIds.mediaType,
   }),
   putUpdateItemHandler<UpdateMediaTypeSchema>({
     model: mediaType,
@@ -93,6 +96,7 @@ app.openapi(
 app.openapi(
   deleteItem({
     tag: NomenclatureTag.MediaType,
+    postmanId: postmanIds.mediaType,
   }),
   deleteItemHandler({
     model: mediaType,

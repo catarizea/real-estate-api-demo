@@ -38,7 +38,9 @@ const putUpdateItemHandler =
   }) =>
   async (c: Context) => {
     const id = c.req.param('id');
+    console.log('in handler before parsing body');
     const body: UpdateItemSchema = await c.req.json();
+    console.log('in handler after parsing body');
 
     const { required, optional } = getModelFields(model);
     const mandatory = without(required, 'id');

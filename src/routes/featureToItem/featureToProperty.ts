@@ -1,5 +1,6 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   deleteFeatureToItemHandler,
   getFeaturesByItemHandler,
@@ -21,17 +22,25 @@ app.openapi(
   getFeaturesByItem(
     NomenclatureTag.FeatureToProperty,
     featureToPropertySuccessSchema,
+    postmanIds.property,
   ),
   getFeaturesByItemHandler(NomenclatureTag.FeatureToProperty),
 );
 
 app.openapi(
-  postCreateFeatureToItem(NomenclatureTag.FeatureToProperty),
+  postCreateFeatureToItem(NomenclatureTag.FeatureToProperty, {
+    featureId: postmanIds.feature,
+    itemId: postmanIds.property,
+  }),
   postCreateFeatureToItemHandler(NomenclatureTag.FeatureToProperty),
 );
 
 app.openapi(
-  deleteFeatureToItem(NomenclatureTag.FeatureToProperty),
+  deleteFeatureToItem(
+    NomenclatureTag.FeatureToProperty,
+    postmanIds.feature,
+    postmanIds.property,
+  ),
   deleteFeatureToItemHandler(NomenclatureTag.FeatureToProperty),
 );
 

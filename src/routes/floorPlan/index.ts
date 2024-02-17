@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   customInsertFloorPlanCheck,
   deleteItemHandler,
@@ -67,6 +68,7 @@ app.openapi(
   postCreateItemHandler<InsertFloorPlanSchema>({
     model: floorPlan,
     customCheck: customInsertFloorPlanCheck,
+    postmanId: postmanIds.floorPlan,
     onSuccess: async (id: string) => {
       console.log(`publish message for created floorPlan with id ${id}`);
     },
@@ -78,6 +80,7 @@ app.openapi(
     tag: NomenclatureTag.FloorPlan,
     updateItemSchema: updateFloorPlanSchema,
     updateItemSchemaExample: updateFloorPlanSchemaExample,
+    postmanId: postmanIds.floorPlan,
   }),
   putUpdateItemHandler<UpdateFloorPlanSchema>({
     model: floorPlan,
@@ -93,6 +96,7 @@ app.openapi(
 app.openapi(
   deleteItem({
     tag: NomenclatureTag.FloorPlan,
+    postmanId: postmanIds.floorPlan,
   }),
   deleteItemHandler({
     model: floorPlan,

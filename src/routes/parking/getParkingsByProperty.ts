@@ -1,5 +1,6 @@
 import { createRoute, z } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import { NomenclatureTag } from '@/types';
 import { errorSchema } from '@/validators';
 import { parkingsByPropertySuccessSchema } from '@/validators';
@@ -10,7 +11,7 @@ const getParkingsByProperty = createRoute({
   tags: [NomenclatureTag.Parking],
   request: {
     params: z.object({
-      itemId: z.string(),
+      itemId: z.string().openapi({ example: postmanIds.property }),
     }),
   },
   responses: {

@@ -6,7 +6,7 @@ let httpLogger: MiddlewareHandler = async (_, next) => {
   await next();
 };
 
-if (process.env.BUN_ENV !== 'test') {
+if (process.env.BUN_ENV && process.env.BUN_ENV !== 'test') {
   httpLogger = async (c, next) => {
     const start = performance.now();
 

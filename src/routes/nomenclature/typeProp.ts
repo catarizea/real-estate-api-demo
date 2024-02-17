@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   customUpdateTypePropCheck,
   deleteItemHandler,
@@ -66,6 +67,7 @@ app.openapi(
   }),
   postCreateItemHandler<InsertBathroomSchema>({
     model: typeProp,
+    postmanId: postmanIds.typeProp,
     onSuccess: async (id: string) => {
       console.log(`publish message for created typeProp with id ${id}`);
     },
@@ -77,6 +79,7 @@ app.openapi(
     tag: NomenclatureTag.TypeProp,
     updateItemSchema: updateBathroomSchema,
     updateItemSchemaExample: updateBathroomSchemaExample,
+    postmanId: postmanIds.typeProp,
   }),
   putUpdateItemHandler<UpdateBathroomSchema>({
     model: typeProp,
@@ -92,6 +95,7 @@ app.openapi(
 app.openapi(
   deleteItem({
     tag: NomenclatureTag.TypeProp,
+    postmanId: postmanIds.typeProp,
   }),
   deleteItemHandler({
     model: typeProp,

@@ -7,7 +7,10 @@ export const successSchema = z.object({
   success: z.literal(true),
 });
 
-const postCreateFeatureToItem = (tag: NomenclatureTag) =>
+const postCreateFeatureToItem = (
+  tag: NomenclatureTag,
+  example: { featureId: string; itemId: string },
+) =>
   createRoute({
     method: 'post',
     path: '/create',
@@ -18,10 +21,7 @@ const postCreateFeatureToItem = (tag: NomenclatureTag) =>
         content: {
           'application/json': {
             schema: featureToItemSchema,
-            example: {
-              featureId: 'kse7hpwwu3rj6ook4g90nvzs',
-              itemId: 'a5ug1fdwkkc4byl1uw9d7cqo',
-            },
+            example,
           },
         },
         required: true,

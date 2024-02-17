@@ -14,6 +14,7 @@ const postCreateItemHandler =
     model,
     customCheck,
     onSuccess,
+    postmanId,
   }: {
     model: CommonModel;
     customCheck?: (body: InsertItemType) => Promise<string | null>;
@@ -21,6 +22,7 @@ const postCreateItemHandler =
       id: string,
       newValues: CommonInsertItemSchema,
     ) => Promise<void>;
+    postmanId: string;
   }) =>
   async (c: Context) => {
     const body: InsertItemType = await c.req.json();
@@ -50,7 +52,10 @@ const postCreateItemHandler =
       }
     }
 
-    const id = createId();
+    const id =
+      process.env.BUN_ENV && process.env.BUN_ENV === 'postman'
+        ? postmanId
+        : createId();
     const newValues = {
       id,
       ...pick(body, [...mandatory, ...optional]),

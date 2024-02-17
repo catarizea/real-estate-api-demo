@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   customBathroomBedroomCheck,
   deleteItemHandler,
@@ -66,6 +67,7 @@ app.openapi(
   }),
   postCreateItemHandler<InsertBathroomSchema>({
     model: bathroom,
+    postmanId: postmanIds.bathroom,
     onSuccess: async (id: string) => {
       console.log(`publish message for created bathroom with id ${id}`);
     },
@@ -77,6 +79,7 @@ app.openapi(
     tag: NomenclatureTag.Bathroom,
     updateItemSchema: updateBathroomSchema,
     updateItemSchemaExample: updateBathroomSchemaExample,
+    postmanId: postmanIds.bathroom,
   }),
   putUpdateItemHandler<UpdateBathroomSchema>({
     model: bathroom,
@@ -92,6 +95,7 @@ app.openapi(
 app.openapi(
   deleteItem({
     tag: NomenclatureTag.Bathroom,
+    postmanId: postmanIds.bathroom,
   }),
   deleteItemHandler({
     model: bathroom,

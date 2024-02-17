@@ -1,7 +1,11 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
 import { cors } from 'hono/cors';
 
-import { contentTypeChecker, httpLogger } from '@/middlewares';
+import {
+  contentTypeChecker,
+  httpExceptionHandler,
+  httpLogger,
+} from '@/middlewares';
 import routes from '@/routes';
 
 const app = new OpenAPIHono();
@@ -16,6 +20,8 @@ app.use(
 
 app.use('*', httpLogger);
 app.use('*', contentTypeChecker);
+
+app.onError(httpExceptionHandler);
 
 routes.forEach(({ path, routes }) => {
   app.route(path, routes);

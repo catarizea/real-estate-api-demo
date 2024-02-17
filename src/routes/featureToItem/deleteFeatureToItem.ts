@@ -7,15 +7,19 @@ export const successSchema = z.object({
   success: z.literal(true),
 });
 
-const deleteFeatureToItem = (tag: NomenclatureTag) =>
+const deleteFeatureToItem = (
+  tag: NomenclatureTag,
+  postmanFeatureId: string,
+  postmanItemId: string,
+) =>
   createRoute({
     method: 'delete',
     path: '/delete/{featureId}/{itemId}',
     tags: [tag],
     request: {
       params: z.object({
-        featureId: z.string(),
-        itemId: z.string(),
+        featureId: z.string().openapi({ example: postmanFeatureId }),
+        itemId: z.string().openapi({ example: postmanItemId }),
       }),
     },
     responses: {

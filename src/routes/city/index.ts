@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   customInsertCityCheck,
   deleteItemHandler,
@@ -67,6 +68,7 @@ app.openapi(
   postCreateItemHandler<InsertCitySchema>({
     model: city,
     customCheck: customInsertCityCheck,
+    postmanId: postmanIds.city,
     onSuccess: async (id: string) => {
       console.log(`publish message for created city with id ${id}`);
     },
@@ -78,6 +80,7 @@ app.openapi(
     tag: NomenclatureTag.City,
     updateItemSchema: updateCitySchema,
     updateItemSchemaExample: updateCitySchemaExample,
+    postmanId: postmanIds.city,
   }),
   putUpdateItemHandler<UpdateCitySchema>({
     model: city,
@@ -93,6 +96,7 @@ app.openapi(
 app.openapi(
   deleteItem({
     tag: NomenclatureTag.City,
+    postmanId: postmanIds.city,
   }),
   deleteItemHandler({
     model: city,

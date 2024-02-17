@@ -1,5 +1,6 @@
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   customInsertPropertyCheck,
   deleteItemHandler,
@@ -30,7 +31,11 @@ import {
   updatePropertySchemaExample,
 } from '@/models/zodSchemas';
 import { NomenclatureTag } from '@/types';
-import { createBodyDescription, getModelFields } from '@/utils';
+import {
+  badRequestResponse,
+  createBodyDescription,
+  getModelFields,
+} from '@/utils';
 import {
   bodyPropertyListSchema,
   getPropertyCursorValidatorByOrderBy,
@@ -79,6 +84,7 @@ app.openapi(
   postCreateItemHandler<InsertPropertySchema>({
     model: property,
     customCheck: customInsertPropertyCheck,
+    postmanId: postmanIds.property,
   }),
 );
 
@@ -86,6 +92,7 @@ app.openapi(
   putUpdateItem({
     tag: NomenclatureTag.Property,
     updateItemSchema: updatePropertySchema,
+    postmanId: postmanIds.property,
     updateItemSchemaExample: updatePropertySchemaExample,
   }),
   putUpdateItemHandler<UpdatePropertySchema>({
@@ -100,6 +107,7 @@ app.openapi(
 app.openapi(
   deleteItem({
     tag: NomenclatureTag.Property,
+    postmanId: postmanIds.property,
   }),
   deleteItemHandler({
     model: property,

@@ -16,7 +16,7 @@ let logger: Logger | MockLogger = {
   info: () => {},
 };
 
-if (process.env.BUN_ENV !== 'test') {
+if (process.env.BUN_ENV && process.env.BUN_ENV !== 'test') {
   logger = createLogger({
     level: 'info',
     transports: [

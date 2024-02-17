@@ -1,3 +1,5 @@
+import { postmanIds } from '@/constants';
+
 export const cityBodySchemaExample = {
   and: [
     [
@@ -6,6 +8,6 @@ export const cityBodySchemaExample = {
       ['eq', 'name', 'Ottawa'],
       ['eq', 'name', 'Mississauga'],
     ],
-    ['eq', 'regionId', 'atgl5rbiijouz9695d01vpne'],
+    ['eq', 'regionId', postmanIds.region],
   ],
 };

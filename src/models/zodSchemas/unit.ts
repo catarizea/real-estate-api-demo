@@ -1,7 +1,9 @@
 import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
+import { postmanIds } from '@/constants';
 import { unit } from '@/models/schema';
+import { atLeastOneFieldDefined } from '@/utils';
 
 export const selectUnitSchema = createSelectSchema(unit, {
   createdAt: z.string(),
@@ -13,8 +15,8 @@ export type SelectUnitSchema = z.infer<typeof selectUnitSchema>;
 export const insertUnitSchema = createInsertSchema(unit);
 
 export const insertUnitSchemaExample = {
-  propertyId: 'a5ug1fdwkkc4byl1uw9d7cqo',
-  floorPlanId: 'pkzhabeowrf5q2gj0gtl1657',
+  propertyId: postmanIds.property,
+  floorPlanId: postmanIds.floorPlan,
   name: 'Unit name',
   rent: 1000,
   deposit: 1000,
@@ -30,8 +32,8 @@ export const insertUnitSchemaExample = {
   internet: true,
   television: true,
   order: 1,
-  bedroomId: 'ztie6w95a0ia39zssos2p4bx',
-  bathroomId: 'rtfvftapzbzz6czz73ss09jf',
+  bedroomId: postmanIds.bedroom,
+  bathroomId: postmanIds.bathroom,
 };
 
 export type InsertUnitSchema = z.infer<typeof insertUnitSchema>;
@@ -63,50 +65,7 @@ const updateSchema = z.object({
 export const updatableUnitFields: string[] = updateSchema.keyof().options;
 
 export const updateUnitSchema = updateSchema.refine(
-  ({
-    name,
-    rent,
-    deposit,
-    available,
-    immediate,
-    availableDate,
-    shortterm,
-    longterm,
-    unitNumber,
-    unitName,
-    surface,
-    furnished,
-    bedroomId,
-    bathroomId,
-    heat,
-    water,
-    electricity,
-    internet,
-    television,
-    order,
-    published,
-  }) =>
-    typeof name !== 'undefined' ||
-    typeof rent !== 'undefined' ||
-    typeof deposit !== 'undefined' ||
-    typeof available !== 'undefined' ||
-    typeof immediate !== 'undefined' ||
-    typeof availableDate !== 'undefined' ||
-    typeof shortterm !== 'undefined' ||
-    typeof longterm !== 'undefined' ||
-    typeof unitNumber !== 'undefined' ||
-    typeof unitName !== 'undefined' ||
-    typeof surface !== 'undefined' ||
-    typeof furnished !== 'undefined' ||
-    typeof bedroomId !== 'undefined' ||
-    typeof bathroomId !== 'undefined' ||
-    typeof heat !== 'undefined' ||
-    typeof water !== 'undefined' ||
-    typeof electricity !== 'undefined' ||
-    typeof internet !== 'undefined' ||
-    typeof television !== 'undefined' ||
-    typeof order !== 'undefined' ||
-    typeof published !== 'undefined',
+  (fields) => atLeastOneFieldDefined(fields, updatableUnitFields),
   {
     message: 'at least one field must be provided for update',
     path: updatableUnitFields,

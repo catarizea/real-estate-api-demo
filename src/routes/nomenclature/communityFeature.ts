@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   customUpdateCommunityFeatureCheck,
   deleteItemHandler,
@@ -66,6 +67,7 @@ app.openapi(
   }),
   postCreateItemHandler<InsertBathroomSchema>({
     model: communityFeature,
+    postmanId: postmanIds.communityFeature,
     onSuccess: async (id: string) => {
       console.log(`publish message for created communityFeature with id ${id}`);
     },
@@ -77,6 +79,7 @@ app.openapi(
     tag: NomenclatureTag.CommunityFeature,
     updateItemSchema: updateBathroomSchema,
     updateItemSchemaExample: updateBathroomSchemaExample,
+    postmanId: postmanIds.communityFeature,
   }),
   putUpdateItemHandler<UpdateBathroomSchema>({
     model: communityFeature,
@@ -92,6 +95,7 @@ app.openapi(
 app.openapi(
   deleteItem({
     tag: NomenclatureTag.CommunityFeature,
+    postmanId: postmanIds.communityFeature,
   }),
   deleteItemHandler({
     model: communityFeature,

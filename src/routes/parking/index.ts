@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   customInsertParkingCheck,
   customUpdateParkingCheck,
@@ -75,6 +76,7 @@ app.openapi(
   postCreateItemHandler<InsertParkingSchema>({
     model: parking,
     customCheck: customInsertParkingCheck,
+    postmanId: postmanIds.parking,
     onSuccess: publishInsertParking,
   }),
 );
@@ -84,6 +86,7 @@ app.openapi(
     tag: NomenclatureTag.Parking,
     updateItemSchema: updateParkingSchema,
     updateItemSchemaExample: updateParkingSchemaExample,
+    postmanId: postmanIds.parking,
   }),
   putUpdateItemHandler<UpdateParkingSchema>({
     model: parking,
@@ -97,6 +100,7 @@ app.openapi(
 app.openapi(
   deleteItem({
     tag: NomenclatureTag.Parking,
+    postmanId: postmanIds.parking,
   }),
   deleteItemHandler({
     model: parking,

@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   customInsertUnitCheck,
   deleteItemHandler,
@@ -71,6 +72,7 @@ app.openapi(
   postCreateItemHandler<InsertUnitSchema>({
     model: unit,
     customCheck: customInsertUnitCheck,
+    postmanId: postmanIds.unit,
     onSuccess: async (id: string) => {
       console.log(`publish message for created unit with id ${id}`);
     },
@@ -82,6 +84,7 @@ app.openapi(
     tag: NomenclatureTag.Unit,
     updateItemSchema: updateUnitSchema,
     updateItemSchemaExample: updateUnitSchemaExample,
+    postmanId: postmanIds.unit,
   }),
   putUpdateItemHandler<UpdateUnitSchema>({
     model: unit,
@@ -97,6 +100,7 @@ app.openapi(
 app.openapi(
   deleteItem({
     tag: NomenclatureTag.Unit,
+    postmanId: postmanIds.unit,
   }),
   deleteItemHandler({
     model: unit,

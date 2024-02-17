@@ -6,6 +6,7 @@ import { errorSchema } from '@/validators';
 const getFeaturesByItem = (
   tag: NomenclatureTag,
   successSchema: FeatureToItemSuccessSchema,
+  postmanId: string,
 ) =>
   createRoute({
     method: 'get',
@@ -13,7 +14,7 @@ const getFeaturesByItem = (
     tags: [tag],
     request: {
       params: z.object({
-        itemId: z.string(),
+        itemId: z.string().openapi({ example: postmanId }),
       }),
     },
     responses: {

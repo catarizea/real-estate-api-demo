@@ -16,10 +16,12 @@ const putUpdateItem = ({
   tag,
   updateItemSchema,
   updateItemSchemaExample,
+  postmanId,
 }: {
   tag: NomenclatureTag;
   updateItemSchema: CommonUpdateSchema;
   updateItemSchemaExample: CommonUpdateSchemaExample;
+  postmanId: string;
 }) =>
   createRoute({
     method: 'put',
@@ -27,7 +29,7 @@ const putUpdateItem = ({
     tags: [tag],
     request: {
       params: z.object({
-        id: z.string(),
+        id: z.string().openapi({ example: postmanId }),
       }),
       body: {
         description: `<p>Update a ${tag} object.</p>`,
@@ -37,7 +39,7 @@ const putUpdateItem = ({
             example: updateItemSchemaExample,
           },
         },
-        required: true,
+        required: false,
       },
     },
     responses: {

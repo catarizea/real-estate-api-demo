@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import {
   customInsertCommunityCheck,
   deleteItemHandler,
@@ -75,6 +76,7 @@ app.openapi(
   postCreateItemHandler<InsertCommunitySchema>({
     model: community,
     customCheck: customInsertCommunityCheck,
+    postmanId: postmanIds.community,
     onSuccess: async (id: string) => {
       console.log(`publish message for created community with id ${id}`);
     },
@@ -86,6 +88,7 @@ app.openapi(
     tag: NomenclatureTag.Community,
     updateItemSchema: updateCommunitySchema,
     updateItemSchemaExample: updateCommunitySchemaExample,
+    postmanId: postmanIds.community,
   }),
   putUpdateItemHandler<UpdateCommunitySchema>({
     model: community,
@@ -101,6 +104,7 @@ app.openapi(
 app.openapi(
   deleteItem({
     tag: NomenclatureTag.Community,
+    postmanId: postmanIds.community,
   }),
   deleteItemHandler({
     model: community,

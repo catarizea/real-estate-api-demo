@@ -1,5 +1,6 @@
 import { createRoute, z } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
 import { NomenclatureTag } from '@/types';
 import { errorSchema, preparedRegionSchema } from '@/validators';
 
@@ -9,7 +10,7 @@ const getRegion = createRoute({
   tags: [NomenclatureTag.Region],
   request: {
     params: z.object({
-      id: z.string(),
+      id: z.string().openapi({ example: postmanIds.region }),
     }),
   },
   responses: {

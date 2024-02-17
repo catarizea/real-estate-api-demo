@@ -9,6 +9,13 @@ const publishDeleteMedia: (
   id: string,
   oldValues: CommonSelectItemSchemaType,
 ) => Promise<void> = async (_, oldValues) => {
+  if (
+    process.env.BUN_ENV &&
+    ['test', 'postman'].includes(process.env.BUN_ENV)
+  ) {
+    return;
+  }
+
   const { propertyId, order } = oldValues as SelectMediaSchema;
 
   const medias = (await preparedImagesByPropertyId.execute({

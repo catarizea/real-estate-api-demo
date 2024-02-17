@@ -2,6 +2,7 @@ import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 import { region } from '@/models/schema';
+import { atLeastOneFieldDefined } from '@/utils';
 
 export const selectRegionSchema = createSelectSchema(region, {
   createdAt: z.string(),
@@ -27,8 +28,7 @@ const updateSchema = z.object({
 export const updatableRegionFields: string[] = updateSchema.keyof().options;
 
 export const updateRegionSchema = updateSchema.refine(
-  ({ name, administrativeName }) =>
-    typeof name !== 'undefined' || typeof administrativeName !== 'undefined',
+  (fields) => atLeastOneFieldDefined(fields, updatableRegionFields),
   {
     message: 'at least one field must be provided for update',
     path: updatableRegionFields,

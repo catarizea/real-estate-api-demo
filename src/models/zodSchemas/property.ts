@@ -2,6 +2,7 @@ import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 import { property } from '@/models/schema';
+import { atLeastOneFieldDefined } from '@/utils';
 
 export const selectPropertySchema = createSelectSchema(property, {
   createdAt: z.string(),
@@ -17,7 +18,7 @@ export const insertPropertySchemaExample = {
   address: '123 Main St, Calgary, AB T2P 1J9',
   latitude: '51.0447',
   longitude: '-114.0719',
-  yearBuilt: 2020,
+  yearBuilt: 2019,
   descriptionTitle: 'Property description title',
   descriptionSubtitle: 'Property description subtitle',
   descriptionText: 'Property description text',
@@ -58,53 +59,14 @@ const updateSchema = z.object({
 export const updatablePropertyFields: string[] = updateSchema.keyof().options;
 
 export const updatePropertySchema = updateSchema.refine(
-  ({
-    name,
-    address,
-    latitude,
-    longitude,
-    yearBuilt,
-    descriptionTitle,
-    descriptionSubtitle,
-    descriptionText,
-    typePropId,
-    communityId,
-    cityId,
-    smoking,
-    cats,
-    dogs,
-    petsNegotiable,
-    petsFee,
-    petsFeeInterval,
-    published,
-    customerRanking,
-    paidSearchRanking,
-  }) =>
-    typeof name !== 'undefined' ||
-    typeof address !== 'undefined' ||
-    typeof latitude !== 'undefined' ||
-    typeof longitude !== 'undefined' ||
-    typeof yearBuilt !== 'undefined' ||
-    typeof descriptionTitle !== 'undefined' ||
-    typeof descriptionSubtitle !== 'undefined' ||
-    typeof descriptionText !== 'undefined' ||
-    typeof typePropId !== 'undefined' ||
-    typeof communityId !== 'undefined' ||
-    typeof cityId !== 'undefined' ||
-    typeof smoking !== 'undefined' ||
-    typeof cats !== 'undefined' ||
-    typeof dogs !== 'undefined' ||
-    typeof petsNegotiable !== 'undefined' ||
-    typeof petsFee !== 'undefined' ||
-    typeof petsFeeInterval !== 'undefined' ||
-    typeof published !== 'undefined' ||
-    typeof customerRanking !== 'undefined' ||
-    typeof paidSearchRanking !== 'undefined',
+  (fields) => atLeastOneFieldDefined(fields, updatablePropertyFields),
   {
     message: 'at least one field must be provided for update',
     path: updatablePropertyFields,
   },
 );
+
+export type UpdatePropertySchema = z.infer<typeof updatePropertySchema>;
 
 export const updatePropertySchemaExample = {
   name: 'Property name',
@@ -121,5 +83,3 @@ export const updatePropertySchemaExample = {
   petsNegotiable: true,
   petsFee: 100,
 };
-
-export type UpdatePropertySchema = z.infer<typeof updatePropertySchema>;

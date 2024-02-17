@@ -2,6 +2,7 @@ import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 import { floorPlan } from '@/models/schema';
+import { atLeastOneFieldDefined } from '@/utils';
 
 export const selectFloorPlanSchema = createSelectSchema(floorPlan, {
   createdAt: z.string(),
@@ -29,10 +30,7 @@ const updateSchema = z.object({
 export const updatableFloorPlanFields: string[] = updateSchema.keyof().options;
 
 export const updateFloorPlanSchema = updateSchema.refine(
-  ({ name, propertyId, order }) =>
-    typeof name !== 'undefined' ||
-    typeof propertyId !== 'undefined' ||
-    typeof order !== 'undefined',
+  (fields) => atLeastOneFieldDefined(fields, updatableFloorPlanFields),
   {
     message: 'at least one field must be provided for update',
     path: updatableFloorPlanFields,

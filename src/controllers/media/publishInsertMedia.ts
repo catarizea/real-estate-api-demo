@@ -9,6 +9,13 @@ const publishInsertMedia: (
   newId: string,
   newValues: CommonInsertItemSchema,
 ) => Promise<void> = async (newId, newValues) => {
+  if (
+    process.env.BUN_ENV &&
+    ['test', 'postman'].includes(process.env.BUN_ENV)
+  ) {
+    return;
+  }
+
   const { propertyId, assetId } = newValues as typeof media.$inferInsert;
 
   const medias = await preparedImagesByPropertyId.execute({ propertyId });

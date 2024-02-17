@@ -2,6 +2,7 @@ import { z } from '@hono/zod-openapi';
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 import { community } from '@/models/schema';
+import { atLeastOneFieldDefined } from '@/utils';
 
 export const selectCommunitySchema = createSelectSchema(community, {
   createdAt: z.string(),
@@ -47,48 +48,7 @@ const updateSchema = z.object({
 export const updatableCommunityFields: string[] = updateSchema.keyof().options;
 
 export const updateCommunitySchema = updateSchema.refine(
-  ({
-    name,
-    latitude,
-    longitude,
-    cityId,
-    score,
-    imageUrl,
-    quadrant,
-    sector,
-    ward,
-    population,
-    dwellings,
-    usedForRenting,
-    area,
-    density,
-    averageIncome,
-    lowIncome,
-    immigrants,
-    elevation,
-    established,
-    description,
-  }) =>
-    typeof name !== 'undefined' ||
-    typeof latitude !== 'undefined' ||
-    typeof longitude !== 'undefined' ||
-    typeof cityId !== 'undefined' ||
-    typeof score !== 'undefined' ||
-    typeof imageUrl !== 'undefined' ||
-    typeof quadrant !== 'undefined' ||
-    typeof sector !== 'undefined' ||
-    typeof ward !== 'undefined' ||
-    typeof population !== 'undefined' ||
-    typeof dwellings !== 'undefined' ||
-    typeof usedForRenting !== 'undefined' ||
-    typeof area !== 'undefined' ||
-    typeof density !== 'undefined' ||
-    typeof averageIncome !== 'undefined' ||
-    typeof lowIncome !== 'undefined' ||
-    typeof immigrants !== 'undefined' ||
-    typeof elevation !== 'undefined' ||
-    typeof established !== 'undefined' ||
-    typeof description !== 'undefined',
+  (fields) => atLeastOneFieldDefined(fields, updatableCommunityFields),
   {
     message: 'at least one field must be provided for update',
     path: updatableCommunityFields,

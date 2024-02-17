@@ -1,15 +1,17 @@
 import { z } from '@hono/zod-openapi';
 
+import { postmanIds } from '@/constants';
+
 export const unitBodySchemaExample = {
   and: [
     [
       'or',
       [
-        ['eq', 'bedroomId', 'ztie6w95a0ia39zssos2p4bx'],
+        ['eq', 'bedroomId', postmanIds.bedroom],
         ['eq', 'bedroomId', 'kcfw2qhwnky96aeeov73aaze'],
       ],
     ],
-    ['eq', 'bathroomId', 'rtfvftapzbzz6czz73ss09jf'],
+    ['eq', 'bathroomId', postmanIds.bathroom],
     ['eq', 'longterm', 1],
     ['between', 'surface', 700, 1000],
     ['eq', 'furnished', 1],

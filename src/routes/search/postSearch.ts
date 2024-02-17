@@ -26,19 +26,28 @@ const postSearch = createRoute({
           schema: bodySearchSchema,
           example: {
             and: [
-              ['eq', 'smoking', 1],
-              ['between', 'rent', 1000, 1200],
+              ['between', 'rent', 1000, 2000],
               ['like', 'address', 'Crescent'],
               [
                 'or',
                 [
+                  ['eq', 'smoking', 1],
                   ['eq', 'cats', 1],
                   ['eq', 'dogs', 1],
                 ],
               ],
               ['aroundLatLng', 50.9573828, -114.084153, 1000],
             ],
-            fields: ['listingId', 'propertyId', 'rent', 'immediate', 'imageId'],
+            fields: [
+              'listingId',
+              'propertyId',
+              'rent',
+              'immediate',
+              'imageId',
+              'smoking',
+              'cats',
+              'dogs',
+            ],
           },
         },
       },

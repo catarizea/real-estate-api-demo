@@ -18,6 +18,13 @@ const publishUpdateProperty: (
   newValues: CommonUpdateItemSchema & { updatedAt: Date },
   oldValues: CommonSelectItemSchemaType,
 ) => Promise<void> = async (id, newValues, oldValues) => {
+  if (
+    process.env.BUN_ENV &&
+    ['test', 'postman'].includes(process.env.BUN_ENV)
+  ) {
+    return;
+  }
+
   const { published: newPublished, ...restNew } =
     newValues as UpdatePropertySchema;
   const { published: oldPublished, ...restOld } =
