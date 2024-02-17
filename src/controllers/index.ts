@@ -1,4 +1,5 @@
 import { customBathroomBedroomCheck } from './bathroom';
+import { customUpdateBuildingFeatureCheck } from './buildingFeature';
 import { customInsertCityCheck } from './city';
 import {
   deleteItemHandler,
@@ -53,6 +54,7 @@ export {
   customInsertParkingCheck,
   customInsertPropertyCheck,
   customInsertUnitCheck,
+  customUpdateBuildingFeatureCheck,
   customUpdateCommunityFeatureCheck,
   customUpdateFeatureCheck,
   customUpdateParkingCheck,

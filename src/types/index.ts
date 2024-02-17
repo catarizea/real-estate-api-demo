@@ -399,6 +399,7 @@ export enum NomenclatureTag {
   Region = 'region',
   City = 'city',
   MediaType = 'mediaType',
+  BuildingFeature = 'buildingFeature',
 }
 
 export type FeatureToItem =

@@ -12,6 +12,7 @@ import mediaType from './mediaType';
 import {
   bathroom,
   bedroom,
+  buildingFeature,
   communityFeature,
   feature,
   typeProp,
@@ -38,6 +39,10 @@ const routes = [
   {
     path: '/bedroom',
     routes: bedroom,
+  },
+  {
+    path: '/building-feature',
+    routes: buildingFeature,
   },
   {
     path: '/building-feature-to-property',

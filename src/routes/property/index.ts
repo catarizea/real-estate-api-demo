@@ -31,11 +31,7 @@ import {
   updatePropertySchemaExample,
 } from '@/models/zodSchemas';
 import { NomenclatureTag } from '@/types';
-import {
-  badRequestResponse,
-  createBodyDescription,
-  getModelFields,
-} from '@/utils';
+import { createBodyDescription, getModelFields } from '@/utils';
 import {
   bodyPropertyListSchema,
   getPropertyCursorValidatorByOrderBy,
