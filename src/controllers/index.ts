@@ -14,6 +14,7 @@ import {
   deleteFeatureToItemHandler,
   getFeaturesByItemHandler,
   postCreateFeatureToItemHandler,
+  publishFeatureToProperty,
 } from './featureToItem';
 import { customInsertFloorPlanCheck } from './floorPlan';
 import {
@@ -74,6 +75,7 @@ export {
   postSearchHandler,
   publishDeleteMedia,
   publishDeleteParking,
+  publishFeatureToProperty,
   publishInsertMedia,
   publishInsertParking,
   publishUpdateMedia,

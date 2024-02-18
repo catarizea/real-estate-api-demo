@@ -368,6 +368,11 @@ export type PartialSelectPropertySchema = Omit<
 > &
   KeyedObject;
 
+export type FeatureToItemPayload = {
+  features: string[];
+  unitIds: string[];
+};
+
 export type RabbitMqMessage = {
   type: string;
   payload:
@@ -376,7 +381,8 @@ export type RabbitMqMessage = {
     | MediaPayload
     | ParkingPayload
     | PropertyPartialPayload
-    | UnitsPayload;
+    | UnitsPayload
+    | FeatureToItemPayload;
 };
 
 export enum NomenclatureTag {

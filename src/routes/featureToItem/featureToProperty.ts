@@ -5,6 +5,7 @@ import {
   deleteFeatureToItemHandler,
   getFeaturesByItemHandler,
   postCreateFeatureToItemHandler,
+  publishFeatureToProperty,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
 import { NomenclatureTag } from '@/types';
@@ -32,7 +33,10 @@ app.openapi(
     featureId: postmanIds.feature,
     itemId: postmanIds.property,
   }),
-  postCreateFeatureToItemHandler(NomenclatureTag.FeatureToProperty),
+  postCreateFeatureToItemHandler(
+    NomenclatureTag.FeatureToProperty,
+    publishFeatureToProperty,
+  ),
 );
 
 app.openapi(
@@ -41,7 +45,10 @@ app.openapi(
     postmanIds.feature,
     postmanIds.property,
   ),
-  deleteFeatureToItemHandler(NomenclatureTag.FeatureToProperty),
+  deleteFeatureToItemHandler(
+    NomenclatureTag.FeatureToProperty,
+    publishFeatureToProperty,
+  ),
 );
 
 export default app;
