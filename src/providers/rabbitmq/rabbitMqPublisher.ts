@@ -1,4 +1,4 @@
-import amqp from 'amqplib';
+import amqp from 'amqp-connection-manager';
 
 import { rabbitMqPrefix } from '@/constants';
 import { logger } from '@/services';
@@ -11,15 +11,16 @@ if (!cloudAmqpUrl) {
 }
 
 const rabbitMqPublisher = async (queue: string) => {
-  const connection = await amqp.connect(cloudAmqpUrl);
-  const channel = await connection.createChannel();
+  const connection = amqp.connect(cloudAmqpUrl);
+  const channelWrapper = connection.createChannel({
+    json: true,
+  });
 
   return (message: RabbitMqMessage) => {
-    const messageString = JSON.stringify(message);
     logger.info(
       `${rabbitMqPrefix} publishing message of type ${message.type} to queue ${queue}`,
     );
-    channel.sendToQueue(queue, Buffer.from(messageString));
+    channelWrapper.sendToQueue(queue, message);
   };
 };
 
