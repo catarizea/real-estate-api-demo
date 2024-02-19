@@ -23,7 +23,7 @@ import {
   updateUnitSchemaExample,
 } from '@/models/zodSchemas';
 
-const sleepTime = 500;
+const sleepTime = 300;
 
 const executeApiCalls = async () => {
   const start = performance.now();
