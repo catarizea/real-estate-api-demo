@@ -1,18 +1,12 @@
 /* eslint-disable no-console */
 import { sleep } from 'bun';
-import { expect, test } from 'bun:test';
+import { describe, expect, test } from 'bun:test';
 import logSymbols from 'log-symbols';
 
 let honoPid: number | null = null;
 const logs: string[] = [];
 
-process.on('SIGINT', async () => {
-  console.log(`\n${logSymbols.info} Ctrl-C was pressed. Killing children...`);
-  await killChildren();
-  process.exit();
-});
-
-const proc = Bun.spawn(['bun', 'run', 'start:postman:test']);
+const proc = Bun.spawn(['bun', 'run', 'start:algolia:test']);
 
 const killChildren = async () => {
   console.log(logs);
@@ -27,6 +21,12 @@ const killChildren = async () => {
   console.log(logSymbols.success, 'All children have been killed');
 };
 
+process.on('SIGINT', async () => {
+  console.log(`\n${logSymbols.info} Ctrl-C was pressed. Killing children...`);
+  await killChildren();
+  process.exit(0);
+});
+
 const stream = new WritableStream({
   write: async (chunk) => {
     const str = new TextDecoder().decode(chunk);
@@ -40,7 +40,14 @@ const stream = new WritableStream({
 
 proc.stdout.pipeTo(stream);
 
-test('startAppAndReadStdout', async () => {
+describe('testing algolia workers', async () => {
   await sleep(10000);
-  await killChildren();
-}, 15000);
+
+  test('test 1', async () => {});
+
+  test('test 2', async () => {});
+
+  test('clean up', async () => {
+    await killChildren();
+  }, 15000);
+});
