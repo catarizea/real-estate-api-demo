@@ -39,6 +39,7 @@
     "@paralleldrive/cuid2": "^2.2.2",
     "@planetscale/database": "^1.16.0",
     "algoliasearch": "^4.22.1",
+    "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.3",
     "drizzle-orm": "^0.29.3",
     "drizzle-zod": "^0.5.1",

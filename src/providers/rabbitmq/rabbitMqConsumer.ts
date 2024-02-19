@@ -1,4 +1,5 @@
-import amqp, { Message } from 'amqplib';
+import amqp, { Channel } from 'amqp-connection-manager';
+import { Message } from 'amqplib';
 
 import { rabbitMqPrefix } from '@/constants';
 import { logger, worker } from '@/services';
@@ -11,32 +12,39 @@ if (!cloudAmqpUrl) {
 }
 
 const rabbitMqConsumer = async (queue: string) => {
-  const connection = await amqp.connect(cloudAmqpUrl);
-  const channel = await connection.createChannel();
+  const connection = amqp.connect([cloudAmqpUrl]);
 
-  channel.assertQueue(queue, { durable: true });
-  logger.info(`${rabbitMqPrefix} waiting for messages in queue ${queue}`);
+  connection.createChannel({
+    json: true,
+    setup: (channel: Channel) => {
+      channel.assertQueue(queue, { durable: true });
 
-  channel.consume(
-    queue,
-    (message: Message | null) => {
-      if (!message) {
-        logger.error(`${rabbitMqPrefix} message is null for queue ${queue}`);
-        return;
-      }
+      logger.info(`${rabbitMqPrefix} waiting for messages in queue ${queue}`);
 
-      const messageString = message.content.toString();
+      channel.consume(
+        queue,
+        (message: Message | null) => {
+          if (!message) {
+            logger.error(
+              `${rabbitMqPrefix} message is null for queue ${queue}`,
+            );
+            return;
+          }
 
-      const rabbitMqMessage: RabbitMqMessage = JSON.parse(messageString);
+          const messageString = message.content.toString();
 
-      logger.info(
-        `${rabbitMqPrefix} consuming message of type ${rabbitMqMessage.type} from queue ${queue}`,
+          const rabbitMqMessage: RabbitMqMessage = JSON.parse(messageString);
+
+          logger.info(
+            `${rabbitMqPrefix} consuming message of type ${rabbitMqMessage.type} from queue ${queue}`,
+          );
+
+          worker(rabbitMqMessage, channel, message);
+        },
+        { noAck: false },
       );
-
-      worker(rabbitMqMessage, channel, message);
     },
-    { noAck: false },
-  );
+  });
 };
 
 export default rabbitMqConsumer;
