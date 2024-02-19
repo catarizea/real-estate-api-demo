@@ -15,7 +15,7 @@ const getSingleUnitForIndex = async (
 
   const unitForIndex: UnitIndexFragment = {
     objectID: u.id,
-    propertyId: id,
+    propertyId: u.propertyId,
     rent: u.rent,
     immediate: u.immediate ? 1 : 0,
     shortterm: u.shortterm ? 1 : 0,

@@ -119,7 +119,7 @@ const executeApiCalls = async () => {
     });
     console.log(logSymbols.success, 'Feature to property created');
   } catch (error) {
-    console.error(logSymbols.error, 'Error creating feature to property', e);
+    console.error(logSymbols.error, 'Error creating feature to property');
   }
 
   await sleep(sleepTime);
@@ -244,7 +244,7 @@ UPDATE
     );
     console.log(logSymbols.success, 'Feature to property updated');
   } catch (error) {
-    console.error(logSymbols.error, 'Error updating feature to property', e);
+    console.error(logSymbols.error, 'Error updating feature to property');
   }
 
   await sleep(sleepTime);
@@ -401,4 +401,6 @@ DELETE
   console.log(`Execution time: ${Math.round(duration / 1000)} s`);
 };
 
-await executeApiCalls();
+// await executeApiCalls();
+
+export default executeApiCalls;

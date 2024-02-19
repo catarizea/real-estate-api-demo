@@ -6,6 +6,7 @@ const preparedSingleUnitForIndex = db.query.unit
   .findFirst({
     columns: {
       id: true,
+      propertyId: true,
       rent: true,
       immediate: true,
       availableDate: true,

@@ -52,6 +52,7 @@ export type PreparedUnitSchema = z.infer<typeof preparedUnitSchema>;
 
 export const preparedUnitForIndexSchema = z.object({
   id: z.string(),
+  propertyId: z.string(),
   rent: z.number(),
   immediate: z.boolean(),
   availableDate: z.date().nullable(),

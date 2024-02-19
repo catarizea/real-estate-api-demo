@@ -30,13 +30,11 @@
     "postman:test": "bun ./src/utils/tools/postmanRunTests.ts",
     "postman:test:cleanup": "bun ./src/utils/tools/cleanUpAfterTest.ts",
     "start": "dotenv -e .env -v BUN_ENV=prod -- bun index.ts",
-    "start:message:consumer": "bun ./src/services/messageConsumer.ts",
     "start:postman:test": "dotenv -e .env -v BUN_ENV=postman -- bun index.ts",
     "start:algolia:test": "dotenv -e .env -v BUN_ENV=algolia -- bun index.ts",
     "test": "dotenv -e .env -v BUN_ENV=test -- bun test",
-    "test:algolia": "run-s test:apicalls postman:test:cleanup",
-    "test:apicalls": "bun ./src/services/taskWorkers/__tests__/apiCalls.ts",
-    "test:workers": "bun test ./src/services/taskWorkers/__tests__/startAppAndReadStdout.ts"
+    "test:workers": "bun test ./src/services/taskWorkers/__tests__/startAppAndReadStdout.ts",
+    "test:workers:clean": "run-s test:workers:start postman:test:cleanup"
   },
   "dependencies": {
     "@hono/swagger-ui": "^0.2.1",
