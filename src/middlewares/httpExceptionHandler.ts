@@ -1,6 +1,10 @@
 import { Context } from 'hono';
 
-import { badRequestResponse } from '@/utils';
+import {
+  badRequestResponse,
+  getCodeDescriptionPath,
+  hasStatusNameBody,
+} from '@/utils';
 
 const httpExceptionHandler = async (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,6 +29,27 @@ const httpExceptionHandler = async (
       }
 
       return response;
+    }
+  }
+
+  if (
+    hasStatusNameBody(err) &&
+    err.status === 400 &&
+    err.name === 'DatabaseError' &&
+    err.body &&
+    err.body.message
+  ) {
+    const result = getCodeDescriptionPath(err.body.message);
+
+    if (result) {
+      return c.json(
+        badRequestResponse({
+          reason: result.code,
+          message: result.description,
+          path: [result.path],
+        }),
+        400,
+      );
     }
   }
 

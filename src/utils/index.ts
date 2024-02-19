@@ -9,7 +9,9 @@ import dateIsoToDatetime from './tools/dateIsoToDatetime';
 import delay from './tools/delay';
 import getAddressByCoordinates from './tools/getAddressByCoordinates';
 import getBoundingBox from './tools/getBoundingBox';
+import getCodeDescriptionPath from './tools/getCodeDescriptionPath';
 import getModelFields from './tools/getModelFields';
+import hasStatusNameBody from './tools/hasStatusNameBody';
 import isValidJson from './tools/isValidJson';
 import queryIsNotOk from './tools/queryIsNotOk';
 import toCamelCase from './tools/toCamelCase';
@@ -27,7 +29,9 @@ export {
   delay,
   getAddressByCoordinates,
   getBoundingBox,
+  getCodeDescriptionPath,
   getModelFields,
+  hasStatusNameBody,
   isValidJson,
   queryIsNotOk,
   toCamelCase,
