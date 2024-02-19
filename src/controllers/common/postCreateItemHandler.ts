@@ -51,7 +51,7 @@ const postCreateItemHandler =
     }
 
     const id =
-      process.env.BUN_ENV && process.env.BUN_ENV === 'postman'
+      process.env.BUN_ENV && ['test', 'postman'].includes(process.env.BUN_ENV)
         ? postmanId
         : createId();
     const newValues = {

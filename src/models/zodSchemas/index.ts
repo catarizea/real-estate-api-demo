@@ -37,6 +37,10 @@ import {
   updateCommunitySchema,
   updateCommunitySchemaExample,
 } from './community';
+import {
+  insertFeatureSchemaExample,
+  insertTypePropSchemaExample,
+} from './feature';
 import type {
   InsertFloorPlanSchema,
   SelectFloorPlanSchema,
@@ -141,6 +145,7 @@ export {
   InsertCommunitySchema,
   insertCommunitySchema,
   insertCommunitySchemaExample,
+  insertFeatureSchemaExample,
   InsertFloorPlanSchema,
   insertFloorPlanSchema,
   insertFloorPlanSchemaExample,
@@ -159,6 +164,7 @@ export {
   InsertRegionSchema,
   insertRegionSchema,
   insertRegionSchemaExample,
+  insertTypePropSchemaExample,
   InsertUnitSchema,
   insertUnitSchema,
   insertUnitSchemaExample,
