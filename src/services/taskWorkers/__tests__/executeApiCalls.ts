@@ -401,6 +401,4 @@ DELETE
   console.log(`Execution time: ${Math.round(duration / 1000)} s`);
 };
 
-// await executeApiCalls();
-
 export default executeApiCalls;

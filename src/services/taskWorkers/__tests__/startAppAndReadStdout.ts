@@ -11,8 +11,6 @@ const logs: string[] = [];
 const proc = Bun.spawn(['bun', 'run', 'start:algolia:test']);
 
 const killChildren = async () => {
-  console.log(logs);
-
   if (honoPid) {
     process.kill(honoPid);
   }
@@ -43,15 +41,69 @@ const stream = new WritableStream({
 proc.stdout.pipeTo(stream);
 
 describe('testing algolia workers', async () => {
-  await sleep(10000);
+  await sleep(2000);
 
   await executeApiCalls();
 
-  await sleep(10000);
+  test('success task property.create', () => {
+    const tasksPropertyCreate = logs.filter(
+      (log) =>
+        log.indexOf(
+          '[TASK] success finished task property.create created 1 index objects',
+        ) !== -1,
+    );
+    expect(tasksPropertyCreate.length).toBe(1);
+  });
 
-  test('test 1', async () => {});
+  test('success task property.delete', () => {
+    const tasksPropertyDelete = logs.filter(
+      (log) =>
+        log.indexOf(
+          '[TASK] success finished task property.delete deleted 1 index objects',
+        ) !== -1,
+    );
+    expect(tasksPropertyDelete.length).toBe(1);
+  });
 
-  test('test 2', async () => {});
+  test('success task feature.update', () => {
+    const tasksFeatureUpdate = logs.filter(
+      (log) =>
+        log.indexOf(
+          '[TASK] success finished task feature.update updated 1 index objects',
+        ) !== -1,
+    );
+    expect(tasksFeatureUpdate.length).toBe(1);
+  });
+
+  test('success task unit.create', () => {
+    const tasksUnitCreate = logs.filter(
+      (log) =>
+        log.indexOf(
+          '[TASK] success finished task unit.create created 1 index objects',
+        ) !== -1,
+    );
+    expect(tasksUnitCreate.length).toBe(2);
+  });
+
+  test('success task unit.delete', () => {
+    const tasksUnitDelete = logs.filter(
+      (log) =>
+        log.indexOf(
+          '[TASK] success finished task unit.delete deleted 1 index objects',
+        ) !== -1,
+    );
+    expect(tasksUnitDelete.length).toBe(2);
+  });
+
+  test('success task parking.update', () => {
+    const tasksParkingUpdate = logs.filter(
+      (log) =>
+        log.indexOf(
+          '[TASK] success finished task parking.update updated 1 index objects',
+        ) !== -1,
+    );
+    expect(tasksParkingUpdate.length).toBe(2);
+  });
 
   test('clean up', async () => {
     await killChildren();

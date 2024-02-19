@@ -34,7 +34,7 @@
     "start:algolia:test": "dotenv -e .env -v BUN_ENV=algolia -- bun index.ts",
     "test": "dotenv -e .env -v BUN_ENV=test -- bun test",
     "test:workers": "bun test ./src/services/taskWorkers/__tests__/startAppAndReadStdout.ts",
-    "test:workers:clean": "run-s test:workers:start postman:test:cleanup"
+    "test:workers:clean": "run-s test:workers postman:test:cleanup"
   },
   "dependencies": {
     "@hono/swagger-ui": "^0.2.1",
