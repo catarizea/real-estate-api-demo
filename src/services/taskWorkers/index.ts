@@ -12,6 +12,7 @@ import {
   propertyDeleteWorker,
   propertyUpdateWorker,
 } from './property';
+import { unitCreateWorker, unitDeleteWorker, unitUpdateWorker } from './unit';
 
 const worker = (
   rabbitMqMessage: RabbitMqMessage,
@@ -73,6 +74,15 @@ const worker = (
       break;
     case tasks.feature.update:
       featureWorker(rabbitMqMessage, channel, message, tasks.feature.update);
+      break;
+    case tasks.unit.create:
+      unitCreateWorker(rabbitMqMessage, channel, message, tasks.unit.create);
+      break;
+    case tasks.unit.update:
+      unitUpdateWorker(rabbitMqMessage, channel, message, tasks.unit.update);
+      break;
+    case tasks.unit.delete:
+      unitDeleteWorker(rabbitMqMessage, channel, message, tasks.unit.delete);
       break;
     default:
       logger.error(`${taskPrefix} unknown task type ${rabbitMqMessage.type}`);
