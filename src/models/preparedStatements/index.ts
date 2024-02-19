@@ -9,6 +9,7 @@ import preparedPropertyForIndex from './preparedPropertyForIndex';
 import preparedPublishedProperty from './preparedPublishedProperty';
 import preparedPublishedUnit from './preparedPublishedUnit';
 import preparedRegion from './preparedRegion';
+import preparedSingleUnitForIndex from './preparedSingleUnitForIndex';
 import preparedUnit from './preparedUnit';
 import preparedUnitForIndex from './preparedUnitForIndex';
 import preparedUnitsByProperty from './preparedUnitsByProperty';
@@ -25,6 +26,7 @@ export {
   preparedPublishedProperty,
   preparedPublishedUnit,
   preparedRegion,
+  preparedSingleUnitForIndex,
   preparedUnit,
   preparedUnitForIndex,
   preparedUnitsByProperty,

@@ -35,13 +35,21 @@ import {
 } from './parking';
 import {
   customInsertPropertyCheck,
+  getPropertyForIndex,
   getPropertyHandler,
   publishUpdateProperty,
 } from './property';
 import { customUpdateRegionCheck, getRegionHandler } from './region';
 import { postSearchHandler } from './search';
 import { customUpdateTypePropCheck } from './typeProp';
-import { checkPublished, customInsertUnitCheck, getUnitHandler } from './unit';
+import {
+  checkPublished,
+  customInsertUnitCheck,
+  getUnitHandler,
+  publishDeleteUnit,
+  publishInsertUnit,
+  publishUpdateUnit,
+} from './unit';
 
 export {
   checkPublished,
@@ -66,6 +74,7 @@ export {
   getCommunityHandler,
   getFeaturesByItemHandler,
   getParkingsByPropertyHandler,
+  getPropertyForIndex,
   getPropertyHandler,
   getRegionHandler,
   getUnitHandler,
@@ -75,11 +84,14 @@ export {
   postSearchHandler,
   publishDeleteMedia,
   publishDeleteParking,
+  publishDeleteUnit,
   publishFeatureToProperty,
   publishInsertMedia,
   publishInsertParking,
+  publishInsertUnit,
   publishUpdateMedia,
   publishUpdateParking,
   publishUpdateProperty,
+  publishUpdateUnit,
   putUpdateItemHandler,
 };

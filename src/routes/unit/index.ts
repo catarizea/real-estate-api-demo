@@ -8,6 +8,9 @@ import {
   getUnitHandler,
   postCreateItemHandler,
   postListItemHandler,
+  publishDeleteUnit,
+  publishInsertUnit,
+  publishUpdateUnit,
   putUpdateItemHandler,
 } from '@/controllers';
 import { zodDefaultHook } from '@/middlewares';
@@ -73,9 +76,7 @@ app.openapi(
     model: unit,
     customCheck: customInsertUnitCheck,
     postmanId: postmanIds.unit,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created unit with id ${id}`);
-    },
+    onSuccess: publishInsertUnit,
   }),
 );
 
@@ -91,9 +92,7 @@ app.openapi(
     tag: NomenclatureTag.Unit,
     updatableFields: updatableUnitFields,
     customCheck: customInsertUnitCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated unit with id ${id}`);
-    },
+    onSuccess: publishUpdateUnit,
   }),
 );
 
@@ -106,9 +105,7 @@ app.openapi(
     model: unit,
     tag: NomenclatureTag.Unit,
     idField: 'id',
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted unit with id ${id}`);
-    },
+    onSuccess: publishDeleteUnit,
   }),
 );
 

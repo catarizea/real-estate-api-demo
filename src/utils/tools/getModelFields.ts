@@ -6,6 +6,7 @@ type Column = {
   name: string;
   notNull: boolean;
   columnType: string;
+  hasDefault: boolean;
 };
 
 type Fields = {
@@ -48,11 +49,11 @@ const getModelFields = (model: CommonModel): Fields => {
       return;
     }
 
-    if (columns[key].notNull === true) {
+    if (columns[key].notNull === true && columns[key].hasDefault === false) {
       fields.required.push(key);
     }
 
-    if (columns[key].notNull === false) {
+    if (!(columns[key].notNull === true && columns[key].hasDefault === false)) {
       fields.optional.push(key);
     }
 

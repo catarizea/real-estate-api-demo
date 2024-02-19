@@ -27,19 +27,17 @@ const postCreateItemHandler =
   async (c: Context) => {
     const body: InsertItemType = await c.req.json();
     const { required, optional } = getModelFields(model);
-    const mandatory = without(required, 'id');
 
     if (
       !body ||
       Object.keys(body).length === 0 ||
-      Object.keys(body).length > mandatory.length ||
-      intersection(Object.keys(body), mandatory).length === 0
+      intersection(Object.keys(body), required).length === 0
     ) {
       return c.json(
         badRequestResponse({
           reason: 'validation error',
-          message: `body must contain valid ${mandatory.join(' and ')}`,
-          path: mandatory,
+          message: `body must contain valid ${required.join(' and ')}`,
+          path: required,
         }),
         400,
       );
@@ -58,7 +56,10 @@ const postCreateItemHandler =
         : createId();
     const newValues = {
       id,
-      ...pick(body, [...mandatory, ...optional]),
+      ...pick(body, [
+        ...required,
+        ...without(optional, 'id', 'createdAt', 'updatedAt'),
+      ]),
     } as unknown as typeof model.$inferInsert;
 
     await db.insert(model).values(newValues);

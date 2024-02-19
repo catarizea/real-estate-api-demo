@@ -334,6 +334,23 @@ export type UnitIndexFragment = {
   bathroom?: string;
 };
 
+export type UnitUpdateIndexFragment = {
+  objectID: string;
+  rent?: number;
+  immediate?: number;
+  availableDate?: Date;
+  shortterm?: number;
+  longterm?: number;
+  furnished?: number;
+  heat?: number;
+  water?: number;
+  electricity?: number;
+  internet?: number;
+  television?: number;
+  bedroom?: string;
+  bathroom?: string;
+};
+
 export type MediaPayload = {
   imageId: string;
   unitIds: string[];
@@ -368,6 +385,18 @@ export type PartialSelectPropertySchema = Omit<
 > &
   KeyedObject;
 
+export type PartialUpdateUnitSchema = Omit<
+  UpdateUnitSchema,
+  'updatedAt' | 'published'
+> &
+  KeyedObject;
+
+export type PartialSelectUnitSchema = Omit<
+  SelectUnitSchema,
+  'createdAt' | 'updatedAt' | 'published'
+> &
+  KeyedObject;
+
 export type FeatureToItemPayload = {
   features: string[];
   unitIds: string[];
@@ -378,6 +407,8 @@ export type RabbitMqMessage = {
   payload:
     | { id: string }
     | { unitIds: string[] }
+    | { newUnit: PropertyIndexFragment & UnitIndexFragment }
+    | { unit: UnitUpdateIndexFragment }
     | MediaPayload
     | ParkingPayload
     | PropertyPartialPayload
