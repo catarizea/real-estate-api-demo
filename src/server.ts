@@ -10,6 +10,11 @@ import routes from '@/routes';
 
 const app = new OpenAPIHono();
 
+if (process.env.BUN_ENV && process.env.BUN_ENV === 'postman') {
+  // eslint-disable-next-line no-console
+  console.log(`hono pid: ${process.pid}`);
+}
+
 app.use(
   '*',
   cors({
