@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "algolia:seed": "bun ./src/utils/db/seed/algolia/index.ts",
+    "build": "bun build ./index.ts --outdir ./build --target bun",
     "codegen:validators": "bun ./src/validators/codegen/generate.ts generate",
     "db:push": "drizzle-kit push:mysql --config=drizzle.config.ts",
     "db:generate:migration": "drizzle-kit generate:mysql --config=drizzle.config.ts",

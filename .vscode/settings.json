@@ -13,5 +13,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
   },
-  "debug.javascript.unmapMissingSources": true
+  "debug.javascript.unmapMissingSources": true,
+  "terminal.integrated.fontFamily": "Hack Nerd Font Mono",
+  "terminal.integrated.fontWeight": "normal"
 }
