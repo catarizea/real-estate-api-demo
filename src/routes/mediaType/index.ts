@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import { postmanIds } from '@/constants';
@@ -69,9 +68,6 @@ app.openapi(
     model: mediaType,
     customCheck: customInsertMediaTypeCheck,
     postmanId: postmanIds.mediaType,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created mediaType with id ${id}`);
-    },
   }),
 );
 
@@ -87,9 +83,6 @@ app.openapi(
     tag: NomenclatureTag.MediaType,
     updatableFields: updatableMediaTypeFields,
     customCheck: customInsertMediaTypeCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated mediaType with id ${id}`);
-    },
   }),
 );
 
@@ -109,9 +102,6 @@ app.openapi(
         parentIdField: 'mediaTypeId',
       },
     ],
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted mediaType with id ${id}`);
-    },
   }),
 );
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import { postmanIds } from '@/constants';
@@ -69,9 +68,6 @@ app.openapi(
     model: city,
     customCheck: customInsertCityCheck,
     postmanId: postmanIds.city,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created city with id ${id}`);
-    },
   }),
 );
 
@@ -87,9 +83,6 @@ app.openapi(
     tag: NomenclatureTag.City,
     updatableFields: updatableCityFields,
     customCheck: customInsertCityCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated city with id ${id}`);
-    },
   }),
 );
 
@@ -114,9 +107,6 @@ app.openapi(
         parentIdField: 'cityId',
       },
     ],
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted city with id ${id}`);
-    },
   }),
 );
 

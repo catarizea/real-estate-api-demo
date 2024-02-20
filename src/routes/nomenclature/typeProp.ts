@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import { postmanIds } from '@/constants';
@@ -68,9 +67,6 @@ app.openapi(
   postCreateItemHandler<InsertBathroomSchema>({
     model: typeProp,
     postmanId: postmanIds.typeProp,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created typeProp with id ${id}`);
-    },
   }),
 );
 
@@ -86,9 +82,6 @@ app.openapi(
     tag: NomenclatureTag.TypeProp,
     updatableFields: updatableBathroomFields,
     customCheck: customUpdateTypePropCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated typeProp with id ${id}`);
-    },
   }),
 );
 
@@ -108,9 +101,6 @@ app.openapi(
         parentIdField: 'typePropId',
       },
     ],
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted typeProp with id ${id}`);
-    },
   }),
 );
 

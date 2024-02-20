@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import { postmanIds } from '@/constants';
@@ -68,9 +67,6 @@ app.openapi(
   postCreateItemHandler<InsertBathroomSchema>({
     model: feature,
     postmanId: postmanIds.feature,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created feature with id ${id}`);
-    },
   }),
 );
 
@@ -86,9 +82,6 @@ app.openapi(
     tag: NomenclatureTag.Feature,
     updatableFields: updatableBathroomFields,
     customCheck: customUpdateFeatureCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated feature with id ${id}`);
-    },
   }),
 );
 
@@ -108,9 +101,6 @@ app.openapi(
         parentIdField: 'featureId',
       },
     ],
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted feature with id ${id}`);
-    },
   }),
 );
 

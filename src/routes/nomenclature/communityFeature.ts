@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import { postmanIds } from '@/constants';
@@ -68,9 +67,6 @@ app.openapi(
   postCreateItemHandler<InsertBathroomSchema>({
     model: communityFeature,
     postmanId: postmanIds.communityFeature,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created communityFeature with id ${id}`);
-    },
   }),
 );
 
@@ -86,9 +82,6 @@ app.openapi(
     tag: NomenclatureTag.CommunityFeature,
     updatableFields: updatableBathroomFields,
     customCheck: customUpdateCommunityFeatureCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated communityFeature with id ${id}`);
-    },
   }),
 );
 
@@ -108,9 +101,6 @@ app.openapi(
         parentIdField: 'communityFeatureId',
       },
     ],
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted communityFeature with id ${id}`);
-    },
   }),
 );
 

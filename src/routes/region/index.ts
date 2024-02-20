@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import { postmanIds } from '@/constants';
@@ -72,9 +71,6 @@ app.openapi(
   postCreateItemHandler<InsertRegionSchema>({
     model: region,
     postmanId: postmanIds.region,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created region with id ${id}`);
-    },
   }),
 );
 
@@ -90,9 +86,6 @@ app.openapi(
     tag: NomenclatureTag.Region,
     updatableFields: updatableRegionFields,
     customCheck: customUpdateRegionCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated region with id ${id}`);
-    },
   }),
 );
 
@@ -112,9 +105,6 @@ app.openapi(
         parentIdField: 'regionId',
       },
     ],
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted region with id ${id}`);
-    },
   }),
 );
 

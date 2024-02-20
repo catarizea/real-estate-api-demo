@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import { postmanIds } from '@/constants';
@@ -77,9 +76,6 @@ app.openapi(
     model: community,
     customCheck: customInsertCommunityCheck,
     postmanId: postmanIds.community,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created community with id ${id}`);
-    },
   }),
 );
 
@@ -95,9 +91,6 @@ app.openapi(
     tag: NomenclatureTag.Community,
     updatableFields: updatableCommunityFields,
     customCheck: customInsertCommunityCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated community with id ${id}`);
-    },
   }),
 );
 
@@ -122,9 +115,6 @@ app.openapi(
         parentIdField: 'communityId',
       },
     ],
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted community with id ${id}`);
-    },
   }),
 );
 

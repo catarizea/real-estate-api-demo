@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { OpenAPIHono } from '@hono/zod-openapi';
 
 import { postmanIds } from '@/constants';
@@ -69,9 +68,6 @@ app.openapi(
     model: floorPlan,
     customCheck: customInsertFloorPlanCheck,
     postmanId: postmanIds.floorPlan,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for created floorPlan with id ${id}`);
-    },
   }),
 );
 
@@ -87,9 +83,6 @@ app.openapi(
     tag: NomenclatureTag.FloorPlan,
     updatableFields: updatableFloorPlanFields,
     customCheck: customInsertFloorPlanCheck,
-    onSuccess: async (id: string) => {
-      console.log(`publish message for updated floorPlan with id ${id}`);
-    },
   }),
 );
 
@@ -109,9 +102,6 @@ app.openapi(
         parentIdField: 'floorPlanId',
       },
     ],
-    onSuccess: async (id: string) => {
-      console.log(`publish message for deleted floorPlan with id ${id}`);
-    },
   }),
 );
 
