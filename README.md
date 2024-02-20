@@ -117,7 +117,7 @@ https://local.drizzle.studio/?port=3001
 
 17. See entity relationship Draw.io diagram inside this folder `erd/entity-relationship-diagram.drawio`
 
-18 Install **Postman** and import `spec/real-estate-api-demo.postman_collection.json`. In Postman set `baseUrl` variable as `http://localhost:3000`
+18. Install **Postman** and import `spec/real-estate-api-demo.postman_collection.json`. In Postman set `baseUrl` variable as `http://localhost:3000`
 
 19. Install Postman CLI with Homebrew
 
