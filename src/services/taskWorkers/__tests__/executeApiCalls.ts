@@ -113,6 +113,15 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
+    await axios.post(`/media/create`, insertMediaSchemaExample);
+    console.log(logSymbols.success, 'Media created');
+  } catch (error) {
+    console.error(logSymbols.error, 'Error creating media');
+  }
+
+  await sleep(sleepTime);
+
+  try {
     await axios.post(`/feature-to-property/create`, {
       featureId: postmanIds.feature,
       itemId: postmanIds.property,
@@ -120,15 +129,6 @@ const executeApiCalls = async () => {
     console.log(logSymbols.success, 'Feature to property created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating feature to property');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.post(`/media/create`, insertMediaSchemaExample);
-    console.log(logSymbols.success, 'Media created');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error creating media');
   }
 
   await sleep(sleepTime);
@@ -178,10 +178,8 @@ UPDATE
   await sleep(sleepTime);
 
   try {
-    await axios.put(`/unit/update/${postmanIds.unit}`, {
-      ...updateUnitSchemaExample,
-      published: true,
-    });
+    await axios.put(`/unit/update/${postmanIds.unit}`, updateUnitSchemaExample);
+    console.log(logSymbols.success, 'Unit updated');
   } catch (error) {
     console.error(logSymbols.error, 'Error updating unit');
   }
@@ -206,6 +204,17 @@ UPDATE
     console.log(logSymbols.success, 'Property updated');
   } catch (error) {
     console.error(logSymbols.error, 'Error updating property');
+  }
+
+  await sleep(sleepTime);
+
+  try {
+    await axios.put(`/media/update/${postmanIds.media}`, {
+      assetId: '3fjjah9',
+    });
+    console.log(logSymbols.success, 'Media updated');
+  } catch (error) {
+    console.error(logSymbols.error, 'Error updating media');
   }
 
   await sleep(sleepTime);
@@ -242,20 +251,9 @@ UPDATE
     await axios.delete(
       `/feature-to-property/delete/${postmanIds.feature}/${postmanIds.property}`,
     );
-    console.log(logSymbols.success, 'Feature to property updated');
+    console.log(logSymbols.success, 'Feature to property deleted');
   } catch (error) {
-    console.error(logSymbols.error, 'Error updating feature to property');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.put(`/media/update/${postmanIds.media}`, {
-      assetId: '3fjjah9',
-    });
-    console.log(logSymbols.success, 'Media updated');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error updating media');
+    console.error(logSymbols.error, 'Error deleting feature to property');
   }
 
   await sleep(sleepTime);
@@ -282,114 +280,6 @@ DELETE
     console.log(logSymbols.success, 'Unit deleted');
   } catch (error) {
     console.error(logSymbols.error, 'Error deleting unit');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/floor-plan/delete/${postmanIds.floorPlan}`);
-    console.log(logSymbols.success, 'Floor plan deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting floor plan');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/parking/delete/${postmanIds.parking}`);
-    console.log(logSymbols.success, 'Parking deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting parking');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/media/delete/${postmanIds.media}`);
-    console.log(logSymbols.success, 'Media deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting media');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/property/delete/${postmanIds.property}`);
-    console.log(logSymbols.success, 'Property deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting property');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/type-prop/delete/${postmanIds.typeProp}`);
-    console.log(logSymbols.success, 'Type prop deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting type prop');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/media-type/delete/${postmanIds.mediaType}`);
-    console.log(logSymbols.success, 'Media type deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting media type');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/feature/delete/${postmanIds.feature}`);
-    console.log(logSymbols.success, 'Feature deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting feature');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/bedroom/delete/${postmanIds.bedroom}`);
-    console.log(logSymbols.success, 'Bedroom deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting bedroom');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/bathroom/delete/${postmanIds.bathroom}`);
-    console.log(logSymbols.success, 'Bathroom deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting bathroom');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/community/delete/${postmanIds.community}`);
-    console.log(logSymbols.success, 'Community deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting community');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/city/delete/${postmanIds.city}`);
-    console.log(logSymbols.success, 'City deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting city');
-  }
-
-  await sleep(sleepTime);
-
-  try {
-    await axios.delete(`/region/delete/${postmanIds.region}`);
-    console.log(logSymbols.success, 'Region deleted');
-  } catch (error) {
-    console.error(logSymbols.error, 'Error deleting region');
   }
 
   await sleep(sleepTime);

@@ -65,6 +65,16 @@ describe('testing algolia workers', async () => {
     expect(tasksPropertyDelete.length).toBe(1);
   });
 
+  test('success task media.update', () => {
+    const tasksMediaUpdate = logs.filter(
+      (log) =>
+        log.indexOf(
+          '[TASK] success finished task media.update updated 1 index objects',
+        ) !== -1,
+    );
+    expect(tasksMediaUpdate.length).toBe(1);
+  });
+
   test('success task feature.update', () => {
     const tasksFeatureUpdate = logs.filter(
       (log) =>
@@ -105,7 +115,7 @@ describe('testing algolia workers', async () => {
     expect(tasksParkingUpdate.length).toBe(2);
   });
 
-  test('clean up', async () => {
-    await killChildren();
-  }, 60000);
+  await sleep(2000);
+
+  await killChildren();
 });
