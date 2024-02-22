@@ -13,7 +13,7 @@ const killChildren = async () => {
     process.kill(honoPid);
   }
 
-  procPostman;
+  procPostman.kill();
   await procPostman.exited;
 
   procServer.kill();
