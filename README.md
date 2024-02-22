@@ -2,6 +2,8 @@
 
 REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, PlanetScale, Algolia, RabbitMQ (CloudAMQP)
 
+Find more details in this blog article [Real estate API for a search-to-rent application](https://catalin.works/blog/real-estate-api-bun-hono-drizzle-planetscale-algolia).
+
 ## Development environment setup
 
 1. Clone the repo and install dependencies
