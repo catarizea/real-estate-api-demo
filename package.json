@@ -33,8 +33,8 @@
     "start:postman:test": "dotenv -e .env -v BUN_ENV=postman -- bun index.ts",
     "start:algolia:test": "dotenv -e .env -v BUN_ENV=algolia -- bun index.ts",
     "test": "dotenv -e .env -v BUN_ENV=test -- bun test",
-    "test:postman": "run-s postman:test:utils postman:test:cleanup",
-    "test:workers": "run-s workers:test:utils postman:test:cleanup",
+    "test:postman": "run-s postman:test:cleanup postman:test:utils",
+    "test:workers": "run-s postman:test:cleanup workers:test:utils",
     "workers:test:utils": "bun test ./src/services/taskWorkers/__tests__/startAppAndReadStdout.ts"
   },
   "dependencies": {
