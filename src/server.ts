@@ -10,7 +10,10 @@ import routes from '@/routes';
 
 const app = new OpenAPIHono();
 
-if (process.env.BUN_ENV && process.env.BUN_ENV === 'algolia') {
+if (
+  process.env.BUN_ENV &&
+  ['algolia', 'postman'].includes(process.env.BUN_ENV)
+) {
   // eslint-disable-next-line no-console
   console.log(`hono pid: ${process.pid}`);
 }

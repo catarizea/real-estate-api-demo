@@ -18,11 +18,13 @@ const killChildren = async () => {
   proc.kill();
   await proc.exited;
 
-  console.log(logSymbols.success, 'All children have been killed');
+  console.log(logSymbols.success, 'All children processes have been killed');
 };
 
 process.on('SIGINT', async () => {
-  console.log(`\n${logSymbols.info} Ctrl-C was pressed. Killing children...`);
+  console.log(
+    `\n${logSymbols.info} Ctrl-C was pressed. Killing children processes...`,
+  );
   await killChildren();
   process.exit(0);
 });

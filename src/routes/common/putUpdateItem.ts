@@ -39,7 +39,7 @@ const putUpdateItem = ({
             example: updateItemSchemaExample,
           },
         },
-        required: false,
+        required: true,
       },
     },
     responses: {
