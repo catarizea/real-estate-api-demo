@@ -117,22 +117,28 @@ https://local.drizzle.studio/?port=3001
 
 17. See entity relationship Draw.io diagram inside this folder `erd/entity-relationship-diagram.drawio`
 
-18. Install **Postman** and import `spec/real-estate-api-demo.postman_collection.json`. In Postman set `baseUrl` variable as `http://localhost:3000`
+18. You can run normal tests
 
-19. Install Postman CLI with Homebrew
+```
+bun run test
+```
+
+19. You can run Algolia workers tests
+
+```
+bun run test:workers
+```
+
+20. Install **Postman** and import `spec/real-estate-api-demo.postman_collection.json`. In Postman set `baseUrl` variable as `http://localhost:3000`
+
+21. Install Postman CLI with Homebrew
 
 ```
 brew install --cask postman-cli
 ```
 
-20. Start api for Postman
+22. You can run tests from Postman app or from CLI
 
 ```
-bun run start:postman:test
-```
-
-21. You can run tests from Postman app or from CLI
-
-```
-bun run postman
+bun run test:postman
 ```
