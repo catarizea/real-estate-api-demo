@@ -188,4 +188,6 @@ tmp
 
 build
 
-client
+client*
+
+devkey

@@ -21,7 +21,7 @@ DATABASE_HOST=aws.connect.psdb.cloud
 DATABASE_USERNAME=<planetscale_username>
 DATABASE_PASSWORD=<planetscale_password>
 DATABASE_URI=mysql://<planetscale_username>:<planetscale_password>@aws.connect.psdb.cloud/<planetscale_database_name>?ssl={"rejectUnauthorized": "true"}
-GOOGLE_MAPS_API_KEY=<google_maps_api_key>
+GCLOUD_API_KEY=<gcloud_api_key>
 PEXELS_API_KEY=<pexels_api_key>
 ALGOLIA_APP_ID=<algolia_app_id>
 ALGOLIA_ADMIN_API_KEY=<algolia_admin_api_key>

@@ -6,7 +6,7 @@
   "scripts": {
     "algolia:seed": "bun ./src/utils/db/seed/algolia/index.ts",
     "build": "bun build ./index.ts --outdir ./build --target bun",
-    "codegen:client": "openapi --input ./spec/spec.json --output ./client --client axios",
+    "codegen:client": "openapi-rq -i ./spec/spec.json -o ./client -c axios",
     "codegen:validators": "bun ./src/validators/codegen/generate.ts generate",
     "db:push": "drizzle-kit push:mysql --config=drizzle.config.ts",
     "db:generate:migration": "drizzle-kit generate:mysql --config=drizzle.config.ts",
@@ -40,7 +40,6 @@
     "workers:test:utils": "bun test ./src/services/taskWorkers/__tests__/startAppAndReadStdout.ts"
   },
   "dependencies": {
-    "@google-cloud/logging-winston": "^6.0.0",
     "@hono/swagger-ui": "^0.2.1",
     "@hono/zod-openapi": "^0.9.6",
     "@paralleldrive/cuid2": "^2.2.2",
@@ -61,6 +60,7 @@
     "winston": "^3.11.0"
   },
   "devDependencies": {
+    "@7nohe/openapi-react-query-codegen": "^0.5.3",
     "@apideck/portman": "^1.26.3",
     "@faker-js/faker": "^8.3.1",
     "@readme/openapi-parser": "^2.5.0",
@@ -90,7 +90,6 @@
     "node-geocoder": "^4.3.0",
     "npm-run-all": "^4.1.5",
     "openapi-to-postmanv2": "^4.20.0",
-    "openapi-typescript-codegen": "^0.27.0",
     "path": "^0.12.7",
     "prettier": "^3.2.5"
   }
