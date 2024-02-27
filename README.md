@@ -1,6 +1,6 @@
 # Real Estate API Demo
 
-REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, PlanetScale, Algolia, RabbitMQ (CloudAMQP)
+REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, PlanetScale, Algolia, Clerk, RabbitMQ (CloudAMQP)
 
 Find more details in this blog article [Real estate API for a search-to-rent application](https://catalin.works/blog/real-estate-api-bun-hono-drizzle-planetscale-algolia).
 
@@ -12,7 +12,7 @@ Find more details in this blog article [Real estate API for a search-to-rent app
 bun install
 ```
 
-2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia, CloudAMQP, Postman accounts.
+2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia, Clerk, CloudAMQP, Postman accounts.
 
 ```
 BUN_ENV=dev
@@ -31,6 +31,9 @@ WINSTON_LOG_DAYS=5
 SERVER_TIMEZONE=Europe/Berlin
 DATABASE_SEED_BLOCKED=false
 POSTMAN_API_KEY=<postman_api_key>
+CLERK_PUBLISHABLE_KEY=<clerk_publishable_key>
+CLERK_SECRET_KEY=<clerk_secret_key>
+
 ```
 
 3. Install PlanetScale CLI `pscale`
