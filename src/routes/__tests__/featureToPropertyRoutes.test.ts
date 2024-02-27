@@ -1,7 +1,7 @@
 import { z } from '@hono/zod-openapi';
 import { expect, test } from 'bun:test';
 
-import { postmanIds } from '@/constants';
+import { apiVersion, headers, postmanIds } from '@/constants';
 import {
   insertCitySchemaExample,
   insertCommunitySchemaExample,
@@ -19,12 +19,10 @@ const successSchema = z.object({
 type SuccessSchema = z.infer<typeof successSchema>;
 
 test('POST /region/create', async () => {
-  const response = await app.request('/region/create', {
+  const response = await app.request(`/${apiVersion}/region/create`, {
     method: 'POST',
     body: JSON.stringify(insertRegionSchemaExample),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
   });
 
   const body = (await response.json()) as SuccessSchema;
@@ -35,12 +33,10 @@ test('POST /region/create', async () => {
 });
 
 test('POST /city/create', async () => {
-  const response = await app.request('/city/create', {
+  const response = await app.request(`/${apiVersion}/city/create`, {
     method: 'POST',
     body: JSON.stringify(insertCitySchemaExample),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
   });
 
   const body = (await response.json()) as SuccessSchema;
@@ -51,12 +47,10 @@ test('POST /city/create', async () => {
 });
 
 test('POST /community/create', async () => {
-  const response = await app.request('/community/create', {
+  const response = await app.request(`/${apiVersion}/community/create`, {
     method: 'POST',
     body: JSON.stringify(insertCommunitySchemaExample),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
   });
 
   const body = (await response.json()) as SuccessSchema;
@@ -67,12 +61,10 @@ test('POST /community/create', async () => {
 });
 
 test('POST /feature/create', async () => {
-  const response = await app.request('/feature/create', {
+  const response = await app.request(`/${apiVersion}/feature/create`, {
     method: 'POST',
     body: JSON.stringify(insertFeatureSchemaExample),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
   });
 
   const body = (await response.json()) as SuccessSchema;
@@ -83,12 +75,10 @@ test('POST /feature/create', async () => {
 });
 
 test('POST /type-prop/create', async () => {
-  const response = await app.request('/type-prop/create', {
+  const response = await app.request(`/${apiVersion}/type-prop/create`, {
     method: 'POST',
     body: JSON.stringify(insertTypePropSchemaExample),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
   });
 
   const body = (await response.json()) as SuccessSchema;
@@ -99,12 +89,10 @@ test('POST /type-prop/create', async () => {
 });
 
 test('POST /property/create', async () => {
-  const response = await app.request('/property/create', {
+  const response = await app.request(`/${apiVersion}/property/create`, {
     method: 'POST',
     body: JSON.stringify(insertPropertySchemaExample),
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
   });
 
   const body = (await response.json()) as SuccessSchema;
@@ -115,16 +103,17 @@ test('POST /property/create', async () => {
 });
 
 test('POST /feature-to-property/create', async () => {
-  const response = await app.request('/feature-to-property/create', {
-    method: 'POST',
-    body: JSON.stringify({
-      featureId: postmanIds.feature,
-      itemId: postmanIds.property,
-    }),
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await app.request(
+    `/${apiVersion}/feature-to-property/create`,
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        featureId: postmanIds.feature,
+        itemId: postmanIds.property,
+      }),
+      headers,
     },
-  });
+  );
 
   const body = (await response.json()) as SuccessSchema;
 
@@ -135,12 +124,10 @@ test('POST /feature-to-property/create', async () => {
 
 test('DELETE /feature-to-property/delete', async () => {
   const response = await app.request(
-    `/feature-to-property/delete/${postmanIds.feature}/${postmanIds.property}`,
+    `/${apiVersion}/feature-to-property/delete/${postmanIds.feature}/${postmanIds.property}`,
     {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
     },
   );
 
@@ -153,12 +140,10 @@ test('DELETE /feature-to-property/delete', async () => {
 
 test('DELETE /property/delete', async () => {
   const response = await app.request(
-    `/property/delete/${postmanIds.property}`,
+    `/${apiVersion}/property/delete/${postmanIds.property}`,
     {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
     },
   );
 
@@ -171,12 +156,10 @@ test('DELETE /property/delete', async () => {
 
 test('DELETE /type-prop/delete', async () => {
   const response = await app.request(
-    `/type-prop/delete/${postmanIds.typeProp}`,
+    `/${apiVersion}/type-prop/delete/${postmanIds.typeProp}`,
     {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
     },
   );
 
@@ -188,12 +171,13 @@ test('DELETE /type-prop/delete', async () => {
 });
 
 test('DELETE /feature/delete', async () => {
-  const response = await app.request(`/feature/delete/${postmanIds.feature}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await app.request(
+    `/${apiVersion}/feature/delete/${postmanIds.feature}`,
+    {
+      method: 'DELETE',
+      headers,
     },
-  });
+  );
 
   const body = (await response.json()) as SuccessSchema;
 
@@ -204,12 +188,10 @@ test('DELETE /feature/delete', async () => {
 
 test('DELETE /community/delete', async () => {
   const response = await app.request(
-    `/community/delete/${postmanIds.community}`,
+    `/${apiVersion}/community/delete/${postmanIds.community}`,
     {
       method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers,
     },
   );
 
@@ -221,12 +203,13 @@ test('DELETE /community/delete', async () => {
 });
 
 test('DELETE /city/delete', async () => {
-  const response = await app.request(`/city/delete/${postmanIds.city}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await app.request(
+    `/${apiVersion}/city/delete/${postmanIds.city}`,
+    {
+      method: 'DELETE',
+      headers,
     },
-  });
+  );
 
   const body = (await response.json()) as SuccessSchema;
 
@@ -236,12 +219,13 @@ test('DELETE /city/delete', async () => {
 });
 
 test('DELETE /region/delete', async () => {
-  const response = await app.request(`/region/delete/${postmanIds.region}`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await app.request(
+    `/${apiVersion}/region/delete/${postmanIds.region}`,
+    {
+      method: 'DELETE',
+      headers,
     },
-  });
+  );
 
   const body = (await response.json()) as SuccessSchema;
 

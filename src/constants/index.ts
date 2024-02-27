@@ -64,3 +64,8 @@ export const postmanIds = {
   typeProp: 'zvyuykclatrceuwmxo1bd42p',
   unit: 'amyphpzv9inobdo3x1dfu18p',
 };
+
+export const headers = {
+  Authorization: `Bearer ${process.env.CLERK_JWT_TEST}`,
+  'Content-Type': 'application/json',
+};
