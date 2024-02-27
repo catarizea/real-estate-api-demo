@@ -64,6 +64,22 @@ const putUpdateItem = ({
           },
         },
       },
+      401: {
+        description: 'Responds with an unauthorized message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      403: {
+        description: 'Responds with a forbidden message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
     },
   });
 

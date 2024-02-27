@@ -37,6 +37,7 @@ export {
   getFloorPlanCursorValidatorByOrderBy,
   paginationFloorPlanOrderSchema,
 } from './floorPlanList';
+export { headersSchema } from './headers';
 export { mediaBodySchemaExample } from './media';
 export type { MediaListSchema } from './mediaList';
 export {

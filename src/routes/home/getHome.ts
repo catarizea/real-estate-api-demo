@@ -1,6 +1,7 @@
 import { createRoute, z } from '@hono/zod-openapi';
 
 import { NomenclatureTag } from '@/types';
+import { errorSchema } from '@/validators';
 
 const successSchema = z.object({
   message: z.string(),
@@ -23,6 +24,14 @@ const getHome = createRoute({
       content: {
         'application/json': {
           schema: successSchema,
+        },
+      },
+    },
+    401: {
+      description: 'Responds with an unauthorized message.',
+      content: {
+        'application/json': {
+          schema: errorSchema,
         },
       },
     },
