@@ -12,6 +12,11 @@ const getFeaturesByItem = (
     method: 'get',
     path: '/features-by-item/{itemId}',
     tags: [tag],
+    security: [
+      {
+        Bearer: [],
+      },
+    ],
     request: {
       params: z.object({
         itemId: z.string().openapi({ example: postmanId }),

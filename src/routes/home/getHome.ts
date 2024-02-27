@@ -12,6 +12,11 @@ const getHome = createRoute({
   method: 'get',
   path: '/',
   tags: [NomenclatureTag.Home],
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   responses: {
     200: {
       description: 'Responds with a message',

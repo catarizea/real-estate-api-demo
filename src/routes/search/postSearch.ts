@@ -17,6 +17,11 @@ const postSearch = createRoute({
   method: 'post',
   path: '/',
   tags: [NomenclatureTag.Search],
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   request: {
     query: paginationSchema,
     body: {

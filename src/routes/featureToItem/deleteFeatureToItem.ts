@@ -16,6 +16,11 @@ const deleteFeatureToItem = (
     method: 'delete',
     path: '/delete/{featureId}/{itemId}',
     tags: [tag],
+    security: [
+      {
+        Bearer: [],
+      },
+    ],
     request: {
       params: z.object({
         featureId: z.string().openapi({ example: postmanFeatureId }),

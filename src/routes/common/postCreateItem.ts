@@ -27,6 +27,11 @@ const postCreateItem = ({
     method: 'post',
     path: '/create',
     tags: [tag],
+    security: [
+      {
+        Bearer: [],
+      },
+    ],
     request: {
       body: {
         description: `<p>Insert a ${tag} object.</p>`,

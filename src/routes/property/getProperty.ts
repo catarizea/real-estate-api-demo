@@ -8,6 +8,11 @@ const getProperty = createRoute({
   method: 'get',
   path: '/{id}',
   tags: [NomenclatureTag.Property],
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   request: {
     params: z.object({
       id: z.string().openapi({ example: postmanIds.property }),

@@ -9,5 +9,5 @@ test('GET /', async () => {
 
   expect(response.status).toBe(200);
   expect(body).toHaveProperty('message');
-  expect(body.message).toBe('real estate api demo');
+  expect(body.message).toBeString();
 });

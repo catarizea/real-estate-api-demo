@@ -1,5 +1,7 @@
 import { Point } from '@/types';
 
+export const apiVersion = 'v1';
+
 export const defaultPerPage = 10;
 
 export const maxPerPage = 100;

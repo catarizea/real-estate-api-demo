@@ -18,6 +18,11 @@ const deleteItem = ({
     method: 'delete',
     path: '/delete/{id}',
     tags: [tag],
+    security: [
+      {
+        Bearer: [],
+      },
+    ],
     request: {
       params: z.object({
         id: z.string().openapi({ example: postmanId }),

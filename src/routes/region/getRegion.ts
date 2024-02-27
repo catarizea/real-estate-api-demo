@@ -8,6 +8,11 @@ const getRegion = createRoute({
   method: 'get',
   path: '/{id}',
   tags: [NomenclatureTag.Region],
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   request: {
     params: z.object({
       id: z.string().openapi({ example: postmanIds.region }),

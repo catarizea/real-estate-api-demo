@@ -27,6 +27,11 @@ const putUpdateItem = ({
     method: 'put',
     path: '/update/{id}',
     tags: [tag],
+    security: [
+      {
+        Bearer: [],
+      },
+    ],
     request: {
       params: z.object({
         id: z.string().openapi({ example: postmanId }),

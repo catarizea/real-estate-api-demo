@@ -8,6 +8,11 @@ const getUnit = createRoute({
   method: 'get',
   path: '/{id}',
   tags: [NomenclatureTag.Unit],
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   request: {
     params: z.object({
       id: z.string().openapi({ example: postmanIds.unit }),

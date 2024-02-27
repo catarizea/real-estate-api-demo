@@ -9,6 +9,11 @@ const getParkingsByProperty = createRoute({
   method: 'get',
   path: '/parkings-by-property/{itemId}',
   tags: [NomenclatureTag.Parking],
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   request: {
     params: z.object({
       itemId: z.string().openapi({ example: postmanIds.property }),

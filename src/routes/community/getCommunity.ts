@@ -8,6 +8,11 @@ const getCommunity = createRoute({
   method: 'get',
   path: '/{id}',
   tags: [NomenclatureTag.Community],
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   request: {
     params: z.object({
       id: z.string().openapi({ example: postmanIds.community }),

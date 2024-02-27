@@ -28,6 +28,11 @@ const postListItem = ({
     method: 'post',
     path: '/list',
     tags: [tag],
+    security: [
+      {
+        Bearer: [],
+      },
+    ],
     request: {
       query: paginationItemOrderSchema,
       body: {
