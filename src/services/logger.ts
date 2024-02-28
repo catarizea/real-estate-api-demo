@@ -1,3 +1,4 @@
+import { WinstonTransport as AxiomTransport } from '@axiomhq/winston';
 import logSymbols from 'log-symbols';
 import { createLogger, format, transports } from 'winston';
 import { Logger } from 'winston';
@@ -14,6 +15,28 @@ let logger: Logger | MockLogger = {
   warn: () => {},
   info: () => {},
 };
+
+if (
+  process.env.BUN_ENV === 'production' &&
+  process.env.AXIOM_API_TOKEN &&
+  process.env.AXIOM_DATASET
+) {
+  const { combine, errors, json } = format;
+
+  const axiomTransport = new AxiomTransport({
+    dataset: process.env.AXIOM_DATASET,
+    token: process.env.AXIOM_API_TOKEN,
+  });
+
+  logger = createLogger({
+    level: 'info',
+    format: combine(errors({ stack: true }), json()),
+    defaultMeta: { service: 'real-estate-api' },
+    transports: [axiomTransport],
+    exceptionHandlers: [axiomTransport],
+    rejectionHandlers: [axiomTransport],
+  });
+}
 
 if (
   process.env.BUN_ENV &&

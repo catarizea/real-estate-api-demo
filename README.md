@@ -12,7 +12,7 @@ Find more details in this blog article [Real estate API for a search-to-rent app
 bun install
 ```
 
-2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia, Clerk, CloudAMQP, Postman accounts.
+2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia, Clerk, CloudAMQP, Axiom, Postman accounts.
 
 ```
 BUN_ENV=dev
@@ -33,11 +33,13 @@ POSTMAN_API_KEY=<postman_api_key>
 CLERK_PUBLISHABLE_KEY=<clerk_publishable_key>
 CLERK_SECRET_KEY=<clerk_secret_key>
 CLERK_JWT_TEST=<clerk_jwt_test>
+AXIOM_API_TOKEN=<axiom_api_token>
+AXIOM_DATASET=<axiom_dataset>
 ```
 
 3. Clerk Setup. Create an organization. For your organization you have to create two custom roles: `Creator` and `Reader` and assign at least one verified user each.
 
-[See here details](https://clerk.com/docs/testing/postman-or-insomnia) on how you can generate a JWT template on Clerk dashboard and based on that a long term JWT as `CLERK_JWT_TEST` environment variable. Make sure your custom JWT template looks like this:
+[See here details](https://clerk.com/docs/testing/postman-or-insomnia) on how you can generate a JWT template on Clerk dashboard and based on that a long term JWT as `CLERK_JWT_TEST` environment variable. Make sure your custom JWT template claims look like this:
 
 ```
 {
