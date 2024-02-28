@@ -6,6 +6,9 @@
   "scripts": {
     "algolia:seed": "bun ./src/utils/db/seed/algolia/index.ts",
     "build": "dotenv -e .env -v BUN_ENV=production -- bun build ./index.ts --outdir ./build --target bun",
+    "docker:image:build": "docker build --pull -t real-estate-api-demo .",
+    "docker:container:start": "dotenv -e .env -v BUN_ENV=production -- docker-compose up -d",
+    "docker:container:stop": "docker stop real-estate-api-demo-container",
     "codegen:client": "openapi-rq -i ./spec/spec.json -o ./client -c axios",
     "codegen:validators": "bun ./src/validators/codegen/generate.ts generate",
     "db:push": "drizzle-kit push:mysql --config=drizzle.config.ts",
