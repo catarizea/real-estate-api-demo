@@ -9,6 +9,7 @@ import {
   httpLogger,
   isAuthenticated,
   isCreator,
+  rateLimiter,
 } from '@/middlewares';
 import routes from '@/routes';
 
@@ -35,6 +36,7 @@ app.openAPIRegistry.registerComponent('securitySchemes', 'Bearer', {
   scheme: 'bearer',
 });
 
+app.use('*', rateLimiter);
 app.use('*', httpLogger);
 app.use('*', contentTypeChecker);
 app.use('*', clerkMiddleware());

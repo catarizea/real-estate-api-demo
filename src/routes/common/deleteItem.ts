@@ -46,7 +46,7 @@ const deleteItem = ({
         },
       },
       401: {
-        description: 'Responds with an unauthorized message.',
+        description: 'Responds with an unauthorized error message.',
         content: {
           'application/json': {
             schema: errorSchema,
@@ -54,7 +54,7 @@ const deleteItem = ({
         },
       },
       403: {
-        description: 'Responds with a forbidden message.',
+        description: 'Responds with a forbidden error message.',
         content: {
           'application/json': {
             schema: errorSchema,
@@ -63,6 +63,14 @@ const deleteItem = ({
       },
       409: {
         description: 'Responds with a conflict error message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      429: {
+        description: 'Responds with a too many requests error message.',
         content: {
           'application/json': {
             schema: errorSchema,

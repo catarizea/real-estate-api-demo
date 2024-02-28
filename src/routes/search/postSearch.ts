@@ -78,7 +78,15 @@ const postSearch = createRoute({
       },
     },
     401: {
-      description: 'Responds with an unauthorized message.',
+      description: 'Responds with an unauthorized error message.',
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        },
+      },
+    },
+    429: {
+      description: 'Responds with a too many requests error message.',
       content: {
         'application/json': {
           schema: errorSchema,

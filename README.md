@@ -1,6 +1,6 @@
 # Real Estate API Demo
 
-REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, PlanetScale, Algolia, Clerk, RabbitMQ (CloudAMQP)
+REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, PlanetScale, Algolia, Clerk, Axiom, Upstash, RabbitMQ (CloudAMQP)
 
 Find more details in this blog article [Real estate API for a search-to-rent application](https://catalin.works/blog/real-estate-api-bun-hono-drizzle-planetscale-algolia).
 
@@ -12,7 +12,7 @@ Find more details in this blog article [Real estate API for a search-to-rent app
 bun install
 ```
 
-2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia, Clerk, CloudAMQP, Axiom, Postman accounts.
+2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia, Clerk, CloudAMQP, Axiom, Upstash, Postman accounts.
 
 ```
 BUN_ENV=dev
@@ -35,6 +35,8 @@ CLERK_SECRET_KEY=<clerk_secret_key>
 CLERK_JWT_TEST=<clerk_jwt_test>
 AXIOM_API_TOKEN=<axiom_api_token>
 AXIOM_DATASET=<axiom_dataset>
+UPSTASH_REDIS_REST_URL=<upstash_redis_rest_url>
+UPSTASH_REDIS_REST_TOKEN=<upstash_redis_rest_token>
 ```
 
 3. Clerk Setup. Create an organization. For your organization you have to create two custom roles: `Creator` and `Reader` and assign at least one verified user each.

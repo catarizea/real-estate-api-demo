@@ -48,6 +48,8 @@
     "@hono/zod-openapi": "^0.9.6",
     "@paralleldrive/cuid2": "^2.2.2",
     "@planetscale/database": "^1.16.0",
+    "@upstash/ratelimit": "^1.0.1",
+    "@upstash/redis": "^1.28.4",
     "algoliasearch": "^4.22.1",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.3",
