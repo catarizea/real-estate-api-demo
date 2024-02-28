@@ -145,7 +145,7 @@ bun run test
 bun run test:workers
 ```
 
-21. Install **Postman** and import `spec/real-estate-api-demo.postman_collection.json`. In Postman set `baseUrl` variable as `http://localhost:3000`. Set a Postman environment variable `clerk_jwt_test` and use it at the top authorization as a `Bearer Token` `{{clerk_jwt_test}}`. All endpoints should have authorization header as `Inherit from parent`.
+21. Install **Postman** and import `spec/real-estate-api-demo.postman_collection.json`. In Postman set `baseUrl` variable as `http://localhost:3000`. Set a Postman environment variable `clerk_jwt_test` and use it at the top authorization as a `Bearer Token` `{{clerk_jwt_test}}`. All endpoints should have authorization header as `Inherit auth from parent`.
 
 22. Install Postman CLI with Homebrew
 
