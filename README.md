@@ -50,6 +50,12 @@ DATABASE_SEED_BLOCKED=true
 AXIOM_DATASET=real-estate-api-demo
 ```
 
+2.2 To build the project use this command to prevent Bun reading `.env.dev` at build time:
+
+```
+bun run move:up; bun run build; bun run move:down
+```
+
 3. Clerk Setup. Create an organization. For your organization you have to create two custom roles: `Creator` and `Reader` and assign at least one verified user each.
 
 [See here details](https://clerk.com/docs/testing/postman-or-insomnia) on how you can generate a JWT template on Clerk dashboard and based on that a long term JWT as `CLERK_JWT_TEST` environment variable. Make sure your custom JWT template claims look like this:
