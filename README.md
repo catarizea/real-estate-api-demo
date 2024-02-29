@@ -1,8 +1,11 @@
 # Real Estate API Demo
 
-REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, PlanetScale, Algolia, Clerk, Axiom, Upstash, RabbitMQ (CloudAMQP)
+REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, PlanetScale, Algolia, Clerk, Axiom, Upstash, RabbitMQ (CloudAMQP), Fly.io
 
-Find more details in this blog article [Real estate API for a search-to-rent application](https://catalin.works/blog/real-estate-api-bun-hono-drizzle-planetscale-algolia).
+Find more details in this blog articles:
+
+* [Real estate API for a search-to-rent application](https://catalin.works/blog/real-estate-api-bun-hono-drizzle-planetscale-algolia).
+* [Clerk authentication, authorization, Upstash limiter, Axiom logging](https://catalin.works/blog/clerk-authentication-authorization-api-upstash-axiom)
 
 ## Development environment setup
 

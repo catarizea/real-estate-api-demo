@@ -40,7 +40,7 @@ if (
 
 if (
   process.env.BUN_ENV &&
-  ['dev', 'postman', 'algolia'].includes(process.env.BUN_ENV)
+  ['development', 'postman', 'algolia'].includes(process.env.BUN_ENV)
 ) {
   const transportsArr: ConsoleTransportInstance[] = [
     new transports.Console({
