@@ -23,3 +23,8 @@ cpus = 1
 
 [env]
 BUN_ENV = "production"
+DATABASE_NAME = "real-estate-api-demo"
+DATABASE_HOST = "aws.connect.psdb.cloud"
+SERVER_TIMEZONE = "Europe/Bucharest"
+DATABASE_SEED_BLOCKED = "true"
+AXIOM_DATASET = "real-estate-api-demo"

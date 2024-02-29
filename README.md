@@ -12,10 +12,10 @@ Find more details in this blog article [Real estate API for a search-to-rent app
 bun install
 ```
 
-2. Create a `.env` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia, Clerk, CloudAMQP, Axiom, Upstash, Postman accounts.
+2. Create a `.env.dev` file inside of the root of the project and fill in the variables after you setup PlanetScale (`dev` branch), Google Maps Api, Pexels, Algolia, Clerk, CloudAMQP, Axiom, Upstash, Postman accounts.
 
 ```
-BUN_ENV=dev
+BUN_ENV=development
 DATABASE_NAME=<planetscale_database_name>
 DATABASE_HOST=aws.connect.psdb.cloud
 DATABASE_USERNAME=<planetscale_username>
@@ -37,6 +37,17 @@ AXIOM_API_TOKEN=<axiom_api_token>
 AXIOM_DATASET=<axiom_dataset>
 UPSTASH_REDIS_REST_URL=<upstash_redis_rest_url>
 UPSTASH_REDIS_REST_TOKEN=<upstash_redis_rest_token>
+```
+
+2.1 Create a `.env.prod` file inside of the root of the project. This will be used to build the project
+
+```
+BUN_ENV=production
+DATABASE_NAME=real-estate-api-demo
+DATABASE_HOST=aws.connect.psdb.cloud
+SERVER_TIMEZONE=Europe/Bucharest
+DATABASE_SEED_BLOCKED=true
+AXIOM_DATASET=real-estate-api-demo
 ```
 
 3. Clerk Setup. Create an organization. For your organization you have to create two custom roles: `Creator` and `Reader` and assign at least one verified user each.
