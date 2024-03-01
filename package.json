@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "algolia:seed": "bun ./src/utils/db/seed/algolia/index.ts",
-    "build": "dotenv -e .env.prod -- bun build ./index.ts --outdir ./build --target bun",
+    "build": "dotenv -e .env.prod -- bun build ./index.ts --outdir ./build --target bun --minify",
     "docker:image:build": "docker build --pull -t real-estate-api-demo .",
     "docker:container:start": "dotenv -e .env.dev -v BUN_ENV=production -- docker-compose up -d",
     "docker:container:stop": "docker stop real-estate-api-demo-container",
