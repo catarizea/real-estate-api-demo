@@ -8,7 +8,10 @@ import executeApiCalls from './executeApiCalls';
 let honoPid: number | null = null;
 const logs: string[] = [];
 
-const proc = Bun.spawn(['bun', 'run', 'start:algolia:test']);
+const proc =
+  typeof process.env.CICD === 'undefined'
+    ? Bun.spawn(['bun', 'run', 'start:algolia:test'])
+    : Bun.spawn(['bun', 'run', 'start:actions']);
 
 const killChildren = async () => {
   if (honoPid) {

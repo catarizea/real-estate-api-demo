@@ -6,6 +6,7 @@
   "scripts": {
     "algolia:seed": "bun ./src/utils/db/seed/algolia/index.ts",
     "build": "dotenv -e .env.prod -- bun build ./index.ts --outdir ./build --target bun --minify",
+    "build:actions": "bun build ./index.ts --outdir ./build --target bun --minify",
     "docker:image:build": "docker build --pull -t real-estate-api-demo .",
     "docker:container:start": "dotenv -e .env.dev -v BUN_ENV=production -- docker-compose up -d",
     "docker:container:stop": "docker stop real-estate-api-demo-container",
@@ -34,16 +35,22 @@
     "openapi:validate": "bun ./src/validators/openApiParser",
     "openapi:portman": "portman -u ./spec/spec.json  -o ./spec/crm.postman.json",
     "postman:test:utils": "dotenv -e .env.dev -- bun ./src/utils/tools/postmanRunTests.ts",
+    "postman:test:utils:actions": "bun ./src/utils/tools/postmanRunTests.ts",
     "postman:test:suite": "run-s postman:test:cleanup postman:test:utils",
     "postman:test:cleanup": "dotenv -e .env.dev -- bun ./src/utils/tools/cleanUpAfterTest.ts",
+    "postman:test:cleanup:actions": "bun ./src/utils/tools/cleanUpAfterTest.ts",
     "start": "dotenv -e .env.dev -v BUN_ENV=production -- bun ./build/index.js",
+    "start:actions": "bun index.ts",
     "start:postman:test": "dotenv -e .env.dev -v BUN_ENV=postman -- bun index.ts",
     "start:algolia:test": "dotenv -e .env.dev -v BUN_ENV=algolia -- bun index.ts",
     "test": "run-s postman:test:cleanup test:bun",
     "test:bun": "dotenv -e .env.dev -v BUN_ENV=test -- bun test",
+    "test:bun:actions": "bun test",
     "test:postman": "dotenv -e .env.dev -v BUN_ENV=postman -- bun ./src/routes/__tests__/startAppAndRunPostmanTests.ts",
+    "test:postman:actions": "bun ./src/routes/__tests__/startAppAndRunPostmanTests.ts",
     "test:workers": "run-s postman:test:cleanup workers:test:utils",
-    "workers:test:utils": "dotenv -e .env.dev -v BUN_ENV=algolia -- bun test ./src/services/taskWorkers/__tests__/startAppAndReadStdout.ts"
+    "workers:test:utils": "dotenv -e .env.dev -v BUN_ENV=algolia -- bun test ./src/services/taskWorkers/__tests__/startAppAndReadStdout.ts",
+    "workers:test:utils:actions": "bun test ./src/services/taskWorkers/__tests__/startAppAndReadStdout.ts"
   },
   "dependencies": {
     "@axiomhq/winston": "^1.0.0-rc.2",
