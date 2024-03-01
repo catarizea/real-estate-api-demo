@@ -36,7 +36,10 @@ app.openAPIRegistry.registerComponent('securitySchemes', 'Bearer', {
   scheme: 'bearer',
 });
 
-app.use('*', rateLimiter);
+if (process.env.BUN_ENV && process.env.BUN_ENV === 'production') {
+  app.use('*', rateLimiter);
+}
+
 app.use('*', httpLogger);
 app.use('*', contentTypeChecker);
 app.use('*', clerkMiddleware());
