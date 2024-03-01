@@ -1,7 +1,7 @@
 {
   "name": "real-estate-api-demo",
   "version": "1.0.1",
-  "description": "REST API demo for a search app to rent a property. Tech stack Bun, Hono, Drizzle, Planetscale.",
+  "description": "REST API demo for a search-to-rent application.",
   "main": "index.ts",
   "scripts": {
     "algolia:seed": "bun ./src/utils/db/seed/algolia/index.ts",
