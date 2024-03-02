@@ -6,6 +6,7 @@ Find more details in these blog articles:
 
 * [Real estate API for a search-to-rent application](https://catalin.works/blog/real-estate-api-bun-hono-drizzle-planetscale-algolia).
 * [Clerk authentication, authorization, Upstash limiter, Axiom logging](https://catalin.works/blog/clerk-authentication-authorization-api-upstash-axiom)
+* [Test and deploy an OpenAPI with Github Actions](https://catalin.works/blog/test-and-deploy-api-with-github-actions)
 
 ## Development environment setup
 
