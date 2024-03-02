@@ -1,7 +1,7 @@
 {
   "name": "real-estate-api-demo",
   "version": "1.0.1",
-  "description": "OpenAPI for a search-to-rent application.",
+  "description": "OpenAPI for a search-to-rent application demo.",
   "main": "index.ts",
   "scripts": {
     "algolia:seed": "bun ./src/utils/db/seed/algolia/index.ts",
