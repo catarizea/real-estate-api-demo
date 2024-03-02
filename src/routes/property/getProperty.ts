@@ -8,6 +8,11 @@ const getProperty = createRoute({
   method: 'get',
   path: '/{id}',
   tags: [NomenclatureTag.Property],
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   request: {
     params: z.object({
       id: z.string().openapi({ example: postmanIds.property }),
@@ -27,6 +32,22 @@ const getProperty = createRoute({
     },
     400: {
       description: 'Responds with a bad request error message.',
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        },
+      },
+    },
+    401: {
+      description: 'Responds with an unauthorized error message.',
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        },
+      },
+    },
+    429: {
+      description: 'Responds with a too many requests error message.',
       content: {
         'application/json': {
           schema: errorSchema,

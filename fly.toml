@@ -1,0 +1,30 @@
+# fly.toml app configuration file generated for real-estate-api-demo on 2024-02-28T20:45:33+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'real-estate-api-demo'
+primary_region = 'otp'
+
+[build]
+
+[http_service]
+internal_port = 3000
+force_https = true
+auto_stop_machines = true
+auto_start_machines = true
+min_machines_running = 0
+processes = ['app']
+
+[[vm]]
+memory = '1gb'
+cpu_kind = 'shared'
+cpus = 1
+
+[env]
+BUN_ENV = "production"
+DATABASE_NAME = "real-estate-api-demo"
+DATABASE_HOST = "aws.connect.psdb.cloud"
+SERVER_TIMEZONE = "Europe/Bucharest"
+DATABASE_SEED_BLOCKED = "true"
+AXIOM_DATASET = "real-estate-api-demo"

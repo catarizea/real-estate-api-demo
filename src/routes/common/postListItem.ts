@@ -28,6 +28,11 @@ const postListItem = ({
     method: 'post',
     path: '/list',
     tags: [tag],
+    security: [
+      {
+        Bearer: [],
+      },
+    ],
     request: {
       query: paginationItemOrderSchema,
       body: {
@@ -55,6 +60,22 @@ const postListItem = ({
       },
       400: {
         description: 'Responds with a bad request error object',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      401: {
+        description: 'Responds with an unauthorized error message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      429: {
+        description: 'Responds with a too many requests error message.',
         content: {
           'application/json': {
             schema: errorSchema,

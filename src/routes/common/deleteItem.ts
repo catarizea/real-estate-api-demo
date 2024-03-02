@@ -18,6 +18,11 @@ const deleteItem = ({
     method: 'delete',
     path: '/delete/{id}',
     tags: [tag],
+    security: [
+      {
+        Bearer: [],
+      },
+    ],
     request: {
       params: z.object({
         id: z.string().openapi({ example: postmanId }),
@@ -40,8 +45,32 @@ const deleteItem = ({
           },
         },
       },
+      401: {
+        description: 'Responds with an unauthorized error message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      403: {
+        description: 'Responds with a forbidden error message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
       409: {
         description: 'Responds with a conflict error message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      429: {
+        description: 'Responds with a too many requests error message.',
         content: {
           'application/json': {
             schema: errorSchema,

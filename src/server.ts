@@ -1,10 +1,15 @@
+import { clerkMiddleware } from '@hono/clerk-auth';
 import { OpenAPIHono } from '@hono/zod-openapi';
 import { cors } from 'hono/cors';
 
+import { apiVersion } from '@/constants';
 import {
   contentTypeChecker,
   httpExceptionHandler,
   httpLogger,
+  isAuthenticated,
+  isCreator,
+  rateLimiter,
 } from '@/middlewares';
 import routes from '@/routes';
 
@@ -26,8 +31,23 @@ app.use(
   }),
 );
 
+app.openAPIRegistry.registerComponent('securitySchemes', 'Bearer', {
+  type: 'http',
+  scheme: 'bearer',
+});
+
+if (process.env.BUN_ENV && process.env.BUN_ENV === 'production') {
+  app.use('*', rateLimiter);
+}
+
 app.use('*', httpLogger);
 app.use('*', contentTypeChecker);
+app.use('*', clerkMiddleware());
+
+app.use(`/${apiVersion}/*`, isAuthenticated);
+app.use(`/${apiVersion}/*/create`, isCreator);
+app.use(`/${apiVersion}/*/update/*`, isCreator);
+app.use(`/${apiVersion}/*/delete/*`, isCreator);
 
 app.onError(httpExceptionHandler);
 

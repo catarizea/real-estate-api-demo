@@ -15,5 +15,6 @@
   },
   "debug.javascript.unmapMissingSources": true,
   "terminal.integrated.fontFamily": "Hack Nerd Font Mono",
-  "terminal.integrated.fontWeight": "normal"
+  "terminal.integrated.fontWeight": "normal",
+  "terminal.integrated.fontSize": 12,
 }

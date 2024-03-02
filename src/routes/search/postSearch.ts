@@ -17,6 +17,11 @@ const postSearch = createRoute({
   method: 'post',
   path: '/',
   tags: [NomenclatureTag.Search],
+  security: [
+    {
+      Bearer: [],
+    },
+  ],
   request: {
     query: paginationSchema,
     body: {
@@ -66,6 +71,22 @@ const postSearch = createRoute({
     },
     400: {
       description: 'Responds with a bad request error object',
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        },
+      },
+    },
+    401: {
+      description: 'Responds with an unauthorized error message.',
+      content: {
+        'application/json': {
+          schema: errorSchema,
+        },
+      },
+    },
+    429: {
+      description: 'Responds with a too many requests error message.',
       content: {
         'application/json': {
           schema: errorSchema,

@@ -1,5 +1,7 @@
 import { Point } from '@/types';
 
+export const apiVersion = 'v1';
+
 export const defaultPerPage = 10;
 
 export const maxPerPage = 100;
@@ -61,4 +63,9 @@ export const postmanIds = {
   region: 'kj3nrb5rv094v8ns5ptz1jhc',
   typeProp: 'zvyuykclatrceuwmxo1bd42p',
   unit: 'amyphpzv9inobdo3x1dfu18p',
+};
+
+export const headers = {
+  Authorization: `Bearer ${process.env.CLERK_JWT_TEST}`,
+  'Content-Type': 'application/json',
 };

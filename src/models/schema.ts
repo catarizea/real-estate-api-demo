@@ -1,49 +1,49 @@
-import { bathroom, bathroomUnitRelations } from './schemas/bathroom';
-import { bedroom, bedroomUnitRelations } from './schemas/bedroom';
-import {
+export { bathroom, bathroomUnitRelations } from './schemas/bathroom';
+export { bedroom, bedroomUnitRelations } from './schemas/bedroom';
+export {
   buildingFeature,
   buildingFeaturePropertyRelations,
   buildingFeatureToProperty,
   buildingFeatureToPropertyRelations,
 } from './schemas/buildingFeature';
-import {
+export {
   city,
   cityCommunityRelations,
   cityPropertyRelations,
   cityRegionRelations,
 } from './schemas/city';
-import {
+export {
   community,
   communityCityRelations,
   communityCommunityFeatureRelations,
   communityPropertyRelations,
 } from './schemas/community';
-import {
+export {
   communityFeature,
   communityFeatureCommunityRelations,
   communityFeatureToCommunity,
   communityFeatureToCommunityRelations,
 } from './schemas/communityFeature';
-import {
+export {
   feature,
   featurePropertyRelations,
   featureToProperty,
   featureToPropertyRelations,
 } from './schemas/feature';
-import {
+export {
   floorPlan,
   floorPlanPropertyRelations,
   floorPlanUnitRelations,
 } from './schemas/floorPlan';
-import {
+export {
   media,
   mediaMediaTypeRelations,
   mediaPropertyRelations,
   mediaType,
   mediaTypeMediaRelations,
 } from './schemas/media';
-import { parking, parkingPropertyRelations } from './schemas/parking';
-import {
+export { parking, parkingPropertyRelations } from './schemas/parking';
+export {
   property,
   propertyBuildingFeatureRelations,
   propertyCityRelations,
@@ -55,75 +55,14 @@ import {
   propertyTypeRelations,
   propertyUnitRelations,
 } from './schemas/property';
-import { region, regionCityRelations } from './schemas/region';
-import { seedAddress } from './schemas/seedAddress';
-import { typeProp, typePropPropertyRelations } from './schemas/typeProp';
-import {
+export { region, regionCityRelations } from './schemas/region';
+export { seedAddress } from './schemas/seedAddress';
+export { typeProp, typePropPropertyRelations } from './schemas/typeProp';
+export {
   unit,
   unitBathroomRelations,
   unitBedroomRelations,
   unitFloorPlanRelations,
   unitPropertyRelations,
 } from './schemas/unit';
-import { allView, propertyView, searchView, unitView } from './schemas/views';
-
-export {
-  allView,
-  bathroom,
-  bathroomUnitRelations,
-  bedroom,
-  bedroomUnitRelations,
-  buildingFeature,
-  buildingFeaturePropertyRelations,
-  buildingFeatureToProperty,
-  buildingFeatureToPropertyRelations,
-  city,
-  cityCommunityRelations,
-  cityPropertyRelations,
-  cityRegionRelations,
-  community,
-  communityCityRelations,
-  communityCommunityFeatureRelations,
-  communityFeature,
-  communityFeatureCommunityRelations,
-  communityFeatureToCommunity,
-  communityFeatureToCommunityRelations,
-  communityPropertyRelations,
-  feature,
-  featurePropertyRelations,
-  featureToProperty,
-  featureToPropertyRelations,
-  floorPlan,
-  floorPlanPropertyRelations,
-  floorPlanUnitRelations,
-  media,
-  mediaMediaTypeRelations,
-  mediaPropertyRelations,
-  mediaType,
-  mediaTypeMediaRelations,
-  parking,
-  parkingPropertyRelations,
-  property,
-  propertyBuildingFeatureRelations,
-  propertyCityRelations,
-  propertyCommunityRelations,
-  propertyFeatureRelations,
-  propertyFloorPlanRelations,
-  propertyMediaRelations,
-  propertyParkingRelations,
-  propertyTypeRelations,
-  propertyUnitRelations,
-  propertyView,
-  region,
-  regionCityRelations,
-  searchView,
-  seedAddress,
-  typeProp,
-  typePropPropertyRelations,
-  unit,
-  unitBathroomRelations,
-  unitBedroomRelations,
-  unitFloorPlanRelations,
-  unitPropertyRelations,
-  unitView,
-};
+export { allView, propertyView, searchView, unitView } from './schemas/views';

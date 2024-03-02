@@ -1,8 +1,8 @@
+import { WinstonTransport as AxiomTransport } from '@axiomhq/winston';
 import logSymbols from 'log-symbols';
-import path from 'path';
 import { createLogger, format, transports } from 'winston';
 import { Logger } from 'winston';
-import DailyRotateFile from 'winston-daily-rotate-file';
+import { ConsoleTransportInstance } from 'winston/lib/winston/transports';
 
 type MockLogger = {
   error: () => void;
@@ -16,51 +16,66 @@ let logger: Logger | MockLogger = {
   info: () => {},
 };
 
-if (process.env.BUN_ENV && process.env.BUN_ENV !== 'test') {
+if (
+  process.env.BUN_ENV === 'production' &&
+  process.env.AXIOM_API_TOKEN &&
+  process.env.AXIOM_DATASET
+) {
+  const { combine, errors, json } = format;
+
+  const axiomTransport = new AxiomTransport({
+    dataset: process.env.AXIOM_DATASET,
+    token: process.env.AXIOM_API_TOKEN,
+  });
+
   logger = createLogger({
     level: 'info',
-    transports: [
-      new DailyRotateFile({
-        filename: path.join(process.cwd(), 'logs', 'all-logs-%DATE%.log'),
-        json: false,
-        maxSize: 5242880,
-        maxFiles: process.env.WINSTON_LOG_DAYS,
-        format: format.combine(
-          format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
-          format.printf(
-            (info) => `${info.timestamp} ${info.level}: ${info.message}`,
-          ),
-        ),
-      }),
-      new transports.Console({
-        format: format.combine(
-          format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
-          format.printf((info) => {
-            let symbol;
+    format: combine(errors({ stack: true }), json()),
+    defaultMeta: { service: 'real-estate-api' },
+    transports: [axiomTransport],
+    exceptionHandlers: [axiomTransport],
+    rejectionHandlers: [axiomTransport],
+  });
+}
 
-            switch (info.level) {
-              case 'error':
-                symbol = logSymbols.error;
-                break;
-              case 'warn':
-                symbol = logSymbols.warning;
-                break;
-              case 'info':
-                symbol = logSymbols.info;
-                break;
-            }
+if (
+  process.env.BUN_ENV &&
+  ['development', 'postman', 'algolia'].includes(process.env.BUN_ENV)
+) {
+  const transportsArr: ConsoleTransportInstance[] = [
+    new transports.Console({
+      format: format.combine(
+        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss:ms' }),
+        format.printf((info) => {
+          let symbol;
 
-            if (info.message.includes('success')) {
-              symbol = logSymbols.success;
-            }
+          switch (info.level) {
+            case 'error':
+              symbol = logSymbols.error;
+              break;
+            case 'warn':
+              symbol = logSymbols.warning;
+              break;
+            case 'info':
+              symbol = logSymbols.info;
+              break;
+          }
 
-            return `${symbol} ${info.timestamp} ${info.level}: ${info.message}`;
-          }),
-          format.align(),
-          format.colorize({ all: true }),
-        ),
-      }),
-    ],
+          if (info.message.includes('success')) {
+            symbol = logSymbols.success;
+          }
+
+          return `${symbol} ${info.timestamp} ${info.level}: ${info.message}`;
+        }),
+        format.align(),
+        format.colorize({ all: true }),
+      ),
+    }),
+  ];
+
+  logger = createLogger({
+    level: 'info',
+    transports: transportsArr,
   });
 }
 

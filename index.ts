@@ -1,6 +1,6 @@
 import { swaggerUI } from '@hono/swagger-ui';
 
-import { rabbitMqQueue } from '@/constants';
+import { apiVersion, rabbitMqQueue } from '@/constants';
 import { rabbitMqConsumer } from '@/providers/rabbitmq';
 import app from '@/server';
 
@@ -16,7 +16,7 @@ app.get(
 app.doc('/doc', {
   info: {
     title: 'Real Estate API Demo',
-    version: 'v1',
+    version: `${apiVersion}`,
   },
   openapi: '3.1.0',
 });

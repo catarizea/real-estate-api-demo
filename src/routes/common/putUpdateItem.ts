@@ -27,6 +27,11 @@ const putUpdateItem = ({
     method: 'put',
     path: '/update/{id}',
     tags: [tag],
+    security: [
+      {
+        Bearer: [],
+      },
+    ],
     request: {
       params: z.object({
         id: z.string().openapi({ example: postmanId }),
@@ -53,6 +58,30 @@ const putUpdateItem = ({
       },
       400: {
         description: 'Responds with a bad request error message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      401: {
+        description: 'Responds with an unauthorized error message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      403: {
+        description: 'Responds with a forbidden error message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      429: {
+        description: 'Responds with a too many requests error message.',
         content: {
           'application/json': {
             schema: errorSchema,

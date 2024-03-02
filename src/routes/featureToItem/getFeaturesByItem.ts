@@ -12,6 +12,11 @@ const getFeaturesByItem = (
     method: 'get',
     path: '/features-by-item/{itemId}',
     tags: [tag],
+    security: [
+      {
+        Bearer: [],
+      },
+    ],
     request: {
       params: z.object({
         itemId: z.string().openapi({ example: postmanId }),
@@ -31,6 +36,22 @@ const getFeaturesByItem = (
       },
       400: {
         description: 'Responds with a bad request error message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      401: {
+        description: 'Responds with an unauthorized error message.',
+        content: {
+          'application/json': {
+            schema: errorSchema,
+          },
+        },
+      },
+      429: {
+        description: 'Responds with a too many requests error message.',
         content: {
           'application/json': {
             schema: errorSchema,

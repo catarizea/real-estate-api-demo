@@ -4,7 +4,7 @@ import axios from 'axios';
 import { sleep } from 'bun';
 import logSymbols from 'log-symbols';
 
-import { postmanIds } from '@/constants';
+import { apiVersion, headers, postmanIds } from '@/constants';
 import {
   insertBathroomSchemaExample,
   insertCitySchemaExample,
@@ -29,10 +29,11 @@ const executeApiCalls = async () => {
   const start = performance.now();
 
   axios.defaults.baseURL = 'http://localhost:3000';
-  axios.defaults.headers['Content-Type'] = 'application/json';
+  axios.defaults.headers['Content-Type'] = headers['Content-Type'];
+  axios.defaults.headers['Authorization'] = headers['Authorization'];
 
   try {
-    await axios.post(`/region/create`, insertRegionSchemaExample);
+    await axios.post(`/${apiVersion}/region/create`, insertRegionSchemaExample);
     console.log(logSymbols.success, 'Region created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating region');
@@ -41,7 +42,7 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/city/create`, insertCitySchemaExample);
+    await axios.post(`/${apiVersion}/city/create`, insertCitySchemaExample);
     console.log(logSymbols.success, 'City created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating city');
@@ -50,7 +51,10 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/community/create`, insertCommunitySchemaExample);
+    await axios.post(
+      `/${apiVersion}/community/create`,
+      insertCommunitySchemaExample,
+    );
     console.log(logSymbols.success, 'Community created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating community');
@@ -59,7 +63,10 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/bathroom/create`, insertBathroomSchemaExample);
+    await axios.post(
+      `/${apiVersion}/bathroom/create`,
+      insertBathroomSchemaExample,
+    );
     console.log(logSymbols.success, 'Bathroom created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating bathroom');
@@ -68,7 +75,10 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/bedroom/create`, insertBathroomSchemaExample);
+    await axios.post(
+      `/${apiVersion}/bedroom/create`,
+      insertBathroomSchemaExample,
+    );
     console.log(logSymbols.success, 'Bedroom created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating bedroom');
@@ -77,7 +87,10 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/feature/create`, insertFeatureSchemaExample);
+    await axios.post(
+      `/${apiVersion}/feature/create`,
+      insertFeatureSchemaExample,
+    );
     console.log(logSymbols.success, 'Feature created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating feature');
@@ -86,7 +99,10 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/media-type/create`, insertMediaTypeSchemaExample);
+    await axios.post(
+      `/${apiVersion}/media-type/create`,
+      insertMediaTypeSchemaExample,
+    );
     console.log(logSymbols.success, 'Media type created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating media type');
@@ -95,7 +111,10 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/type-prop/create`, insertTypePropSchemaExample);
+    await axios.post(
+      `/${apiVersion}/type-prop/create`,
+      insertTypePropSchemaExample,
+    );
     console.log(logSymbols.success, 'Type prop created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating type prop');
@@ -104,7 +123,10 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/property/create`, insertPropertySchemaExample);
+    await axios.post(
+      `/${apiVersion}/property/create`,
+      insertPropertySchemaExample,
+    );
     console.log(logSymbols.success, 'Property created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating property');
@@ -113,7 +135,7 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/media/create`, insertMediaSchemaExample);
+    await axios.post(`/${apiVersion}/media/create`, insertMediaSchemaExample);
     console.log(logSymbols.success, 'Media created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating media');
@@ -122,7 +144,7 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/feature-to-property/create`, {
+    await axios.post(`/${apiVersion}/feature-to-property/create`, {
       featureId: postmanIds.feature,
       itemId: postmanIds.property,
     });
@@ -134,7 +156,10 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/parking/create`, insertParkingSchemaExample);
+    await axios.post(
+      `/${apiVersion}/parking/create`,
+      insertParkingSchemaExample,
+    );
     console.log(logSymbols.success, 'Parking created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating parking');
@@ -143,7 +168,10 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/floor-plan/create`, insertFloorPlanSchemaExample);
+    await axios.post(
+      `/${apiVersion}/floor-plan/create`,
+      insertFloorPlanSchemaExample,
+    );
     console.log(logSymbols.success, 'Floor plan created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating floor plan');
@@ -152,7 +180,7 @@ const executeApiCalls = async () => {
   await sleep(sleepTime);
 
   try {
-    await axios.post(`/unit/create`, insertUnitSchemaExample);
+    await axios.post(`/${apiVersion}/unit/create`, insertUnitSchemaExample);
     console.log(logSymbols.success, 'Unit created');
   } catch (error) {
     console.error(logSymbols.error, 'Error creating unit');
@@ -166,7 +194,7 @@ UPDATE
 */
 
   try {
-    await axios.put(`/property/update/${postmanIds.property}`, {
+    await axios.put(`/${apiVersion}/property/update/${postmanIds.property}`, {
       ...updatePropertySchemaExample,
       published: true,
     });
@@ -178,7 +206,10 @@ UPDATE
   await sleep(sleepTime);
 
   try {
-    await axios.put(`/unit/update/${postmanIds.unit}`, updateUnitSchemaExample);
+    await axios.put(
+      `/${apiVersion}/unit/update/${postmanIds.unit}`,
+      updateUnitSchemaExample,
+    );
     console.log(logSymbols.success, 'Unit updated');
   } catch (error) {
     console.error(logSymbols.error, 'Error updating unit');
@@ -187,7 +218,7 @@ UPDATE
   await sleep(sleepTime);
 
   try {
-    await axios.put(`/property/update/${postmanIds.property}`, {
+    await axios.put(`/${apiVersion}/property/update/${postmanIds.property}`, {
       published: false,
     });
     console.log(logSymbols.success, 'Property updated');
@@ -198,7 +229,7 @@ UPDATE
   await sleep(sleepTime);
 
   try {
-    await axios.put(`/property/update/${postmanIds.property}`, {
+    await axios.put(`/${apiVersion}/property/update/${postmanIds.property}`, {
       published: true,
     });
     console.log(logSymbols.success, 'Property updated');
@@ -209,7 +240,7 @@ UPDATE
   await sleep(sleepTime);
 
   try {
-    await axios.put(`/media/update/${postmanIds.media}`, {
+    await axios.put(`/${apiVersion}/media/update/${postmanIds.media}`, {
       assetId: '3fjjah9',
     });
     console.log(logSymbols.success, 'Media updated');
@@ -221,7 +252,7 @@ UPDATE
 
   try {
     await axios.put(
-      `/parking/update/${postmanIds.parking}`,
+      `/${apiVersion}/parking/update/${postmanIds.parking}`,
       updateParkingSchemaExample,
     );
     console.log(logSymbols.success, 'Parking updated');
@@ -232,7 +263,9 @@ UPDATE
   await sleep(sleepTime);
 
   try {
-    await axios.put(`/unit/update/${postmanIds.unit}`, { published: false });
+    await axios.put(`/${apiVersion}/unit/update/${postmanIds.unit}`, {
+      published: false,
+    });
   } catch (error) {
     console.error(logSymbols.error, 'Error updating unit');
   }
@@ -240,7 +273,9 @@ UPDATE
   await sleep(sleepTime);
 
   try {
-    await axios.put(`/unit/update/${postmanIds.unit}`, { published: true });
+    await axios.put(`/${apiVersion}/unit/update/${postmanIds.unit}`, {
+      published: true,
+    });
   } catch (error) {
     console.error(logSymbols.error, 'Error updating unit');
   }
@@ -249,7 +284,7 @@ UPDATE
 
   try {
     await axios.delete(
-      `/feature-to-property/delete/${postmanIds.feature}/${postmanIds.property}`,
+      `/${apiVersion}/feature-to-property/delete/${postmanIds.feature}/${postmanIds.property}`,
     );
     console.log(logSymbols.success, 'Feature to property deleted');
   } catch (error) {
@@ -260,7 +295,7 @@ UPDATE
 
   try {
     await axios.put(
-      `/parking/update/${postmanIds.parking}`,
+      `/${apiVersion}/parking/update/${postmanIds.parking}`,
       updateParkingSchemaExample,
     );
     console.log(logSymbols.success, 'Parking updated');
@@ -276,7 +311,7 @@ DELETE
 */
 
   try {
-    await axios.delete(`/unit/delete/${postmanIds.unit}`);
+    await axios.delete(`/${apiVersion}/unit/delete/${postmanIds.unit}`);
     console.log(logSymbols.success, 'Unit deleted');
   } catch (error) {
     console.error(logSymbols.error, 'Error deleting unit');

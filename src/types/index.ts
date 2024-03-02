@@ -1,3 +1,4 @@
+import type { SignedInAuthObject, SignedOutAuthObject } from '@hono/clerk-auth';
 import type { Entry } from 'node-geocoder';
 
 import {
@@ -642,3 +643,14 @@ export type CommonChild = {
   tag: NomenclatureTag;
   parentIdField: string;
 };
+
+export type AuthOrg =
+  | (SignedInAuthObject & {
+      sessionClaims: {
+        role: string;
+        email: string;
+        fullName: string;
+      };
+    })
+  | SignedOutAuthObject
+  | null;

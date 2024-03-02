@@ -1,3 +1,5 @@
+import { apiVersion } from '@/constants';
+
 import city from './city';
 import community from './community';
 import {
@@ -25,83 +27,83 @@ import unit from './unit';
 
 const routes = [
   {
-    path: '/',
+    path: `/${apiVersion}/`,
     routes: home,
   },
   {
-    path: '/search',
+    path: `/${apiVersion}/search`,
     routes: search,
   },
   {
-    path: '/bathroom',
+    path: `/${apiVersion}/bathroom`,
     routes: bathroom,
   },
   {
-    path: '/bedroom',
+    path: `/${apiVersion}/bedroom`,
     routes: bedroom,
   },
   {
-    path: '/building-feature',
+    path: `/${apiVersion}/building-feature`,
     routes: buildingFeature,
   },
   {
-    path: '/building-feature-to-property',
+    path: `/${apiVersion}/building-feature-to-property`,
     routes: buildingFeatureToProperty,
   },
   {
-    path: '/city',
+    path: `/${apiVersion}/city`,
     routes: city,
   },
   {
-    path: '/community',
+    path: `/${apiVersion}/community`,
     routes: community,
   },
   {
-    path: '/community-feature',
+    path: `/${apiVersion}/community-feature`,
     routes: communityFeature,
   },
   {
-    path: '/community-feature-to-community',
+    path: `/${apiVersion}/community-feature-to-community`,
     routes: communityFeatureToCommunity,
   },
   {
-    path: '/feature',
+    path: `/${apiVersion}/feature`,
     routes: feature,
   },
   {
-    path: '/feature-to-property',
+    path: `/${apiVersion}/feature-to-property`,
     routes: featureToProperty,
   },
   {
-    path: '/floor-plan',
+    path: `/${apiVersion}/floor-plan`,
     routes: floorPlan,
   },
   {
-    path: '/media',
+    path: `/${apiVersion}/media`,
     routes: media,
   },
   {
-    path: '/media-type',
+    path: `/${apiVersion}/media-type`,
     routes: mediaType,
   },
   {
-    path: '/parking',
+    path: `/${apiVersion}/parking`,
     routes: parking,
   },
   {
-    path: '/property',
+    path: `/${apiVersion}/property`,
     routes: property,
   },
   {
-    path: '/region',
+    path: `/${apiVersion}/region`,
     routes: region,
   },
   {
-    path: '/type-prop',
+    path: `/${apiVersion}/type-prop`,
     routes: typeProp,
   },
   {
-    path: '/unit',
+    path: `/${apiVersion}/unit`,
     routes: unit,
   },
 ];

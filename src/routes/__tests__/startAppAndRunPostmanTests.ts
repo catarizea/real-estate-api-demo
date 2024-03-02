@@ -5,8 +5,15 @@ import logSymbols from 'log-symbols';
 let honoPid: number | null = null;
 let isSuccessful = true;
 
-const procServer = Bun.spawn(['bun', 'run', 'start:postman:test']);
-const procPostman = Bun.spawn(['bun', 'run', 'postman:test:suite']);
+const procServer =
+  typeof process.env.CICD === 'undefined'
+    ? Bun.spawn(['bun', 'run', 'start:postman:test'])
+    : Bun.spawn(['bun', 'run', 'start:actions']);
+
+const procPostman =
+  typeof process.env.CICD === 'undefined'
+    ? Bun.spawn(['bun', 'run', 'postman:test:suite'])
+    : Bun.spawn(['bun', 'run', 'postman:test:utils:actions']);
 
 const killChildren = async () => {
   if (honoPid) {
