@@ -3,7 +3,7 @@ name: Fly Test and Deploy
 on:
   push:
     branches:
-      - github-actions
+      - main
     paths:
       - 'src/**'
       - 'package.json'
