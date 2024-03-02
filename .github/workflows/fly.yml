@@ -33,6 +33,7 @@ jobs:
       DATABASE_SEED_BLOCKED: ${{ vars.DATABASE_SEED_BLOCKED }}
       AXIOM_DATASET: ${{ vars.AXIOM_DATASET }}
       POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+      CLERK_JWT_TEST: ${{ secrets.CLERK_JWT_TEST }}
       BUN_ENV: dev
     concurrency: deploy-group
     steps:
