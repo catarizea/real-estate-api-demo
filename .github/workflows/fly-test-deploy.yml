@@ -51,6 +51,9 @@ jobs:
         env:
           BUN_ENV: algolia
           CICD: true
+      - name: Install Postman CLI
+        run: |
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
       - run: bun run postman:test:cleanup:actions
       - run: bun run test:postman:actions
         env:
