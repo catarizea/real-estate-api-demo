@@ -1,4 +1,4 @@
-import getBoundsOfDistance from 'geolib/es/getBoundsOfDistance';
+import { getBoundsOfDistance } from 'geolib';
 
 import { Point } from '@/types';
 
