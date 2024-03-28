@@ -65,7 +65,7 @@
     "algoliasearch": "^4.22.1",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.3",
-    "drizzle-orm": "^0.29.3",
+    "drizzle-orm": "^0.30.0",
     "drizzle-zod": "^0.5.1",
     "geolib": "^3.3.4",
     "hono": "^4.0.4",
