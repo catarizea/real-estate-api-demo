@@ -57,7 +57,7 @@
     "@clerk/backend": "^0.38.1",
     "@hono/clerk-auth": "^1.0.1",
     "@hono/swagger-ui": "^0.2.1",
-    "@hono/zod-openapi": "^0.9.6",
+    "@hono/zod-openapi": "^0.10.0",
     "@paralleldrive/cuid2": "^2.2.2",
     "@planetscale/database": "^1.16.0",
     "@upstash/ratelimit": "^1.0.1",
