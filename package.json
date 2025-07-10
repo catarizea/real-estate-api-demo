@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@axiomhq/winston": "^1.0.0-rc.2",
-    "@clerk/backend": "^0.38.1",
+    "@clerk/backend": "^2.4.0",
     "@hono/clerk-auth": "^1.0.1",
     "@hono/swagger-ui": "^0.2.1",
     "@hono/zod-openapi": "^0.9.6",
